@@ -4,10 +4,14 @@ import (
 	"fmt"
 	"net/http"
 
+	"aquamor-backend/backend/internal/db"
 	"aquamor-backend/backend/internal/handlers"
 )
 
 func main() {
+	// Initialize SQLite Database and migration tables
+	db.InitDB()
+
 	// 1. Health check endpoint
 	http.HandleFunc("/api/v1/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
