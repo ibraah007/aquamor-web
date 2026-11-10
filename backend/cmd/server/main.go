@@ -8,15 +8,18 @@ import (
 )
 
 func main() {
-	// Health check endpoint
+	// 1. Health check endpoint
 	http.HandleFunc("/api/v1/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, `{"status":"ok", "message":"Aquamor Water API is running"}`)
 	})
 
-	// Products endpoint
+	// 2. Products catalog endpoint
 	http.HandleFunc("/api/v1/products", handlers.GetProducts)
+
+	// 3. Order placement endpoint
+	http.HandleFunc("/api/v1/orders", handlers.CreateOrder)
 
 	fmt.Println("Server starting on port 8080...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
