@@ -65,7 +65,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 			orderID, item.ProductID, item.BottleOption, item.Quantity, item.UnitPrice, subtotal,
 		)
 		if err != nil {
-			// Continue or log error
+			// Log or handle error if needed
 		}
 
 		processedItems = append(processedItems, models.OrderItem{
@@ -97,4 +97,39 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		"message": "Order placed and saved to SQLite database successfully!",
 		"order":   newOrder,
 	})
+}
+
+// GetOrders fetches all customer orders from SQLite
+func GetOrders(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Method not allowed"})
+		return
+	}
+
+	rows, err := db.DB.Query(`SELECT id, customer_name, customer_phone, delivery_estate, delivery_address, total_amount, order_status, payment_status, created_at FROM orders ORDER BY created_at DESC`)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to fetch orders"})
+		return
+	}
+	defer rows.Close()
+
+	var orders []models.Order
+	for rows.Next() {
+		var o models.Order
+		if err := rows.Scan(&o.ID, &o.CustomerName, &o.CustomerPhone, &o.DeliveryEstate, &o.DeliveryAddress, &o.TotalAmount, &o.OrderStatus, &o.PaymentStatus, &o.CreatedAt); err != nil {
+			continue
+		}
+		orders = append(orders, o)
+	}
+
+	if orders == nil {
+		orders = []models.Order{}
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(orders)
 }
