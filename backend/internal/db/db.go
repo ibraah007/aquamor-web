@@ -13,10 +13,13 @@ var DB *sql.DB
 // InitDB opens the SQLite database connection and creates required tables
 func InitDB() {
 	var err error
-	DB, err = sql.Open("sqlite3", "./aquamor.db")
+	DB, err = sql.Open("sqlite3", "file:./aquamor.db?_busy_timeout=5000&_journal_mode=WAL&_foreign_keys=on")
 	if err != nil {
 		log.Fatalf("Error opening database: %v", err)
 	}
+	// SQLite allows one writer at a time. A single connection avoids
+	// "database is locked" errors in this small service.
+	DB.SetMaxOpenConns(1)
 
 	// Test connection
 	if err = DB.Ping(); err != nil {
