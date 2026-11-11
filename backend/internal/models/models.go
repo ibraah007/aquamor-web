@@ -26,11 +26,13 @@ type OrderItem struct {
 
 // OrderRequest handles incoming customer orders for delivery
 type OrderRequest struct {
-	CustomerName    string      `json:"customer_name" binding:"required"`
-	CustomerPhone   string      `json:"customer_phone" binding:"required"`
-	DeliveryEstate  string      `json:"delivery_estate" binding:"required"` // e.g., Ngara, Parklands, CBD
-	DeliveryAddress string      `json:"delivery_address" binding:"required"`
-	Items           []OrderItem `json:"items" binding:"required"`
+	CustomerName    string `json:"customer_name" binding:"required"`
+	CustomerPhone   string `json:"customer_phone" binding:"required"`
+	DeliveryEstate  string `json:"delivery_estate" binding:"required"` // e.g., Ngara, Parklands, CBD
+	DeliveryAddress string `json:"delivery_address" binding:"required"`
+	// unit_price and subtotal inside incoming items are ignored; the server
+	// prices every line from the catalog.
+	Items []OrderItem `json:"items" binding:"required"`
 }
 
 // Order represents a saved order in the system
