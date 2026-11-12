@@ -1,0 +1,8 @@
+node_modules/
+.env
+aquamor-backend
+aquamor.db
+aquamor.db-wal
+aquamor.db-shm
+.DS_Store
+*.log
