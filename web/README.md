@@ -11,7 +11,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Order builder | Customer picks refills, bottled water and new 20L bottles, sees a running total, and sends the order to WhatsApp, already written out |
 | Label designer | Customer types an event name and message, picks a colour and size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
-| Gallery | 20 real photos with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
+| Gallery | 26 real photos and two short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
 | Fading backgrounds | Photo slideshows behind the hero, order, branded-bottles and contact sections |
 | Mobile menu | A keyboard-accessible menu below 1000px |
 | English / Swahili | One-tap language switch, remembered between visits; WhatsApp messages are written in the chosen language |
