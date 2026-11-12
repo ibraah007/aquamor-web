@@ -91,8 +91,8 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 4. **Instagram link** (official profile, not a single post or video). The TikTok link has been supplied and added.
 5. **KEBS permit number and purification steps**, if they have them. Until then the site makes no quality claims.
 
-### B. Permissions to confirm
-- Showing the staff in the photos
+### B. Permissions
+- [x] Showing the staff and customers in the photos, including the new event, shop and delivery photos (confirmed by the client on 12 November 2026)
 - Showing other customers' labels (Wave360 and the church labels)
 - Whether they sell the water pumps (the pump photo is in the gallery)
 - Showing the Paybill number online (it is on their own flyers)
@@ -180,4 +180,4 @@ The standalone download has been imported into this git repository.
 - Added the client's official TikTok (https://www.tiktok.com/@aquamor2020) to the contact section and the `LocalBusiness` `sameAs` data.
 - Reviewed the new client media and added six photos to the gallery: bottled water on the shop shelves, 20L containers at the counter, bottles ready for a church event, a wedding-reception hall, a customer carrying a refill and a team member refilling a 20L container. Each has JPG and WebP copies.
 - The gallery now has 20 photos. Filter categories and English/Swahili captions were updated for the new tiles.
-- The permission note in section 5B still applies to the new photos that show people (the customer and the team member).
+- The client confirmed permission on 12 November 2026 to show the people in the new photos (the customer and the team member), as well as the existing staff photos.

@@ -93,7 +93,8 @@ For a custom domain (for example `aquamor.co.ke`), add it in the host's dashboar
 - Only facts the client has stated, or that are visible in their own photos and flyers, appear on the site.
 - No certification, health or "100% pure" claims have been added. A KEBS permit number and purification details are still needed.
 - No names or job titles are given to people in photos.
-- Customer labels (Wave360 and church labels) and staff photos (including the newer event, shop and delivery photos) should be confirmed with the client before the site goes public.
+- The client confirmed permission to show the people in the photos (staff and customers, including the newer event, shop and delivery photos) on 12 November 2026.
+- Customer labels (Wave360 and church labels) should still be confirmed with the client before the site goes public.
 
 ## Open issues
 
