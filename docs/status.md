@@ -1,6 +1,6 @@
 # Aquamor Purified Drinking Water: Website Project Status
 
-**Updated:** 11 November 2026
+**Updated:** 12 November 2026
 **Project start:** 10 November 2026
 **Target delivery:** about 10 December 2026 (one month)
 **Repository:** the site is in `web/`; the Go API is in `backend/` (see the root `README.md`)
@@ -34,6 +34,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 | Delivers to (flyer) | Homes, offices, schools, restaurants, clinics, hotels |
 | Payment | Equity Paybill 247247, account 395210 (account name: Aquamor Water) |
 | Facebook | https://www.facebook.com/profile.php?id=100066493751902 (confirmed by the user as the client's page) |
+| TikTok | https://www.tiktok.com/@aquamor2020 (provided by the client on 12 November 2026) |
 
 ---
 
@@ -53,7 +54,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] **Build your order:** refill sizes, bottled water and new 20L bottles with steppers, delivery/pickup choice, running total, and a one-tap WhatsApp message with the order already written
 - [x] **Label designer:** type an event name and message, pick a color and size, see it on a bottle, send the request on WhatsApp
 - [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, book on WhatsApp
-- [x] **Our work (gallery):** 14 real photos, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
+- [x] **Our work (gallery):** 20 real photos, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
 - [x] **About:** company story with a team photo
 - [x] **FAQ:** eight tap-to-open questions, answered only with confirmed facts
 - [x] **Contact:** address, hours, WhatsApp, calls (two numbers), email, Paybill with Copy buttons, Get directions (Google Maps), Facebook button
@@ -66,7 +67,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] Favicon and Apple touch icon
 
 ### Photos used (all from the client's own material)
-Refill station, glass bottle rows, custom church labels, Wave360 label bottle, shelf of "50 years" labels, bottle stacks, team photos, pump photos, dispenser cleaning before/after, wedding label designs. Each has a JPG and a WebP copy; the browser downloads only one. Gallery photos are lazy-loaded.
+Refill station, glass bottle rows, custom church labels, Wave360 label bottle, shelf of "50 years" labels, bottle stacks, team photos, pump photos, dispenser cleaning before/after, wedding label designs, bottled water on the shop shelves, 20L containers at the counter, a church-event bottle setup, a wedding-reception hall, a customer carrying a refill and a team member refilling a 20L container. Each has a JPG and a WebP copy; the browser downloads only one. Gallery photos are lazy-loaded.
 
 ---
 
@@ -77,7 +78,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 - No names or job titles are given to anyone in the photos (nobody has been confirmed as the owner).
 - No health, certification or "100% pure" claims have been added. The flyers' claims about germs and bacteria were left out.
 - Hard bottle price set to Ksh 1,400 (clear flyer and the latest flyer agree; an earlier blurry rate card looked like 1,500).
-- A personal-looking TikTok account (@benzi254) was **not** linked.
+- The client's official TikTok, [@aquamor2020](https://www.tiktok.com/@aquamor2020), is linked in the contact section and in the structured data. A personal-looking TikTok account (@benzi254) was **not** linked.
 
 ---
 
@@ -87,7 +88,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 1. **Original logo file** and which version is current (three versions seen), plus the official business name and tagline (four names and four taglines seen).
 2. **Prices** for small bottled water (300ml, 500ml, 1L, 1.5L), branded bottles (and minimum order), and dispenser cleaning.
 3. **Free delivery rules:** areas and any minimum order.
-4. **Instagram and TikTok links** (official profile links, not single posts or videos).
+4. **Instagram link** (official profile, not a single post or video). The TikTok link has been supplied and added.
 5. **KEBS permit number and purification steps**, if they have them. Until then the site makes no quality claims.
 
 ### B. Permissions to confirm
@@ -98,9 +99,8 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 
 ### C. Content still missing
 - Shop front on Musindi Road, taken from the street
-- Weddings, graduations and other event photos
+- Graduation and corporate event photos (church-event and wedding-reception photos are now added)
 - A close-up of a glass bottle with its label
-- A delivery in action
 - Two or three real customer comments
 - Original before/after photos for the cleaning service (current ones are small crops from a flyer)
 - A named person for the About page, only if the client wants one
@@ -174,3 +174,10 @@ The standalone download has been imported into this git repository.
 - Test on a real iPhone (safe area, menu, WhatsApp hand-off) and a low-end Android phone.
 - Decide whether to connect the order builder to `POST /api/v1/orders` (currently WhatsApp only) and add an authenticated admin view.
 - Consider deferring the banner slideshow images that are below the fold; only the first image is needed at load.
+
+## 10. Media and social update (12 November 2026)
+
+- Added the client's official TikTok (https://www.tiktok.com/@aquamor2020) to the contact section and the `LocalBusiness` `sameAs` data.
+- Reviewed the new client media and added six photos to the gallery: bottled water on the shop shelves, 20L containers at the counter, bottles ready for a church event, a wedding-reception hall, a customer carrying a refill and a team member refilling a 20L container. Each has JPG and WebP copies.
+- The gallery now has 20 photos. Filter categories and English/Swahili captions were updated for the new tiles.
+- The permission note in section 5B still applies to the new photos that show people (the customer and the team member).

@@ -11,7 +11,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Order builder | Customer picks refills, bottled water and new 20L bottles, sees a running total, and sends the order to WhatsApp, already written out |
 | Label designer | Customer types an event name and message, picks a colour and size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
-| Gallery | Real photos with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
+| Gallery | 20 real photos with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
 | Fading backgrounds | Photo slideshows behind the hero, order, branded-bottles and contact sections |
 | Mobile menu | A keyboard-accessible menu below 1000px |
 | English / Swahili | One-tap language switch, remembered between visits; WhatsApp messages are written in the chosen language |
@@ -68,7 +68,7 @@ Scripts load with `defer`, in this order: `order.js`, `gallery.js`, `site.js`, `
 | Paybill and account | Contact section and FAQ in `index.html` |
 | Add a testimonial | `TESTIMONIALS` at the top of `js/i18n.js`: `{quote:"...", name:"...", place:"..."}`. The section appears when the list is not empty. |
 | Add a photo | Put the JPG (and a WebP copy) in `assets/img/`, add `.p-name{...}` to `css/photos.css`, then add a tile in the gallery in `index.html` with `data-c` and `data-k="name"` |
-| Add a social link | Add a button next to the Facebook one in the contact section of `index.html` |
+| Add a social link | Add a button next to the Facebook and TikTok ones in the contact section of `index.html`, and add the URL to `sameAs` in `<head>` |
 | Edit Swahili | `SW` in `js/i18n.js` (the English text must match `index.html` exactly) |
 | Colours | The `:root` variables at the top of `css/styles.css` |
 | Social preview / canonical | The `og:` tags, `twitter:` tags and `<link rel="canonical">` in `<head>`; update the `aquamor.co.ke` placeholder when the domain is confirmed |
@@ -93,7 +93,7 @@ For a custom domain (for example `aquamor.co.ke`), add it in the host's dashboar
 - Only facts the client has stated, or that are visible in their own photos and flyers, appear on the site.
 - No certification, health or "100% pure" claims have been added. A KEBS permit number and purification details are still needed.
 - No names or job titles are given to people in photos.
-- Customer labels (Wave360 and church labels) and staff photos should be confirmed with the client before the site goes public.
+- Customer labels (Wave360 and church labels) and staff photos (including the newer event, shop and delivery photos) should be confirmed with the client before the site goes public.
 
 ## Open issues
 
