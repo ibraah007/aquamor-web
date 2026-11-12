@@ -54,7 +54,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] **Build your order:** refill sizes, bottled water and new 20L bottles with steppers, delivery/pickup choice, running total, and a one-tap WhatsApp message with the order already written
 - [x] **Label designer:** type an event name and message, pick a color and size, see it on a bottle, send the request on WhatsApp
 - [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, book on WhatsApp
-- [x] **Our work (gallery):** 26 real photos, two short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
+- [x] **Our work (gallery):** 26 real photos, three short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
 - [x] **About:** company story with a team photo
 - [x] **FAQ:** eight tap-to-open questions, answered only with confirmed facts
 - [x] **Contact:** address, hours, WhatsApp, calls (two numbers), email, Paybill with Copy buttons, Get directions (Google Maps), Facebook button
@@ -67,7 +67,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] Favicon and Apple touch icon
 
 ### Photos used (all from the client's own material)
-Refill station, glass bottle rows, custom church labels, Wave360 label bottle, shelf of "50 years" labels, bottle stacks, team photos, pump photos, dispenser cleaning before/after, wedding label designs, bottled water on the shop shelves, 20L containers at the counter, a church-event bottle setup, a wedding-reception hall, a customer carrying a refill, a team member refilling a 20L container, a close-up of a custom-labelled bottle, an event table, team members checking and washing containers, 20L bottle tops, and stacked blue containers. Each photo has a JPG and a WebP copy; the browser downloads only one. Gallery photos are lazy-loaded. Two short muted clips (event setup and dispenser cleaning) use `preload="none"` so they download only when played.
+Refill station, glass bottle rows, custom church labels, Wave360 label bottle, shelf of "50 years" labels, bottle stacks, team photos, pump photos, dispenser cleaning before/after, wedding label designs, bottled water on the shop shelves, 20L containers at the counter, a church-event bottle setup, a wedding-reception hall, a customer carrying a refill, a team member refilling a 20L container, a close-up of a custom-labelled bottle, an event table, team members checking and washing containers, 20L bottle tops, and stacked blue containers. Each photo has a JPG and a WebP copy; the browser downloads only one. Gallery photos are lazy-loaded. Three short muted clips (event setup, custom-labelled event bottles, and dispenser cleaning) use `preload="none"` so they download only when played.
 
 ---
 
@@ -180,12 +180,12 @@ The standalone download has been imported into this git repository.
 
 - Added the client's official TikTok (https://www.tiktok.com/@aquamor2020) to the contact section and the `LocalBusiness` `sameAs` data.
 - Reviewed the new client media and added six photos to the gallery: bottled water on the shop shelves, 20L containers at the counter, bottles ready for a church event, a wedding-reception hall, a customer carrying a refill and a team member refilling a 20L container. Each has JPG and WebP copies.
-- The gallery now has 26 photos and two short video clips. Filter categories and English/Swahili captions were updated for the new tiles.
+- The gallery now has 26 photos and three short video clips. Filter categories and English/Swahili captions were updated for the new tiles.
 - The client confirmed permission on 12 November 2026 to show the people in the new photos (the customer and the team member), as well as the existing staff photos.
 
 ## 11. Additional photos and video clips (12 November 2026)
 
 - Added six more photos from the client's media folder: a close-up of a custom-labelled bottle, an event table, a team member checking containers, a team member washing a container, a close-up of 20L bottle tops, and stacked blue 20L containers.
-- Added two short muted video clips: event setup and dispenser cleaning. Both use `preload="none"` and a poster image so they do not download until played.
+- Added three short muted video clips: event setup, custom-labelled event bottles, and dispenser cleaning. All use `preload="none"` and a poster image so they do not download until played.
 - The gallery now has 26 photos. English and Swahili captions were added for all six new tiles.
 - The TikTok link (`https://www.tiktok.com/@aquamor2020`) is already present in the contact section and the `LocalBusiness` `sameAs` data.
