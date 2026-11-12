@@ -15,7 +15,10 @@
     if(e.target.closest("a"))close();
   });
   document.addEventListener("keydown",function(e){
-    if(e.key==="Escape")close();
+    if(e.key!=="Escape"||!menu.classList.contains("open"))return;
+    var hadFocus=menu.contains(document.activeElement);
+    close();
+    if(hadFocus)btn.focus();
   });
   document.addEventListener("click",function(e){
     if(!btn.contains(e.target)&&!menu.contains(e.target))close();
