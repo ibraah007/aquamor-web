@@ -169,6 +169,7 @@ The standalone download has been imported into this git repository.
 
 ### Still to do before launch
 - Choose the domain and replace the `aquamor.co.ke` placeholders in `<head>`, `robots.txt` and `sitemap.xml`.
+- Put the Go server behind a TLS-terminating reverse proxy before any remote use and block direct access to port 8080; the admin bearer token and customer PII must not travel over plain HTTP.
 - Get the client answers listed in section 5.
 - Confirm the WhatsApp link preview after deployment.
 - Test on a real iPhone (safe area, menu, WhatsApp hand-off) and a low-end Android phone.

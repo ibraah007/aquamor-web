@@ -94,6 +94,8 @@ curl -H "Authorization: Bearer $ADMIN_TOKEN" http://localhost:8080/api/v1/orders
 
 If `ADMIN_TOKEN` is unset, the endpoint returns `503` and does not expose customer names, phones or addresses. If it is set but the token is missing or wrong, it returns `401`.
 
+**HTTPS is required for remote use.** The Go server listens with plain HTTP (`http.ListenAndServe`), which is fine for `localhost`. Before deploying it anywhere remote, put it behind a TLS-terminating reverse proxy (for example Caddy, nginx or a cloud load balancer) and block direct access to port 8080. Otherwise the `Authorization: Bearer` token and the customer names, phones and addresses returned by this endpoint travel in cleartext.
+
 ## What changed after importing the downloaded site
 
 The original snapshot was a standalone marketing page. It is now the `web/` front end of this repository, with these fixes applied:
