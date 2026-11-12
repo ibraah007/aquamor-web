@@ -171,6 +171,8 @@
   var orig=new WeakMap();
   function textNodes(root){var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n,a=[];while(n=w.nextNode()){var t=n.parentNode&&n.parentNode.nodeName;if(t!=="SCRIPT"&&t!=="STYLE")a.push(n)}return a}
   function apply(root){textNodes(root).forEach(function(n){
+    // Keep the customer's own label text; updateLabel() localizes the defaults.
+    if(n.parentNode&&(n.parentNode.id==="t1"||n.parentNode.id==="t2"))return;
     var o=orig.has(n)?orig.get(n):n.nodeValue,k=o.replace(/\s+/g," ").trim(); if(!k)return;
     if(window.LANG==="sw"&&SW[k]){if(!orig.has(n))orig.set(n,o);n.nodeValue=o.match(/^\s*/)[0]+SW[k]+o.match(/\s*$/)[0]}
     else if(orig.has(n)&&window.LANG!=="sw"){n.nodeValue=orig.get(n)}
