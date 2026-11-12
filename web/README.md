@@ -35,6 +35,7 @@ web/
 │   ├── site.js         # Mobile navigation toggle
 │   └── i18n.js         # Swahili switch, open/closed status, copy buttons, testimonials
 ├── assets/img/         # Photos (JPG + WebP), og.jpg, favicons
+├── assets/video/       # Short muted MP4 clips (event setup, dispenser cleaning)
 └── README.md
 ```
 
@@ -48,7 +49,7 @@ Scripts load with `defer`, in this order: `order.js`, `gallery.js`, `site.js`, `
 
 **Fading backgrounds (`js/gallery.js`).** Any element with class `bg` holds `<i>` children, each with a photo class. The script shows one at a time and fades to the next every 6 seconds. With "reduced motion" turned on in the visitor's phone, it shows only the first photo.
 
-**Gallery filters and lightbox (`js/gallery.js`).** Each tile has `data-c` with its categories (for example `"events bottles"`). A filter button hides tiles that do not include its category. Tapping a tile opens a `<dialog>` with the photo enlarged, using the tile's caption. Gallery photos are `<picture>` elements with a WebP source and a JPEG fallback, and are lazy-loaded.
+**Gallery filters and lightbox (`js/gallery.js`).** Each tile has `data-c` with its categories (for example `"events bottles"`). A filter button hides tiles that do not include its category. Tapping a tile opens a `<dialog>` with the photo enlarged, using the tile's caption. Gallery photos are `<picture>` elements with a WebP source and a JPEG fallback, and are lazy-loaded. The two short video clips sit below the grid and use `preload="none"` with a poster image, so they download only when played.
 
 **Mobile menu (`js/site.js`).** The toggle updates `aria-expanded`, opens the menu, closes on Escape, on an outside click, or when a link is chosen.
 
