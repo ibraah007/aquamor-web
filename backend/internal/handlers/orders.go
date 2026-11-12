@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -30,8 +31,21 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	r.Body = http.MaxBytesReader(w, r.Body, maxOrderBody)
+	decoder := json.NewDecoder(r.Body)
 	var req models.OrderRequest
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+	if err := decoder.Decode(&req); err != nil {
+		var tooLarge *http.MaxBytesError
+		if errors.As(err, &tooLarge) {
+			w.WriteHeader(http.StatusRequestEntityTooLarge)
+			json.NewEncoder(w).Encode(map[string]string{"error": "Request body is too large"})
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Invalid request payload"})
+		return
+	}
+	// Reject a second JSON value or any trailing content after the order.
+	if err := decoder.Decode(&struct{}{}); err != io.EOF {
 		var tooLarge *http.MaxBytesError
 		if errors.As(err, &tooLarge) {
 			w.WriteHeader(http.StatusRequestEntityTooLarge)
@@ -117,18 +131,26 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	processedItems := make([]models.OrderItem, 0, len(lines))
-	for i, line := range lines {
-		if _, err := tx.Exec(
+	for _, line := range lines {
+		itemResult, err := tx.Exec(
 			`INSERT INTO order_items (order_id, product_id, bottle_option, quantity, unit_price, subtotal) VALUES (?, ?, ?, ?, ?, ?)`,
 			orderID, line.product.ID, line.option, line.quantity, line.unit, line.subtotal,
-		); err != nil {
+		)
+		if err != nil {
 			log.Printf("create order: insert item: %v", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order items"})
 			return
 		}
+		itemID, err := itemResult.LastInsertId()
+		if err != nil {
+			log.Printf("create order: item last insert id: %v", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order items"})
+			return
+		}
 		processedItems = append(processedItems, models.OrderItem{
-			ID:           i + 1,
+			ID:           int(itemID),
 			OrderID:      int(orderID),
 			ProductID:    line.product.ID,
 			BottleOption: line.option,
