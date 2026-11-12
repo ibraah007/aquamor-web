@@ -84,7 +84,7 @@ dialog{border:0;padding:0;background:transparent;width:min(94vw,900px);max-heigh
 dialog::backdrop{background:rgba(3,20,30,.9)}
 .lbimg{width:100%;height:min(74vh,640px);background-size:contain;background-repeat:no-repeat;background-position:center}
 #lbc{text-align:center;margin:.6em auto 0}
-.x{position:absolute;top:-46px;right:0;width:40px;height:40px;border-radius:50%;border:1.5px solid #fff;background:transparent;color:#fff;font-size:1.4rem;cursor:pointer}
+.x{position:absolute;top:8px;right:8px;width:40px;height:40px;border-radius:50%;border:1.5px solid #fff;background:rgba(3,20,30,.6);color:#fff;font-size:1.4rem;cursor:pointer}
 .brand{display:inline-flex;align-items:center;gap:8px}
 .mark{display:inline-block;width:46px;height:28px;background-color:#fff;background-size:contain;background-repeat:no-repeat;background-position:center;border-radius:8px}
 .foamsec{background:var(--foam)}
