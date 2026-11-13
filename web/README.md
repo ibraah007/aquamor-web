@@ -12,7 +12,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Refill planner | Customer enters how many people are at home and picks 5L, 10L or 20L; the site estimates weekly refills and cost, with a WhatsApp button |
 | Price card | A standalone A4 page ([price-card.html](price-card.html)) for the shop counter, with the confirmed refill and bottle prices, free-delivery line and WhatsApp number; use the Print button or the browser's print dialog |
 | How it works | Three steps (choose your water, order on WhatsApp, delivery or pickup) and a "Who we deliver to" strip for homes, offices, schools, restaurants, clinics and hotels |
-| Label designer | Customer types an event name and message, picks a colour and size, sees it on a bottle, and sends the request to WhatsApp |
+| Label designer | Customer picks a Wedding, Church, Graduation or Corporate preset, types an event name and message, picks a colour, a rectangular or round label and a bottle size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
 | Gallery | 26 real photos and three short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
 | Fading backgrounds | Photo slideshows behind the hero, order, branded-bottles and contact sections |
@@ -52,7 +52,7 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 
 **Refill planner (`js/planner.js`).** `SIZES` holds the three refill sizes and their confirmed prices, and `PER_PERSON_DAY` is the planning assumption (2 litres). Weekly litres are the number of people times the assumption times seven; the refills are rounded up to full containers, and the cost is refills times the size price. The results and the WhatsApp message are redrawn on each change and when the language changes.
 
-**Label designer (`js/order.js`).** The bottle is an SVG. The event text, message and label colour are SVG elements that the inputs update live. `fit()` measures the rendered text and reduces the font size until it fits inside the label; it runs again when the web font finishes loading and when the language changes. "Request this design" builds a WhatsApp message from the same values.
+**Label designer (`js/order.js`).** The bottle is an SVG. The event text, message and label colour are SVG elements that the inputs update live. Presets fill the event name, message and colour with sample values in the current language; they do not add products or prices. The label style switches between a rectangle (`#lbl`) and a circle (`#lblRound`). `fit()` measures the rendered text and reduces the font size until it fits inside the label, using smaller limits for the round style; it runs again when the web font finishes loading, when the style changes and when the language changes. "Request this design" builds a WhatsApp message from the same values.
 
 **Fading backgrounds (`js/gallery.js`).** Any element with class `bg` holds `<i>` children, each with a photo class. The script shows one at a time and fades to the next every 6 seconds. With "reduced motion" turned on in the visitor's phone, it shows only the first photo.
 

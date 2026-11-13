@@ -53,7 +53,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] **Hero:** headline, buttons, key facts, live "Open now / Closed now" line (Nairobi time)
 - [x] **Build your order:** refill sizes, bottled water and new 20L bottles with steppers, delivery/pickup choice, running total, and a one-tap WhatsApp message with the order already written
 - [x] **Refill planner:** enter the number of people at home and choose 5L, 10L or 20L; the site estimates weekly litres, refills and cost, and links to WhatsApp with the plan already written
-- [x] **Label designer:** type an event name and message, pick a color and size, see it on a bottle, send the request on WhatsApp
+- [x] **Label designer:** pick a Wedding, Church, Graduation or Corporate preset, type an event name and message, pick a color, a rectangular or round label and a size, see it on a bottle, send the request on WhatsApp
 - [x] **Printable price card:** a standalone A4 page for the shop counter with the confirmed refill and new-bottle prices, free-delivery line and WhatsApp number (linked from the docs; not part of the one-page site)
 - [x] **How it works and who we deliver to:** three steps (choose your water, order on WhatsApp, delivery or pickup) and a strip for homes, offices, schools, restaurants, clinics and hotels
 - [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, book on WhatsApp
@@ -214,3 +214,10 @@ The standalone download has been imported into this git repository.
 - Added a "Who we deliver to" strip under it: homes, offices, schools, restaurants, clinics and hotels, as listed on the client's delivery flyer.
 - Delivery wording stays within confirmed facts: free delivery is mentioned, and visitors are asked for their area so the shop can confirm. No areas, minimum order or time claims were added.
 - English and Swahili copy added; no JavaScript or backend changes.
+
+## 15. Designer presets and round labels (13 November 2026)
+
+- Added four presets to the label designer (Wedding, Church, Graduation, Corporate). A preset fills the event name, message and label colour with sample text in the current language; it adds no products or prices.
+- Added a label style switch: the existing rectangular label, or a round label drawn inside the bottle preview. Text is measured and shrunk to fit the round shape.
+- The WhatsApp handoff is unchanged and still sends the design details for Aquamor to confirm.
+- English and Swahili labels added for the presets and style controls.

@@ -69,7 +69,13 @@
     go(message);
   });
 
-  var ev=document.getElementById("ev"),msg=document.getElementById("msg"),t1=document.getElementById("t1"),t2=document.getElementById("t2"),lbl=document.getElementById("lbl"),col="#06476a";
+  var ev=document.getElementById("ev"),msg=document.getElementById("msg"),t1=document.getElementById("t1"),t2=document.getElementById("t2"),t3=document.getElementById("t3"),lbl=document.getElementById("lbl"),lblRound=document.getElementById("lblRound"),col="#06476a",style="rect";
+  var PRESETS={
+    wedding:{color:"#7a1f3d",en:["John & Mary","12 December 2026"],sw:["John na Mary","12 Desemba 2026"]},
+    church:{color:"#06476a",en:["Grace Church","Sunday service"],sw:["Kanisa la Neema","Ibada ya Jumapili"]},
+    graduation:{color:"#1d6b43",en:["Class of 2026","Graduation day"],sw:["Darasa la 2026","Siku ya mahafali"]},
+    corporate:{color:"#4b2c82",en:["Your company","Team event"],sw:["Kampuni yako","Hafla ya timu"]}
+  };
   function fit(el,max,base,min){
     el.removeAttribute("textLength");
     var size=base;
@@ -80,16 +86,38 @@
     if(el.getComputedTextLength()>max){el.setAttribute("textLength",max);el.setAttribute("lengthAdjust","spacingAndGlyphs")}
   }
   function updateLabel(){
+    var round=style==="round";
     t1.textContent=ev.value||t("Your event","Hafla yako");
     t2.textContent=msg.value||t("date or message","tarehe au ujumbe");
-    fit(t1,54,12,4.5);
-    fit(t2,54,8,4.5);
+    fit(t1,round?46:54,12,4.5);
+    fit(t2,round?42:54,8,4.5);
+  }
+  function setColor(c){
+    col=c; lbl.setAttribute("fill",c); lblRound.setAttribute("fill",c);
+    document.querySelectorAll("#sw button").forEach(function(x){x.setAttribute("aria-pressed",x.dataset.c===c)});
+  }
+  function applyStyle(){
+    var round=style==="round";
+    lbl.style.display=round?"none":"";
+    lblRound.style.display=round?"":"none";
+    t1.setAttribute("y",round?"176":"170");
+    t2.setAttribute("y",round?"192":"190");
+    t3.style.display=round?"none":"";
+    updateLabel();
   }
   ev.addEventListener("input",updateLabel);
   msg.addEventListener("input",updateLabel);
   document.addEventListener("aquamor:lang",function(){drawRows();updateLabel()});
-  document.querySelectorAll("#sw button").forEach(function(b){b.addEventListener("click",function(){
-    col=b.dataset.c; lbl.setAttribute("fill",col); document.querySelectorAll("#sw button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+  document.querySelectorAll("#sw button").forEach(function(b){b.addEventListener("click",function(){setColor(b.dataset.c)})});
+  document.querySelectorAll("#presets button").forEach(function(b){b.addEventListener("click",function(){
+    var p=PRESETS[b.dataset.p]; if(!p)return;
+    var v=sw()?p.sw:p.en;
+    ev.value=v[0]; msg.value=v[1]; setColor(p.color); updateLabel();
+  })});
+  document.querySelectorAll("#styleSeg button").forEach(function(b){b.addEventListener("click",function(){
+    style=b.dataset.st;
+    document.querySelectorAll("#styleSeg button").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+    applyStyle();
   })});
   document.getElementById("sendDesign").addEventListener("click",function(e){
     e.preventDefault();
@@ -104,6 +132,6 @@
       t("\nPlease tell me the quantity options and price.","\nTafadhali niambie idadi zinazopatikana na bei."));
   });
   drawRows();
-  updateLabel();
+  applyStyle();
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(updateLabel)}
 })();
