@@ -202,7 +202,7 @@ The standalone download has been imported into this git repository.
 
 ## 13. Printable price card (13 November 2026)
 
-- Added `web/price-card.html`, a standalone A4 page for the shop counter. It uses the Aquamor logo and only confirmed prices: refills 5L Ksh 50, 10L Ksh 100, 20L Ksh 200; new 20L bottles Ksh 1,400 (hard bottle + water) and Ksh 450 (regular bottle).
+- Added [web/price-card.html](../web/price-card.html), a standalone A4 page for the shop counter. It uses the Aquamor logo and only confirmed prices: refills 5L Ksh 50, 10L Ksh 100, 20L Ksh 200; new 20L bottles Ksh 1,400 (hard bottle + water) and Ksh 450 (regular bottle).
 - Includes the free-delivery line with "tell us your area and we will confirm", the WhatsApp number, call numbers, opening hours, email, Paybill and the address.
 - Excludes unconfirmed prices: small bottled water, custom-branded bottles and dispenser cleaning are noted as quoted on request.
 - Print styles are built in: A4, one page, with a Print button on screen. The page is `noindex` and is not linked from the public site.
