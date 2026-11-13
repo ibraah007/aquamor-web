@@ -11,6 +11,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Order builder | Customer picks refills, bottled water and new 20L bottles, sees a running total, and sends the order to WhatsApp, already written out |
 | Refill planner | Customer enters how many people are at home and picks 5L, 10L or 20L; the site estimates weekly refills and cost, with a WhatsApp button |
 | Price card | A standalone A4 page ([price-card.html](price-card.html)) for the shop counter, with the confirmed refill and bottle prices, free-delivery line and WhatsApp number; use the Print button or the browser's print dialog |
+| How it works | Three steps (choose your water, order on WhatsApp, delivery or pickup) and a "Who we deliver to" strip for homes, offices, schools, restaurants, clinics and hotels |
 | Label designer | Customer types an event name and message, picks a colour and size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
 | Gallery | 26 real photos and three short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
