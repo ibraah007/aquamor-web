@@ -124,11 +124,11 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 
 ## 6. Ideas that can be built next (no client input needed)
 1. ~~Refill planner (people in the home, then suggested refills per week and cost)~~ — built (see section 12)
-2. Designer presets (Wedding, Church, Graduation, Corporate) and a round label style
-3. "Reorder my last order" in one tap
-4. "Who we deliver to" strip and a three-step "How it works"
-5. Printable A4 price card for the shop counter
-6. "How to update your site" guide
+2. ~~Designer presets (Wedding, Church, Graduation, Corporate) and a round label style~~ — built (see section 15)
+3. ~~"Reorder my last order" in one tap~~ — built (see section 16)
+4. ~~"Who we deliver to" strip and a three-step "How it works"~~ — built (see section 14)
+5. ~~Printable A4 price card for the shop counter~~ — built (see section 13)
+6. ~~"How to update your site" guide~~ — built (see section 17)
 7. Final speed, contrast and small-phone pass
 
 ---
@@ -228,3 +228,9 @@ The standalone download has been imported into this git repository.
 - A "Reorder my last order" button appears in the order summary when that record exists. It restores the quantities, opens the tab of the first item, sets delivery or pickup and fills the area.
 - Items that are no longer available are skipped with a note; if none match, the note says the items are unavailable. Cleared or blocked storage simply hides the button.
 - No account or backend is used; the customer still confirms and sends the order on WhatsApp.
+
+## 17. Handover guide (13 November 2026)
+
+- Added `docs/how-to-update-your-site.md`, a non-technical guide for the client and whoever maintains the site: editing text (including the exact-match Swahili keys), editing prices in every file that repeats them, adding a gallery photo (JPG + WebP, photo class, tile, captions), previewing with Python or the Go server, a pre-publish checklist, and the domain/hosting/support table to complete at handover.
+- Linked from the root `README.md` and `web/README.md`.
+- The guide does not invent ownership: domain, hosting, renewals and support contact are marked "to agree in writing".

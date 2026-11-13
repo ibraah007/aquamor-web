@@ -2,7 +2,7 @@
 
 The public one-page site for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, Nairobi. Plain HTML, CSS and JavaScript. There is no build step and no framework, so it can be opened from a folder or hosted on any static host.
 
-The repository-level README explains the Go API and how the pieces fit together. This file covers the front end.
+The repository-level README explains the Go API and how the pieces fit together. This file covers the front end. For the handover guide (editing text, prices and photos, previewing and publishing), see [`../docs/how-to-update-your-site.md`](../docs/how-to-update-your-site.md).
 
 ## Features
 
