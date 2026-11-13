@@ -29,6 +29,7 @@ final="$BACKUP_DIR/aquamor-$stamp.db.gz"
 # running and includes committed WAL contents.
 sqlite3 "$DB_PATH" ".backup '$tmp'"
 gzip -9 "$tmp"
+mv -- "$tmp.gz" "$final"
 
 # Delete old local backups. Keep copies off the server as well.
 find "$BACKUP_DIR" -type f -name 'aquamor-*.db.gz' -mtime +"$KEEP_DAYS" -delete

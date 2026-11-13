@@ -62,6 +62,12 @@ fi
 
 code="$(status "$base/api/v1/orders/all")"
 if [[ -n "${ADMIN_TOKEN:-}" ]]; then
+	# Never send the bearer token to a remote plain-HTTP URL. The token would
+	# leave the machine before any HTTP-to-HTTPS redirect could happen.
+	if [[ "$base" != https://* && ! "$base" =~ ^http://(127\.0\.0\.1|localhost|\[::1\])(:[0-9]+)?$ ]]; then
+		echo "refusing to send ADMIN_TOKEN over plain HTTP to $base" >&2
+		exit 1
+	fi
 	code="$(status -H "Authorization: Bearer $ADMIN_TOKEN" "$base/api/v1/orders/all")"
 	expect_status "orders endpoint with ADMIN_TOKEN" "200" "$code"
 else

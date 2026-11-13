@@ -36,7 +36,10 @@ sudo apt install -y build-essential sqlite3 curl git
 sudo git clone https://github.com/ibraah007/aquamor-web.git /opt/aquamor
 cd /opt/aquamor
 
-CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o aquamor-backend ./backend/cmd/server
+# The checkout is root-owned, so build into the operator's home and install
+# the binary with privileges afterwards.
+CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o "$HOME/aquamor-backend" ./backend/cmd/server
+sudo install -m 755 "$HOME/aquamor-backend" /opt/aquamor/aquamor-backend
 ```
 
 Run the tests before building if this is the first deploy or after a code change:
@@ -177,7 +180,14 @@ To restore, stop the service first:
 ```sh
 sudo systemctl stop aquamor
 sudo cp /var/lib/aquamor/aquamor.db /var/lib/aquamor/aquamor.db.before-restore
-gunzip -c /var/backups/aquamor/aquamor-YYYYMMDDTHHMMSSZ.db.gz > /tmp/restore.db
+gunzip -c /var/backups/aquamor/aquamor-YYYYMMDDTHHMMSSZ.db.gz > /tmp/restore.db || {
+  echo "restore failed: backup missing or corrupt; database unchanged" >&2
+  exit 1
+}
+sqlite3 /tmp/restore.db 'PRAGMA integrity_check;' | grep -qx ok || {
+  echo "restore failed: integrity check did not return ok; database unchanged" >&2
+  exit 1
+}
 sudo install -o aquamor -g aquamor -m 600 /tmp/restore.db /var/lib/aquamor/aquamor.db
 sudo rm -f /var/lib/aquamor/aquamor.db-wal /var/lib/aquamor/aquamor.db-shm
 sudo systemctl start aquamor
@@ -188,10 +198,10 @@ sudo systemctl start aquamor
 ```sh
 cd /opt/aquamor
 sudo git pull --ff-only
-CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o aquamor-backend.new ./backend/cmd/server
+CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o "$HOME/aquamor-backend.new" ./backend/cmd/server
 sudo systemctl stop aquamor
-sudo mv aquamor-backend aquamor-backend.prev
-sudo mv aquamor-backend.new aquamor-backend
+sudo cp aquamor-backend aquamor-backend.prev
+sudo install -m 755 "$HOME/aquamor-backend.new" aquamor-backend
 sudo systemctl start aquamor
 ./deploy/smoke-test.sh https://aquamor.co.ke
 ```
