@@ -46,9 +46,9 @@ Price confirmed in writing: yes / no / not a price change
 
 ## Prices and business facts
 
-The site only shows prices and facts that Aquamor has confirmed. If you ask for a price that has not been confirmed in writing, we will ask you to confirm it before it is published.
+The site only shows prices and facts that Aquamor has confirmed. If you ask for a new price, we will ask you to confirm it in writing before it is published.
 
-The current confirmed prices are refills at 5L Ksh 50, 10L Ksh 100 and 20L Ksh 200, and new 20L bottles at Ksh 1,400 (hard bottle with water) and Ksh 450 (regular bottle). Small bottled water, custom-branded bottles and dispenser cleaning are left as "quoted on request" until you give us the prices.
+The prices themselves are kept on the website and on the printable price card for the shop counter, so there is only one list to keep up to date. If either looks out of date, tell us before you print a new card or quote a customer.
 
 ---
 
