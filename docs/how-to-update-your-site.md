@@ -130,7 +130,7 @@ Open <http://localhost:8080>. The API serves the same `web/` folder.
 - [ ] Light and dark mode (change your phone or browser theme)
 - [ ] The WhatsApp buttons open a chat with the right message
 - [ ] New photos load, and the gallery filters and enlarged view work
-- [ ] `go build ./...`, `go vet ./...` and `for f in web/js/*.js; do node --check "$f"; done` pass, or the pull-request checks are green
+- [ ] The pull-request checks are green. They run `go build ./...`, `go vet ./...` and `node --check` on every file in `web/js/`; if you check locally, run `node --check` one file at a time
 - [ ] The title, description and canonical URL in the `<head>` are correct for the live domain
 - [ ] Nothing private was added: no admin token, no customer names or phone numbers, no Paybill photo that the client has not approved
 
