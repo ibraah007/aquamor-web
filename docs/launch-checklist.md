@@ -41,7 +41,7 @@ been checked on the real domain, not just locally.
 - [x] Unused legacy dashboard and Next.js config removed.
 - [x] No certification, health or "100% pure" claims.
 - [x] English/Swahili copy in place; Swahili still needs a native-speaker check.
-- [x] Accessibility and SEO checks pass locally (Lighthouse 100 / 100).
+- [x] Accessibility and SEO were 100/100 in the section 18 Lighthouse run; re-run on the deployed domain after the image changes.
 - [x] No broken internal documentation links.
 
 ## C. Domain and hosting (blocked on the client)
