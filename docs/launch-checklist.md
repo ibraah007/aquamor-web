@@ -47,6 +47,8 @@ been checked on the real domain, not just locally.
       smoke test and domain-placement script.
 - [x] Responsive gallery and banner images (`srcset`/`sizes`).
 - [x] Below-the-fold banner images lazy-loaded.
+- [x] Fonts are self-hosted; the CSP allows no third-party font origin.
+- [x] Order and checkout endpoints are rate-limited per client IP.
 - [x] Unused legacy dashboard and Next.js config removed.
 - [x] No certification, health or "100% pure" claims.
 - [x] English/Swahili copy in place; Swahili still needs a native-speaker check.

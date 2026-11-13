@@ -1,4 +1,6 @@
 
+@font-face{font-family:'Figtree';font-style:normal;font-weight:400 600;font-display:swap;src:url(../assets/fonts/figtree-latin.woff2) format('woff2')}
+@font-face{font-family:'Bricolage Grotesque';font-style:normal;font-weight:600 800;font-display:swap;src:url(../assets/fonts/bricolage-grotesque-latin.woff2) format('woff2')}
 :root{
   --ink:#0a2533; --muted:#476272; --bg:#ffffff; --foam:#e6f4f8; --deep:#06476a; --deeper:#042f47; --aqua:#2cc0d6;
   --sun:#f6b93b; --on-sun:#2a1d00; --line:#c9e1e9; --card:#ffffff; --on-deep:#ffffff;

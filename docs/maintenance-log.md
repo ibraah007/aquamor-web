@@ -103,6 +103,13 @@ Decision: the client chose a hosted checkout. The site now uses Flutterwave host
 - The smoke test checks `/admin.html` returns 200 and is `noindex`. `node --check`, Go build, vet and tests pass.
 - Docs updated: this log, `status.md` section 24, `launch-checklist.md`, `web/README.md` and the maintainer guide.
 
+### Self-hosted fonts and write-endpoint rate limits (13 November 2026)
+
+- Bricolage Grotesque and Figtree are now served from `web/assets/fonts/` as Latin variable WOFF2 files, declared with `@font-face` in `web/css/styles.css`. The Google Fonts links were removed from `index.html`, `admin.html` and `payment.html`, and those pages preload the local fonts instead.
+- The CSP no longer allows Google Fonts: `style-src` drops `fonts.googleapis.com` and `font-src` is `'self'`. Google is still allowed for the map frame only.
+- Added an in-memory fixed-window rate limiter (`backend/internal/ratelimit`): 20 requests/minute per IP on `POST /api/v1/orders` and 10 on `POST /api/v1/payments/checkout`, returning `429` with `Retry-After`. It uses the last `X-Forwarded-For` value appended by Caddy and falls back to the connection address.
+- Added unit tests for the limiter and documented the change in `status.md` section 25 and the launch checklist. Build, vet, tests, the font/CSP checks and the local smoke test pass.
+
 ---
 
 ## Open items waiting on the client
