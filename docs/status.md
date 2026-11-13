@@ -1,6 +1,6 @@
 # Aquamor Purified Drinking Water: Website Project Status
 
-**Updated:** 12 November 2026
+**Updated:** 13 November 2026
 **Project start:** 10 November 2026
 **Target delivery:** about 10 December 2026 (one month)
 **Repository:** the site is in `web/`; the Go API is in `backend/` (see the root `README.md`)
@@ -52,6 +52,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 ### Sections and features
 - [x] **Hero:** headline, buttons, key facts, live "Open now / Closed now" line (Nairobi time)
 - [x] **Build your order:** refill sizes, bottled water and new 20L bottles with steppers, delivery/pickup choice, running total, and a one-tap WhatsApp message with the order already written
+- [x] **Refill planner:** enter the number of people at home and choose 5L, 10L or 20L; the site estimates weekly litres, refills and cost, and links to WhatsApp with the plan already written
 - [x] **Label designer:** type an event name and message, pick a color and size, see it on a bottle, send the request on WhatsApp
 - [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, book on WhatsApp
 - [x] **Our work (gallery):** 26 real photos, three short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
@@ -120,7 +121,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 ---
 
 ## 6. Ideas that can be built next (no client input needed)
-1. Refill planner (people in the home, then suggested refills per week and cost)
+1. ~~Refill planner (people in the home, then suggested refills per week and cost)~~ — built (see section 12)
 2. Designer presets (Wedding, Church, Graduation, Corporate) and a round label style
 3. "Reorder my last order" in one tap
 4. "Who we deliver to" strip and a three-step "How it works"
@@ -189,3 +190,11 @@ The standalone download has been imported into this git repository.
 - Added three short muted video clips: event setup, custom-labelled event bottles, and dispenser cleaning. All use `preload="none"` and a poster image so they do not download until played.
 - The gallery now has 26 photos. English and Swahili captions were added for all six new tiles.
 - The TikTok link (`https://www.tiktok.com/@aquamor2020`) is already present in the contact section and the `LocalBusiness` `sameAs` data.
+
+## 12. Refill planner (13 November 2026)
+
+- Added a refill planner between the order builder and the label designer. The visitor enters the number of people at home and chooses 5L, 10L or 20L; the site estimates weekly litres, the number of refills (rounded up to full containers) and the weekly cost.
+- Uses only confirmed refill prices: 5L Ksh 50, 10L Ksh 100, 20L Ksh 200.
+- The estimate assumes about 2 litres of water per person per day; this assumption is stated under the result. No health or quality claims were added.
+- Works in English and Swahili (including the numbers and the WhatsApp message), and the plan can be sent to WhatsApp in one tap.
+- No backend; the logic is in `web/js/planner.js`.
