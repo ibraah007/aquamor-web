@@ -183,8 +183,8 @@ The standalone download has been imported into this git repository.
 - Get the client answers listed in section 5.
 - Confirm the WhatsApp link preview after deployment.
 - Test on a real iPhone (safe area, menu, WhatsApp hand-off) and a low-end Android phone.
-- Decide whether to connect the order builder to `POST /api/v1/orders` (currently WhatsApp only) and add an authenticated admin view.
-- Consider deferring the banner slideshow images that are below the fold; only the first image is needed at load.
+- [x] Connected the order builder to `POST /api/v1/orders` (WhatsApp remains the final hand-off) and added an authenticated admin orders view (see section 24).
+- [x] Deferred the banner slideshow images that are below the fold; only the first image loads eagerly.
 
 ## 10. Media and social update (12 November 2026)
 
@@ -317,3 +317,12 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Tests:** Go tests cover checkout creation, provider errors, verification, amount/currency checks, the webhook signature, the paid-order update and the unconfigured state. The smoke test checks `/payment.html` and `/api/v1/payments/config`.
 - **Configuration:** set `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL`; see [`deployment.md`](deployment.md). Without all three, the button stays hidden.
 - **Still needed:** an approved Flutterwave merchant account and live credentials. Online payment is limited to refills and 20L bottles because the other bottled-water prices are not confirmed.
+
+## 24. Authenticated admin orders view (13 November 2026)
+
+- **Page:** [`web/admin.html`](../web/admin.html) with `web/js/admin.js` and `web/css/admin.css`. It is a private staff page, not linked from the public site, marked `noindex`, disallowed in `robots.txt`, and served with `X-Robots-Tag: noindex, nofollow` and `Cache-Control: no-store`.
+- **Access:** the page asks for `ADMIN_TOKEN` and keeps it in `sessionStorage`, so it lasts for that browser tab only. It is never written to the page, the URL or `localStorage`. The token is sent as a bearer token to the existing `GET /api/v1/orders/all` endpoint; the server still returns 503 when no token is configured and 401 for a wrong token.
+- **Content:** orders are listed newest first with customer name, phone and email, delivery area and address, order status, payment status, provider and reference, M-Pesa receipt, paid time, total and every line item. Product names come from the public catalog; an unknown product falls back to its ID.
+- **Controls:** text search across order number, customer, contact, area and references; order-status and payment-status filters; refresh; sign out; and CSV export of the filtered rows (RFC 4180 quoting and formula-injection guard). All customer fields are inserted as text, not HTML.
+- **Checks:** `node --check` passes; the local smoke test now checks that `/admin.html` returns 200 and is `noindex`; Go build, vet and tests still pass.
+- **Access control note:** the page is only a shell. Order data remains protected by `ADMIN_TOKEN` on the API, so anyone who opens the page without the token sees nothing. The token must only be used over HTTPS.

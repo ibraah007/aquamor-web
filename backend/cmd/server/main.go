@@ -135,6 +135,9 @@ func securityHeaders(next http.Handler) http.Handler {
 		h.Set("Referrer-Policy", "strict-origin-when-cross-origin")
 		h.Set("Permissions-Policy", "camera=(), microphone=(), geolocation=(self), payment=()")
 		h.Set("Content-Security-Policy", contentSecurityPolicy)
+		if r.URL.Path == "/admin.html" {
+			h.Set("X-Robots-Tag", "noindex, nofollow")
+		}
 		if r.TLS != nil || r.Header.Get("X-Forwarded-Proto") == "https" {
 			h.Set("Strict-Transport-Security", "max-age=31536000")
 		}
@@ -148,6 +151,11 @@ func securityHeaders(next http.Handler) http.Handler {
 func cacheControl(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if strings.HasPrefix(r.URL.Path, "/api/") {
+			w.Header().Set("Cache-Control", "no-store")
+			next.ServeHTTP(w, r)
+			return
+		}
+		if r.URL.Path == "/admin.html" {
 			w.Header().Set("Cache-Control", "no-store")
 			next.ServeHTTP(w, r)
 			return

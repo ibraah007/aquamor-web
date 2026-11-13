@@ -40,6 +40,8 @@ been checked on the real domain, not just locally.
       webhook, server-side price/amount/currency checks and paid-order update.
 - [x] Payment tests cover checkout creation, verification, webhook signatures,
       amount checks and the unconfigured state.
+- [x] Authenticated admin orders page (`web/admin.html`) with token login,
+      line items, payment state, filters and CSV export; `noindex` and no-store.
 - [x] CI runs build, vet, `go test -race` and JavaScript/script syntax checks.
 - [x] Deployment files: systemd unit, Caddy example, env example, backup script,
       smoke test and domain-placement script.
@@ -70,6 +72,8 @@ been checked on the real domain, not just locally.
 - [ ] `deploy/smoke-test.sh https://<domain>` passes.
 - [ ] `https://<domain>/api/v1/orders/all` without a token returns 401 or 503.
 - [ ] A test order is stored and can be read with the admin token.
+- [ ] `/admin.html` loads, accepts the admin token, shows the test order with its
+      line items and payment state, and the CSV export opens correctly.
 - [ ] `/api/v1/payments/config` returns `"enabled": false` before credentials
       are installed, and `true` afterwards.
 - [ ] A small test payment is confirmed as `paid` on the return page and by the

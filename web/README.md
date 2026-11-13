@@ -12,6 +12,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Online payment | When the server has Flutterwave configured, a Pay online button collects the customer's name, phone, receipt email and area, saves the order and opens the hosted checkout; a return page confirms the result |
 | Refill planner | Customer enters how many people are at home and picks 5L, 10L or 20L; the site estimates weekly refills and cost, with a WhatsApp button |
 | Price card | A standalone A4 page ([price-card.html](price-card.html)) for the shop counter, with the confirmed refill and bottle prices, free-delivery line and WhatsApp number; use the Print button or the browser's print dialog |
+| Admin orders | A private page ([admin.html](admin.html)) that asks for `ADMIN_TOKEN`, then lists saved orders with customer details, line items, payment state and a CSV export; never linked from the public site and marked `noindex` |
 | How it works | Three steps (choose your water, order on WhatsApp, delivery or pickup) and a "Who we deliver to" strip for homes, offices, schools, restaurants, clinics and hotels |
 | Label designer | Customer picks a Wedding, Church, Graduation or Corporate preset, types an event name and message, picks a colour, a rectangular or round label and a bottle size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
@@ -32,15 +33,18 @@ web/
 ├── index.html          # All page content (sections, text, markup)
 ├── price-card.html     # Standalone printable A4 price card (inline styles)
 ├── payment.html        # Hosted-checkout return page (noindex)
+├── admin.html          # Private orders page with ADMIN_TOKEN (noindex)
 ├── css/
 │   ├── styles.css      # Layout, colours, light/dark mode, components, mobile nav
-│   └── photos.css      # One class per photo (.p-refill, .p-team, ...)
+│   ├── photos.css      # One class per photo (.p-refill, .p-team, ...)
+│   └── admin.css       # Orders page: login, stats, filters, order cards
 ├── js/
 │   ├── order.js        # Order builder + label designer
 │   ├── planner.js      # Refill planner (weekly refills and cost)
 │   ├── gallery.js      # Fading backgrounds, gallery filters, lightbox
 │   ├── site.js         # Mobile navigation toggle
 │   ├── payment.js      # Confirms the payment on payment.html
+│   ├── admin.js        # Admin orders page: token login, list, filters, CSV
 │   └── i18n.js         # Swahili switch, open/closed status, copy buttons, testimonials
 ├── assets/img/         # Photos (JPG + WebP, plus 480w/800w variants), og.jpg, favicons
 ├── assets/video/       # Short muted MP4 clips (event setup, event bottles, dispenser cleaning)
@@ -54,6 +58,8 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 **Order builder (`js/order.js`).** `items` holds the products shown in each tab. `PRICE` maps a product name to its price in Ksh. Each press of + or − updates the `qty` object, and the summary list and total are redrawn from it. On "Send order", the script builds a text message and opens `https://wa.me/254712140006?text=...` with the message URL-encoded. Delivery or pickup and the area are added. Product names and the delivery mode are translated when the site is in Swahili. Items without a listed price are shown separately and are not included in the estimated total.
 
 **Online payment (`js/order.js`, `js/payment.js`).** The Pay online button is hidden until `GET /api/v1/payments/config` reports that the server has Flutterwave keys. Only refills and 20L bottles have confirmed prices, so bottled-water orders stay on WhatsApp. The dialog collects the customer's details, posts the order to `/api/v1/payments/checkout`, and redirects to the provider's secure page. When the provider returns to `payment.html`, `payment.js` calls `/api/v1/payments/verify` and shows paid, failed, pending or an error. The server prices the order again and checks the amount and currency; the browser cannot set the price.
+
+**Admin orders (`js/admin.js`).** `admin.html` asks for `ADMIN_TOKEN` and keeps it in `sessionStorage` for that tab only; it is never put in the URL, the page or `localStorage`. The script sends it as a bearer token to `GET /api/v1/orders/all`, then renders the orders with their line items, customer contact details and payment state. It loads the public product list to show product names, supports search and status filters, and exports the filtered rows to CSV. The page is not linked from the public site, is `noindex`, and is served with `X-Robots-Tag: noindex` and `no-store`. Without `ADMIN_TOKEN` the API returns 503; with a wrong token it returns 401 and the page asks again.
 
 **Reorder (`js/order.js`).** When an order is sent, its quantities, delivery mode and area are saved in `localStorage` under `aquamor-last-order`. On the next visit a "Reorder my last order" button appears if that record exists; it restores the quantities, opens the tab of the first item, sets delivery or pickup and fills the area. Items that no longer exist are skipped, and a note says so. If nothing matches, the note says the items are unavailable. The WhatsApp handoff is still the final step.
 
@@ -87,6 +93,7 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 | Edit Swahili | `SW` in `js/i18n.js` (the English text must match `index.html` exactly) |
 | Colours | The `:root` variables at the top of `css/styles.css` |
 | Social preview / canonical | The `og:` tags, `twitter:` tags and `<link rel="canonical">` in `<head>`; update the `aquamor.co.ke` placeholder when the domain is confirmed |
+| See or export orders | Open `/admin.html` on the deployed site and enter `ADMIN_TOKEN`; use Export CSV. The token comes from the server environment, not from a file in `web/` |
 
 ## Run it locally
 

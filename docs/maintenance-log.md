@@ -94,6 +94,15 @@ Decision: the client chose a hosted checkout. The site now uses Flutterwave host
 - Tests cover checkout creation, provider errors, verification, amount/currency checks, webhook signatures and the unconfigured state.
 - Open: the client must supply an approved Flutterwave merchant account and credentials. Online payment is limited to refills and 20L bottles because other bottled-water prices are not confirmed.
 
+### Order capture, payment fixes and admin view (13 November 2026)
+
+- The order builder now saves each order to `POST /api/v1/orders` before the WhatsApp hand-off. Saves are only remembered after a successful response, and two different pending orders can be saved without blocking each other.
+- Checkout keeps the quantities and delivery mode as they were at submission, so reorder data matches the order that was actually paid for.
+- Payment verification leaves an order `pending` while the provider is still deciding, and does not overwrite a `paid` order that a webhook confirmed while verification was in flight.
+- Added the authenticated admin orders page (`web/admin.html`, `web/js/admin.js`, `web/css/admin.css`). It asks for `ADMIN_TOKEN`, keeps it in `sessionStorage` for the tab only, shows orders with line items and payment state, filters and searches them, and exports CSV. It is `noindex`, disallowed in `robots.txt`, served with `X-Robots-Tag: noindex` and `no-store`, and not linked from the public site.
+- The smoke test checks `/admin.html` returns 200 and is `noindex`. `node --check`, Go build, vet and tests pass.
+- Docs updated: this log, `status.md` section 24, `launch-checklist.md`, `web/README.md` and the maintainer guide.
+
 ---
 
 ## Open items waiting on the client
