@@ -33,6 +33,30 @@ Message sent:
 4. rebuild the shop price card only if a price changes;
 5. note the change here.
 
+### Client reply (later on 13 November 2026)
+
+Reply received:
+
+> The KEBS is with our supplier we are working on our own next year February we have already gone to the Kebs and we are now in the process,,and also if there is prices for small bottlled water(300ml.500ml,1l,5l)  Branded-bottle pricing and minimum order.
+> -  Dispenser-cleaning price.
+> [Free-delivery areas and any minimum order
+> Oh yes we do them but for now we deal with branded water alone
+> Which ranges from 500-800 depending on the type of the bottle
+
+Decisions:
+
+- **KEBS:** the client does not have their own permit or certificate yet; the current certification is with their supplier. Their own application is in process and expected in February next year. Do not add a KEBS number or certification claim. A supplier's certificate is not ours to publish.
+- **Prices:** do not publish the Ksh 500–800 range yet. The reply does not say whether it is per bottle or per pack, whether it covers small bottled water or custom-branded bottles, or what the minimum order is.
+- **Dispenser cleaning and free delivery:** the client's "yes we do them" is not tied to one question. The cleaning price and the delivery areas/minimum order are still missing.
+
+Follow-up questions to confirm:
+
+1. Is Ksh 500–800 per bottle or per pack/carton?
+2. Does that range apply to small bottled water (300ml, 500ml, 1L, 5L) or to custom-branded bottles?
+3. What is the minimum order for branded bottles?
+4. What is the dispenser-cleaning price?
+5. Which areas are free delivery, and is there a minimum order?
+
 ### Earlier decisions this day
 
 - The client has no Instagram account; no Instagram link will be added (issue #5, closed).
@@ -51,11 +75,11 @@ Message sent:
 
 | Item | Issue | Status |
 |---|---|---|
-| Small bottled-water prices (300ml, 500ml, 1L, 1.5L) | #4 | Waiting |
-| Branded-bottle pricing and minimum order | #4 | Waiting |
+| Small bottled-water prices (300ml, 500ml, 1L, 1.5L) | #4 | Reply ambiguous; confirm unit |
+| Branded-bottle pricing and minimum order | #4 | 500–800 quoted; unit/minimum unclear |
 | Dispenser-cleaning price | #4 | Waiting |
-| Free-delivery areas and minimum order | #4 | Requested 13 Nov |
-| KEBS permit number and a photo of the certificate | #4 | Requested 13 Nov |
+| Free-delivery areas and minimum order | #4 | Requested 13 Nov; not answered |
+| KEBS permit number and a photo of the certificate | #4 | Answered: with supplier; own due Feb |
 | Purification steps (only if the client has them) | #4 | Not yet requested |
 | Official business name and tagline | #4 | Waiting |
 | Facebook page is a business page, not a personal profile | #10 | Waiting |
