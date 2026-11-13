@@ -238,7 +238,7 @@ func GetOrders(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rows, err := db.DB.Query(`SELECT id, customer_name, customer_phone, customer_email, delivery_estate, delivery_address, total_amount, order_status, payment_status, payment_provider, payment_reference, mpesa_receipt_number, paid_at, created_at FROM orders ORDER BY created_at DESC LIMIT 500`)
+	rows, err := db.DB.Query(`SELECT id, customer_name, customer_phone, customer_email, delivery_estate, delivery_address, total_amount, order_status, payment_status, payment_provider, payment_reference, mpesa_receipt_number, paid_at, created_at FROM orders ORDER BY created_at DESC, id DESC LIMIT 500`)
 	if err != nil {
 		log.Printf("get orders: query: %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -273,6 +273,37 @@ func GetOrders(w http.ResponseWriter, r *http.Request) {
 	}
 	if err := rows.Err(); err != nil {
 		log.Printf("get orders: rows: %v", err)
+	}
+	rows.Close()
+
+	// Load the line items for the same 500 orders in one query. The admin view
+	// needs the items, and a second query avoids N+1 lookups per order.
+	itemRows, err := db.DB.Query(`
+		SELECT id, order_id, product_id, bottle_option, quantity, unit_price, subtotal
+		FROM order_items
+		WHERE order_id IN (SELECT id FROM orders ORDER BY created_at DESC, id DESC LIMIT 500)
+		ORDER BY order_id, id`)
+	if err != nil {
+		log.Printf("get orders: items query: %v", err)
+	} else {
+		itemsByOrder := make(map[int][]models.OrderItem)
+		for itemRows.Next() {
+			var item models.OrderItem
+			if err := itemRows.Scan(&item.ID, &item.OrderID, &item.ProductID, &item.BottleOption, &item.Quantity, &item.UnitPrice, &item.Subtotal); err != nil {
+				log.Printf("get orders: item scan: %v", err)
+				continue
+			}
+			itemsByOrder[item.OrderID] = append(itemsByOrder[item.OrderID], item)
+		}
+		if err := itemRows.Err(); err != nil {
+			log.Printf("get orders: item rows: %v", err)
+		}
+		itemRows.Close()
+		for i := range orders {
+			if items, ok := itemsByOrder[orders[i].ID]; ok {
+				orders[i].Items = items
+			}
+		}
 	}
 
 	w.WriteHeader(http.StatusOK)
