@@ -54,6 +54,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] **Build your order:** refill sizes, bottled water and new 20L bottles with steppers, delivery/pickup choice, running total, and a one-tap WhatsApp message with the order already written
 - [x] **Refill planner:** enter the number of people at home and choose 5L, 10L or 20L; the site estimates weekly litres, refills and cost, and links to WhatsApp with the plan already written
 - [x] **Label designer:** type an event name and message, pick a color and size, see it on a bottle, send the request on WhatsApp
+- [x] **Printable price card:** a standalone A4 page for the shop counter with the confirmed refill and new-bottle prices, free-delivery line and WhatsApp number (linked from the docs; not part of the one-page site)
 - [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, book on WhatsApp
 - [x] **Our work (gallery):** 26 real photos, three short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
 - [x] **About:** company story with a team photo
@@ -198,3 +199,10 @@ The standalone download has been imported into this git repository.
 - The estimate assumes about 2 litres of water per person per day; this assumption is stated under the result. No health or quality claims were added.
 - Works in English and Swahili (including the numbers and the WhatsApp message), and the plan can be sent to WhatsApp in one tap.
 - No backend; the logic is in `web/js/planner.js`.
+
+## 13. Printable price card (13 November 2026)
+
+- Added [web/price-card.html](../web/price-card.html), a standalone A4 page for the shop counter. It uses the Aquamor logo and only confirmed prices: refills 5L Ksh 50, 10L Ksh 100, 20L Ksh 200; new 20L bottles Ksh 1,400 (hard bottle + water) and Ksh 450 (regular bottle).
+- Includes the free-delivery line with "tell us your area and we will confirm", the WhatsApp number, call numbers, opening hours, email, Paybill and the address.
+- Excludes unconfirmed prices: small bottled water, custom-branded bottles and dispenser cleaning are noted as quoted on request.
+- Print styles are built in: A4, one page, with a Print button on screen. The page is `noindex` and is not linked from the public site.
