@@ -285,8 +285,10 @@ data was damaged.
 - The API and the token must only travel over HTTPS.
 - Bind the app to loopback and expose only Caddy on ports 80 and 443.
 - Run one app instance per database. SQLite allows one writer at a time.
-- Application logs contain errors, not customer names, phones or addresses.
-  Keep it that way when adding logging.
+- Application logs contain errors plus one line per request (method, path,
+  status, response size, duration and client IP). They do not contain customer
+  names, phones, addresses, headers or query strings. Keep it that way when
+  adding logging.
 - For remote administration, use an SSH tunnel rather than opening 8080:
   `ssh -L 8080:127.0.0.1:8080 user@server`.
 

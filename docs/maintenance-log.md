@@ -110,6 +110,13 @@ Decision: the client chose a hosted checkout. The site now uses Flutterwave host
 - Added an in-memory fixed-window rate limiter (`backend/internal/ratelimit`): 20 requests/minute per IP on `POST /api/v1/orders` and 10 on `POST /api/v1/payments/checkout`, returning `429` with `Retry-After`. It uses the last `X-Forwarded-For` value appended by Caddy and falls back to the connection address.
 - Added unit tests for the limiter and documented the change in `status.md` section 25 and the launch checklist. Build, vet, tests, the font/CSP checks and the local smoke test pass.
 
+### Request logging (13 November 2026)
+
+- Added `backend/internal/requestlog`, an outer middleware that writes one line per request with method, path, status, response size, duration and client IP.
+- Query strings and headers are not logged, and customer fields never appear. The admin token, admin search terms and payment parameters therefore stay out of the log.
+- Wired around the security and cache middleware, so rate-limited `429` responses are recorded too. Tests cover status/size, the `200` default, query-string exclusion and the forwarded client address.
+- Updated the deployment security notes and the launch checklist; the local smoke test and a privacy check of the log output pass.
+
 ---
 
 ## Open items waiting on the client

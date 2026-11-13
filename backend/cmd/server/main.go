@@ -16,6 +16,7 @@ import (
 	"aquamor-backend/backend/internal/db"
 	"aquamor-backend/backend/internal/handlers"
 	"aquamor-backend/backend/internal/ratelimit"
+	"aquamor-backend/backend/internal/requestlog"
 )
 
 // The site uses inline JSON-LD and a few inline style attributes, so
@@ -73,7 +74,7 @@ func main() {
 
 	srv := &http.Server{
 		Addr:              addr,
-		Handler:           securityHeaders(cacheControl(mux)),
+		Handler:           requestlog.Middleware(securityHeaders(cacheControl(mux)), log.Default()),
 		ReadHeaderTimeout: 5 * time.Second,
 		ReadTimeout:       30 * time.Second,
 		WriteTimeout:      5 * time.Minute, // allows a slow video download

@@ -49,6 +49,8 @@ been checked on the real domain, not just locally.
 - [x] Below-the-fold banner images lazy-loaded.
 - [x] Fonts are self-hosted; the CSP allows no third-party font origin.
 - [x] Order and checkout endpoints are rate-limited per client IP.
+- [x] Request logging records method/path/status/duration/IP, with no customer
+      data, headers or query strings.
 - [x] Unused legacy dashboard and Next.js config removed.
 - [x] No certification, health or "100% pure" claims.
 - [x] English/Swahili copy in place; Swahili still needs a native-speaker check.
