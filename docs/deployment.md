@@ -92,6 +92,12 @@ To enable it:
    `/api/v1/orders/all` with `payment_status` `pending`, then `paid` after the
    redirect or webhook, with the provider transaction ID in `mpesa_receipt_number`.
 
+This integration uses the Flutterwave v3 standard checkout API with a
+`FLWSECK-...` secret key. If the Aquamor account was issued v4 OAuth credentials
+(client ID and secret), request the v3 secret key from Flutterwave or update
+`backend/internal/payments/flutterwave.go` for the v4 token flow before enabling
+payments.
+
 The server prices every order again, checks the currency and amount against the
 saved order, and only marks an order paid after the provider confirms it.
 

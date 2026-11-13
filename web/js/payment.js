@@ -26,6 +26,22 @@
     "Ikiwa ulitozwa na ukurasa huu hauthibitishi malipo, tutumie ujumbe WhatsApp na risiti yako."
   );
 
+  function serverError(message){
+    var map={
+      "Online payment is not configured":t("Online payment is not configured. Please send your order on WhatsApp.","Malipo ya mtandaoni hayajaanishwa. Tafadhali tuma oda yako kupitia WhatsApp."),
+      "Payment reference not found":t("Payment reference not found. If you were charged, message us on WhatsApp with your receipt.","Kumbukumbu ya malipo haikupatikana. Ikiwa ulitozwa, tutumie ujumbe WhatsApp na risiti yako."),
+      "Could not verify the payment with the provider":t("We could not verify the payment with the provider. Please try again.","Hatukuweza kuthibitisha malipo na mtoa huduma. Tafadhali jaribu tena."),
+      "Payment reference does not match":t("The payment reference does not match this order. Please contact us on WhatsApp.","Kumbukumbu ya malipo hailingani na oda hii. Tafadhali wasiliana nasi kupitia WhatsApp."),
+      "Unexpected payment currency":t("The payment currency was not expected. Please contact us on WhatsApp.","Sarafu ya malipo haikutarajiwa. Tafadhali wasiliana nasi kupitia WhatsApp."),
+      "Payment amount does not match the order":t("The payment amount does not match the order. Please contact us on WhatsApp.","Kiasi cha malipo hakilingani na oda. Tafadhali wasiliana nasi kupitia WhatsApp."),
+      "Payment succeeded but the order could not be updated":t("Payment succeeded but the order could not be updated. Please message us on WhatsApp with your receipt.","Malipo yamefanikiwa lakini oda haikusasishwa. Tafadhali tutumie ujumbe WhatsApp na risiti yako."),
+      "Could not check the payment":t("We could not check the payment. Please try again.","Hatukuweza kukagua malipo. Tafadhali jaribu tena."),
+      "reference and transaction_id are required":t("Payment details are incomplete. Please contact us on WhatsApp with your receipt.","Maelezo ya malipo hayakamiliki. Tafadhali wasiliana nasi kupitia WhatsApp na risiti yako."),
+      "Online payment is being set up. Please send your order on WhatsApp and we will confirm the total.":t("Online payment is being set up. Please send your order on WhatsApp and we will confirm the total.","Malipo ya mtandaoni yanaandaliwa. Tafadhali tuma oda yako kupitia WhatsApp nasi tutathibitisha jumla.")
+    };
+    return map[message]||message;
+  }
+
   function show(state,heading,text){
     if(card)card.dataset.state=state;
     title.textContent=heading;
@@ -56,7 +72,7 @@
   fetch("/api/v1/payments/verify?reference="+encodeURIComponent(ref)+"&transaction_id="+encodeURIComponent(txid),{headers:{Accept:"application/json"},credentials:"same-origin"})
     .then(function(r){return r.json().catch(function(){return {}}).then(function(data){return {ok:r.ok,data:data}})})
     .then(function(res){
-      if(!res.ok)throw new Error(res.data.error||t(
+      if(!res.ok)throw new Error(serverError(res.data.error)||t(
         "We could not confirm the payment. Please try again.",
         "Hatukuweza kuthibitisha malipo. Tafadhali jaribu tena."
       ));

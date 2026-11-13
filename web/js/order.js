@@ -145,7 +145,7 @@
   });
 
   /* Online payment. The backend prices the order again and confirms the total. */
-  var payBtn=document.getElementById("payOrder"),payNote=document.getElementById("payNote"),payDlg=document.getElementById("payDlg"),payForm=document.getElementById("payForm"),payError=document.getElementById("payError"),payTotal=document.getElementById("payTotal"),paySubmit=document.getElementById("paySubmit"),payClose=document.getElementById("payClose"),payAmount=0;
+  var payBtn=document.getElementById("payOrder"),payNote=document.getElementById("payNote"),payDlg=document.getElementById("payDlg"),payForm=document.getElementById("payForm"),payError=document.getElementById("payError"),payTotal=document.getElementById("payTotal"),paySubmit=document.getElementById("paySubmit"),payClose=document.getElementById("payClose"),payAmount=0,payBusy=false;
   function pricedOrder(){
     var ks=Object.keys(qty).filter(function(k){return qty[k]>0}),tot=0,unknown=[];
     ks.forEach(function(k){
@@ -165,13 +165,14 @@
     return map[message]||message;
   }
   function renderPayTotal(){if(payTotal)payTotal.textContent=t("Estimated total: Ksh ","Jumla ya makadirio: Ksh ")+payAmount.toLocaleString("en-US")}
-  function setPayBusy(busy){if(!paySubmit)return;paySubmit.disabled=busy;paySubmit.textContent=busy?t("Starting payment…","Tunanza malipo…"):t("Continue to payment","Endelea kulipa")}
+  function setPayBusy(busy){payBusy=!!busy;if(!paySubmit)return;paySubmit.disabled=payBusy;paySubmit.textContent=payBusy?t("Starting payment…","Tunanza malipo…"):t("Continue to payment","Endelea kulipa")}
   if(payBtn){
     fetch("/api/v1/payments/config",{headers:{Accept:"application/json"},credentials:"same-origin"})
       .then(function(r){return r.ok?r.json():null})
       .then(function(cfg){if(cfg&&cfg.enabled)payBtn.hidden=false})
       .catch(function(){});
     payBtn.addEventListener("click",function(){
+      if(payBusy)return;
       var o=pricedOrder();
       if(!o.keys.length){list.innerHTML='<li class="empty">Add at least one item first.</li>';return}
       if(o.unknown.length){setPayNote(t("Online payment is available for refills and 20L bottles. Please send bottled water orders on WhatsApp.","Malipo ya mtandaoni yanapatikana kwa kujaza maji na chupa za 20L. Tafadhali tuma oda za maji ya chupa kupitia WhatsApp."));return}
@@ -191,6 +192,7 @@
   if(payDlg)payDlg.addEventListener("click",function(e){if(e.target===payDlg)payDlg.close()});
   if(payForm)payForm.addEventListener("submit",function(e){
     e.preventDefault();
+    if(payBusy)return;
     var o=pricedOrder();
     if(!o.keys.length||o.unknown.length){setPayError(t("Please choose refills or 20L bottles to pay online.","Tafadhali chagua kujaza maji au chupa za 20L kulipa mtandaoni."));return}
     var name=(document.getElementById("payName").value||"").trim();
