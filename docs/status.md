@@ -93,7 +93,6 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 1. **Official business name and tagline** (four names and four taglines seen). The logo is settled: the existing header mark and icon files are the approved versions (13 November 2026).
 2. **Prices** for small bottled water (300ml, 500ml, 1L, 1.5L), branded bottles (and minimum order), and dispenser cleaning.
 3. **Free delivery rules:** areas and any minimum order (requested from the client on 13 November 2026).
-4. **KEBS permit number and purification steps**, if they have them. The permit number and a photo of the certificate were requested on 13 November 2026; the purification steps have not been asked for yet. Until they reply, the site makes no quality claims.
 
 ### B. Permissions
 - [x] Showing the staff and customers in the photos, including the new event, shop and delivery photos (confirmed by the client on 12 November 2026)
@@ -110,6 +109,9 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 - A named person for the About page, only if the client wants one
 
 ### D. To verify
+- **KEBS:** the client replied on 13 November 2026 that their certification is currently with their supplier; they have started the process for their own permit and expect it in February next year. No permit number or certificate is available to publish, so the site makes no certification claim. The purification-steps question was sent on 13 November 2026; the reply is pending.
+- **Branded bottles:** the client quoted Ksh 500–800 "depending on the type of the bottle" on 13 November 2026. Confirm whether that is per bottle or per pack, and whether a minimum order applies, before publishing it.
+- **Small bottled water:** the same reply was ambiguous; confirm whether the Ksh 500–800 range covers small bottled water or custom-branded bottles.
 - **Facebook page:** confirm it is a business page and not a personal profile.
 - **Sizes:** the latest flyer shows 500ml, 5L, 10L, 20L only; the client's text also lists 300ml, 1L, 1.5L.
 - **Swahili text:** have a native speaker read it once.
@@ -278,3 +280,11 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - Sent the client a WhatsApp message asking for the KEBS permit number, a photo of the certificate, and the free-delivery rules.
 - No KEBS number, certification claim, delivery area or minimum order will be published until the client replies and the details are checked.
 - Decisions, requests and the open-items table are kept in [`docs/maintenance-log.md`](maintenance-log.md).
+
+## 20. Client reply (13 November 2026)
+
+- **KEBS:** the client says their certification is currently with their supplier. They have started the process for their own permit and expect it in February next year. There is no number or certificate to publish, so no certification claim was added.
+- **Prices:** the client replied about prices, but the reply does not clearly separate small bottled water from custom-branded bottles. The quoted range is Ksh 500–800 "depending on the type of the bottle"; the unit (per bottle or per pack) and any minimum order are not stated.
+- **Not published yet:** the Ksh 500–800 range, dispenser-cleaning price, delivery areas and minimum order. Publishing an unclear price would mislead customers, so the site keeps its current "confirmed on WhatsApp" wording.
+- **Still needed:** small bottled-water prices, branded-bottle unit and minimum order, dispenser-cleaning price, free-delivery areas and minimum order, the official business name and tagline, and the purification steps.
+- Follow-up questions covering those items and the Ksh 500–800 sizes were sent to the client on 13 November 2026; the reply is pending. The questions are recorded in the maintenance log.
