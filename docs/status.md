@@ -93,7 +93,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 1. **Official business name and tagline** (four names and four taglines seen). The logo is settled: the existing header mark and icon files are the approved versions (13 November 2026).
 2. **Prices** for small bottled water (300ml, 500ml, 1L, 1.5L), branded bottles (and minimum order), and dispenser cleaning.
 3. **Free delivery rules:** areas and any minimum order (requested from the client on 13 November 2026).
-4. **KEBS permit number and purification steps**, if they have them (requested, including a photo of the certificate, on 13 November 2026). Until they reply, the site makes no quality claims.
+4. **KEBS permit number and purification steps**, if they have them. The permit number and a photo of the certificate were requested on 13 November 2026; the purification steps have not been asked for yet. Until they reply, the site makes no quality claims.
 
 ### B. Permissions
 - [x] Showing the staff and customers in the photos, including the new event, shop and delivery photos (confirmed by the client on 12 November 2026)

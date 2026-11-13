@@ -55,7 +55,8 @@ Message sent:
 | Branded-bottle pricing and minimum order | #4 | Waiting |
 | Dispenser-cleaning price | #4 | Waiting |
 | Free-delivery areas and minimum order | #4 | Requested 13 Nov |
-| KEBS permit number, certificate and purification steps | #4 | Requested 13 Nov |
+| KEBS permit number and a photo of the certificate | #4 | Requested 13 Nov |
+| Purification steps (only if the client has them) | #4 | Not yet requested |
 | Official business name and tagline | #4 | Waiting |
 | Facebook page is a business page, not a personal profile | #10 | Waiting |
 | Confirm bottled-water sizes (flyer vs client text) | #10 | Waiting |
