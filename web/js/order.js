@@ -137,9 +137,9 @@
   if(reorderBtn)reorderBtn.addEventListener("click",applyLast);
   refreshReorder();
   function go(text){window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(text),"_blank","noopener")}
-  var lastSaved={sig:"",at:0}, saveInFlight=false;
+  var lastSaved={sig:"",at:0}, saving={};
   function saveOrder(keys,details){
-    if(!window.fetch||saveInFlight)return;
+    if(!window.fetch)return;
     var priced=true;
     keys.forEach(function(k){if(!PRODUCTS[k])priced=false});
     if(!priced)return;
@@ -152,14 +152,15 @@
     };
     var sig=JSON.stringify(payload);
     if(sig===lastSaved.sig&&Date.now()-lastSaved.at<60000)return;
-    saveInFlight=true;
+    if(saving[sig])return;
+    saving[sig]=true;
     fetch("/api/v1/orders",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},credentials:"same-origin",keepalive:true,body:sig})
       .then(function(r){
         if(!r.ok)throw new Error("HTTP "+r.status);
         lastSaved.sig=sig;lastSaved.at=Date.now();
       })
       .catch(function(err){if(window.console&&console.warn)console.warn("Could not save order",err)})
-      .then(function(){saveInFlight=false});
+      .then(function(){delete saving[sig]});
   }
   document.getElementById("sendOrder").addEventListener("click",function(e){
     e.preventDefault();
