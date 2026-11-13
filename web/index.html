@@ -215,12 +215,19 @@
         <ul id="sumList" aria-live="polite"><li class="empty">Nothing added yet.</li></ul>
         <button class="btn btn-line reorder" id="reorderBtn" type="button" hidden>Reorder my last order</button>
         <p class="note reorderNote" id="reorderNote" role="status" hidden></p>
+        <label for="customerName">Your name</label>
+        <input type="text" id="customerName" autocomplete="name" maxlength="80" placeholder="e.g. Amina Wanjiku">
+        <label for="customerPhone">Phone number</label>
+        <input type="tel" id="customerPhone" autocomplete="tel" maxlength="20" placeholder="e.g. 0712 345 678">
         <div class="seg" role="group" aria-label="Delivery or pickup">
           <button data-m="Delivery" aria-pressed="true">Delivery</button>
           <button data-m="Pickup" aria-pressed="false">Pickup</button>
         </div>
         <label for="area" id="areaLbl">Delivery area</label>
-        <input type="text" id="area" placeholder="e.g. Ngara, Pangani, Eastleigh">
+        <input type="text" id="area" maxlength="80" placeholder="e.g. Ngara, Pangani, Eastleigh">
+        <p class="note orderError" id="orderError" role="alert" hidden></p>
+        <button class="btn btn-pay" id="payOrder" type="button" hidden>Pay online</button>
+        <p class="note payNote" id="payNote" role="status" hidden></p>
         <a class="btn btn-sun" id="sendOrder" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20order%20water." style="display:block;text-align:center">Send order on WhatsApp</a>
         <noscript><p class="note">The order builder needs JavaScript. You can still <a href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20order%20water.">order on WhatsApp</a> or call <a href="tel:+254113952100">0113 952 100</a>.</p></noscript>
         <p class="note">Refills: 5L Ksh 50, 10L Ksh 100, 20L Ksh 200. New 20L bottles: hard bottle with water Ksh 1,400, regular bottle Ksh 450. We offer free delivery: tell us your area and we will confirm. Small bottled water prices are confirmed on WhatsApp. The estimated total only includes items with a listed price.</p>
@@ -304,19 +311,59 @@
   <div class="wrap dgrid">
     <div class="stage">
       <svg viewBox="0 0 120 300" id="prev" role="img" aria-label="Preview of your custom bottle">
-        <defs><clipPath id="pb"><path d="M46 8h28v30c0 10 16 22 16 48v196c0 8-6 14-14 14H44c-8 0-14-6-14-14V86c0-26 16-38 16-48z"/></clipPath></defs>
+        <defs>
+          <clipPath id="pb"><path d="M46 8h28v30c0 10 16 22 16 48v196c0 8-6 14-14 14H44c-8 0-14-6-14-14V86c0-26 16-38 16-48z"/></clipPath>
+          <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#8fc9d9"/>
+            <stop offset=".18" stop-color="#dcf5fa"/>
+            <stop offset=".5" stop-color="#f7feff"/>
+            <stop offset=".82" stop-color="#d3eef5"/>
+            <stop offset="1" stop-color="#7fb9cb"/>
+          </linearGradient>
+          <linearGradient id="gWater" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#a8f0fa" stop-opacity=".85"/>
+            <stop offset=".55" stop-color="#37c4dd" stop-opacity=".9"/>
+            <stop offset="1" stop-color="#0d7fa0" stop-opacity=".95"/>
+          </linearGradient>
+          <linearGradient id="gEdge" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#03283b" stop-opacity=".38"/>
+            <stop offset=".16" stop-color="#03283b" stop-opacity="0"/>
+            <stop offset=".55" stop-color="#ffffff" stop-opacity=".18"/>
+            <stop offset=".84" stop-color="#03283b" stop-opacity="0"/>
+            <stop offset="1" stop-color="#03283b" stop-opacity=".42"/>
+          </linearGradient>
+          <linearGradient id="gCap" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#03283b"/>
+            <stop offset=".45" stop-color="#0a5a82"/>
+            <stop offset="1" stop-color="#03283b"/>
+          </linearGradient>
+          <filter id="soft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+        </defs>
+        <ellipse cx="60" cy="295" rx="40" ry="7" fill="#03283b" opacity=".22" filter="url(#soft)"/>
         <g clip-path="url(#pb)">
-          <rect width="120" height="300" fill="#bfe6ef"/>
-          <rect y="70" width="120" height="240" fill="#2cc0d6" opacity=".35"/>
-          <rect id="lbl" x="30" y="120" width="60" height="120" fill="#06476a"/>
-          <circle id="lblRound" cx="60" cy="180" r="29" fill="#06476a" style="display:none"/>
-          <text id="t1" x="60" y="170" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="12" fill="#fff">Your event</text>
-          <text id="t2" x="60" y="190" text-anchor="middle" font-family="Figtree,sans-serif" font-size="8" fill="#fff">date or message</text>
-          <text id="t3" x="60" y="226" text-anchor="middle" font-family="Figtree,sans-serif" font-size="5" fill="#fff" opacity=".8">Aquamor purified water</text>
+          <rect width="120" height="300" fill="url(#gGlass)"/>
+          <rect y="94" width="120" height="206" fill="url(#gWater)"/>
+          <rect x="34" y="88" width="6" height="196" rx="3" fill="#fff" opacity=".5"/>
+          <rect x="84" y="100" width="3" height="170" rx="1.5" fill="#fff" opacity=".35"/>
+          <g id="labelGroup">
+            <rect id="lbl" x="30" y="120" width="60" height="120" fill="#06476a"/>
+            <circle id="lblRound" cx="60" cy="180" r="29" fill="#06476a" style="display:none"/>
+            <text id="t1" x="60" y="170" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="12" fill="#fff">Your event</text>
+            <text id="t2" x="60" y="190" text-anchor="middle" font-family="Figtree,sans-serif" font-size="8" fill="#fff">date or message</text>
+            <text id="t3" x="60" y="226" text-anchor="middle" font-family="Figtree,sans-serif" font-size="5" fill="#fff" opacity=".8">Aquamor purified water</text>
+          </g>
+          <rect width="120" height="300" fill="url(#gEdge)" pointer-events="none"/>
+          <rect x="36" y="96" width="4" height="184" rx="2" fill="#fff" opacity=".45" pointer-events="none"/>
         </g>
         <path d="M46 8h28v30c0 10 16 22 16 48v196c0 8-6 14-14 14H44c-8 0-14-6-14-14V86c0-26 16-38 16-48z" fill="none" stroke="#06476a" stroke-width="3"/>
-        <rect x="44" y="2" width="32" height="10" rx="3" fill="#06476a"/>
+        <rect x="44" y="2" width="32" height="10" rx="3" fill="url(#gCap)"/>
+        <rect x="46" y="8" width="28" height="2" rx="1" fill="#fff" opacity=".25"/>
       </svg>
+      <div class="stagecontrol">
+        <label for="rot">Rotate</label>
+        <input type="range" id="rot" min="-72" max="72" value="0" step="1" aria-label="Rotate the bottle">
+      </div>
+      <p class="note stagehint">Drag the bottle or use the slider to turn it.</p>
     </div>
     <div>
       <p class="note" id="presetsLbl">Start with a preset</p>
@@ -516,6 +563,25 @@
 </section>
 <dialog id="lb" aria-labelledby="lbc"><button class="x" aria-label="Close">×</button><div class="lbimg" role="img"></div><p id="lbc"></p></dialog>
 
+<dialog id="payDlg" class="paydlg" aria-labelledby="payDlgTitle">
+  <form id="payForm" class="payform" novalidate>
+    <button class="x payx" type="button" id="payClose" aria-label="Close">×</button>
+    <h3 id="payDlgTitle">Pay online</h3>
+    <p class="note" id="payTotal"></p>
+    <label for="payName">Your name</label>
+    <input type="text" id="payName" autocomplete="name" maxlength="80" required>
+    <label for="payPhone">Phone number</label>
+    <input type="tel" id="payPhone" autocomplete="tel" maxlength="20" required>
+    <label for="payEmail">Email for the receipt</label>
+    <input type="email" id="payEmail" autocomplete="email" maxlength="120" required>
+    <label for="payArea">Delivery area or pickup name</label>
+    <input type="text" id="payArea" maxlength="80" required>
+    <p class="note payError" id="payError" role="alert" hidden></p>
+    <button class="btn btn-sun paygo" type="submit" id="paySubmit">Continue to payment</button>
+    <p class="note">You will be redirected to a secure payment page. Online payment is available for refills and 20L bottles only.</p>
+  </form>
+</dialog>
+
 <section id="about" class="about">
   <div class="wrap aboutgrid">
     <div>
@@ -562,12 +628,21 @@
     <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Aquamor+Drinking+Water+Musindi+Road+Ngara+Nairobi" target="_blank" rel="noopener">Get directions</a>
     <a class="btn btn-line" href="https://www.facebook.com/profile.php?id=100066493751902" target="_blank" rel="noopener">Facebook</a>
     <a class="btn btn-line" href="https://www.tiktok.com/@aquamor2020" target="_blank" rel="noopener">TikTok</a>
+    <div class="map">
+      <h3>Find us on the map</h3>
+      <iframe
+        title="Map showing Aquamor on Musindi Road, Ngara, Nairobi"
+        src="https://www.google.com/maps?q=Aquamor%20Drinking%20Water%2C%20Musindi%20Road%2C%20Ngara%2C%20Nairobi&amp;z=16&amp;output=embed"
+        width="600" height="360" loading="lazy" allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
   </div>
 </section>
 </main>
 
 <footer><div class="wrap">© 2026 Aquamor Purified Drinking Water. Musindi Road, Ngara, Nairobi.</div></footer>
 <a class="btn btn-sun fab" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20ask%20about%20your%20water." target="_blank" rel="noopener">WhatsApp us</a>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
 <script src="js/order.js" defer></script>
 <script src="js/planner.js" defer></script>

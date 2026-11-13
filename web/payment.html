@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Payment status | Aquamor Purified Drinking Water</title>
+<meta name="description" content="Check the status of your Aquamor online payment.">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#06476a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06151e" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/photos.css">
+</head>
+<body>
+<header class="top">
+  <div class="nav">
+    <div class="navleft"><a class="brand" href="/"><span class="mark p-icon" aria-hidden="true"></span>Aquamor</a></div>
+    <a class="btn btn-line" id="backOrder" href="/#order">Back to order</a>
+  </div>
+</header>
+<main id="top" tabindex="-1">
+  <section class="paypage">
+    <div class="wrap">
+      <div class="panel paycard" id="payCard" data-state="checking">
+        <div class="payspin" id="paySpinner" aria-hidden="true"></div>
+        <h1 class="paytitle" id="payTitle">Checking your payment…</h1>
+        <p class="lead" id="payMsg" role="status" aria-live="polite">Please wait while we confirm your payment with the provider.</p>
+        <div class="payactions" id="payActions" hidden>
+          <a class="btn btn-sun" id="payOrderAgain" href="/#order">Order again</a>
+          <a class="btn btn-line" id="payWhatsApp" href="https://wa.me/254712140006" target="_blank" rel="noopener">WhatsApp us</a>
+        </div>
+        <p class="note" id="payHelpNote">If you were charged and this page does not confirm it, message us on WhatsApp with your receipt.</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">© 2026 Aquamor Purified Drinking Water. Musindi Road, Ngara, Nairobi.</div></footer>
+<script src="js/payment.js" defer></script>
+</body>
+</html>

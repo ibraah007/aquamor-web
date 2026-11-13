@@ -121,6 +121,25 @@ func TestCreateOrderUsesServerPrices(t *testing.T) {
 	}
 }
 
+func TestCreateOrderAllowsMultipleOrdersWithoutPaymentReference(t *testing.T) {
+	first := decodeCreatedOrder(t, postOrder(t, validOrder()))
+	second := decodeCreatedOrder(t, postOrder(t, validOrder()))
+
+	if first.ID == second.ID {
+		t.Fatalf("both orders got ID %d", first.ID)
+	}
+	var withNull int
+	if err := db.DB.QueryRow(
+		`SELECT COUNT(*) FROM orders WHERE payment_reference IS NULL AND id IN (?, ?)`,
+		first.ID, second.ID,
+	).Scan(&withNull); err != nil {
+		t.Fatalf("count orders: %v", err)
+	}
+	if withNull != 2 {
+		t.Errorf("orders with NULL payment_reference = %d, want 2", withNull)
+	}
+}
+
 func TestCreateOrderRejectsUnknownOrUnavailableProduct(t *testing.T) {
 	for _, id := range []int{6, 999} {
 		t.Run(fmt.Sprintf("product_%d", id), func(t *testing.T) {
@@ -322,6 +341,50 @@ func TestGetOrdersRequiresToken(t *testing.T) {
 			t.Fatalf("decode orders: %v; body: %s", err, recorder.Body.String())
 		}
 	})
+}
+
+func TestGetOrdersIncludesItems(t *testing.T) {
+	req := validOrder()
+	req.Items = []models.OrderItem{
+		{ProductID: 1, BottleOption: "swap", Quantity: 2},
+		{ProductID: 4, BottleOption: "new_purchase", Quantity: 1},
+	}
+	created := decodeCreatedOrder(t, postOrder(t, req))
+
+	t.Setenv("ADMIN_TOKEN", "correct-token")
+	request := httptest.NewRequest(http.MethodGet, "/api/v1/orders/all", nil)
+	request.Header.Set("Authorization", "Bearer correct-token")
+	recorder := httptest.NewRecorder()
+	GetOrders(recorder, request)
+	if recorder.Code != http.StatusOK {
+		t.Fatalf("status = %d, want 200; body: %s", recorder.Code, recorder.Body.String())
+	}
+
+	var orders []models.Order
+	if err := json.Unmarshal(recorder.Body.Bytes(), &orders); err != nil {
+		t.Fatalf("decode orders: %v; body: %s", err, recorder.Body.String())
+	}
+	var found *models.Order
+	for i := range orders {
+		if orders[i].ID == created.ID {
+			found = &orders[i]
+			break
+		}
+	}
+	if found == nil {
+		t.Fatalf("order %d not found in response", created.ID)
+	}
+	if len(found.Items) != 2 {
+		t.Fatalf("items = %d, want 2", len(found.Items))
+	}
+	if found.Items[0].ProductID != 1 || found.Items[0].BottleOption != "swap" ||
+		found.Items[0].Quantity != 2 || found.Items[0].UnitPrice != 200 || found.Items[0].Subtotal != 400 {
+		t.Errorf("first item = %+v", found.Items[0])
+	}
+	if found.Items[1].ProductID != 4 || found.Items[1].BottleOption != "new_purchase" ||
+		found.Items[1].Quantity != 1 || found.Items[1].UnitPrice != 1400 || found.Items[1].Subtotal != 1400 {
+		t.Errorf("second item = %+v", found.Items[1])
+	}
 }
 
 func TestUnitPrice(t *testing.T) {

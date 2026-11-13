@@ -93,6 +93,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 1. **Official business name and tagline** (four names and four taglines seen). The logo is settled: the existing header mark and icon files are the approved versions (13 November 2026).
 2. **Prices** for small bottled water (300ml, 500ml, 1L, 1.5L), branded bottles (and minimum order), and dispenser cleaning.
 3. **Free delivery rules:** areas and any minimum order (requested from the client on 13 November 2026).
+4. **Online payment and automated replies:** the client chose a hosted checkout. The site now integrates Flutterwave hosted checkout; the client still needs to supply an approved merchant account, API keys and a webhook secret. A real email or WhatsApp auto-reply still needs SMTP or WhatsApp Business API credentials; the site currently shows an on-page acknowledgment instead.
 
 ### B. Permissions
 - [x] Showing the staff and customers in the photos, including the new event, shop and delivery photos (confirmed by the client on 12 November 2026)
@@ -182,8 +183,8 @@ The standalone download has been imported into this git repository.
 - Get the client answers listed in section 5.
 - Confirm the WhatsApp link preview after deployment.
 - Test on a real iPhone (safe area, menu, WhatsApp hand-off) and a low-end Android phone.
-- Decide whether to connect the order builder to `POST /api/v1/orders` (currently WhatsApp only) and add an authenticated admin view.
-- Consider deferring the banner slideshow images that are below the fold; only the first image is needed at load.
+- [x] Connected the order builder to `POST /api/v1/orders` (WhatsApp remains the final hand-off) and added an authenticated admin orders view (see section 24).
+- [x] Deferred the banner slideshow images that are below the fold; only the first image loads eagerly.
 
 ## 10. Media and social update (12 November 2026)
 
@@ -297,3 +298,31 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Images:** generated 480w and 800w JPG/WebP variants for the gallery and banner photos. The gallery and banners use `srcset`/`sizes`, below-the-fold banner images are lazy-loaded, and the hero preload uses the same responsive source set. The lightbox still loads the full-size photo.
 - **Cleanup:** removed the unused legacy dashboard (`backend/internal/web/`) and the leftover Next.js `tsconfig.json`.
 - **Checks:** Go build/vet/test/race and `gofmt` pass; all JavaScript and shell scripts pass syntax checks; the local smoke test passes for the home page, health, products, protected orders and security headers.
+
+## 22. 3D bottle, on-site map and reach-out acknowledgment (13 November 2026)
+
+- **Label designer:** the bottle preview now uses glass, water and cap gradients, edge shading, highlights and a soft shadow. It can be turned by dragging it or with a slider, and the label compresses and moves around the curve of the bottle. The rectangular/round styles, colours, presets, text fitting and WhatsApp hand-off are unchanged. No idle animation, so it respects reduced motion.
+- **Map:** added a lazy-loaded Google Maps embed in the contact section using the same location text as the existing "Get directions" link. The link itself is unchanged. The server CSP now allows Google Maps frames (`frame-src`).
+- **Reach-out acknowledgment:** tapping any WhatsApp or email link now shows an on-page message: thanks for reaching out, send the prepared message, and Aquamor will get back to you. It is translated into Swahili. This is a UI acknowledgment, not an automated email or WhatsApp reply.
+- **Still needed:** online payment and true automated replies require an external provider and credentials; see section 5A item 4.
+
+## 23. Online payments with Flutterwave hosted checkout (13 November 2026)
+
+- **Decision:** the client chose a hosted checkout rather than building card or M-Pesa collection directly. Flutterwave is the first provider.
+- **Button:** a Pay online button appears in the order summary only when `/api/v1/payments/config` reports that payment is configured. If the provider is not configured, the existing WhatsApp order path is unchanged.
+- **Flow:** the dialog collects name, phone, receipt email and delivery area or pickup name; the site saves the order and redirects to Flutterwave's secure page. The no-JS WhatsApp path still works.
+- **Return page:** [`web/payment.html`](../web/payment.html) confirms the payment with `/api/v1/payments/verify`, then shows paid, failed, pending or an error message, with links to order again or contact Aquamor on WhatsApp.
+- **Security:** the server prices every order from the catalog, ignores client prices, checks the provider reference, currency and amount before marking an order paid, and verifies the `verif-hash` webhook signature. The webhook is the fallback when a customer closes the browser before returning.
+- **Data:** orders can store `customer_email`, `payment_provider`, `payment_reference`, `mpesa_receipt_number` and `paid_at`; older databases receive these columns automatically at startup.
+- **Tests:** Go tests cover checkout creation, provider errors, verification, amount/currency checks, the webhook signature, the paid-order update and the unconfigured state. The smoke test checks `/payment.html` and `/api/v1/payments/config`.
+- **Configuration:** set `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL`; see [`deployment.md`](deployment.md). Without all three, the button stays hidden.
+- **Still needed:** an approved Flutterwave merchant account and live credentials. Online payment is limited to refills and 20L bottles because the other bottled-water prices are not confirmed.
+
+## 24. Authenticated admin orders view (13 November 2026)
+
+- **Page:** [`web/admin.html`](../web/admin.html) with `web/js/admin.js` and `web/css/admin.css`. It is a private staff page, not linked from the public site, marked `noindex`, disallowed in `robots.txt`, and served with `X-Robots-Tag: noindex, nofollow` and `Cache-Control: no-store`.
+- **Access:** the page asks for `ADMIN_TOKEN` and keeps it in `sessionStorage`, so it lasts for that browser tab only. It is never written to the page, the URL or `localStorage`. The token is sent as a bearer token to the existing `GET /api/v1/orders/all` endpoint; the server still returns 503 when no token is configured and 401 for a wrong token.
+- **Content:** orders are listed newest first with customer name, phone and email, delivery area and address, order status, payment status, provider and reference, M-Pesa receipt, paid time, total and every line item. Product names come from the public catalog; an unknown product falls back to its ID.
+- **Controls:** text search across order number, customer, contact, area and references; order-status and payment-status filters; refresh; sign out; and CSV export of the filtered rows (RFC 4180 quoting and formula-injection guard). All customer fields are inserted as text, not HTML.
+- **Checks:** `node --check` passes; the local smoke test now checks that `/admin.html` returns 200 and is `noindex`; Go build, vet and tests still pass.
+- **Access control note:** the page is only a shell. Order data remains protected by `ADMIN_TOKEN` on the API, so anyone who opens the page without the token sees nothing. The token must only be used over HTTPS.

@@ -49,14 +49,19 @@ aquamor-web/
 ├── web/
 │   ├── index.html
 │   ├── price-card.html      # printable A4 price card for the shop counter
+│   ├── payment.html         # hosted-checkout return page (noindex)
+│   ├── admin.html           # private orders page (ADMIN_TOKEN, noindex)
 │   ├── css/
 │   │   ├── styles.css      # layout, colours, light/dark mode, mobile nav
-│   │   └── photos.css      # one class per photo (WebP with JPEG fallback)
+│   │   ├── photos.css      # one class per photo (WebP with JPEG fallback)
+│   │   └── admin.css       # orders page: login, stats, filters, order cards
 │   ├── js/
 │   │   ├── order.js        # order builder + label designer
 │   │   ├── planner.js      # weekly refill planner
 │   │   ├── gallery.js      # fading banners, filters, lightbox
 │   │   ├── site.js         # mobile navigation
+│   │   ├── payment.js      # confirms the checkout result on payment.html
+│   │   ├── admin.js        # admin orders page: token login, list, filters, CSV
 │   │   └── i18n.js         # English/Swahili, open/closed status, copy, testimonials
 │   ├── assets/img/         # JPG + WebP photos, social preview, icons
 │   └── README.md           # front-end details and edit points
@@ -122,6 +127,8 @@ curl -H "Authorization: Bearer $ADMIN_TOKEN" http://localhost:8080/api/v1/orders
 
 If `ADMIN_TOKEN` is unset, the endpoint returns `503` and does not expose customer names, phones or addresses. If it is set but the token is missing or wrong, it returns `401`.
 
+Staff can also use the private orders page at `/admin.html`. It asks for `ADMIN_TOKEN`, keeps it in the browser tab only, shows the saved orders with their line items and payment state, and exports the filtered list to CSV. The page is `noindex`, not linked from the public site, and the token must only be entered over HTTPS.
+
 **HTTPS is required for remote use.** The Go server listens with plain HTTP (`http.ListenAndServe`), which is fine for `localhost`. Before deploying it anywhere remote, put it behind a TLS-terminating reverse proxy (for example Caddy, nginx or a cloud load balancer) and block direct access to port 8080. Otherwise the `Authorization: Bearer` token and the customer names, phones and addresses returned by this endpoint travel in cleartext.
 
 ## What changed after importing the downloaded site
@@ -139,6 +146,7 @@ The original snapshot was a standalone marketing page. It is now the `web/` fron
 - **Phone safe areas:** the safe-area inset is applied to the sticky header/footer rather than the root element, avoiding a strip of content above the header on notched phones.
 - **Status:** the open/closed line refreshes every minute, not only on page load.
 - **Go server:** now serves `web/`; the API uses server-side prices, a transaction, size/quantity validation, and a protected orders list. SQLite uses WAL and a busy timeout.
+- **Order capture and admin view:** the order builder now saves each order to `POST /api/v1/orders` before handing off to WhatsApp (and only remembers a save after a successful response). The private `/admin.html` page lists saved orders with line items and payment state, supports search and filters, and exports CSV.
 
 ## Before going live
 
@@ -146,7 +154,7 @@ Use [`docs/deployment.md`](docs/deployment.md) for the server and TLS steps, and
 
 - The canonical URL, `og:image` URL, `web/robots.txt` and `web/sitemap.xml` use `https://aquamor.co.ke/`. Run `./scripts/set-domain.sh <domain>` once the domain is confirmed.
 - Confirm the remaining client facts in `docs/status.md`: small bottled-water prices, branded-bottle pricing and minimum order, delivery rules, KEBS/purification details, the official business name and tagline, photo/label permissions and social links.
-- The site still sends orders to WhatsApp; the API stores orders only when a client posts to it. Connecting the two is the next product step.
+- Orders are saved through `POST /api/v1/orders` and WhatsApp remains the final hand-off. Staff read and export them from `/admin.html`; set a strong `ADMIN_TOKEN` and serve the page only over HTTPS.
 - Keep `web/js/order.js` (`PRICE`), `web/js/planner.js` (`SIZES`) and `backend/internal/catalog/catalog.go` in sync until prices come from one API; the printable card in [web/price-card.html](web/price-card.html) repeats the confirmed refill and bottle prices.
 - Decide whether to add privacy-friendly analytics and a short privacy note (the API stores name, phone and address if it is used).
 - Test on a real iPhone and a low-end Android phone before announcing the domain.

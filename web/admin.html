@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Orders | Aquamor admin</title>
+<meta name="description" content="Private order list for Aquamor staff.">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#06476a" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06151e" media="(prefers-color-scheme: dark)">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/photos.css">
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="nav">
+    <div class="navleft">
+      <a class="brand" href="/"><span class="mark p-icon" aria-hidden="true"></span>Aquamor</a>
+      <span class="admin-tag">Admin</span>
+    </div>
+    <a class="btn btn-line" href="/">View site</a>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+  <section class="admin-page">
+    <div class="wrap">
+
+      <div class="panel admin-login" id="loginPanel">
+        <h1 class="admin-title">Orders</h1>
+        <p class="lead">Enter the admin token to see recent orders. Customer names, phone numbers and email addresses are private.</p>
+        <form id="loginForm" novalidate>
+          <label for="token">Admin token</label>
+          <input id="token" name="token" type="password" autocomplete="current-password" spellcheck="false" aria-describedby="loginNote">
+          <button class="btn btn-sun" type="submit" id="loginBtn">Unlock orders</button>
+        </form>
+        <p class="admin-status" id="loginStatus" role="status" aria-live="polite"></p>
+        <p class="note" id="loginNote">The token is kept in this tab only and is never added to the page or the URL. Use the orders page over HTTPS, because the token travels in the request header.</p>
+      </div>
+
+      <div id="ordersView" hidden>
+        <div class="admin-head">
+          <div>
+            <h1 class="admin-title">Orders</h1>
+            <p class="note" id="updated">Not loaded yet.</p>
+          </div>
+          <div class="admin-actions">
+            <button class="btn btn-line" type="button" id="refresh">Refresh</button>
+            <button class="btn btn-line" type="button" id="export">Export CSV</button>
+            <button class="btn btn-line" type="button" id="logout">Sign out</button>
+          </div>
+        </div>
+
+        <p class="admin-status" id="adminStatus" role="status" aria-live="polite"></p>
+
+        <div class="stats" id="stats"></div>
+
+        <div class="panel filters">
+          <label for="search">Search
+            <input id="search" type="search" placeholder="Name, phone, area, order number…" autocomplete="off">
+          </label>
+          <label for="orderFilter">Order status
+            <select id="orderFilter">
+              <option value="">All order statuses</option>
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="out_for_delivery">Out for delivery</option>
+              <option value="completed">Completed</option>
+            </select>
+          </label>
+          <label for="payFilter">Payment
+            <select id="payFilter">
+              <option value="">All payment statuses</option>
+              <option value="unpaid">Unpaid</option>
+              <option value="pending">Pending</option>
+              <option value="paid">Paid</option>
+              <option value="failed">Failed</option>
+            </select>
+          </label>
+          <button class="btn btn-line" type="button" id="clearFilters">Clear filters</button>
+        </div>
+
+        <p class="note" id="shownCount" aria-live="polite"></p>
+        <div id="orders"></div>
+      </div>
+
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">© 2026 Aquamor Purified Drinking Water. Private staff page.</div></footer>
+<script src="js/admin.js" defer></script>
+</body>
+</html>

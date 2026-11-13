@@ -156,6 +156,8 @@ Fill this in at handover and keep it with the client:
 
 **Security note:** the admin token for the orders list is a password. Never put it in `web/`, in a screenshot, or in a shared chat. The orders endpoint must only be used over HTTPS.
 
+To see or export orders, open `https://<domain>/admin.html` and enter the admin token. The page is not linked from the public site, and the token stays in that browser tab until you close it or press Sign out. Use **Export CSV** to download the orders that match the current search and filters. The page shows customer names, phone numbers and email addresses, so do not open it on a shared or public computer.
+
 ---
 
 ## 7. If something breaks

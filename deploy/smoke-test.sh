@@ -60,6 +60,30 @@ else
 	pass "products endpoint returns catalog data"
 fi
 
+code="$(status "$base/payment.html")"
+expect_status "payment status page" "200" "$code"
+if ! grep -qi "Aquamor" "$body"; then
+	fail "payment status page does not mention Aquamor"
+else
+	pass "payment status page contains the business name"
+fi
+
+code="$(status "$base/admin.html")"
+expect_status "admin orders page" "200" "$code"
+if ! grep -qi "noindex" "$body"; then
+	fail "admin orders page is not marked noindex"
+else
+	pass "admin orders page is noindex"
+fi
+
+code="$(status "$base/api/v1/payments/config")"
+expect_status "payments config endpoint" "200" "$code"
+if ! grep -q '"enabled"' "$body"; then
+	fail "payments config endpoint did not report enabled state"
+else
+	pass "payments config endpoint reports enabled state"
+fi
+
 code="$(status "$base/api/v1/orders/all")"
 if [[ -n "${ADMIN_TOKEN:-}" ]]; then
 	# Never send the bearer token to a remote plain-HTTP URL. The token would

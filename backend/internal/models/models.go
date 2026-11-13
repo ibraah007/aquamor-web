@@ -28,6 +28,7 @@ type OrderItem struct {
 type OrderRequest struct {
 	CustomerName    string `json:"customer_name" binding:"required"`
 	CustomerPhone   string `json:"customer_phone" binding:"required"`
+	CustomerEmail   string `json:"customer_email,omitempty"`
 	DeliveryEstate  string `json:"delivery_estate" binding:"required"` // e.g., Ngara, Parklands, CBD
 	DeliveryAddress string `json:"delivery_address" binding:"required"`
 	// unit_price and subtotal inside incoming items are ignored; the server
@@ -40,12 +41,16 @@ type Order struct {
 	ID                 int         `json:"id"`
 	CustomerName       string      `json:"customer_name"`
 	CustomerPhone      string      `json:"customer_phone"`
+	CustomerEmail      string      `json:"customer_email,omitempty"`
 	DeliveryEstate     string      `json:"delivery_estate"`
 	DeliveryAddress    string      `json:"delivery_address"`
 	TotalAmount        float64     `json:"total_amount"`
 	OrderStatus        string      `json:"order_status"`   // 'pending', 'processing', 'out_for_delivery', 'completed'
-	PaymentStatus      string      `json:"payment_status"` // 'unpaid', 'mpesa_pending', 'paid'
+	PaymentStatus      string      `json:"payment_status"` // 'unpaid', 'pending', 'paid', 'failed'
+	PaymentProvider    string      `json:"payment_provider,omitempty"`
+	PaymentReference   string      `json:"payment_reference,omitempty"`
 	MpesaReceiptNumber string      `json:"mpesa_receipt_number,omitempty"`
+	PaidAt             *time.Time  `json:"paid_at,omitempty"`
 	CreatedAt          time.Time   `json:"created_at"`
 	Items              []OrderItem `json:"items,omitempty"`
 }
