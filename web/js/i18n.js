@@ -261,7 +261,7 @@
     var chat=document.getElementById("chatWa");
     if(chat)chat.href=wa(isSw?"Habari Aquamor, ningependa kuuliza kuhusu maji yenu.":"Hello Aquamor, I would like to ask about your water.");
     var langBtn=document.getElementById("langBtn");
-    if(langBtn)langBtn.textContent=isSw?"EN":"SW";
+    if(langBtn){langBtn.textContent=isSw?"EN":"SW";langBtn.setAttribute("aria-label",(isSw?"EN":"SW")+" · Badilisha lugha / Switch language")}
     try{localStorage.setItem("aquamor-lang",l)}catch(e){}
     document.dispatchEvent(new CustomEvent("aquamor:lang",{detail:{lang:l}}));
   }

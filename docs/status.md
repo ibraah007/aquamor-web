@@ -239,3 +239,34 @@ The handover is deliberately split into two audiences, because the client does n
 - `docs/how-to-update-your-site.md` is the maintainer guide: editing text (including the exact-match Swahili keys and the `H` opening-hours table), editing every copy of a price, adding a gallery photo (JPG + WebP, photo class, tile, captions), previewing with Python or the Go server, a pre-publish checklist, publishing and support.
 - Both are linked from the root `README.md` and `web/README.md`; the change-request process and maintenance scope are added to the agreement points in section 8.
 - Update model agreed on 13 November 2026: managed updates. The client sends requests; the maintainer edits, checks and publishes. No self-service CMS is included in this phase.
+
+## 18. Final performance, contrast and small-phone pass (13 November 2026)
+
+Lighthouse 12.8.2, mobile, on the local preview:
+
+| Category | Score |
+|---|---|
+| Performance | 78 (simulated mobile); 99 with throttling provided |
+| Accessibility | 100 |
+| Best practices | 100 |
+| SEO | 100 |
+
+The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP is about 0.26s and an unthrottled run scores 99 with LCP 0.22s. The simulation is affected by the local preview server, which sends no compression or cache headers and uses HTTP/1.0; the real host should enable gzip/brotli, long cache lifetimes for images and fonts, and HTTP/2 or HTTP/3.
+
+### Fixes made
+- **Hero paint:** the first banner photo is now visible immediately instead of fading in from zero opacity, so the hero no longer waits for JavaScript plus a 1.6s transition before it can be the largest paint.
+- **Fonts:** the Google Fonts stylesheet is preloaded and loaded without blocking render, with a `<noscript>` fallback. Text still uses `display=swap`.
+- **Video posters:** the three posters now use the existing WebP copies instead of JPG, and the unused `eventBottlesClip.jpg` was deleted. No unused image or video files remain.
+- **Dark-mode contrast:** the dark-mode accent (`--deep`) was lightened from `#0a5a82` to `#1f7ea6`. White text on it is 4.57:1, and it is at least 3:1 against the dark background, card and foam surfaces; the old value was 1.87:1 against cards.
+- **Accessible names:** the language button's accessible name now includes its visible `SW`/`EN` code. The gallery tiles no longer carry longer `aria-label`s that did not match their captions; the visible caption names the tile and the enlarged photo.
+- **Lazy loading:** every gallery image is still `loading="lazy"` with width and height set; the three videos keep `preload="none"`, `muted` and `playsinline`.
+
+### Checks
+- Contrast: all body, muted, heading, button and band text pairs pass WCAG AA in light and dark mode (lowest text ratio 4.57:1; most above 6:1).
+- Widths: no sideways scrolling at 320, 360, 390, 768, 1024 and 1280px, including the planner, designer presets, round label and reorder controls.
+- Reduced motion: with `prefers-reduced-motion: reduce`, smooth scrolling is off and each banner shows a single photo.
+- No JavaScript errors; all scripts pass `node --check`; Go build, vet and the CI workflow pass.
+
+### Deferred (optional)
+- Responsive gallery variants: the photos are about 1000–1200px wide for a roughly 210–372px tile; adding 480w/800w `srcset` variants would save about 356 KiB on the simulated run. They are lazy-loaded and below the fold, so this does not affect the first paint.
+- Real-device test on an iPhone (safe areas, menu, WhatsApp hand-off) and a low-end Android phone, already listed under "Still to do before launch".
