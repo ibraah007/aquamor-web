@@ -335,3 +335,11 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Rate limiting:** a small in-memory fixed-window limiter (`backend/internal/ratelimit`) now guards the public write endpoints. `POST /api/v1/orders` allows 20 requests per minute per client IP and `POST /api/v1/payments/checkout` allows 10. Over-limit requests get `429 Too Many Requests`, a `Retry-After` header and a JSON error.
 - **Client IP:** the limiter uses the last `X-Forwarded-For` value (appended by Caddy in production) and falls back to the connection address. Taking the last value ignores spoofed entries sent by the client. Expired keys are swept once per window so memory cannot grow without bound. Limits are per process and reset on restart.
 - **Tests:** `backend/internal/ratelimit/ratelimit_test.go` covers the window, separate keys, concurrent access, the 429 response and client-IP parsing. The local smoke test still passes, the font files are served as `font/woff2` with a cache header, and no `fonts.googleapis.com` or `fonts.gstatic.com` references remain.
+
+## 26. Request logging (13 November 2026)
+
+- Added `backend/internal/requestlog`, an outer middleware that logs one line per request: method, path, status, response size, duration and client IP.
+- Query strings and headers are never logged, and no customer fields are included. The logged path is `URL.Path` only, so the admin token (sent in a header), admin-page search terms (client-side) and payment parameters cannot appear in the log.
+- The middleware records the status and byte count, defaults to `200` when a handler writes without calling `WriteHeader`, and keeps the response writer usable through `Unwrap`.
+- It wraps the security and cache middleware in `cmd/server/main.go`, so rate-limited `429` responses are logged too.
+- Tests cover the status and size, the `200` default, query-string exclusion and the forwarded client address. The local smoke test passes and the command was checked to contain no customer data or query string.
