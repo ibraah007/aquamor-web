@@ -1,0 +1,43 @@
+[Unit]
+Description=Aquamor website and orders API
+Documentation=file:/opt/aquamor/docs/deployment.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=aquamor
+Group=aquamor
+WorkingDirectory=/opt/aquamor
+EnvironmentFile=/etc/aquamor/aquamor.env
+ExecStart=/opt/aquamor/aquamor-backend
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=15s
+UMask=0077
+
+# The web files and binary live in /opt/aquamor; only the SQLite database
+# directory is writable.
+StateDirectory=aquamor
+ReadWritePaths=/var/lib/aquamor
+
+# Hardening. Keep these unless the hosting setup requires a change.
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+ProtectClock=true
+ProtectHostname=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+MemoryDenyWriteExecute=true
+CapabilityBoundingSet=
+AmbientCapabilities=
+
+[Install]
+WantedBy=multi-user.target

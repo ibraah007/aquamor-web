@@ -39,6 +39,9 @@ jobs:
       - name: Vet
         run: go vet ./...
 
+      - name: Test
+        run: go test -race ./...
+
   web:
     name: JavaScript syntax
     runs-on: ubuntu-latest
@@ -57,3 +60,10 @@ jobs:
             node --check "$f" || status=1
           done
           exit "$status"
+
+      - name: Check deployment scripts
+        run: |
+          for f in deploy/*.sh scripts/*.sh; do
+            echo "checking $f"
+            bash -n "$f"
+          done

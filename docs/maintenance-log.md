@@ -70,7 +70,10 @@ Follow-up questions sent to the client (13 November 2026); waiting for the reply
 ### Site changes merged
 
 - #11 refill planner, #12 designer presets and round labels, #13 one-tap reorder, #14 how it works and delivery strip, #15 printable price card, #16 handover documents, #17 quality pass, #18 CI checks.
-- CI now runs Go build/vet, gofmt and JavaScript syntax on every pull request.
+- Server hardening and launch tooling: environment-based config, loopback default, timeouts, graceful shutdown, security/cache headers, health check, Go tests, CI test step, Caddy/systemd/env/backup/smoke-test examples, and the deployment and launch-checklist docs.
+- Responsive 480w/800w JPG/WebP variants for gallery and banner images, with `srcset`/`sizes` and lazy-loaded below-the-fold banners. The full-size lightbox photos are unchanged.
+- Removed the unused legacy dashboard and the leftover Next.js `tsconfig.json`.
+- CI now runs Go build/vet/tests, gofmt, and JavaScript and shell-script syntax checks on every pull request.
 
 ---
 
