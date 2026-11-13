@@ -14,12 +14,12 @@
     var lb=document.getElementById("lb");
     if(lb&&lb.showModal){
       tiles.forEach(function(g){g.addEventListener("click",function(){
-        var img=lb.querySelector(".lbimg");
+        var img=lb.querySelector(".lbimg"),cap=g.querySelector("span"),label=cap?cap.textContent:"";
         img.className="lbimg p-"+g.dataset.k;
-        // Keep the English label so language switching can translate it back.
-        img.dataset.al0=g.dataset.al0||g.getAttribute("aria-label");
-        img.setAttribute("aria-label",g.getAttribute("aria-label"));
-        document.getElementById("lbc").textContent=g.querySelector("span").textContent;
+        // The visible caption is also the accessible name for the enlarged photo.
+        img.dataset.al0=label;
+        img.setAttribute("aria-label",label);
+        document.getElementById("lbc").textContent=label;
         lb.showModal();
       })});
       lb.addEventListener("click",function(e){if(e.target===lb||e.target.classList.contains("x"))lb.close()});
