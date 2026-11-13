@@ -63,8 +63,9 @@ main:focus{outline:none}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(4,47,71,.9) 0%,rgba(6,71,106,.72) 55%,rgba(6,71,106,.45) 100%)}
 .wave{position:relative;z-index:2}
 .bg{position:absolute;inset:0;z-index:0}
-.bg i{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.6s ease}
-.bg i.on{opacity:1}
+.bg picture{position:absolute;inset:0;display:block;opacity:0;transition:opacity 1.6s ease}
+.bg picture.on{opacity:1}
+.bg img{width:100%;height:100%;object-fit:cover;display:block}
 .band,.contact{position:relative;overflow:hidden}
 .band{color:#fff;padding:72px 0 60px;background:var(--deeper)}
 .band::before,.contact::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(4,47,71,.84) 0%,rgba(6,71,106,.52) 60%,rgba(6,71,106,.3) 100%)}
