@@ -224,16 +224,16 @@ footer{padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));font-size:.9r
 /* Online payment */
 .btn-pay{display:block;width:100%;text-align:center;background:var(--deep);color:#fff;margin-bottom:10px}
 .btn-pay:hover{filter:brightness(1.1)}
-#payOrder[hidden],#payNote[hidden],#payError[hidden]{display:none}
+#payOrder[hidden],#payNote[hidden],#payError[hidden],#orderError[hidden]{display:none}
 .payNote{color:var(--muted)}
 .paydlg{position:relative;width:min(94vw,460px);max-height:92vh;overflow:auto;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:20px;padding:24px}
 .payform h3{margin:0 28px 6px 0}
 .payform input[type=text],.payform input[type=tel],.payform input[type=email]{margin-bottom:12px}
 .payx{top:10px;right:10px;z-index:1;color:var(--ink);border-color:var(--line);background:var(--card)}
-.payError{color:#b3261e}
+.payError,.orderError{color:#b3261e}
 .paygo{display:block;width:100%;margin-top:6px}
 .paygo[disabled]{opacity:.65;cursor:progress}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .payError{color:#ffb4ab}}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .payError,:root:not([data-theme="light"]) .orderError{color:#ffb4ab}}
 
 /* Payment return page */
 .paypage{padding:60px 0}

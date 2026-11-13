@@ -215,12 +215,17 @@
         <ul id="sumList" aria-live="polite"><li class="empty">Nothing added yet.</li></ul>
         <button class="btn btn-line reorder" id="reorderBtn" type="button" hidden>Reorder my last order</button>
         <p class="note reorderNote" id="reorderNote" role="status" hidden></p>
+        <label for="customerName">Your name</label>
+        <input type="text" id="customerName" autocomplete="name" maxlength="80" placeholder="e.g. Amina Wanjiku">
+        <label for="customerPhone">Phone number</label>
+        <input type="tel" id="customerPhone" autocomplete="tel" maxlength="20" placeholder="e.g. 0712 345 678">
         <div class="seg" role="group" aria-label="Delivery or pickup">
           <button data-m="Delivery" aria-pressed="true">Delivery</button>
           <button data-m="Pickup" aria-pressed="false">Pickup</button>
         </div>
         <label for="area" id="areaLbl">Delivery area</label>
-        <input type="text" id="area" placeholder="e.g. Ngara, Pangani, Eastleigh">
+        <input type="text" id="area" maxlength="80" placeholder="e.g. Ngara, Pangani, Eastleigh">
+        <p class="note orderError" id="orderError" role="alert" hidden></p>
         <button class="btn btn-pay" id="payOrder" type="button" hidden>Pay online</button>
         <p class="note payNote" id="payNote" role="status" hidden></p>
         <a class="btn btn-sun" id="sendOrder" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20order%20water." style="display:block;text-align:center">Send order on WhatsApp</a>

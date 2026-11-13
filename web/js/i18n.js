@@ -46,7 +46,7 @@
   "Delivery": "Kuletewa",
   "Pickup": "Kuchukua",
   "Delivery area": "Eneo la kuletewa",
-  "Name for pickup": "Jina la kuchukua",
+  "Pickup name or note": "Jina la kuchukua au maelezo",
   "Send order on WhatsApp": "Tuma oda kupitia WhatsApp",
   "Pay online": "Lipa mtandaoni",
   "Your name": "Jina lako",
@@ -225,6 +225,9 @@
 };
   var PH = {
   "e.g. Ngara, Pangani, Eastleigh": "mf. Ngara, Pangani, Eastleigh",
+  "e.g. Amina Wanjiku": "mf. Amina Wanjiku",
+  "e.g. 0712 345 678": "mf. 0712 345 678",
+  "e.g. Pickup at 5pm": "mf. Kuchukua saa 11",
   "e.g. John & Mary": "mf. John & Mary",
   "e.g. 12 December 2026": "mf. 12 Desemba 2026",
   "e.g. Your name": "mf. Jina lako"
