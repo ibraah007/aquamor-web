@@ -118,17 +118,17 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 - Client review and the agreed revision rounds
 - Choose and register a domain (for example aquamor.co.ke) and set up hosting
 - Move the site to the domain (this is when the Google search data matters most)
-- Hand over, plus a short "how to update your site" guide
+- Hand over, plus the client change-request sheet and the maintainer guide
 
 ---
 
 ## 6. Ideas that can be built next (no client input needed)
 1. ~~Refill planner (people in the home, then suggested refills per week and cost)~~ — built (see section 12)
-2. Designer presets (Wedding, Church, Graduation, Corporate) and a round label style
-3. "Reorder my last order" in one tap
-4. "Who we deliver to" strip and a three-step "How it works"
-5. Printable A4 price card for the shop counter
-6. "How to update your site" guide
+2. ~~Designer presets (Wedding, Church, Graduation, Corporate) and a round label style~~ — built (see section 15)
+3. ~~"Reorder my last order" in one tap~~ — built (see section 16)
+4. ~~"Who we deliver to" strip and a three-step "How it works"~~ — built (see section 14)
+5. ~~Printable A4 price card for the shop counter~~ — built (see section 13)
+6. ~~"How to update your site" guide~~ — built (see section 17)
 7. Final speed, contrast and small-phone pass
 
 ---
@@ -149,6 +149,8 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 - Who gives final approval
 - Deposit and payment dates
 - Who pays for the domain and hosting
+- Who handles updates after launch, the change-request process and response times
+- What is included in ongoing maintenance and what is charged separately
 - Whether the optional business social media setup is a separate paid service
 
 ---
@@ -228,3 +230,12 @@ The standalone download has been imported into this git repository.
 - A "Reorder my last order" button appears in the order summary when that record exists. It restores the quantities, opens the tab of the first item, sets delivery or pickup and fills the area.
 - Items that are no longer available are skipped with a note; if none match, the note says the items are unavailable. Cleared or blocked storage simply hides the button.
 - No account or backend is used; the customer still confirms and sends the order on WhatsApp.
+
+## 17. Handover documents (13 November 2026)
+
+The handover is deliberately split into two audiences, because the client does not use a terminal or edit files:
+
+- `docs/how-to-request-a-change.md` is the one-page guide for the client: how to send a change request, what to include, how prices and photo permissions are confirmed, what happens next, and the domain/hosting ownership table to complete at handover.
+- `docs/how-to-update-your-site.md` is the maintainer guide: editing text (including the exact-match Swahili keys and the `H` opening-hours table), editing every copy of a price, adding a gallery photo (JPG + WebP, photo class, tile, captions), previewing with Python or the Go server, a pre-publish checklist, publishing and support.
+- Both are linked from the root `README.md` and `web/README.md`; the change-request process and maintenance scope are added to the agreement points in section 8.
+- Update model agreed on 13 November 2026: managed updates. The client sends requests; the maintainer edits, checks and publishes. No self-service CMS is included in this phase.
