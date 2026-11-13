@@ -35,11 +35,13 @@ The `ADMIN_TOKEN` is only needed to read customer orders. Without it the orders 
 aquamor-web/
 ├── web/
 │   ├── index.html
+│   ├── price-card.html      # printable A4 price card for the shop counter
 │   ├── css/
 │   │   ├── styles.css      # layout, colours, light/dark mode, mobile nav
 │   │   └── photos.css      # one class per photo (WebP with JPEG fallback)
 │   ├── js/
 │   │   ├── order.js        # order builder + label designer
+│   │   ├── planner.js      # weekly refill planner
 │   │   ├── gallery.js      # fading banners, filters, lightbox
 │   │   ├── site.js         # mobile navigation
 │   │   └── i18n.js         # English/Swahili, open/closed status, copy, testimonials
@@ -118,6 +120,6 @@ The original snapshot was a standalone marketing page. It is now the `web/` fron
 - Confirm the remaining client facts in `docs/status.md`: small bottled-water prices, branded-bottle pricing, delivery rules, logo file, photo/label permissions and social links.
 - The legacy dashboard at `backend/internal/web/index.html` is **not served** and has no authentication. Do not expose it without adding a login.
 - The site still sends orders to WhatsApp; the API stores orders only when a client posts to it. Connecting the two is the next product step.
-- Keep `web/js/order.js` (`PRICE`) and `backend/internal/catalog/catalog.go` in sync until prices come from one API.
+- Keep `web/js/order.js` (`PRICE`), `web/js/planner.js` (`SIZES`) and `backend/internal/catalog/catalog.go` in sync until prices come from one API; the printable card in `web/price-card.html` repeats the confirmed refill and bottle prices.
 - Decide whether to add privacy-friendly analytics and a short privacy note (the API stores name, phone and address if it is used).
 - `tsconfig.json` is a leftover Next.js config and is not used by this project; remove it if you are not planning a Next.js front end.
