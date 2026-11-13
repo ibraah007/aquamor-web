@@ -8,6 +8,8 @@ One-page website for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, N
 - [`docs/how-to-request-a-change.md`](docs/how-to-request-a-change.md) — one-page guide for the client: how to ask for text, price and photo changes (no terminal needed).
 - [`docs/how-to-update-your-site.md`](docs/how-to-update-your-site.md) — maintainer guide: editing text, prices and photos, previewing and publishing.
 - [`docs/maintenance-log.md`](docs/maintenance-log.md) — dated record of client decisions, requests and site changes.
+- [`docs/deployment.md`](docs/deployment.md) — server setup, TLS, backups, updates and launch runbook.
+- [`docs/launch-checklist.md`](docs/launch-checklist.md) — what to check before and after the public launch.
 
 ## Run it
 
@@ -28,9 +30,17 @@ Run from the repository root so the database and `web/` resolve correctly:
 ADMIN_TOKEN="choose-a-long-random-token" go run ./backend/cmd/server
 ```
 
-Open <http://localhost:8080>. The database is created/opened at `./aquamor.db`.
+Open <http://localhost:8080>. The defaults are `ADDR=127.0.0.1:8080`, `DB_PATH=./aquamor.db` and `WEB_DIR=web`; override them when the layout differs. The app binds to loopback, so use a reverse proxy for public traffic (see [`docs/deployment.md`](docs/deployment.md)).
 
 The `ADMIN_TOKEN` is only needed to read customer orders. Without it the orders endpoint deliberately refuses to expose customer data.
+
+### Tests
+
+```sh
+go test ./...
+```
+
+CI also runs `go test -race ./...`, `go vet ./...`, `gofmt`, JavaScript syntax checks and deployment-script syntax checks.
 
 ## Repository layout
 
@@ -56,10 +66,19 @@ aquamor-web/
 │       ├── catalog/        # single source of truth for products and prices
 │       ├── db/             # SQLite connection and schema
 │       ├── handlers/       # products + orders HTTP handlers
-│       ├── models/
-│       └── web/            # legacy prototype dashboard (not served)
+│       └── models/
+├── deploy/
+│   ├── Caddyfile           # TLS reverse-proxy example
+│   ├── aquamor.service     # systemd unit
+│   ├── aquamor.env.example # server environment variables
+│   ├── backup.sh           # online SQLite backup
+│   └── smoke-test.sh       # post-deploy checks
+├── scripts/
+│   └── set-domain.sh       # replace the domain placeholders
 ├── docs/
 │   ├── status.md
+│   ├── deployment.md                 # server, TLS, backups and launch runbook
+│   ├── launch-checklist.md           # pre/post-launch checks
 │   ├── how-to-update-your-site.md   # maintainer guide (text, prices, photos, publishing)
 │   ├── how-to-request-a-change.md   # client-facing change-request sheet
 │   └── maintenance-log.md           # dated client decisions, requests and changes
@@ -116,17 +135,18 @@ The original snapshot was a standalone marketing page. It is now the `web/` fron
 - **Label designer:** text is measured and shrunk to fit the label; the default preview is no longer clipped.
 - **Accessibility:** `aria-live` on the cart, translated `aria-label`s, skip link, keyboard-friendly menu, no-JS fallback for ordering.
 - **Social/search:** added `og:image` (1200×630), `og:url`, `og:site_name`, Twitter card, canonical URL, favicon, apple-touch icon; added `url`, `image`, `priceRange` and `areaServed` to the structured data.
-- **Performance:** WebP versions of all photos with JPEG fallback; gallery photos are lazy-loaded `<picture>` elements; the first hero image is preloaded; fonts now load the 700 weight the CSS already used.
+- **Performance:** WebP versions of all photos with JPEG fallback; responsive 480w/800w variants for the gallery and banners; gallery and below-the-fold banner images are lazy-loaded; the first hero image is preloaded with its responsive source set; fonts now load the 700 weight the CSS already used.
 - **Phone safe areas:** the safe-area inset is applied to the sticky header/footer rather than the root element, avoiding a strip of content above the header on notched phones.
 - **Status:** the open/closed line refreshes every minute, not only on page load.
 - **Go server:** now serves `web/`; the API uses server-side prices, a transaction, size/quantity validation, and a protected orders list. SQLite uses WAL and a busy timeout.
 
 ## Before going live
 
-- The canonical URL, `og:image` URL, `web/robots.txt` and `web/sitemap.xml` use `https://aquamor.co.ke/`. Update them when the domain is confirmed.
-- Confirm the remaining client facts in `docs/status.md`: small bottled-water prices, branded-bottle pricing, delivery rules, logo file, photo/label permissions and social links.
-- The legacy dashboard at `backend/internal/web/index.html` is **not served** and has no authentication. Do not expose it without adding a login.
+Use [`docs/deployment.md`](docs/deployment.md) for the server and TLS steps, and [`docs/launch-checklist.md`](docs/launch-checklist.md) for the full go-live list.
+
+- The canonical URL, `og:image` URL, `web/robots.txt` and `web/sitemap.xml` use `https://aquamor.co.ke/`. Run `./scripts/set-domain.sh <domain>` once the domain is confirmed.
+- Confirm the remaining client facts in `docs/status.md`: small bottled-water prices, branded-bottle pricing and minimum order, delivery rules, KEBS/purification details, the official business name and tagline, photo/label permissions and social links.
 - The site still sends orders to WhatsApp; the API stores orders only when a client posts to it. Connecting the two is the next product step.
 - Keep `web/js/order.js` (`PRICE`), `web/js/planner.js` (`SIZES`) and `backend/internal/catalog/catalog.go` in sync until prices come from one API; the printable card in [web/price-card.html](web/price-card.html) repeats the confirmed refill and bottle prices.
 - Decide whether to add privacy-friendly analytics and a short privacy note (the API stores name, phone and address if it is used).
-- `tsconfig.json` is a leftover Next.js config and is not used by this project; remove it if you are not planning a Next.js front end.
+- Test on a real iPhone and a low-end Android phone before announcing the domain.

@@ -39,7 +39,7 @@ web/
 │   ├── gallery.js      # Fading backgrounds, gallery filters, lightbox
 │   ├── site.js         # Mobile navigation toggle
 │   └── i18n.js         # Swahili switch, open/closed status, copy buttons, testimonials
-├── assets/img/         # Photos (JPG + WebP), og.jpg, favicons
+├── assets/img/         # Photos (JPG + WebP, plus 480w/800w variants), og.jpg, favicons
 ├── assets/video/       # Short muted MP4 clips (event setup, event bottles, dispenser cleaning)
 └── README.md
 ```
@@ -56,9 +56,9 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 
 **Label designer (`js/order.js`).** The bottle is an SVG. The event text, message and label colour are SVG elements that the inputs update live. Presets fill the event name, message and colour with sample values in the current language; they do not add products or prices. The label style switches between a rectangle (`#lbl`) and a circle (`#lblRound`). `fit()` measures the rendered text and reduces the font size until it fits inside the label, using smaller limits for the round style; it runs again when the web font finishes loading, when the style changes and when the language changes. "Request this design" builds a WhatsApp message from the same values.
 
-**Fading backgrounds (`js/gallery.js`).** Any element with class `bg` holds `<i>` children, each with a photo class. The script shows one at a time and fades to the next every 6 seconds. With "reduced motion" turned on in the visitor's phone, it shows only the first photo.
+**Fading backgrounds (`js/gallery.js`).** Any element with class `bg` holds `<picture>` children with a `<source>` for WebP and a JPEG fallback. The script shows one at a time and fades to the next every 6 seconds. The first hero photo is eager and high priority; the other slides and below-the-fold banners are lazy-loaded. With "reduced motion" turned on in the visitor's phone, it shows only the first photo.
 
-**Gallery filters and lightbox (`js/gallery.js`).** Each tile has `data-c` with its categories (for example `"events bottles"`). A filter button hides tiles that do not include its category. Tapping a tile opens a `<dialog>` with the photo enlarged, using the tile's caption. Gallery photos are `<picture>` elements with a WebP source and a JPEG fallback, and are lazy-loaded. The three short video clips sit below the grid and use `preload="none"` with a poster image, so they download only when played.
+**Gallery filters and lightbox (`js/gallery.js`).** Each tile has `data-c` with its categories (for example `"events bottles"`). A filter button hides tiles that do not include its category. Tapping a tile opens a `<dialog>` with the photo enlarged, using the tile's caption. Gallery photos are `<picture>` elements with a WebP source and a JPEG fallback, responsive `srcset` variants (480w, 800w and the original), and `loading="lazy"`. The lightbox uses the full-size photo from `css/photos.css`, so enlarging does not show a small variant. The three short video clips sit below the grid and use `preload="none"` with a poster image, so they download only when played.
 
 **Mobile menu (`js/site.js`).** The toggle updates `aria-expanded`, opens the menu, closes on Escape, on an outside click, or when a link is chosen.
 
@@ -66,7 +66,7 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 
 **English / Swahili (`js/i18n.js`).** The `SW` dictionary maps each English sentence to its Swahili version. When Swahili is switched on, the script walks every text node on the page, looks up its exact English text, and swaps it. The original is stored so it can be switched back. It also translates `aria-label`s and placeholders. A `MutationObserver` translates text added later, such as the order rows. The chosen language is saved in `localStorage`.
 
-**Photos (`css/photos.css`).** Each photo is a class such as `.p-refill`, using `image-set()` to prefer WebP and fall back to JPEG. The same photo can be used in a banner, the gallery and the enlarged view without being stored twice.
+**Photos (`css/photos.css`).** Each photo is a class such as `.p-refill`, using `image-set()` to prefer WebP and fall back to JPEG. These classes are used by the lightbox and the service photos; the gallery and banners use `<picture>` with explicit `srcset` so the browser can pick a smaller variant on phones. The 480w and 800w variants sit next to the original in `assets/img/`.
 
 ## Common edits
 
@@ -77,7 +77,7 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 | Opening hours | `H` table in `js/i18n.js`, the contact section and FAQ in `index.html`, and the structured data in `<head>` |
 | Paybill and account | Contact section and FAQ in `index.html` |
 | Add a testimonial | `TESTIMONIALS` at the top of `js/i18n.js`: `{quote:"...", name:"...", place:"..."}`. The section appears when the list is not empty. |
-| Add a photo | Put the JPG (and a WebP copy) in `assets/img/`, add `.p-name{...}` to `css/photos.css`, then add a tile in the gallery in `index.html` with `data-c` and `data-k="name"` |
+| Add a photo | Put the JPG and a WebP copy in `assets/img/`, add `.p-name{...}` to `css/photos.css` (for the lightbox and service photos), then add a gallery tile in `index.html` with `data-c`, `data-k="name"` and a `<picture>` that includes the 480w/800w `srcset` entries. Create the variants with `convert name.jpg -resize '480x>' -strip -quality 82 name-480.jpg` and `-quality 80 name-480.webp`, then repeat for 800. |
 | Add a social link | Add a button next to the Facebook and TikTok ones in the contact section of `index.html`, and add the URL to `sameAs` in `<head>` |
 | Edit Swahili | `SW` in `js/i18n.js` (the English text must match `index.html` exactly) |
 | Colours | The `:root` variables at the top of `css/styles.css` |
@@ -96,7 +96,9 @@ Then visit <http://localhost:8000>. Or run the Go server from the repository roo
 
 Any static host works. For Netlify, Cloudflare Pages or Vercel, set the publish/output directory to `web/` and leave the build command empty. For GitHub Pages, use an Actions workflow that uploads `web/` (Pages cannot serve a subfolder directly without one).
 
-For a custom domain (for example `aquamor.co.ke`), add it in the host's dashboard and set the DNS records the provider asks for. Then update the canonical and `og:` URLs.
+For a custom domain (for example `aquamor.co.ke`), add it in the host's dashboard and set the DNS records the provider asks for. Then run `./scripts/set-domain.sh aquamor.co.ke` to update the canonical and `og:` URLs, `robots.txt`, `sitemap.xml` and the Caddy example.
+
+For the full app (Go API, SQLite orders, TLS and backups), follow [`../docs/deployment.md`](../docs/deployment.md). The Go server binds to loopback by default and is meant to sit behind Caddy.
 
 ## Content rules used in this project
 

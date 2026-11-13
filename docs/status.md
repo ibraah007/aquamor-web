@@ -119,9 +119,10 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 
 ### E. Handover tasks (week 4)
 - Client review and the agreed revision rounds
-- Choose and register a domain (for example aquamor.co.ke) and set up hosting
+- Choose and register a domain (for example aquamor.co.ke) and set up hosting using [`deployment.md`](deployment.md)
 - Move the site to the domain (this is when the Google search data matters most)
 - Hand over, plus the client change-request sheet and the maintainer guide
+- Work through [`launch-checklist.md`](launch-checklist.md) before announcing the domain
 
 ---
 
@@ -271,7 +272,6 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - No JavaScript errors; all scripts pass `node --check`; Go build, vet and the CI workflow pass.
 
 ### Deferred (optional)
-- Responsive gallery variants: the photos are about 1000–1200px wide for a roughly 210–372px tile; adding 480w/800w `srcset` variants would save about 356 KiB on the simulated run. They are lazy-loaded and below the fold, so this does not affect the first paint.
 - Real-device test on an iPhone (safe areas, menu, WhatsApp hand-off) and a low-end Android phone, already listed under "Still to do before launch".
 
 ## 19. Client input status (13 November 2026)
@@ -288,3 +288,12 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Not published yet:** the Ksh 500–800 range, dispenser-cleaning price, delivery areas and minimum order. Publishing an unclear price would mislead customers, so the site keeps its current "confirmed on WhatsApp" wording.
 - **Still needed:** small bottled-water prices, branded-bottle unit and minimum order, dispenser-cleaning price, free-delivery areas and minimum order, the official business name and tagline, and the purification steps.
 - Follow-up questions covering those items and the Ksh 500–800 sizes were sent to the client on 13 November 2026; the reply is pending. The questions are recorded in the maintenance log.
+
+## 21. Launch readiness, tests and responsive images (13 November 2026)
+
+- **Server:** `ADDR`, `DB_PATH` and `WEB_DIR` are read from the environment; the default bind is `127.0.0.1:8080`. Added read/write/idle timeouts, graceful shutdown, a database health check, security headers (CSP, frame/nosniff/referrer/permissions, HSTS over HTTPS) and cache headers for static files.
+- **Tests:** added Go tests for the confirmed catalog prices, order totals and validation, server-side pricing, admin-token protection and the products endpoint. CI now runs `go test -race ./...`, plus JavaScript and deployment-script syntax checks.
+- **Deployment:** added [`deploy/Caddyfile`](../deploy/Caddyfile), a systemd unit, an environment example, an online SQLite backup script and a smoke test. [`docs/deployment.md`](deployment.md) covers DNS, TLS, firewall, backups, updates, rollback and security; [`docs/launch-checklist.md`](launch-checklist.md) tracks the launch.
+- **Images:** generated 480w and 800w JPG/WebP variants for the gallery and banner photos. The gallery and banners use `srcset`/`sizes`, below-the-fold banner images are lazy-loaded, and the hero preload uses the same responsive source set. The lightbox still loads the full-size photo.
+- **Cleanup:** removed the unused legacy dashboard (`backend/internal/web/`) and the leftover Next.js `tsconfig.json`.
+- **Checks:** Go build/vet/test/race and `gofmt` pass; all JavaScript and shell scripts pass syntax checks; the local smoke test passes for the home page, health, products, protected orders and security headers.
