@@ -121,6 +121,25 @@ func TestCreateOrderUsesServerPrices(t *testing.T) {
 	}
 }
 
+func TestCreateOrderAllowsMultipleOrdersWithoutPaymentReference(t *testing.T) {
+	first := decodeCreatedOrder(t, postOrder(t, validOrder()))
+	second := decodeCreatedOrder(t, postOrder(t, validOrder()))
+
+	if first.ID == second.ID {
+		t.Fatalf("both orders got ID %d", first.ID)
+	}
+	var withNull int
+	if err := db.DB.QueryRow(
+		`SELECT COUNT(*) FROM orders WHERE payment_reference IS NULL AND id IN (?, ?)`,
+		first.ID, second.ID,
+	).Scan(&withNull); err != nil {
+		t.Fatalf("count orders: %v", err)
+	}
+	if withNull != 2 {
+		t.Errorf("orders with NULL payment_reference = %d, want 2", withNull)
+	}
+}
+
 func TestCreateOrderRejectsUnknownOrUnavailableProduct(t *testing.T) {
 	for _, id := range []int{6, 999} {
 		t.Run(fmt.Sprintf("product_%d", id), func(t *testing.T) {

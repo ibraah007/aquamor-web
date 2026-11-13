@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"crypto/subtle"
+	"database/sql"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -59,6 +60,7 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 
 	req.CustomerName = strings.TrimSpace(req.CustomerName)
 	req.CustomerPhone = strings.TrimSpace(req.CustomerPhone)
+	req.CustomerEmail = strings.TrimSpace(req.CustomerEmail)
 	req.DeliveryEstate = strings.TrimSpace(req.DeliveryEstate)
 	req.DeliveryAddress = strings.TrimSpace(req.DeliveryAddress)
 
@@ -68,22 +70,44 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	type orderLine struct {
-		product  models.Product
-		option   string
-		quantity int
-		unit     float64
-		subtotal float64
+	lines, totalAmount, err := priceOrder(req)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(map[string]string{"error": err.Error()})
+		return
 	}
 
+	newOrder, err := insertOrder(req, lines, totalAmount, paymentMeta{CustomerEmail: req.CustomerEmail})
+	if err != nil {
+		log.Printf("create order: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order"})
+		return
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(map[string]interface{}{
+		"message": "Order placed and saved successfully",
+		"order":   newOrder,
+	})
+}
+
+type orderLine struct {
+	product  models.Product
+	option   string
+	quantity int
+	unit     float64
+	subtotal float64
+}
+
+// priceOrder validates the items and prices them from the server catalog.
+func priceOrder(req models.OrderRequest) ([]orderLine, float64, error) {
 	lines := make([]orderLine, 0, len(req.Items))
 	var totalAmount float64
 	for _, item := range req.Items {
 		product, ok := catalog.ByID(item.ProductID)
 		if !ok {
-			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(map[string]string{"error": fmt.Sprintf("Product %d is unknown or unavailable", item.ProductID)})
-			return
+			return nil, 0, fmt.Errorf("Product %d is unknown or unavailable", item.ProductID)
 		}
 
 		option := strings.ToLower(strings.TrimSpace(item.BottleOption))
@@ -92,42 +116,56 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 		}
 		unit, ok := unitPrice(product, option)
 		if !ok {
-			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(map[string]string{"error": fmt.Sprintf("No price configured for product %d (%s)", product.ID, option)})
-			return
+			return nil, 0, fmt.Errorf("No price configured for product %d (%s)", product.ID, option)
 		}
 
 		subtotal := unit * float64(item.Quantity)
 		totalAmount += subtotal
 		lines = append(lines, orderLine{product: product, option: option, quantity: item.Quantity, unit: unit, subtotal: subtotal})
 	}
+	return lines, totalAmount, nil
+}
+
+type paymentMeta struct {
+	CustomerEmail    string
+	PaymentProvider  string
+	PaymentReference string
+	PaymentStatus    string
+}
+
+// insertOrder writes the order and its items in one transaction.
+func insertOrder(req models.OrderRequest, lines []orderLine, totalAmount float64, meta paymentMeta) (models.Order, error) {
+	if meta.PaymentStatus == "" {
+		meta.PaymentStatus = "unpaid"
+	}
 
 	tx, err := db.DB.Begin()
 	if err != nil {
-		log.Printf("create order: begin transaction: %v", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order"})
-		return
+		return models.Order{}, fmt.Errorf("begin transaction: %w", err)
 	}
 	defer tx.Rollback()
 
+	var customerEmail, paymentProvider, paymentReference interface{}
+	if meta.CustomerEmail != "" {
+		customerEmail = meta.CustomerEmail
+	}
+	if meta.PaymentProvider != "" {
+		paymentProvider = meta.PaymentProvider
+	}
+	if meta.PaymentReference != "" {
+		paymentReference = meta.PaymentReference
+	}
 	result, err := tx.Exec(
-		`INSERT INTO orders (customer_name, customer_phone, delivery_estate, delivery_address, total_amount, order_status, payment_status) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-		req.CustomerName, req.CustomerPhone, req.DeliveryEstate, req.DeliveryAddress, totalAmount, "pending", "unpaid",
+		`INSERT INTO orders (customer_name, customer_phone, customer_email, delivery_estate, delivery_address, total_amount, order_status, payment_status, payment_provider, payment_reference) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+		req.CustomerName, req.CustomerPhone, customerEmail, req.DeliveryEstate, req.DeliveryAddress, totalAmount, "pending", meta.PaymentStatus, paymentProvider, paymentReference,
 	)
 	if err != nil {
-		log.Printf("create order: insert order: %v", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order"})
-		return
+		return models.Order{}, fmt.Errorf("insert order: %w", err)
 	}
 
 	orderID, err := result.LastInsertId()
 	if err != nil {
-		log.Printf("create order: last insert id: %v", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order"})
-		return
+		return models.Order{}, fmt.Errorf("last insert id: %w", err)
 	}
 
 	processedItems := make([]models.OrderItem, 0, len(lines))
@@ -137,17 +175,11 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 			orderID, line.product.ID, line.option, line.quantity, line.unit, line.subtotal,
 		)
 		if err != nil {
-			log.Printf("create order: insert item: %v", err)
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order items"})
-			return
+			return models.Order{}, fmt.Errorf("insert item: %w", err)
 		}
 		itemID, err := itemResult.LastInsertId()
 		if err != nil {
-			log.Printf("create order: item last insert id: %v", err)
-			w.WriteHeader(http.StatusInternalServerError)
-			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order items"})
-			return
+			return models.Order{}, fmt.Errorf("item last insert id: %w", err)
 		}
 		processedItems = append(processedItems, models.OrderItem{
 			ID:           int(itemID),
@@ -161,30 +193,24 @@ func CreateOrder(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := tx.Commit(); err != nil {
-		log.Printf("create order: commit: %v", err)
-		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(map[string]string{"error": "Failed to save order"})
-		return
+		return models.Order{}, fmt.Errorf("commit: %w", err)
 	}
 
-	newOrder := models.Order{
-		ID:              int(orderID),
-		CustomerName:    req.CustomerName,
-		CustomerPhone:   req.CustomerPhone,
-		DeliveryEstate:  req.DeliveryEstate,
-		DeliveryAddress: req.DeliveryAddress,
-		TotalAmount:     totalAmount,
-		OrderStatus:     "pending",
-		PaymentStatus:   "unpaid",
-		CreatedAt:       time.Now().UTC(),
-		Items:           processedItems,
-	}
-
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"message": "Order placed and saved successfully",
-		"order":   newOrder,
-	})
+	return models.Order{
+		ID:               int(orderID),
+		CustomerName:     req.CustomerName,
+		CustomerPhone:    req.CustomerPhone,
+		CustomerEmail:    meta.CustomerEmail,
+		DeliveryEstate:   req.DeliveryEstate,
+		DeliveryAddress:  req.DeliveryAddress,
+		TotalAmount:      totalAmount,
+		OrderStatus:      "pending",
+		PaymentStatus:    meta.PaymentStatus,
+		PaymentProvider:  meta.PaymentProvider,
+		PaymentReference: meta.PaymentReference,
+		CreatedAt:        time.Now().UTC(),
+		Items:            processedItems,
+	}, nil
 }
 
 // GetOrders returns customer orders. Customer contact details are PII, so the
@@ -212,7 +238,7 @@ func GetOrders(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	rows, err := db.DB.Query(`SELECT id, customer_name, customer_phone, delivery_estate, delivery_address, total_amount, order_status, payment_status, created_at FROM orders ORDER BY created_at DESC LIMIT 500`)
+	rows, err := db.DB.Query(`SELECT id, customer_name, customer_phone, customer_email, delivery_estate, delivery_address, total_amount, order_status, payment_status, payment_provider, payment_reference, mpesa_receipt_number, paid_at, created_at FROM orders ORDER BY created_at DESC LIMIT 500`)
 	if err != nil {
 		log.Printf("get orders: query: %v", err)
 		w.WriteHeader(http.StatusInternalServerError)
@@ -223,10 +249,25 @@ func GetOrders(w http.ResponseWriter, r *http.Request) {
 
 	orders := make([]models.Order, 0)
 	for rows.Next() {
-		var o models.Order
-		if err := rows.Scan(&o.ID, &o.CustomerName, &o.CustomerPhone, &o.DeliveryEstate, &o.DeliveryAddress, &o.TotalAmount, &o.OrderStatus, &o.PaymentStatus, &o.CreatedAt); err != nil {
+		var (
+			o         models.Order
+			email     sql.NullString
+			provider  sql.NullString
+			reference sql.NullString
+			receipt   sql.NullString
+			paidAt    sql.NullTime
+		)
+		if err := rows.Scan(&o.ID, &o.CustomerName, &o.CustomerPhone, &email, &o.DeliveryEstate, &o.DeliveryAddress, &o.TotalAmount, &o.OrderStatus, &o.PaymentStatus, &provider, &reference, &receipt, &paidAt, &o.CreatedAt); err != nil {
 			log.Printf("get orders: scan: %v", err)
 			continue
+		}
+		o.CustomerEmail = email.String
+		o.PaymentProvider = provider.String
+		o.PaymentReference = reference.String
+		o.MpesaReceiptNumber = receipt.String
+		if paidAt.Valid {
+			paid := paidAt.Time
+			o.PaidAt = &paid
 		}
 		orders = append(orders, o)
 	}

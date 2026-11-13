@@ -7,6 +7,8 @@
   };
   items.container=[["20L hard bottle + water","Ksh 1,400 · bottle and water",56],["20L regular bottle","Ksh 450",56]];
   var PRICE={"5L refill":50,"10L refill":100,"20L refill":200,"20L hard bottle + water":1400,"20L regular bottle":450}, qty={}, tab="refill", mode="Delivery";
+  /* Catalog IDs for online payment. Only items with confirmed prices are here. */
+  var PRODUCTS={"5L refill":{id:3,option:"swap"},"10L refill":{id:2,option:"swap"},"20L refill":{id:1,option:"swap"},"20L hard bottle + water":{id:4,option:"new_purchase"},"20L regular bottle":{id:5,option:"new_purchase"}};
   var rows=document.getElementById("rows"), list=document.getElementById("sumList");
   var LAST_KEY="aquamor-last-order", reorderBtn=document.getElementById("reorderBtn"), reorderNote=document.getElementById("reorderNote"), note="";
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
@@ -14,6 +16,26 @@
   /* English text from the page dictionary, with a direct fallback for messages. */
   function tr(en){return (sw()&&window.__sw&&window.__sw[en])||en}
   function t(en,swText){return sw()?swText:en}
+  /* Acknowledgment shown after any WhatsApp or email hand-off. */
+  var toast=document.getElementById("toast"), toastTimer=null;
+  function showThanks(){
+    if(!toast)return;
+    toast.textContent=t(
+      "Thanks for reaching out. Your message is ready in WhatsApp or email; send it and Aquamor will get back to you.",
+      "Asante kwa kuwasiliana. Ujumbe wako uko tayari kwenye WhatsApp au barua pepe; tuma na Aquamor atakujibu."
+    );
+    toast.hidden=false;
+    requestAnimationFrame(function(){toast.classList.add("show")});
+    if(toastTimer)clearTimeout(toastTimer);
+    toastTimer=setTimeout(function(){
+      toast.classList.remove("show");
+      toastTimer=setTimeout(function(){toast.hidden=true},300);
+    },7000);
+  }
+  document.addEventListener("click",function(e){
+    var link=e.target.closest&&e.target.closest('a[href*="wa.me/"],a[href^="mailto:"]');
+    if(link)showThanks();
+  });
   /* Last order: saved on send, restored by the Reorder button. */
   function knownKeys(){var all={};Object.keys(items).forEach(function(g){items[g].forEach(function(it){all[it[0]]=1})});return all}
   function readLast(){
@@ -122,6 +144,78 @@
     go(message);
   });
 
+  /* Online payment. The backend prices the order again and confirms the total. */
+  var payBtn=document.getElementById("payOrder"),payNote=document.getElementById("payNote"),payDlg=document.getElementById("payDlg"),payForm=document.getElementById("payForm"),payError=document.getElementById("payError"),payTotal=document.getElementById("payTotal"),paySubmit=document.getElementById("paySubmit"),payClose=document.getElementById("payClose"),payAmount=0;
+  function pricedOrder(){
+    var ks=Object.keys(qty).filter(function(k){return qty[k]>0}),tot=0,unknown=[];
+    ks.forEach(function(k){
+      if(Object.prototype.hasOwnProperty.call(PRICE,k)){tot+=(PRICE[k]||0)*qty[k]}
+      if(!PRODUCTS[k])unknown.push(k);
+    });
+    return {keys:ks,total:tot,unknown:unknown};
+  }
+  function setPayNote(text){if(!payNote)return;payNote.hidden=!text;payNote.textContent=text||""}
+  function setPayError(text){if(!payError)return;payError.hidden=!text;payError.textContent=text||""}
+  function payErrorText(message){
+    var map={
+      "Online payment is being set up. Please send your order on WhatsApp and we will confirm the total.":t("Online payment is being set up. Please send your order on WhatsApp and we will confirm the total.","Malipo ya mtandaoni yanaandaliwa. Tafadhali tuma oda yako kupitia WhatsApp nasi tutathibitisha jumla."),
+      "Could not start the payment. Please try again or send your order on WhatsApp.":t("Could not start the payment. Please try again or send your order on WhatsApp.","Imeshindikana kuanzisha malipo. Tafadhali jaribu tena au tuma oda yako kupitia WhatsApp."),
+      "A valid email address is needed for the payment receipt":t("A valid email address is needed for the payment receipt","Barua pepe sahihi inahitajika kwa risiti ya malipo")
+    };
+    return map[message]||message;
+  }
+  function renderPayTotal(){if(payTotal)payTotal.textContent=t("Estimated total: Ksh ","Jumla ya makadirio: Ksh ")+payAmount.toLocaleString("en-US")}
+  function setPayBusy(busy){if(!paySubmit)return;paySubmit.disabled=busy;paySubmit.textContent=busy?t("Starting payment…","Tunanza malipo…"):t("Continue to payment","Endelea kulipa")}
+  if(payBtn){
+    fetch("/api/v1/payments/config",{headers:{Accept:"application/json"},credentials:"same-origin"})
+      .then(function(r){return r.ok?r.json():null})
+      .then(function(cfg){if(cfg&&cfg.enabled)payBtn.hidden=false})
+      .catch(function(){});
+    payBtn.addEventListener("click",function(){
+      var o=pricedOrder();
+      if(!o.keys.length){list.innerHTML='<li class="empty">Add at least one item first.</li>';return}
+      if(o.unknown.length){setPayNote(t("Online payment is available for refills and 20L bottles. Please send bottled water orders on WhatsApp.","Malipo ya mtandaoni yanapatikana kwa kujaza maji na chupa za 20L. Tafadhali tuma oda za maji ya chupa kupitia WhatsApp."));return}
+      setPayNote("");
+      var area=document.getElementById("area"),payArea=document.getElementById("payArea");
+      if(payArea&&area)payArea.value=area.value;
+      payAmount=o.total;
+      renderPayTotal();
+      setPayError("");
+      setPayBusy(false);
+      payDlg.showModal();
+      var first=document.getElementById("payName");
+      if(first&&!first.value)first.focus();
+    });
+  }
+  if(payClose)payClose.addEventListener("click",function(){payDlg.close()});
+  if(payDlg)payDlg.addEventListener("click",function(e){if(e.target===payDlg)payDlg.close()});
+  if(payForm)payForm.addEventListener("submit",function(e){
+    e.preventDefault();
+    var o=pricedOrder();
+    if(!o.keys.length||o.unknown.length){setPayError(t("Please choose refills or 20L bottles to pay online.","Tafadhali chagua kujaza maji au chupa za 20L kulipa mtandaoni."));return}
+    var name=(document.getElementById("payName").value||"").trim();
+    var phone=(document.getElementById("payPhone").value||"").trim();
+    var email=(document.getElementById("payEmail").value||"").trim();
+    var area=(document.getElementById("payArea").value||"").trim();
+    if(name.length<2){setPayError(t("Please enter your name.","Tafadhali weka jina lako."));return}
+    if(phone.replace(/\D/g,"").length<7){setPayError(t("Please enter a valid phone number.","Tafadhali weka namba sahihi ya simu."));return}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){setPayError(t("Please enter a valid email for the receipt.","Tafadhali weka barua pepe sahihi kwa risiti."));return}
+    if(area.length<2){setPayError(t("Please enter your delivery area or pickup name.","Tafadhali weka eneo la kuletewa au jina la kuchukua."));return}
+    var orderItems=o.keys.map(function(k){return {product_id:PRODUCTS[k].id,bottle_option:PRODUCTS[k].option,quantity:qty[k]}});
+    setPayError("");
+    setPayBusy(true);
+    fetch("/api/v1/payments/checkout",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},credentials:"same-origin",body:JSON.stringify({customer_name:name,customer_phone:phone,customer_email:email,delivery_estate:area,delivery_address:area,items:orderItems})})
+      .then(function(r){return r.json().catch(function(){return {}}).then(function(data){if(!r.ok)throw new Error(data.error||t("Could not start the payment. Please try again.","Imeshindikana kuanzisha malipo. Tafadhali jaribu tena."));return data})})
+      .then(function(data){
+        if(!data.payment_url)throw new Error(t("The payment page was not returned. Please try again.","Ukurasa wa malipo haukurejeshwa. Tafadhali jaribu tena."));
+        saveLast(o.keys,area);
+        refreshReorder();
+        window.location.assign(data.payment_url);
+      })
+      .catch(function(err){setPayBusy(false);setPayError(payErrorText(err.message)||t("Could not start the payment. Please try again.","Imeshindikana kuanzisha malipo. Tafadhali jaribu tena."))});
+  });
+  document.addEventListener("aquamor:lang",function(){if(paySubmit)paySubmit.textContent=paySubmit.disabled?t("Starting payment…","Tunanza malipo…"):t("Continue to payment","Endelea kulipa");renderPayTotal()});
+
   var ev=document.getElementById("ev"),msg=document.getElementById("msg"),t1=document.getElementById("t1"),t2=document.getElementById("t2"),t3=document.getElementById("t3"),lbl=document.getElementById("lbl"),lblRound=document.getElementById("lblRound"),col="#06476a",style="rect";
   var PRESETS={
     wedding:{color:"#7a1f3d",en:["John & Mary","12 December 2026"],sw:["John na Mary","12 Desemba 2026"]},
@@ -158,6 +252,34 @@
     t3.style.display=round?"none":"";
     updateLabel();
   }
+  /* Turn the label around the bottle to give the preview a 3D feel. */
+  var svgPrev=document.getElementById("prev"), labelGroup=document.getElementById("labelGroup"), rotInput=document.getElementById("rot"), angle=0;
+  function applyRotation(){
+    if(!labelGroup)return;
+    var a=angle*Math.PI/180, sx=Math.cos(a), dx=60*Math.sin(a);
+    labelGroup.setAttribute("transform","translate("+dx.toFixed(2)+" 0) translate(60 0) scale("+Math.max(sx,0.06).toFixed(3)+" 1) translate(-60 0)");
+    if(rotInput&&String(rotInput.value)!==String(angle))rotInput.value=angle;
+  }
+  function setAngle(a){angle=Math.max(-72,Math.min(72,a));applyRotation()}
+  if(rotInput)rotInput.addEventListener("input",function(){setAngle(Number(rotInput.value))});
+  if(svgPrev){
+    var drag=null;
+    svgPrev.addEventListener("pointerdown",function(e){
+      drag={x:e.clientX,a:angle,id:e.pointerId};
+      try{svgPrev.setPointerCapture(e.pointerId)}catch(_){}
+    });
+    svgPrev.addEventListener("pointermove",function(e){
+      if(!drag||e.pointerId!==drag.id)return;
+      setAngle(drag.a+(e.clientX-drag.x)/2);
+    });
+    function endDrag(e){
+      if(!drag)return;
+      drag=null;
+      try{svgPrev.releasePointerCapture(e.pointerId)}catch(_){}
+    }
+    svgPrev.addEventListener("pointerup",endDrag);
+    svgPrev.addEventListener("pointercancel",endDrag);
+  }
   ev.addEventListener("input",updateLabel);
   msg.addEventListener("input",updateLabel);
   document.addEventListener("aquamor:lang",function(){drawRows();updateLabel();if(note)showNote(note)});
@@ -186,5 +308,6 @@
   });
   drawRows();
   applyStyle();
+  applyRotation();
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(updateLabel)}
 })();

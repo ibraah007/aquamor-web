@@ -66,11 +66,16 @@ func createTables() error {
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		customer_name TEXT NOT NULL,
 		customer_phone TEXT NOT NULL,
+		customer_email TEXT,
 		delivery_estate TEXT NOT NULL,
 		delivery_address TEXT NOT NULL,
 		total_amount REAL NOT NULL,
 		order_status TEXT DEFAULT 'pending',
 		payment_status TEXT DEFAULT 'unpaid',
+		payment_provider TEXT,
+		payment_reference TEXT,
+		mpesa_receipt_number TEXT,
+		paid_at DATETIME,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 	);
 
@@ -89,5 +94,71 @@ func createTables() error {
 	if _, err := DB.Exec(schemaQuery); err != nil {
 		return fmt.Errorf("create database tables: %w", err)
 	}
+	if err := migrate(); err != nil {
+		return fmt.Errorf("migrate database: %w", err)
+	}
 	return nil
+}
+
+// migrate adds columns that were introduced after the first release. It is
+// safe to run against both new and existing databases.
+func migrate() error {
+	columns := []struct {
+		name string
+		ddl  string
+	}{
+		{"customer_email", "ALTER TABLE orders ADD COLUMN customer_email TEXT"},
+		{"payment_provider", "ALTER TABLE orders ADD COLUMN payment_provider TEXT"},
+		{"payment_reference", "ALTER TABLE orders ADD COLUMN payment_reference TEXT"},
+		{"mpesa_receipt_number", "ALTER TABLE orders ADD COLUMN mpesa_receipt_number TEXT"},
+		{"paid_at", "ALTER TABLE orders ADD COLUMN paid_at DATETIME"},
+	}
+	for _, column := range columns {
+		exists, err := columnExists("orders", column.name)
+		if err != nil {
+			return err
+		}
+		if exists {
+			continue
+		}
+		if _, err := DB.Exec(column.ddl); err != nil {
+			return fmt.Errorf("add column %s: %w", column.name, err)
+		}
+	}
+
+	// Older rows may have an empty string instead of NULL; the unique index
+	// only excludes NULL, so normalise those rows first.
+	if _, err := DB.Exec(`UPDATE orders SET payment_reference = NULL WHERE payment_reference = ''`); err != nil {
+		return fmt.Errorf("normalize payment references: %w", err)
+	}
+	if _, err := DB.Exec(`CREATE UNIQUE INDEX IF NOT EXISTS idx_orders_payment_reference ON orders(payment_reference) WHERE payment_reference IS NOT NULL`); err != nil {
+		return fmt.Errorf("create payment reference index: %w", err)
+	}
+	return nil
+}
+
+func columnExists(table, column string) (bool, error) {
+	rows, err := DB.Query("PRAGMA table_info(" + table + ")")
+	if err != nil {
+		return false, fmt.Errorf("read table info: %w", err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var (
+			cid       int
+			name      string
+			ctype     string
+			notnull   int
+			dfltValue interface{}
+			pk        int
+		)
+		if err := rows.Scan(&cid, &name, &ctype, &notnull, &dfltValue, &pk); err != nil {
+			return false, fmt.Errorf("scan table info: %w", err)
+		}
+		if name == column {
+			return true, nil
+		}
+	}
+	return false, rows.Err()
 }

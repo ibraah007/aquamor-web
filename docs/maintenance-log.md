@@ -75,6 +75,25 @@ Follow-up questions sent to the client (13 November 2026); waiting for the reply
 - Removed the unused legacy dashboard and the leftover Next.js `tsconfig.json`.
 - CI now runs Go build/vet/tests, gofmt, and JavaScript and shell-script syntax checks on every pull request.
 
+### Site changes: 3D label preview, map and acknowledgment
+
+- The label designer bottle now has a 3D look and can be turned by dragging or with a slider; presets, colours, round/rect styles, text fitting and the WhatsApp hand-off are unchanged.
+- The contact section now shows a Google Maps embed using the same location as the existing "Get directions" link; the link is unchanged and the CSP allows Google Maps frames.
+- Any WhatsApp or email link now shows an on-page thank-you acknowledgment in English and Swahili. This is not an automated email or WhatsApp reply.
+- Open: online payment and real automated replies need a provider, merchant account and credentials from the client (see status section 5A item 4).
+
+### Online payments: hosted checkout (13 November 2026)
+
+Decision: the client chose a hosted checkout. The site now uses Flutterwave hosted checkout; no card or M-Pesa data touches the Aquamor server.
+
+- The order summary shows a Pay online button only when payment is configured. The dialog collects name, phone, receipt email and delivery area or pickup name, saves the order, then redirects to Flutterwave's secure page.
+- `web/payment.html` verifies the payment when the customer returns and shows paid, failed, pending or an error.
+- The server re-prices the order, checks the provider reference, currency and amount, and verifies the webhook `verif-hash` before marking an order paid.
+- New order fields are added automatically at startup: `customer_email`, `payment_provider`, `payment_reference`, `mpesa_receipt_number` and `paid_at`.
+- Settings are `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL`. Without all three, the button stays hidden and WhatsApp ordering is unchanged.
+- Tests cover checkout creation, provider errors, verification, amount/currency checks, webhook signatures and the unconfigured state.
+- Open: the client must supply an approved Flutterwave merchant account and credentials. Online payment is limited to refills and 20L bottles because other bottled-water prices are not confirmed.
+
 ---
 
 ## Open items waiting on the client

@@ -9,6 +9,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Feature | What it does |
 |---|---|
 | Order builder | Customer picks refills, bottled water and new 20L bottles, sees a running total, and sends the order to WhatsApp, already written out; the last order can be restored with one tap |
+| Online payment | When the server has Flutterwave configured, a Pay online button collects the customer's name, phone, receipt email and area, saves the order and opens the hosted checkout; a return page confirms the result |
 | Refill planner | Customer enters how many people are at home and picks 5L, 10L or 20L; the site estimates weekly refills and cost, with a WhatsApp button |
 | Price card | A standalone A4 page ([price-card.html](price-card.html)) for the shop counter, with the confirmed refill and bottle prices, free-delivery line and WhatsApp number; use the Print button or the browser's print dialog |
 | How it works | Three steps (choose your water, order on WhatsApp, delivery or pickup) and a "Who we deliver to" strip for homes, offices, schools, restaurants, clinics and hotels |
@@ -30,6 +31,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 web/
 ├── index.html          # All page content (sections, text, markup)
 ├── price-card.html     # Standalone printable A4 price card (inline styles)
+├── payment.html        # Hosted-checkout return page (noindex)
 ├── css/
 │   ├── styles.css      # Layout, colours, light/dark mode, components, mobile nav
 │   └── photos.css      # One class per photo (.p-refill, .p-team, ...)
@@ -38,6 +40,7 @@ web/
 │   ├── planner.js      # Refill planner (weekly refills and cost)
 │   ├── gallery.js      # Fading backgrounds, gallery filters, lightbox
 │   ├── site.js         # Mobile navigation toggle
+│   ├── payment.js      # Confirms the payment on payment.html
 │   └── i18n.js         # Swahili switch, open/closed status, copy buttons, testimonials
 ├── assets/img/         # Photos (JPG + WebP, plus 480w/800w variants), og.jpg, favicons
 ├── assets/video/       # Short muted MP4 clips (event setup, event bottles, dispenser cleaning)
@@ -49,6 +52,8 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 ## How the logic works
 
 **Order builder (`js/order.js`).** `items` holds the products shown in each tab. `PRICE` maps a product name to its price in Ksh. Each press of + or − updates the `qty` object, and the summary list and total are redrawn from it. On "Send order", the script builds a text message and opens `https://wa.me/254712140006?text=...` with the message URL-encoded. Delivery or pickup and the area are added. Product names and the delivery mode are translated when the site is in Swahili. Items without a listed price are shown separately and are not included in the estimated total.
+
+**Online payment (`js/order.js`, `js/payment.js`).** The Pay online button is hidden until `GET /api/v1/payments/config` reports that the server has Flutterwave keys. Only refills and 20L bottles have confirmed prices, so bottled-water orders stay on WhatsApp. The dialog collects the customer's details, posts the order to `/api/v1/payments/checkout`, and redirects to the provider's secure page. When the provider returns to `payment.html`, `payment.js` calls `/api/v1/payments/verify` and shows paid, failed, pending or an error. The server prices the order again and checks the amount and currency; the browser cannot set the price.
 
 **Reorder (`js/order.js`).** When an order is sent, its quantities, delivery mode and area are saved in `localStorage` under `aquamor-last-order`. On the next visit a "Reorder my last order" button appears if that record exists; it restores the quantities, opens the tab of the first item, sets delivery or pickup and fills the area. Items that no longer exist are skipped, and a note says so. If nothing matches, the note says the items are unavailable. The WhatsApp handoff is still the final step.
 
@@ -90,7 +95,7 @@ cd web
 python3 -m http.server 8000
 ```
 
-Then visit <http://localhost:8000>. Or run the Go server from the repository root and open <http://localhost:8080>.
+Then visit <http://localhost:8000>. The Pay online button stays hidden because a static server has no payment API. Or run the Go server from the repository root and open <http://localhost:8080>; set the payment variables from [`../deploy/aquamor.env.example`](../deploy/aquamor.env.example) to enable checkout.
 
 ## Deploy
 

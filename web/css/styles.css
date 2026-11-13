@@ -145,7 +145,7 @@ details p{padding:0 18px 16px;margin:0;color:var(--muted)}
 .seg{display:flex;gap:8px;margin:10px 0 14px}
 .seg button{flex:1;padding:9px;border-radius:12px;border:1.5px solid var(--line);background:transparent;color:var(--ink);font:500 .95rem "Figtree",sans-serif;cursor:pointer}
 .seg button[aria-pressed="true"]{border-color:var(--deep);background:var(--foam);font-weight:600}
-input[type=text],select{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:400 1rem "Figtree",sans-serif;margin-bottom:12px}
+input[type=text],input[type=email],input[type=tel],select{width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:400 1rem "Figtree",sans-serif;margin-bottom:12px}
 label{display:block;font-weight:600;font-size:.95rem;margin-bottom:4px}
 .note{color:var(--muted);font-size:.9rem;margin:8px 0 0}
 
@@ -200,3 +200,50 @@ label{display:block;font-weight:600;font-size:.95rem;margin-bottom:4px}
 .contact .btn-sun{color:var(--on-sun)}
 footer{padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));font-size:.9rem;color:var(--muted)}
 .fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+
+/* 3D bottle preview */
+.stage{flex-direction:column;align-items:center;gap:12px}
+.stage svg{cursor:grab;touch-action:pan-y;user-select:none}
+.stage svg:active{cursor:grabbing}
+.stagecontrol{display:flex;align-items:center;gap:10px;width:100%;max-width:230px}
+.stagecontrol label{font:600 .85rem "Figtree",sans-serif;color:var(--muted);white-space:nowrap}
+.stagecontrol input[type=range]{flex:1;accent-color:var(--deep);cursor:pointer}
+.stagehint{text-align:center;margin:0}
+
+/* Map */
+.contact .map{margin-top:26px;border:1.5px solid rgba(255,255,255,.3);border-radius:18px;overflow:hidden;background:#e6f4f8}
+.contact .map h3{margin:0;padding:14px 16px;background:rgba(4,25,38,.55);color:#fff}
+.contact .map iframe{display:block;width:100%;height:clamp(220px,45vw,360px);border:0}
+
+/* Reach-out acknowledgment */
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:60;max-width:min(92vw,460px);background:var(--deep);color:#fff;border:1.5px solid rgba(255,255,255,.25);border-radius:16px;padding:14px 18px;box-shadow:0 18px 40px rgba(4,25,38,.35);font-size:.95rem;opacity:0;transform:translateX(-50%) translateY(12px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast[hidden]{display:none}
+@media(prefers-reduced-motion:reduce){.toast{transition:none}}
+
+/* Online payment */
+.btn-pay{display:block;width:100%;text-align:center;background:var(--deep);color:#fff;margin-bottom:10px}
+.btn-pay:hover{filter:brightness(1.1)}
+#payOrder[hidden],#payNote[hidden],#payError[hidden]{display:none}
+.payNote{color:var(--muted)}
+.paydlg{position:relative;width:min(94vw,460px);max-height:92vh;overflow:auto;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:20px;padding:24px}
+.payform h3{margin:0 28px 6px 0}
+.payform input[type=text],.payform input[type=tel],.payform input[type=email]{margin-bottom:12px}
+.payx{top:10px;right:10px;z-index:1;color:var(--ink);border-color:var(--line);background:var(--card)}
+.payError{color:#b3261e}
+.paygo{display:block;width:100%;margin-top:6px}
+.paygo[disabled]{opacity:.65;cursor:progress}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .payError{color:#ffb4ab}}
+
+/* Payment return page */
+.paypage{padding:60px 0}
+.paycard{max-width:620px;margin:0 auto;text-align:center;padding:36px 24px}
+.paytitle{font-size:clamp(1.8rem,5vw,2.6rem)}
+.paycard .lead{max-width:none;margin:0 auto 18px}
+.payspin{width:46px;height:46px;border-radius:50%;border:4px solid var(--line);border-top-color:var(--deep);margin:0 auto 18px;animation:spin 1s linear infinite}
+.payspin[hidden]{display:none}
+.payactions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 0}
+.payactions[hidden]{display:none}
+.paycard .btn-line{color:var(--ink)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.payspin{animation:none}}

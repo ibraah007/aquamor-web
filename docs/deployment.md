@@ -70,6 +70,31 @@ sudoedit /etc/aquamor/aquamor.env
 Set `ADMIN_TOKEN` to the value from `openssl rand -hex 32`. Keep the other paths
 as shown unless the server layout is different.
 
+### Online payments (optional)
+
+Online payment uses Flutterwave hosted checkout. Leave the three payment values
+empty to keep WhatsApp-only ordering; the site then hides the Pay online button
+and `/api/v1/payments/config` reports `"enabled": false`.
+
+To enable it:
+
+1. Create or open the Aquamor Flutterwave account and copy the secret key into
+   `FLUTTERWAVE_SECRET_KEY`. Never put the key in the repository.
+2. In Flutterwave, set the webhook URL to
+   `https://<domain>/api/v1/payments/webhook` and set a secret hash. Put the same
+   hash in `FLUTTERWAVE_WEBHOOK_SECRET`.
+3. Set `PUBLIC_BASE_URL=https://<domain>` so the customer returns to
+   `/payment.html` after checkout.
+4. Restart the service and check
+   `curl -fsS https://<domain>/api/v1/payments/config`. It should contain
+   `"enabled": true`.
+5. Make one small live or sandbox payment. The order appears at
+   `/api/v1/orders/all` with `payment_status` `pending`, then `paid` after the
+   redirect or webhook, with the provider transaction ID in `mpesa_receipt_number`.
+
+The server prices every order again, checks the currency and amount against the
+saved order, and only marks an order paid after the provider confirms it.
+
 ## 5. Run the service
 
 ```sh
@@ -139,8 +164,9 @@ Reload Caddy if its configuration changed. Static files do not need a rebuild.
 ./deploy/smoke-test.sh https://aquamor.co.ke
 ```
 
-The smoke test checks the home page, health and products endpoints, the
-protected orders endpoint and the security headers. Also check:
+The smoke test checks the home page, the payment status page, health, products,
+the payments config, the protected orders endpoint and the security headers. Also
+check:
 
 - `https://aquamor.co.ke/` loads over HTTPS with no browser warnings.
 - The canonical link and `og:image` use the new domain.
@@ -149,6 +175,8 @@ protected orders endpoint and the security headers. Also check:
 - Place a test order through the API and confirm it appears at
   `/api/v1/orders/all` with the admin token. Delete the test row afterwards or
   use a throwaway database.
+- If online payments are enabled, make a small test payment and confirm the
+  order becomes `paid` both through the return page and through a webhook.
 - Test on a real iPhone (safe areas, menu, WhatsApp hand-off) and a low-end
   Android phone.
 - The Swahili switch, order builder, planner, label designer and gallery
@@ -236,14 +264,18 @@ sudo mv aquamor-backend.prev aquamor-backend
 sudo systemctl start aquamor
 ```
 
-There are no schema migrations yet, so a code rollback does not require a
-database rollback. Restore a backup only if data was damaged.
+The database is migrated automatically at startup with additive changes, so a
+code rollback keeps the extra columns and still works. Restore a backup only if
+data was damaged.
 
 ## 12. Security notes
 
 - Keep `/etc/aquamor/aquamor.env` at mode `600`; it contains the admin token.
 - `ADMIN_TOKEN` must be set or the orders endpoint deliberately returns `503`.
   Never put the token in a URL, a screenshot or the repository.
+- Keep the payment secret key and webhook hash only in the environment file. The
+  webhook endpoint checks the provider signature, and the server re-checks the
+  paid amount and currency before marking an order paid.
 - The API and the token must only travel over HTTPS.
 - Bind the app to loopback and expose only Caddy on ports 80 and 443.
 - Run one app instance per database. SQLite allows one writer at a time.

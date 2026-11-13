@@ -15,6 +15,9 @@ been checked on the real domain, not just locally.
 - [ ] Permission to show other customers' labels (Wave360 and the church labels).
 - [ ] Confirm whether the water pumps are for sale.
 - [ ] Permission to display the Paybill number online.
+- [ ] Flutterwave merchant account approved and able to receive KES payments.
+- [ ] Payment API keys and webhook secret supplied by the client.
+- [ ] Settlement account, refund contact and chargeback process confirmed.
 - [ ] Confirm the Facebook page is a business page, not a personal profile.
 - [ ] Confirm the bottled-water sizes shown on the flyer and in the client's text.
 - [ ] Confirm whether the regular 20L bottle price includes water.
@@ -33,6 +36,10 @@ been checked on the real domain, not just locally.
 - [x] Static cache headers and `no-store` on the API.
 - [x] Database health check at `/api/v1/health`.
 - [x] Go tests for catalog prices, order totals/validation and admin auth.
+- [x] Online payment backend: hosted checkout, return-page verification, signed
+      webhook, server-side price/amount/currency checks and paid-order update.
+- [x] Payment tests cover checkout creation, verification, webhook signatures,
+      amount checks and the unconfigured state.
 - [x] CI runs build, vet, `go test -race` and JavaScript/script syntax checks.
 - [x] Deployment files: systemd unit, Caddy example, env example, backup script,
       smoke test and domain-placement script.
@@ -53,6 +60,9 @@ been checked on the real domain, not just locally.
 - [ ] HTTP redirects to HTTPS; `www` redirects to the canonical host.
 - [ ] Firewall allows only 22, 80 and 443; port 8080 is not public.
 - [ ] `ADMIN_TOKEN` is strong, stored at mode 600 and not in git.
+- [ ] Payment keys and webhook hash are stored at mode 600 and not in git.
+- [ ] Flutterwave webhook URL is `https://<domain>/api/v1/payments/webhook`.
+- [ ] `PUBLIC_BASE_URL` is the real HTTPS domain.
 - [ ] The service starts on boot (`systemctl is-enabled aquamor`).
 
 ## D. Verification on the real domain
@@ -60,6 +70,10 @@ been checked on the real domain, not just locally.
 - [ ] `deploy/smoke-test.sh https://<domain>` passes.
 - [ ] `https://<domain>/api/v1/orders/all` without a token returns 401 or 503.
 - [ ] A test order is stored and can be read with the admin token.
+- [ ] `/api/v1/payments/config` returns `"enabled": false` before credentials
+      are installed, and `true` afterwards.
+- [ ] A small test payment is confirmed as `paid` on the return page and by the
+      webhook, with the provider reference stored on the order.
 - [ ] Canonical URL, `og:url`, `og:image`, `robots.txt` and `sitemap.xml` use the
       real domain.
 - [ ] WhatsApp/social link preview shows the correct image and title.
@@ -70,6 +84,8 @@ been checked on the real domain, not just locally.
 - [ ] Print the A4 price card and check it fits one page.
 - [ ] Home page, price card, planner, label designer and gallery lightbox all
       work with the final domain.
+- [ ] Pay online opens the secure checkout and failure/cancel paths return to
+      the payment status page without charging twice.
 
 ## E. Data and recovery
 
