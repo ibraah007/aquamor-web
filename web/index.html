@@ -225,6 +225,40 @@
   </div>
 </section>
 
+<section id="planner">
+  <div class="wrap">
+    <h2>Refill planner</h2>
+    <p class="lead">How many refills does your home need? Tell us how many people are at home and choose a container size; we will estimate the refills and the cost each week.</p>
+    <div class="plan">
+      <div class="panel">
+        <label for="people">People at home</label>
+        <div class="step planstep">
+          <button type="button" id="peopleLess" aria-label="Fewer people">−</button>
+          <input type="number" id="people" min="1" max="30" value="3" inputmode="numeric">
+          <button type="button" id="peopleMore" aria-label="More people">+</button>
+        </div>
+        <p class="note" id="planSizeLbl">Container size</p>
+        <div class="seg" id="planSize" role="group" aria-labelledby="planSizeLbl">
+          <button type="button" data-s="5L" aria-pressed="false">5L</button>
+          <button type="button" data-s="10L" aria-pressed="false">10L</button>
+          <button type="button" data-s="20L" aria-pressed="true">20L</button>
+        </div>
+      </div>
+      <div class="panel planout">
+        <h3>Your week</h3>
+        <div class="planrows" aria-live="polite">
+          <div class="planrow"><span>Water needed each week</span><b id="planLitres">about 42 litres</b></div>
+          <div class="planrow"><span>Suggested refills each week</span><b id="planRefills">3 × 20L</b></div>
+          <div class="planrow total"><span>Estimated cost each week</span><b id="planCost">Ksh 600</b></div>
+        </div>
+        <a class="btn btn-sun" id="planWa" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20used%20the%20refill%20planner.">Ask about this plan on WhatsApp</a>
+        <p class="note">An estimate only. It assumes about 2 litres of water per person each day and rounds up to full containers. Prices are for refills; bring your container.</p>
+      </div>
+    </div>
+    <noscript><p class="note">The refill planner needs JavaScript. Refills are 5L Ksh 50, 10L Ksh 100 and 20L Ksh 200. <a href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20plan%20my%20weekly%20refills.">Ask us on WhatsApp</a>.</p></noscript>
+  </div>
+</section>
+
 <section id="design" class="designer withband">
   <div class="band"><div class="bg" aria-hidden="true"><i class="p-fruit"></i><i class="p-shelf"></i><i class="p-wedding"></i><i class="p-rowClose"></i></div>
     <div class="wrap"><h2>Your name on every bottle</h2><p class="lead">Design a label for your wedding, church service, graduation or company event and see it on the bottle straight away.</p></div></div>
@@ -484,6 +518,7 @@
 <a class="btn btn-sun fab" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20ask%20about%20your%20water." target="_blank" rel="noopener">WhatsApp us</a>
 
 <script src="js/order.js" defer></script>
+<script src="js/planner.js" defer></script>
 <script src="js/gallery.js" defer></script>
 <script src="js/site.js" defer></script>
 <script src="js/i18n.js" defer></script>

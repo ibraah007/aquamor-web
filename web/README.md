@@ -9,6 +9,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Feature | What it does |
 |---|---|
 | Order builder | Customer picks refills, bottled water and new 20L bottles, sees a running total, and sends the order to WhatsApp, already written out |
+| Refill planner | Customer enters how many people are at home and picks 5L, 10L or 20L; the site estimates weekly refills and cost, with a WhatsApp button |
 | Label designer | Customer types an event name and message, picks a colour and size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
 | Gallery | 26 real photos and three short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
@@ -31,6 +32,7 @@ web/
 │   └── photos.css      # One class per photo (.p-refill, .p-team, ...)
 ├── js/
 │   ├── order.js        # Order builder + label designer
+│   ├── planner.js      # Refill planner (weekly refills and cost)
 │   ├── gallery.js      # Fading backgrounds, gallery filters, lightbox
 │   ├── site.js         # Mobile navigation toggle
 │   └── i18n.js         # Swahili switch, open/closed status, copy buttons, testimonials
@@ -39,11 +41,13 @@ web/
 └── README.md
 ```
 
-Scripts load with `defer`, in this order: `order.js`, `gallery.js`, `site.js`, `i18n.js`. Keep that order, because `i18n.js` translates the rows that `order.js` creates.
+Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`, `site.js`, `i18n.js`. Keep that order, because `i18n.js` translates the rows that `order.js` creates and dispatches the language event that redraws the planner.
 
 ## How the logic works
 
 **Order builder (`js/order.js`).** `items` holds the products shown in each tab. `PRICE` maps a product name to its price in Ksh. Each press of + or − updates the `qty` object, and the summary list and total are redrawn from it. On "Send order", the script builds a text message and opens `https://wa.me/254712140006?text=...` with the message URL-encoded. Delivery or pickup and the area are added. Product names and the delivery mode are translated when the site is in Swahili. Items without a listed price are shown separately and are not included in the estimated total.
+
+**Refill planner (`js/planner.js`).** `SIZES` holds the three refill sizes and their confirmed prices, and `PER_PERSON_DAY` is the planning assumption (2 litres). Weekly litres are the number of people times the assumption times seven; the refills are rounded up to full containers, and the cost is refills times the size price. The results and the WhatsApp message are redrawn on each change and when the language changes.
 
 **Label designer (`js/order.js`).** The bottle is an SVG. The event text, message and label colour are SVG elements that the inputs update live. `fit()` measures the rendered text and reduces the font size until it fits inside the label; it runs again when the web font finishes loading and when the language changes. "Request this design" builds a WhatsApp message from the same values.
 
@@ -63,7 +67,7 @@ Scripts load with `defer`, in this order: `order.js`, `gallery.js`, `site.js`, `
 
 | To change | Where |
 |---|---|
-| Refill or bottle prices | `PRICE` and `items` in `js/order.js` (also the order note and FAQ text in `index.html`, and the Swahili text in `SW`); keep `backend/internal/catalog/catalog.go` in sync |
+| Refill or bottle prices | `PRICE` in `js/order.js`, `SIZES` in `js/planner.js`, the order note and FAQ text in `index.html`, and the Swahili text in `SW`; keep `backend/internal/catalog/catalog.go` in sync |
 | Phone, WhatsApp, email | `index.html` (contact section and the `wa.me` links), `js/order.js` and `js/i18n.js` (`254712140006`), and the structured data in `<head>` |
 | Opening hours | `H` table in `js/i18n.js`, the contact section and FAQ in `index.html`, and the structured data in `<head>` |
 | Paybill and account | Contact section and FAQ in `index.html` |
