@@ -260,7 +260,7 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 
 ### Fixes made
 - **Hero paint:** the first banner photo is now visible immediately instead of fading in from zero opacity, so the hero no longer waits for JavaScript plus a 1.6s transition before it can be the largest paint.
-- **Fonts:** the Google Fonts stylesheet is preloaded and loaded without blocking render, with a `<noscript>` fallback. Text still uses `display=swap`.
+- **Fonts:** text uses `display=swap`. (The Google Fonts stylesheet was later replaced by self-hosted font files; see section 25.)
 - **Video posters:** the three posters now use the existing WebP copies instead of JPG, and the unused `eventBottlesClip.jpg` was deleted. No unused image or video files remain.
 - **Dark-mode contrast:** the dark-mode accent (`--deep`) was lightened from `#0a5a82` to `#1f7ea6`. White text on it is 4.57:1, and it is at least 3:1 against the dark background, card and foam surfaces; the old value was 1.87:1 against cards.
 - **Accessible names:** the language button's accessible name now includes its visible `SW`/`EN` code. The gallery tiles no longer carry longer `aria-label`s that did not match their captions; the visible caption names the tile and the enlarged photo.
@@ -326,3 +326,12 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Controls:** text search across order number, customer, contact, area and references; order-status and payment-status filters; refresh; sign out; and CSV export of the filtered rows (RFC 4180 quoting and formula-injection guard). All customer fields are inserted as text, not HTML.
 - **Checks:** `node --check` passes; the local smoke test now checks that `/admin.html` returns 200 and is `noindex`; Go build, vet and tests still pass.
 - **Access control note:** the page is only a shell. Order data remains protected by `ADMIN_TOKEN` on the API, so anyone who opens the page without the token sees nothing. The token must only be used over HTTPS.
+
+## 25. Self-hosted fonts and write-endpoint rate limits (13 November 2026)
+
+- **Fonts:** Bricolage Grotesque (weights 600–800) and Figtree (weights 400–600) are now served from `web/assets/fonts/` as Latin variable WOFF2 files. The Google Fonts preconnect, preload and stylesheet links were removed from `index.html`, `admin.html` and `payment.html`; each page preloads the two local files instead.
+- **`@font-face`:** both faces are declared at the top of `web/css/styles.css` with the local variable-font weight ranges and `font-display: swap`. The A4 price card keeps its system-font stack.
+- **CSP:** `style-src` no longer allows `fonts.googleapis.com` and `font-src` is now `'self'`. Google remains allowed only for the map frame. This removes the last third-party asset origin from the public pages.
+- **Rate limiting:** a small in-memory fixed-window limiter (`backend/internal/ratelimit`) now guards the public write endpoints. `POST /api/v1/orders` allows 20 requests per minute per client IP and `POST /api/v1/payments/checkout` allows 10. Over-limit requests get `429 Too Many Requests`, a `Retry-After` header and a JSON error.
+- **Client IP:** the limiter uses the last `X-Forwarded-For` value (appended by Caddy in production) and falls back to the connection address. Taking the last value ignores spoofed entries sent by the client. Expired keys are swept once per window so memory cannot grow without bound. Limits are per process and reset on restart.
+- **Tests:** `backend/internal/ratelimit/ratelimit_test.go` covers the window, separate keys, concurrent access, the 429 response and client-IP parsing. The local smoke test still passes, the font files are served as `font/woff2` with a cache header, and no `fonts.googleapis.com` or `fonts.gstatic.com` references remain.

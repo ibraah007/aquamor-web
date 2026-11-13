@@ -15,11 +15,12 @@ import (
 
 	"aquamor-backend/backend/internal/db"
 	"aquamor-backend/backend/internal/handlers"
+	"aquamor-backend/backend/internal/ratelimit"
 )
 
-// The site uses inline JSON-LD, a few inline style attributes and one inline
-// font-loading handler, so script/style need 'unsafe-inline'. Everything else
-// is limited to the site itself and Google Fonts.
+// The site uses inline JSON-LD and a few inline style attributes, so
+// script/style need 'unsafe-inline'. Fonts are self-hosted, so no third-party
+// font origins are allowed; Google is only permitted as a map frame.
 const contentSecurityPolicy = "default-src 'self'; " +
 	"base-uri 'self'; " +
 	"object-src 'none'; " +
@@ -27,8 +28,8 @@ const contentSecurityPolicy = "default-src 'self'; " +
 	"frame-src https://www.google.com https://maps.google.com; " +
 	"form-action 'self'; " +
 	"img-src 'self' data:; " +
-	"style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
-	"font-src 'self' https://fonts.gstatic.com; " +
+	"style-src 'self' 'unsafe-inline'; " +
+	"font-src 'self'; " +
 	"script-src 'self' 'unsafe-inline'; " +
 	"connect-src 'self'"
 
@@ -49,14 +50,20 @@ func main() {
 
 	mux := http.NewServeMux()
 
+	// A normal visitor places one or two orders, so these limits leave plenty
+	// of room while still stopping a script from flooding the database or the
+	// payment provider. State is in memory and resets when the server restarts.
+	orderLimiter := ratelimit.New(20, time.Minute)
+	checkoutLimiter := ratelimit.New(10, time.Minute)
+
 	// API routes. Go's ServeMux picks the longest matching pattern, so these
 	// win over the static file handler at "/".
 	mux.HandleFunc("/api/v1/health", health)
 	mux.HandleFunc("/api/v1/products", handlers.GetProducts)
-	mux.HandleFunc("/api/v1/orders", handlers.CreateOrder)
+	mux.Handle("/api/v1/orders", orderLimiter.Middleware(http.HandlerFunc(handlers.CreateOrder)))
 	mux.HandleFunc("/api/v1/orders/all", handlers.GetOrders)
 	mux.HandleFunc("/api/v1/payments/config", handlers.PaymentConfig)
-	mux.HandleFunc("/api/v1/payments/checkout", handlers.CreateCheckout)
+	mux.Handle("/api/v1/payments/checkout", checkoutLimiter.Middleware(http.HandlerFunc(handlers.CreateCheckout)))
 	mux.HandleFunc("/api/v1/payments/verify", handlers.VerifyPayment)
 	mux.HandleFunc("/api/v1/payments/webhook", handlers.PaymentWebhook)
 
