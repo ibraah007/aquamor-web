@@ -53,7 +53,7 @@ Follow-up questions sent to the client (13 November 2026); waiting for the reply
 
 1. Is Ksh 500–800 per bottle or per pack/carton?
 2. Which sizes does the Ksh 500–800 range cover?
-3. Does that range apply to small bottled water (300ml, 500ml, 1L, 5L) or to custom-branded bottles?
+3. If the range applies to small bottled water, what is the price for each size: 300ml, 500ml, 1L and 1.5L? (The message sent also asked about 5L.)
 4. What is the minimum order for branded bottles?
 5. What is the dispenser-cleaning price?
 6. Which areas are free delivery, and is there a minimum order?
@@ -83,7 +83,7 @@ Follow-up questions sent to the client (13 November 2026); waiting for the reply
 | Dispenser-cleaning price | #4 | Waiting |
 | Free-delivery areas and minimum order | #4 | Requested 13 Nov; not answered |
 | KEBS permit number and a photo of the certificate | #4 | Answered: with supplier; own due Feb |
-| Purification steps (only if the client has them) | #4 | Not yet requested |
+| Purification steps (only if the client has them) | #4 | Requested 13 Nov; waiting |
 | Official business name and tagline | #4 | Waiting |
 | Facebook page is a business page, not a personal profile | #10 | Waiting |
 | Confirm bottled-water sizes (flyer vs client text) | #10 | Waiting |

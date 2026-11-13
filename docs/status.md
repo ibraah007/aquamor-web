@@ -109,7 +109,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 - A named person for the About page, only if the client wants one
 
 ### D. To verify
-- **KEBS:** the client replied on 13 November 2026 that their certification is currently with their supplier; they have started the process for their own permit and expect it in February next year. No permit number or certificate is available to publish, so the site makes no certification claim. Purification steps have not been requested.
+- **KEBS:** the client replied on 13 November 2026 that their certification is currently with their supplier; they have started the process for their own permit and expect it in February next year. No permit number or certificate is available to publish, so the site makes no certification claim. The purification-steps question was sent on 13 November 2026; the reply is pending.
 - **Branded bottles:** the client quoted Ksh 500–800 "depending on the type of the bottle" on 13 November 2026. Confirm whether that is per bottle or per pack, and whether a minimum order applies, before publishing it.
 - **Small bottled water:** the same reply was ambiguous; confirm whether the Ksh 500–800 range covers small bottled water or custom-branded bottles.
 - **Facebook page:** confirm it is a business page and not a personal profile.
