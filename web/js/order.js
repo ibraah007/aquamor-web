@@ -8,11 +8,60 @@
   items.container=[["20L hard bottle + water","Ksh 1,400 · bottle and water",56],["20L regular bottle","Ksh 450",56]];
   var PRICE={"5L refill":50,"10L refill":100,"20L refill":200,"20L hard bottle + water":1400,"20L regular bottle":450}, qty={}, tab="refill", mode="Delivery";
   var rows=document.getElementById("rows"), list=document.getElementById("sumList");
+  var LAST_KEY="aquamor-last-order", reorderBtn=document.getElementById("reorderBtn"), reorderNote=document.getElementById("reorderNote"), note="";
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
   function sw(){return window.LANG==="sw"}
   /* English text from the page dictionary, with a direct fallback for messages. */
   function tr(en){return (sw()&&window.__sw&&window.__sw[en])||en}
   function t(en,swText){return sw()?swText:en}
+  /* Last order: saved on send, restored by the Reorder button. */
+  function knownKeys(){var all={};Object.keys(items).forEach(function(g){items[g].forEach(function(it){all[it[0]]=1})});return all}
+  function readLast(){
+    try{
+      var raw=localStorage.getItem(LAST_KEY); if(!raw)return null;
+      var o=JSON.parse(raw); if(!o||typeof o!=="object"||!o.qty)return null;
+      return o;
+    }catch(e){return null}
+  }
+  function showNote(kind){
+    note=kind||"";
+    if(!reorderNote)return;
+    reorderNote.hidden=!note;
+    if(!note)return;
+    reorderNote.textContent=note==="gone"?t("Your last order items are no longer available.","Bidhaa za oda yako ya mwisho hazipatikani tena."):
+      note==="dropped"?t("Some items from your last order are no longer available.","Baadhi ya bidhaa za oda yako ya mwisho hazipatikani tena."):
+      t("Last order restored. Check it, then send on WhatsApp.","Oda yako ya mwisho imerejeshwa. Iangalie, kisha itume kupitia WhatsApp.");
+  }
+  function saveLast(keys,area){
+    try{
+      var saved={qty:{},mode:mode,area:area,ts:Date.now()};
+      keys.forEach(function(k){saved.qty[k]=qty[k]});
+      localStorage.setItem(LAST_KEY,JSON.stringify(saved));
+    }catch(e){}
+  }
+  function refreshReorder(){if(reorderBtn)reorderBtn.hidden=!readLast()}
+  function applyLast(){
+    var last=readLast(); if(!last)return;
+    var known=knownKeys(),next={},dropped=false;
+    Object.keys(last.qty||{}).forEach(function(k){
+      var n=Math.floor(Number(last.qty[k]));
+      if(n>0){ if(known[k])next[k]=n; else dropped=true; }
+    });
+    if(!Object.keys(next).length){showNote("gone");return}
+    qty=next;
+    var first=Object.keys(next)[0],target="refill";
+    if(items.bottle.some(function(it){return it[0]===first}))target="bottle";
+    else if(items.container.some(function(it){return it[0]===first}))target="container";
+    tab=target;
+    document.querySelectorAll("#order .tabs .tab").forEach(function(x){x.setAttribute("aria-pressed",x.dataset.t===target)});
+    var m=last.mode==="Pickup"?"Pickup":"Delivery";
+    var mb=document.querySelector('#order .seg [data-m="'+m+'"]');
+    if(mb&&mb.getAttribute("aria-pressed")!=="true")mb.click();
+    var area=document.getElementById("area");
+    if(area&&typeof last.area==="string")area.value=last.area;
+    drawRows(); drawSum();
+    showNote(dropped?"dropped":"ok");
+  }
   function drawRows(){
     var source=items[tab]||[];
     rows.innerHTML=source.map(function(it){
@@ -49,6 +98,8 @@
     area.dataset.ph0=mode==="Delivery"?"e.g. Ngara, Pangani, Eastleigh":"e.g. Your name";
     if(window.__setLang)window.__setLang(window.LANG||"en");
   })});
+  if(reorderBtn)reorderBtn.addEventListener("click",applyLast);
+  refreshReorder();
   function go(text){window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(text),"_blank","noopener")}
   document.getElementById("sendOrder").addEventListener("click",function(e){
     e.preventDefault();
@@ -66,6 +117,8 @@
     if(unpriced){message+=(sw()?"\nBei za maji ya chupa zitathibitishwa kupitia WhatsApp.":"\nBottled water prices will be confirmed on WhatsApp.")}
     message+="\n"+tr(mode)+(a?": "+a:"");
     message+=(sw()?"\nTafadhali nithibitishie bei.":"\nPlease confirm the price.");
+    saveLast(ks,a);
+    refreshReorder();
     go(message);
   });
 
@@ -107,7 +160,7 @@
   }
   ev.addEventListener("input",updateLabel);
   msg.addEventListener("input",updateLabel);
-  document.addEventListener("aquamor:lang",function(){drawRows();updateLabel()});
+  document.addEventListener("aquamor:lang",function(){drawRows();updateLabel();if(note)showNote(note)});
   document.querySelectorAll("#sw button").forEach(function(b){b.addEventListener("click",function(){setColor(b.dataset.c)})});
   document.querySelectorAll("#presets button").forEach(function(b){b.addEventListener("click",function(){
     var p=PRESETS[b.dataset.p]; if(!p)return;

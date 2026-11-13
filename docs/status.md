@@ -51,7 +51,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 
 ### Sections and features
 - [x] **Hero:** headline, buttons, key facts, live "Open now / Closed now" line (Nairobi time)
-- [x] **Build your order:** refill sizes, bottled water and new 20L bottles with steppers, delivery/pickup choice, running total, and a one-tap WhatsApp message with the order already written
+- [x] **Build your order:** refill sizes, bottled water and new 20L bottles with steppers, delivery/pickup choice, running total, one-tap WhatsApp message with the order already written, and a one-tap reorder of the last order
 - [x] **Refill planner:** enter the number of people at home and choose 5L, 10L or 20L; the site estimates weekly litres, refills and cost, and links to WhatsApp with the plan already written
 - [x] **Label designer:** pick a Wedding, Church, Graduation or Corporate preset, type an event name and message, pick a color, a rectangular or round label and a size, see it on a bottle, send the request on WhatsApp
 - [x] **Printable price card:** a standalone A4 page for the shop counter with the confirmed refill and new-bottle prices, free-delivery line and WhatsApp number (linked from the docs; not part of the one-page site)
@@ -221,3 +221,10 @@ The standalone download has been imported into this git repository.
 - Added a label style switch: the existing rectangular label, or a round label drawn inside the bottle preview. Text is measured and shrunk to fit the round shape.
 - The WhatsApp handoff is unchanged and still sends the design details for Aquamor to confirm.
 - English and Swahili labels added for the presets and style controls.
+
+## 16. One-tap reorder (13 November 2026)
+
+- The last submitted order (quantities, delivery or pickup, and area or name) is saved in the browser's `localStorage` under `aquamor-last-order`.
+- A "Reorder my last order" button appears in the order summary when that record exists. It restores the quantities, opens the tab of the first item, sets delivery or pickup and fills the area.
+- Items that are no longer available are skipped with a note; if none match, the note says the items are unavailable. Cleared or blocked storage simply hides the button.
+- No account or backend is used; the customer still confirms and sends the order on WhatsApp.
