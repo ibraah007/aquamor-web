@@ -34,7 +34,9 @@ Everything is kept in the git repository. Make the change on a branch, open a pu
 
 5. Save the file and preview it (section 4).
 
-**Tip:** the contact details appear in more than one place. If the phone, WhatsApp, email, hours or Paybill changes, search the whole `web/` folder for the old value and update every copy, including the structured data in the `<head>` of `index.html`.
+**Tip:** contact details and opening hours appear in more than one place. If the phone, WhatsApp, email, hours or Paybill changes, search the whole `web/` folder for the old value and update every copy, including the structured data in the `<head>` of `index.html`.
+
+Opening hours are also stored as minutes since midnight in the `H` table in `web/js/i18n.js`, which drives the live "Open now / Closed now" line. Update it too (8:30am is `510`, 8:30pm is `1230`, noon is `720` and 7pm is `1140`), then check the line on the page.
 
 ---
 
@@ -44,7 +46,7 @@ Prices are repeated in several files on purpose: the browser needs them, and the
 
 | Price | File | What to edit |
 |---|---|---|
-| Refills in the order builder | `web/js/order.js` | `PRICE` and the matching text in `items` (for example `Ksh 50 · bring your container`) |
+| Refills and bottles in the order builder | `web/js/order.js` | `PRICE` (refill and bottle prices) and the matching text in `items` (for example `Ksh 50 · bring your container`) |
 | Refills in the refill planner | `web/js/planner.js` | `SIZES` |
 | Notes, FAQ and the order summary text | `web/index.html` | the order note and the FAQ answers |
 | Printable shop card | `web/price-card.html` | the prices in the card |
@@ -128,7 +130,7 @@ Open <http://localhost:8080>. The API serves the same `web/` folder.
 - [ ] Light and dark mode (change your phone or browser theme)
 - [ ] The WhatsApp buttons open a chat with the right message
 - [ ] New photos load, and the gallery filters and enlarged view work
-- [ ] `go build ./...`, `go vet ./...` and `node --check web/js/*.js` pass, or the pull-request checks are green
+- [ ] `go build ./...`, `go vet ./...` and `for f in web/js/*.js; do node --check "$f"; done` pass, or the pull-request checks are green
 - [ ] The title, description and canonical URL in the `<head>` are correct for the live domain
 - [ ] Nothing private was added: no admin token, no customer names or phone numbers, no Paybill photo that the client has not approved
 
