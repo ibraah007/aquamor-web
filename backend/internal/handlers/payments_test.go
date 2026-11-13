@@ -2,11 +2,13 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"sync"
 	"testing"
+	"time"
 
 	"aquamor-backend/backend/internal/db"
 	"aquamor-backend/backend/internal/models"
@@ -235,7 +237,7 @@ func TestPaymentWebhookMarksOrderPaid(t *testing.T) {
 	if err != nil {
 		t.Fatalf("price order: %v", err)
 	}
-	reference := "aquamor-webhook-test"
+	reference := fmt.Sprintf("aquamor-webhook-test-%d", time.Now().UnixNano())
 	order, err := insertOrder(req, lines, total, paymentMeta{
 		PaymentProvider:  paymentProvider,
 		PaymentReference: reference,

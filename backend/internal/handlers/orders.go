@@ -276,29 +276,47 @@ func GetOrders(w http.ResponseWriter, r *http.Request) {
 	}
 	rows.Close()
 
-	// Load the line items for the same 500 orders in one query. The admin view
-	// needs the items, and a second query avoids N+1 lookups per order.
-	itemRows, err := db.DB.Query(`
-		SELECT id, order_id, product_id, bottle_option, quantity, unit_price, subtotal
-		FROM order_items
-		WHERE order_id IN (SELECT id FROM orders ORDER BY created_at DESC, id DESC LIMIT 500)
-		ORDER BY order_id, id`)
-	if err != nil {
-		log.Printf("get orders: items query: %v", err)
-	} else {
+	// Load the line items for the orders we just selected. Using their IDs keeps
+	// the listing and its items consistent, and one query avoids N+1 lookups.
+	if len(orders) > 0 {
+		placeholders := make([]string, len(orders))
+		args := make([]interface{}, len(orders))
+		for i := range orders {
+			placeholders[i] = "?"
+			args[i] = orders[i].ID
+		}
+		itemRows, err := db.DB.Query(`
+			SELECT id, order_id, product_id, bottle_option, quantity, unit_price, subtotal
+			FROM order_items
+			WHERE order_id IN (`+strings.Join(placeholders, ",")+`)
+			ORDER BY order_id, id`, args...)
+		if err != nil {
+			log.Printf("get orders: items query: %v", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to fetch orders"})
+			return
+		}
 		itemsByOrder := make(map[int][]models.OrderItem)
+		complete := true
 		for itemRows.Next() {
 			var item models.OrderItem
 			if err := itemRows.Scan(&item.ID, &item.OrderID, &item.ProductID, &item.BottleOption, &item.Quantity, &item.UnitPrice, &item.Subtotal); err != nil {
 				log.Printf("get orders: item scan: %v", err)
-				continue
+				complete = false
+				break
 			}
 			itemsByOrder[item.OrderID] = append(itemsByOrder[item.OrderID], item)
 		}
 		if err := itemRows.Err(); err != nil {
 			log.Printf("get orders: item rows: %v", err)
+			complete = false
 		}
 		itemRows.Close()
+		if !complete {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(map[string]string{"error": "Failed to fetch orders"})
+			return
+		}
 		for i := range orders {
 			if items, ok := itemsByOrder[orders[i].ID]; ok {
 				orders[i].Items = items

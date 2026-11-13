@@ -198,9 +198,27 @@ func VerifyPayment(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if !strings.EqualFold(verified.Status, "successful") {
+	verifiedStatus := strings.ToLower(strings.TrimSpace(verified.Status))
+	if verifiedStatus == "pending" {
+		// The provider has not reached a final result yet. Leave the order
+		// pending so the customer can wait instead of retrying a payment that
+		// may still complete.
+		json.NewEncoder(w).Encode(map[string]interface{}{"status": "pending", "order_id": orderID})
+		return
+	}
+	if verifiedStatus != "successful" {
 		if _, updateErr := db.DB.Exec(`UPDATE orders SET payment_status = 'failed' WHERE id = ? AND payment_status <> 'paid'`, orderID); updateErr != nil {
 			log.Printf("verify payment: mark failed: %v", updateErr)
+		}
+		// A webhook may have marked the order paid while this verification was
+		// in flight. The guarded UPDATE would have changed no rows, so report
+		// the paid state instead of overwriting it with a failure.
+		var currentStatus string
+		if statusErr := db.DB.QueryRow(`SELECT payment_status FROM orders WHERE id = ?`, orderID).Scan(&currentStatus); statusErr != nil {
+			log.Printf("verify payment: read status: %v", statusErr)
+		} else if currentStatus == "paid" {
+			json.NewEncoder(w).Encode(map[string]interface{}{"status": "paid", "order_id": orderID})
+			return
 		}
 		json.NewEncoder(w).Encode(map[string]interface{}{"status": "failed", "order_id": orderID})
 		return
