@@ -1,6 +1,8 @@
-# How to update your website
+# Maintainer guide: updating the Aquamor website
 
-A short guide for the Aquamor team and whoever maintains the site. You do not need to install a framework or run a build: the site is plain HTML, CSS and JavaScript, and the prices it shows are written directly in the files.
+This guide is for the person who maintains the site, not for the Aquamor team. The client does not edit files, run commands or deploy: they send change requests, and the maintainer makes the change, checks it and publishes it. The one-page guide for the client is [how-to-request-a-change.md](how-to-request-a-change.md).
+
+You do not need a framework or a build step: the site is plain HTML, CSS and JavaScript, and the prices it shows are written directly in the files.
 
 The day-to-day edits are in a few places:
 
@@ -138,7 +140,7 @@ Open <http://localhost:8080>. The API serves the same `web/` folder.
 
 ## 6. Publishing, domain, hosting and support
 
-The site goes live by merging to `main` and letting the hosting pull or deploy the repository. Ask the person who set up hosting for the exact deploy step if it is not automatic.
+Publishing is the maintainer's job. The client never edits files or deploys. Merge the approved change to `main` and let the hosting pull or deploy the repository; ask whoever set up hosting for the exact deploy step if it is not automatic. Tell the client when the change is live.
 
 Fill this in at handover and keep it with the client:
 

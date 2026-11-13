@@ -5,7 +5,8 @@ One-page website for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, N
 - `web/` — the public site: plain HTML, CSS and JavaScript. No build step.
 - `backend/` — Go API and SQLite persistence.
 - `docs/status.md` — project status, client decisions and open issues.
-- [`docs/how-to-update-your-site.md`](docs/how-to-update-your-site.md) — non-technical handover guide for editing text, prices and photos, previewing and publishing.
+- [`docs/how-to-request-a-change.md`](docs/how-to-request-a-change.md) — one-page guide for the client: how to ask for text, price and photo changes (no terminal needed).
+- [`docs/how-to-update-your-site.md`](docs/how-to-update-your-site.md) — maintainer guide: editing text, prices and photos, previewing and publishing.
 
 ## Run it
 
@@ -58,7 +59,8 @@ aquamor-web/
 │       └── web/            # legacy prototype dashboard (not served)
 ├── docs/
 │   ├── status.md
-│   └── how-to-update-your-site.md   # handover guide (text, prices, photos, publishing)
+│   ├── how-to-update-your-site.md   # maintainer guide (text, prices, photos, publishing)
+│   └── how-to-request-a-change.md   # client-facing change-request sheet
 └── aquamor.db              # local development database (not for production)
 ```
 
