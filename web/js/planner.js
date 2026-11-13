@@ -11,8 +11,8 @@
   function t(en,swText){return sw()?swText:en}
   function num(n){return n.toLocaleString("en-US")}
   function readPeople(){
-    var n=parseInt(people.value,10);
-    if(!n||n<1)n=1;
+    var n=Math.floor(people.valueAsNumber);
+    if(!isFinite(n)||n<1)n=1;
     if(n>30)n=30;
     return n;
   }
