@@ -82,17 +82,18 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 - No health, certification or "100% pure" claims have been added. The flyers' claims about germs and bacteria were left out.
 - Hard bottle price set to Ksh 1,400 (clear flyer and the latest flyer agree; an earlier blurry rate card looked like 1,500).
 - The client's official TikTok, [@aquamor2020](https://www.tiktok.com/@aquamor2020), is linked in the contact section and in the structured data. A personal-looking TikTok account (@benzi254) was **not** linked.
+- The client has no Instagram account, so no Instagram link was added (issue #5).
+- The logo is settled: the existing header mark (`icon.jpg` / `icon.webp`) and the icon files (`favicon-32.png`, `apple-touch-icon.png`, `icon-512.png`) are approved; no original logo file is being pursued (13 November 2026).
 
 ---
 
 ## 5. Open issues
 
 ### A. Blocking: needed from the client
-1. **Original logo file** and which version is current (three versions seen), plus the official business name and tagline (four names and four taglines seen).
+1. **Official business name and tagline** (four names and four taglines seen). The logo is settled: the existing header mark and icon files are the approved versions (13 November 2026).
 2. **Prices** for small bottled water (300ml, 500ml, 1L, 1.5L), branded bottles (and minimum order), and dispenser cleaning.
-3. **Free delivery rules:** areas and any minimum order.
-4. **Instagram link** (official profile, not a single post or video). The TikTok link has been supplied and added.
-5. **KEBS permit number and purification steps**, if they have them. Until then the site makes no quality claims.
+3. **Free delivery rules:** areas and any minimum order (requested from the client on 13 November 2026).
+4. **KEBS permit number and purification steps**, if they have them (requested, including a photo of the certificate, on 13 November 2026). Until they reply, the site makes no quality claims.
 
 ### B. Permissions
 - [x] Showing the staff and customers in the photos, including the new event, shop and delivery photos (confirmed by the client on 12 November 2026)
@@ -270,3 +271,10 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 ### Deferred (optional)
 - Responsive gallery variants: the photos are about 1000–1200px wide for a roughly 210–372px tile; adding 480w/800w `srcset` variants would save about 356 KiB on the simulated run. They are lazy-loaded and below the fold, so this does not affect the first paint.
 - Real-device test on an iPhone (safe areas, menu, WhatsApp hand-off) and a low-end Android phone, already listed under "Still to do before launch".
+
+## 19. Client input status (13 November 2026)
+
+- Logo: settled. Keep the existing header mark and icons; the original logo file is no longer required.
+- Sent the client a WhatsApp message asking for the KEBS permit number, a photo of the certificate, and the free-delivery rules.
+- No KEBS number, certification claim, delivery area or minimum order will be published until the client replies and the details are checked.
+- Decisions, requests and the open-items table are kept in [`docs/maintenance-log.md`](maintenance-log.md).

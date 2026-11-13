@@ -7,6 +7,7 @@ One-page website for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, N
 - `docs/status.md` — project status, client decisions and open issues.
 - [`docs/how-to-request-a-change.md`](docs/how-to-request-a-change.md) — one-page guide for the client: how to ask for text, price and photo changes (no terminal needed).
 - [`docs/how-to-update-your-site.md`](docs/how-to-update-your-site.md) — maintainer guide: editing text, prices and photos, previewing and publishing.
+- [`docs/maintenance-log.md`](docs/maintenance-log.md) — dated record of client decisions, requests and site changes.
 
 ## Run it
 
@@ -60,7 +61,8 @@ aquamor-web/
 ├── docs/
 │   ├── status.md
 │   ├── how-to-update-your-site.md   # maintainer guide (text, prices, photos, publishing)
-│   └── how-to-request-a-change.md   # client-facing change-request sheet
+│   ├── how-to-request-a-change.md   # client-facing change-request sheet
+│   └── maintenance-log.md           # dated client decisions, requests and changes
 └── aquamor.db              # local development database (not for production)
 ```
 
