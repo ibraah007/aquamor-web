@@ -8,7 +8,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 
 | Feature | What it does |
 |---|---|
-| Order builder | Customer picks refills, bottled water and new 20L bottles, sees a running total, and sends the order to WhatsApp, already written out |
+| Order builder | Customer picks refills, bottled water and new 20L bottles, sees a running total, and sends the order to WhatsApp, already written out; the last order can be restored with one tap |
 | Refill planner | Customer enters how many people are at home and picks 5L, 10L or 20L; the site estimates weekly refills and cost, with a WhatsApp button |
 | Price card | A standalone A4 page ([price-card.html](price-card.html)) for the shop counter, with the confirmed refill and bottle prices, free-delivery line and WhatsApp number; use the Print button or the browser's print dialog |
 | How it works | Three steps (choose your water, order on WhatsApp, delivery or pickup) and a "Who we deliver to" strip for homes, offices, schools, restaurants, clinics and hotels |
@@ -49,6 +49,8 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 ## How the logic works
 
 **Order builder (`js/order.js`).** `items` holds the products shown in each tab. `PRICE` maps a product name to its price in Ksh. Each press of + or − updates the `qty` object, and the summary list and total are redrawn from it. On "Send order", the script builds a text message and opens `https://wa.me/254712140006?text=...` with the message URL-encoded. Delivery or pickup and the area are added. Product names and the delivery mode are translated when the site is in Swahili. Items without a listed price are shown separately and are not included in the estimated total.
+
+**Reorder (`js/order.js`).** When an order is sent, its quantities, delivery mode and area are saved in `localStorage` under `aquamor-last-order`. On the next visit a "Reorder my last order" button appears if that record exists; it restores the quantities, opens the tab of the first item, sets delivery or pickup and fills the area. Items that no longer exist are skipped, and a note says so. If nothing matches, the note says the items are unavailable. The WhatsApp handoff is still the final step.
 
 **Refill planner (`js/planner.js`).** `SIZES` holds the three refill sizes and their confirmed prices, and `PER_PERSON_DAY` is the planning assumption (2 litres). Weekly litres are the number of people times the assumption times seven; the refills are rounded up to full containers, and the cost is refills times the size price. The results and the WhatsApp message are redrawn on each change and when the language changes.
 
