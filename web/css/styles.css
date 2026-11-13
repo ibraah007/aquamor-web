@@ -177,6 +177,8 @@ label{display:block;font-weight:600;font-size:.95rem;margin-bottom:4px}
 .sw{display:flex;gap:10px;margin:4px 0 14px;flex-wrap:wrap}
 .sw button{width:40px;height:40px;border-radius:50%;border:3px solid transparent;cursor:pointer;background:var(--c)}
 .sw button[aria-pressed="true"]{border-color:var(--ink)}
+.presets{margin-bottom:14px}
+.presets .tab{font-size:.9rem;padding:7px 14px}
 
 
 

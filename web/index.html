@@ -305,15 +305,23 @@
           <rect width="120" height="300" fill="#bfe6ef"/>
           <rect y="70" width="120" height="240" fill="#2cc0d6" opacity=".35"/>
           <rect id="lbl" x="30" y="120" width="60" height="120" fill="#06476a"/>
+          <circle id="lblRound" cx="60" cy="180" r="29" fill="#06476a" style="display:none"/>
           <text id="t1" x="60" y="170" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="12" fill="#fff">Your event</text>
           <text id="t2" x="60" y="190" text-anchor="middle" font-family="Figtree,sans-serif" font-size="8" fill="#fff">date or message</text>
-          <text x="60" y="226" text-anchor="middle" font-family="Figtree,sans-serif" font-size="5" fill="#fff" opacity=".8">Aquamor purified water</text>
+          <text id="t3" x="60" y="226" text-anchor="middle" font-family="Figtree,sans-serif" font-size="5" fill="#fff" opacity=".8">Aquamor purified water</text>
         </g>
         <path d="M46 8h28v30c0 10 16 22 16 48v196c0 8-6 14-14 14H44c-8 0-14-6-14-14V86c0-26 16-38 16-48z" fill="none" stroke="#06476a" stroke-width="3"/>
         <rect x="44" y="2" width="32" height="10" rx="3" fill="#06476a"/>
       </svg>
     </div>
     <div>
+      <p class="note" id="presetsLbl">Start with a preset</p>
+      <div class="tabs presets" id="presets" role="group" aria-labelledby="presetsLbl">
+        <button type="button" class="tab" data-p="wedding">Wedding</button>
+        <button type="button" class="tab" data-p="church">Church</button>
+        <button type="button" class="tab" data-p="graduation">Graduation</button>
+        <button type="button" class="tab" data-p="corporate">Corporate</button>
+      </div>
       <label for="ev">Event or name</label>
       <input type="text" id="ev" maxlength="18" placeholder="e.g. John &amp; Mary">
       <label for="msg">Date or short message</label>
@@ -325,6 +333,11 @@
         <button style="--c:#1d6b43" data-c="#1d6b43" aria-pressed="false" aria-label="Green"></button>
         <button style="--c:#4b2c82" data-c="#4b2c82" aria-pressed="false" aria-label="Purple"></button>
         <button style="--c:#1a1a1a" data-c="#1a1a1a" aria-pressed="false" aria-label="Black"></button>
+      </div>
+      <label id="styleLbl">Label style</label>
+      <div class="seg" id="styleSeg" role="group" aria-labelledby="styleLbl">
+        <button type="button" data-st="rect" aria-pressed="true">Rectangular</button>
+        <button type="button" data-st="round" aria-pressed="false">Round</button>
       </div>
       <label for="sz">Bottle size</label>
       <select id="sz"><option>300ml</option><option selected>500ml</option><option>1L</option><option>1.5L</option></select>
