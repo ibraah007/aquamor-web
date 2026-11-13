@@ -49,13 +49,16 @@ Decisions:
 - **Prices:** do not publish the Ksh 500–800 range yet. The reply does not say whether it is per bottle or per pack, whether it covers small bottled water or custom-branded bottles, or what the minimum order is.
 - **Dispenser cleaning and free delivery:** the client's "yes we do them" is not tied to one question. The cleaning price and the delivery areas/minimum order are still missing.
 
-Follow-up questions to confirm:
+Follow-up questions sent to the client (13 November 2026); waiting for the reply:
 
 1. Is Ksh 500–800 per bottle or per pack/carton?
-2. Does that range apply to small bottled water (300ml, 500ml, 1L, 5L) or to custom-branded bottles?
-3. What is the minimum order for branded bottles?
-4. What is the dispenser-cleaning price?
-5. Which areas are free delivery, and is there a minimum order?
+2. Which sizes does the Ksh 500–800 range cover?
+3. Does that range apply to small bottled water (300ml, 500ml, 1L, 5L) or to custom-branded bottles?
+4. What is the minimum order for branded bottles?
+5. What is the dispenser-cleaning price?
+6. Which areas are free delivery, and is there a minimum order?
+7. What is the official business name and tagline?
+8. What are the purification steps, if they want them published?
 
 ### Earlier decisions this day
 
