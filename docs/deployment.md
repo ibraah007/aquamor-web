@@ -30,6 +30,7 @@ proxy can reach it. Do not expose port 8080 in the firewall.
 ## 2. Build
 
 ```sh
+set -euo pipefail
 sudo apt update
 sudo apt install -y build-essential sqlite3 curl git
 
@@ -178,17 +179,31 @@ one into a temporary copy and open it with `sqlite3` at least once.
 To restore, stop the service first:
 
 ```sh
+set -euo pipefail
 sudo systemctl stop aquamor
 sudo cp /var/lib/aquamor/aquamor.db /var/lib/aquamor/aquamor.db.before-restore
-gunzip -c /var/backups/aquamor/aquamor-YYYYMMDDTHHMMSSZ.db.gz > /tmp/restore.db || {
+
+restore_dir="$(mktemp -d)" || exit 1
+restore_db="$restore_dir/restore.db"
+
+gunzip -c /var/backups/aquamor/aquamor-YYYYMMDDTHHMMSSZ.db.gz > "$restore_db" || {
+  rm -rf "$restore_dir"
   echo "restore failed: backup missing or corrupt; database unchanged" >&2
   exit 1
 }
-sqlite3 /tmp/restore.db 'PRAGMA integrity_check;' | grep -qx ok || {
+sqlite3 "$restore_db" 'PRAGMA integrity_check;' | grep -qx ok || {
+  rm -rf "$restore_dir"
   echo "restore failed: integrity check did not return ok; database unchanged" >&2
   exit 1
 }
-sudo install -o aquamor -g aquamor -m 600 /tmp/restore.db /var/lib/aquamor/aquamor.db
+sqlite3 "$restore_db" "SELECT name FROM sqlite_master WHERE type='table' AND name='orders';" | grep -qx orders || {
+  rm -rf "$restore_dir"
+  echo "restore failed: orders table missing; database unchanged" >&2
+  exit 1
+}
+
+sudo install -o aquamor -g aquamor -m 600 "$restore_db" /var/lib/aquamor/aquamor.db
+rm -rf "$restore_dir"
 sudo rm -f /var/lib/aquamor/aquamor.db-wal /var/lib/aquamor/aquamor.db-shm
 sudo systemctl start aquamor
 ```
@@ -196,8 +211,10 @@ sudo systemctl start aquamor
 ## 11. Updates and rollback
 
 ```sh
+set -euo pipefail
 cd /opt/aquamor
 sudo git pull --ff-only
+rm -f "$HOME/aquamor-backend.new"
 CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o "$HOME/aquamor-backend.new" ./backend/cmd/server
 sudo systemctl stop aquamor
 sudo cp aquamor-backend aquamor-backend.prev
