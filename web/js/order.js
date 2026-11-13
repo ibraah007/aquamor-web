@@ -55,10 +55,11 @@
       note==="dropped"?t("Some items from your last order are no longer available.","Baadhi ya bidhaa za oda yako ya mwisho hazipatikani tena."):
       t("Last order restored. Check it, then send on WhatsApp.","Oda yako ya mwisho imerejeshwa. Iangalie, kisha itume kupitia WhatsApp.");
   }
-  function saveLast(keys,area){
+  function saveLast(keys,area,savedQty,savedMode){
     try{
-      var saved={qty:{},mode:mode,area:area,ts:Date.now()};
-      keys.forEach(function(k){saved.qty[k]=qty[k]});
+      var q={};
+      keys.forEach(function(k){q[k]=(savedQty&&savedQty[k]!=null)?savedQty[k]:qty[k]});
+      var saved={qty:q,mode:savedMode||mode,area:area,ts:Date.now()};
       localStorage.setItem(LAST_KEY,JSON.stringify(saved));
     }catch(e){}
   }
@@ -136,9 +137,9 @@
   if(reorderBtn)reorderBtn.addEventListener("click",applyLast);
   refreshReorder();
   function go(text){window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(text),"_blank","noopener")}
-  var lastSaved={sig:"",at:0};
+  var lastSaved={sig:"",at:0}, saveInFlight=false;
   function saveOrder(keys,details){
-    if(!window.fetch)return;
+    if(!window.fetch||saveInFlight)return;
     var priced=true;
     keys.forEach(function(k){if(!PRODUCTS[k])priced=false});
     if(!priced)return;
@@ -151,8 +152,14 @@
     };
     var sig=JSON.stringify(payload);
     if(sig===lastSaved.sig&&Date.now()-lastSaved.at<60000)return;
-    lastSaved.sig=sig;lastSaved.at=Date.now();
-    fetch("/api/v1/orders",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},credentials:"same-origin",keepalive:true,body:sig}).catch(function(){});
+    saveInFlight=true;
+    fetch("/api/v1/orders",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},credentials:"same-origin",keepalive:true,body:sig})
+      .then(function(r){
+        if(!r.ok)throw new Error("HTTP "+r.status);
+        lastSaved.sig=sig;lastSaved.at=Date.now();
+      })
+      .catch(function(err){if(window.console&&console.warn)console.warn("Could not save order",err)})
+      .then(function(){saveInFlight=false});
   }
   document.getElementById("sendOrder").addEventListener("click",function(e){
     e.preventDefault();
@@ -242,14 +249,18 @@
     if(phone.replace(/\D/g,"").length<7){setPayError(t("Please enter a valid phone number.","Tafadhali weka namba sahihi ya simu."));return}
     if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){setPayError(t("Please enter a valid email for the receipt.","Tafadhali weka barua pepe sahihi kwa risiti."));return}
     if(area.length<2){setPayError(t("Please enter your delivery area or pickup name.","Tafadhali weka eneo la kuletewa au jina la kuchukua."));return}
-    var orderItems=o.keys.map(function(k){return {product_id:PRODUCTS[k].id,bottle_option:PRODUCTS[k].option,quantity:qty[k]}});
+    var savedQty={},orderItems=o.keys.map(function(k){
+      savedQty[k]=qty[k];
+      return {product_id:PRODUCTS[k].id,bottle_option:PRODUCTS[k].option,quantity:qty[k]};
+    });
+    var savedMode=mode;
     setPayError("");
     setPayBusy(true);
-    fetch("/api/v1/payments/checkout",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},credentials:"same-origin",body:JSON.stringify({customer_name:name,customer_phone:phone,customer_email:email,delivery_estate:area,delivery_address:area,items:orderItems})})
+    fetch("/api/v1/payments/checkout",{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},credentials:"same-origin",body:JSON.stringify({customer_name:name,customer_phone:phone,customer_email:email,delivery_estate:savedMode==="Delivery"?area:"Pickup",delivery_address:area,items:orderItems})})
       .then(function(r){return r.json().catch(function(){return {}}).then(function(data){if(!r.ok)throw new Error(data.error||t("Could not start the payment. Please try again.","Imeshindikana kuanzisha malipo. Tafadhali jaribu tena."));return data})})
       .then(function(data){
         if(!data.payment_url)throw new Error(t("The payment page was not returned. Please try again.","Ukurasa wa malipo haukurejeshwa. Tafadhali jaribu tena."));
-        saveLast(o.keys,area);
+        saveLast(o.keys,area,savedQty,savedMode);
         refreshReorder();
         window.location.assign(data.payment_url);
       })
