@@ -1,6 +1,6 @@
 # Aquamor Purified Drinking Water: Website Project Status
 
-**Updated:** 13 November 2026
+**Updated:** 14 November 2026
 **Project start:** 10 November 2026
 **Target delivery:** about 10 December 2026 (one month)
 **Repository:** the site is in `web/`; the Go API is in `backend/` (see the root `README.md`)
@@ -343,3 +343,11 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - The middleware records the status and byte count, defaults to `200` when a handler writes without calling `WriteHeader`, and keeps the response writer usable through `Unwrap`.
 - It wraps the security and cache middleware in `cmd/server/main.go`, so rate-limited `429` responses are logged too.
 - Tests cover the status and size, the `200` default, query-string exclusion and the forwarded client address. The local smoke test passes and the command was checked to contain no customer data or query string.
+
+## 27. Cross-machine sync and verification (14 November 2026)
+
+- Fetched the work merged in PRs #32–#34 on a second machine and fast-forwarded `main` to `0d13173`; the working tree is clean and matches `origin/main`.
+- Re-ran every CI check locally: `gofmt`, `go build`, `go vet`, `go test -race`, `node --check` and `bash -n` all pass. GitHub CI is green for the same commits.
+- [`deploy/smoke-test.sh`](../deploy/smoke-test.sh) passes all checks against a local server; a test order posted to `/api/v1/orders` is listed by `/api/v1/orders/all` with the server-priced total.
+- Removed two orphaned, git-ignored SQLite files from the repository root and deleted the merged local and remote branches, leaving only `main`.
+- No client-facing change. Payments stay hidden until the three `FLUTTERWAVE_*`/`PUBLIC_BASE_URL` values are set.

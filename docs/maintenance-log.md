@@ -6,6 +6,23 @@ Keep it short. Link to the issue, PR or file when there is one.
 
 ---
 
+## 14 November 2026
+
+### Cross-machine sync and verification
+
+No client-facing change. The work merged on 13 November (PRs #32–#34) was fetched and checked on a second machine:
+
+- Fast-forwarded `main` to `0d13173`; working tree clean and in sync with `origin/main`.
+- `gofmt`, `go build ./...`, `go vet ./...` and `go test -race ./...` pass.
+- `node --check` on all scripts and `bash -n` on all deploy/scripts pass.
+- `deploy/smoke-test.sh` passes all checks against a local server, and a test order saved through `POST /api/v1/orders` appears in the admin list with the server-priced total.
+- Removed the orphaned `aquamor.db-shm` / `aquamor.db-wal` files left in the repository root (git-ignored, no database beside them).
+- Deleted the merged local and remote feature branches; only `main` remains.
+
+Payments remain off until `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL` are set, so the WhatsApp order path is unchanged.
+
+---
+
 ## 13 November 2026
 
 ### Logo: settled
