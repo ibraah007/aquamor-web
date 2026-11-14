@@ -21,7 +21,7 @@ No client-facing change. The work merged on 13 November (PRs #32–#34) was fetc
 
 ### WhatsApp icon on the "WhatsApp us" buttons
 
-The floating "WhatsApp us" button now shows the WhatsApp glyph before its label, and the same icon is used on the "WhatsApp us" button on the payment status page. The icon is inline SVG, inherits the button text colour (so it works in light and dark mode), is hidden from screen readers, and adds no extra file request. The visible label is unchanged, so the existing Swahili translation still applies.
+Every WhatsApp call-to-action button now shows the WhatsApp glyph before its label: the floating "WhatsApp us" button, Send order, Ask about this plan (refill planner), Request this design (label designer), Book a cleaning, Chat on WhatsApp in the contact section, and the "WhatsApp us" button on the payment status page. The icon is inline SVG, inherits the button text colour (so it works in light and dark mode), is hidden from screen readers, and adds no extra file request. The labels are unchanged, so the existing Swahili translation still applies; the buttons are flex rows so the icon stays beside the text when a label wraps on a narrow phone.
 
 Payments remain off until `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL` are set, so the WhatsApp order path is unchanged.
 
