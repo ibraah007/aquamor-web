@@ -50,6 +50,8 @@ The site only shows prices and facts that Aquamor has confirmed. If you ask for 
 
 The prices themselves are kept on the website and on the printable price card for the shop counter, so there is only one list to keep up to date. If either looks out of date, tell us before you print a new card or quote a customer.
 
+The answers we still need before launch are listed in [client-information-needed.md](client-information-needed.md), with a form you can copy and fill in.
+
 ---
 
 ## Photos
