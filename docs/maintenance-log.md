@@ -19,6 +19,10 @@ No client-facing change. The work merged on 13 November (PRs #32–#34) was fetc
 - Removed the orphaned `aquamor.db-shm` / `aquamor.db-wal` files left in the repository root (git-ignored, no database beside them).
 - Deleted the merged local and remote feature branches; only `main` remains.
 
+### WhatsApp icon on the "WhatsApp us" buttons
+
+The floating "WhatsApp us" button now shows the WhatsApp glyph before its label, and the same icon is used on the "WhatsApp us" button on the payment status page. The icon is inline SVG, inherits the button text colour (so it works in light and dark mode), is hidden from screen readers, and adds no extra file request. The visible label is unchanged, so the existing Swahili translation still applies.
+
 Payments remain off until `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL` are set, so the WhatsApp order path is unchanged.
 
 ---

@@ -45,7 +45,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] Light and dark mode support
 - [x] Blue and white brand look; header with logo icon (cropped from the client's flyer)
 - [x] Fading photo backgrounds in the hero, the order banner, the branded-bottles banner and the contact section (respects "reduced motion")
-- [x] Sticky "WhatsApp us" button on every screen
+- [x] Sticky "WhatsApp us" button with the WhatsApp icon on every screen
 - [x] Mobile navigation menu with keyboard and Escape-key support
 - [x] Skip-to-content link and visible focus styles
 
