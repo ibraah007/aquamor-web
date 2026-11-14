@@ -25,6 +25,43 @@ Every WhatsApp call-to-action button now shows the WhatsApp glyph before its lab
 
 Payments remain off until `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL` are set, so the WhatsApp order path is unchanged.
 
+### Consolidated questions for the client
+
+The 13 November follow-ups and everything else still open in `status.md` section 5 were consolidated into one message:
+
+1. Ksh 500–800 — per bottle or per pack/carton?
+2. Does that range cover small bottled water or branded bottles?
+3. If small bottled water, the price per size: 300ml, 500ml, 1L, 1.5L (and 5L if sold).
+4. Minimum order for branded bottles.
+5. Dispenser-cleaning price.
+6. Free-delivery areas.
+7. Minimum order for free delivery.
+8. Official business name and tagline.
+9. Purification steps, if they want them published.
+10. Facebook page is a business page, not a personal profile.
+11. Which sizes are actually sold (flyer shows 500ml, 5L, 10L, 20L; their text also lists 300ml, 1L, 1.5L).
+12. Regular 20L bottle at Ksh 450 — is water included?
+13. Are the water pumps for sale?
+
+A Swahili version was prepared alongside it so the client can read the questions in their preferred language. Nothing is published from these answers until the client replies in writing (see the open-items table below).
+
+The English sheet for the client is [`client-information-needed.md`](client-information-needed.md): the same questions as a plain document, with the domain and online-payment items, a "not published until confirmed" table and a copy-and-fill reply form. It is also exported to [`client-information-needed.pdf`](client-information-needed.pdf) to attach to an email.
+
+Client email: **Aquamor2020@gmail.com** (already on the site contact section, the printable price card and the structured data). It is the address to send the sheet to. It is a Gmail address, so there is no domain email to preserve if `aquamor.co.ke` is registered; a business address such as `info@aquamor.co.ke` can be added later if they want one.
+
+`docs/screenshots/` was regenerated from the current build so the preview sent with the sheet matches the live code: `desktop.png` (1280×1000), `mobile.png` (390×1000) and `mobile-menu.png` (390×1000, menu open). All three show the current WhatsApp icons.
+
+### Domain
+
+Plan agreed: register a `.co.ke` domain in the **client's name**, with the client paying the yearly renewal; the maintainer only holds DNS/technical access. Do not register it in the maintainer's personal account and do not leave ownership `[to agree]` past handover — this is the item that causes the most disputes later.
+
+- KeNIC is the registry; register through a KeNIC-accredited registrar. A `.co.ke` needs no supporting documents for most registrations (unlike `.go.ke`/`.ac.ke`).
+- Cost: roughly Ksh 1,000–1,500 for the first year and Ksh 1,200–1,350 to renew on Kenyan registrars (checked November 2026). Check the renewal price, not just the first-year offer, and enable auto-renew.
+- Availability on 14 November 2026 (no DNS delegation): `aquamor.co.ke`, `aquamor.ke`, `aquamorwater.co.ke`, `aquamorpurifiedwater.co.ke`. Confirm at the registrar's checkout before promising one.
+- Preferred: `aquamor.co.ke` (already the placeholder in the site and docs). Fallbacks: `aquamor.ke`, `aquamorwater.co.ke`.
+- Ask the client for: the chosen name, the registrant name/email/phone to use, who pays, and whether they already own a domain or use email on one (copy the `MX` records before changing nameservers).
+- When confirmed: point `A`/`AAAA` at the server, run `scripts/set-domain.sh <domain>`, set the Caddy address and `PUBLIC_BASE_URL`, then work through `launch-checklist.md` section C on the real domain.
+
 ---
 
 ## 13 November 2026
