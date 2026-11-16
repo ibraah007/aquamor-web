@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://aquamor.co.ke/sitemap.xml
+Sitemap: https://aquamorwater.co.ke/sitemap.xml

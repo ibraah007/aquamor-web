@@ -6,6 +6,32 @@ Keep it short. Link to the issue, PR or file when there is one.
 
 ---
 
+## 16 November 2026
+
+### Client confirmed all outstanding details
+
+The client sent the confirmed business details in writing. Changes made:
+
+- **Business name and tagline:** AQUAMOR PURIFIED DRINKING WATER; "Hydrated? Worry no more! Aquamor has got you covered. Your satisfaction is our priority." Added to the hero, About section and structured data.
+- **Bottled water:** prices vary by quantity, so the site now asks for a quotation instead of showing fixed prices. Sizes: 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L.
+- **Refills:** 5L Ksh 50, 10L Ksh 100, 20L Ksh 200; the price includes water.
+- **New bottles (bottle purchase; water refills separate):** 20L regular Ksh 450–550, 20L hard Ksh 1,000–1,700, 10L Ksh 200–250, 5L Ksh 100.
+- **Customised bottles:** churches, weddings, graduations, anniversaries, corporate events and other occasions; customisation Ksh 500–1,000; minimum order 10 bales.
+- **Dispenser cleaning:** Ksh 500–1,000 depending on the dispenser and cleaning required.
+- **Delivery:** Ngara, Parklands, Pangani, Gikomba, Westlands, Nairobi CBD and parts of Eastleigh. Free delivery depends on distance and quantity; customers are asked to confirm.
+- **Pumps and dispensers:** manual and electric pumps for 10L and 20L bottles; manual and electric dispensers.
+- **Purification process:** eight steps published without individual sediment-filter micron sizes.
+- **Domain:** preferred `aquamorwater.co.ke`, to be registered under AQUAMOR PURIFIED DRINKING WATER with Aquamor keeping ownership and control and paying renewal. The site, `robots.txt`, sitemap, Caddyfile and environment example now use it.
+- **Contact:** existing Gmail `aquamor2020@gmail.com`; Facebook page is AQUAMOR NGARA; TikTok link kept.
+
+Updated `web/index.html`, `web/js/order.js`, `web/js/i18n.js`, `web/price-card.html`, the hard-bottle catalog name, and the project docs. Bottled-water prices stay as quotations, as requested. New-bottle ranges use the lower bound for the on-page estimate only.
+
+**Online payments are deferred to a later phase** at the project owner's request. The Flutterwave code stays in place but no merchant account, API keys or webhook secret are needed for launch; the Pay online button stays hidden. The two remaining permissions (other customers' labels and the Paybill display) were cleared for this build by the project owner. The Swahili copy was reviewed and awkward phrases refined.
+
+### Open items after this update
+
+Only the domain registration/handover and a native-speaker Swahili read-through remain. Online payments are deferred.
+
 ## 14 November 2026
 
 ### Cross-machine sync and verification
@@ -45,7 +71,7 @@ The 13 November follow-ups and everything else still open in `status.md` section
 
 A Swahili version was prepared alongside it so the client can read the questions in their preferred language. Nothing is published from these answers until the client replies in writing (see the open-items table below).
 
-The English sheet for the client is [`client-information-needed.md`](client-information-needed.md): the same questions as a plain document, with the domain and online-payment items, a "not published until confirmed" table and a copy-and-fill reply form. It is also exported to [`client-information-needed.pdf`](client-information-needed.pdf) to attach to an email.
+The English sheet for the client is [`client-information-needed.md`](client-information-needed.md): the same questions as a plain document, with the domain and online-payment items, a "not published until confirmed" table and a copy-and-fill reply form. It is also exported to [`client-information-needed.pdf`](client-information-needed.pdf) to attach to an email. **Update (16 November 2026):** the sheet and PDF now list the confirmed details and only the remaining domain, payment, Swahili and permission items.
 
 Client email: **Aquamor2020@gmail.com** (already on the site contact section, the printable price card and the structured data). It is the address to send the sheet to. It is a Gmail address, so there is no domain email to preserve if `aquamor.co.ke` is registered; a business address such as `info@aquamor.co.ke` can be added later if they want one.
 
@@ -61,6 +87,8 @@ Plan agreed: register a `.co.ke` domain in the **client's name**, with the clien
 - Preferred: `aquamor.co.ke` (already the placeholder in the site and docs). Fallbacks: `aquamor.ke`, `aquamorwater.co.ke`.
 - Ask the client for: the chosen name, the registrant name/email/phone to use, who pays, and whether they already own a domain or use email on one (copy the `MX` records before changing nameservers).
 - When confirmed: point `A`/`AAAA` at the server, run `scripts/set-domain.sh <domain>`, set the Caddy address and `PUBLIC_BASE_URL`, then work through `launch-checklist.md` section C on the real domain.
+
+**Update (16 November 2026):** the client confirmed `aquamorwater.co.ke` and answered the questions above; see the 16 November entry at the top.
 
 ---
 
@@ -181,16 +209,17 @@ Decision: the client chose a hosted checkout. The site now uses Flutterwave host
 
 | Item | Issue | Status |
 |---|---|---|
-| Small bottled-water prices (300ml, 500ml, 1L, 1.5L) | #4 | Reply ambiguous; confirm unit |
-| Branded-bottle pricing and minimum order | #4 | 500–800 quoted; unit/minimum unclear |
-| Dispenser-cleaning price | #4 | Waiting |
-| Free-delivery areas and minimum order | #4 | Requested 13 Nov; not answered |
-| KEBS permit number and a photo of the certificate | #4 | Answered: with supplier; own due Feb |
-| Purification steps (only if the client has them) | #4 | Requested 13 Nov; waiting |
-| Official business name and tagline | #4 | Waiting |
-| Facebook page is a business page, not a personal profile | #10 | Waiting |
-| Confirm bottled-water sizes (flyer vs client text) | #10 | Waiting |
+| Small bottled-water prices (300ml, 500ml, 1L, 1.5L) | #4 | Resolved 16 Nov: quoted by quantity, no fixed prices |
+| Branded-bottle pricing and minimum order | #4 | Resolved 16 Nov: customisation Ksh 500–1,000; minimum 10 bales |
+| Dispenser-cleaning price | #4 | Resolved 16 Nov: Ksh 500–1,000 |
+| Free-delivery areas and minimum order | #4 | Resolved 16 Nov: listed areas; free delivery depends on distance and quantity |
+| KEBS permit number and a photo of the certificate | #4 | Answered: with supplier; own due Feb; no claim published |
+| Purification steps (only if the client has them) | #4 | Resolved 16 Nov: eight steps published without micron sizes |
+| Official business name and tagline | #4 | Resolved 16 Nov: AQUAMOR PURIFIED DRINKING WATER; tagline supplied |
+| Facebook page is a business page, not a personal profile | #10 | Resolved 16 Nov: AQUAMOR NGARA business page |
+| Confirm bottled-water sizes (flyer vs client text) | #10 | Resolved 16 Nov: ten sizes from 200ml to 20L |
 | Native-speaker Swahili review | #10 | Waiting |
-| Regular 20L bottle: is water included? | #10 | Waiting |
+| Regular 20L bottle: is water included? | #10 | Resolved 16 Nov: bottle purchase; water refill separate |
+| Domain registration and handover (`aquamorwater.co.ke`) | #4 | Preferred domain set in the site; registration/handover still to complete |
 | Original cleaning before/after stills | #9 | Waiting |
 | More gallery content (shop front, graduation/corporate) | #7 | Waiting |

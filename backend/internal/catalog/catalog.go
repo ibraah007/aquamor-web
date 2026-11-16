@@ -34,7 +34,7 @@ var products = []models.Product{
 	},
 	{
 		ID:             4,
-		Name:           "20L Hard Bottle + Water",
+		Name:           "20L Hard Bottle",
 		Category:       "container",
 		Volume:         "20L",
 		PriceSwap:      0,

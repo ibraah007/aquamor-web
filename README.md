@@ -5,7 +5,7 @@ One-page website for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, N
 - `web/` — the public site: plain HTML, CSS and JavaScript. No build step.
 - `backend/` — Go API and SQLite persistence.
 - `docs/status.md` — project status, client decisions and open issues.
-- [`docs/client-information-needed.md`](docs/client-information-needed.md) — client-facing sheet of the answers, prices, domain and payment details still needed before launch (PDF: [`docs/client-information-needed.pdf`](docs/client-information-needed.pdf), for emailing).
+- [`docs/client-information-needed.md`](docs/client-information-needed.md) — client-facing sheet of the confirmed details and the domain/payment items still needed before launch (PDF: [`docs/client-information-needed.pdf`](docs/client-information-needed.pdf), for emailing).
 - [`docs/how-to-request-a-change.md`](docs/how-to-request-a-change.md) — one-page guide for the client: how to ask for text, price and photo changes (no terminal needed).
 - [`docs/how-to-update-your-site.md`](docs/how-to-update-your-site.md) — maintainer guide: editing text, prices and photos, previewing and publishing.
 - [`docs/maintenance-log.md`](docs/maintenance-log.md) — dated record of client decisions, requests and site changes.
@@ -87,7 +87,7 @@ aquamor-web/
 │   ├── launch-checklist.md           # pre/post-launch checks
 │   ├── how-to-update-your-site.md   # maintainer guide (text, prices, photos, publishing)
 │   ├── how-to-request-a-change.md   # client-facing change-request sheet
-│   ├── client-information-needed.md # client-facing list of answers still needed
+│   ├── client-information-needed.md # confirmed details and remaining launch items
 │   ├── client-information-needed.pdf # the same sheet as a PDF for emailing
 │   └── maintenance-log.md           # dated client decisions, requests and changes
 └── aquamor.db              # local development database (not for production)
@@ -155,8 +155,8 @@ The original snapshot was a standalone marketing page. It is now the `web/` fron
 
 Use [`docs/deployment.md`](docs/deployment.md) for the server and TLS steps, and [`docs/launch-checklist.md`](docs/launch-checklist.md) for the full go-live list.
 
-- The canonical URL, `og:image` URL, `web/robots.txt` and `web/sitemap.xml` use `https://aquamor.co.ke/`. Run `./scripts/set-domain.sh <domain>` once the domain is confirmed.
-- Confirm the remaining client facts in `docs/status.md`: small bottled-water prices, branded-bottle pricing and minimum order, delivery rules, KEBS/purification details, the official business name and tagline, photo/label permissions and social links.
+- The canonical URL, `og:image` URL, `web/robots.txt` and `web/sitemap.xml` use the client's preferred domain, `https://aquamorwater.co.ke/`. Run `./scripts/set-domain.sh <domain>` if a different final domain is chosen.
+- The client confirmed the remaining business facts on 16 November 2026 (prices, customisation charges and minimum order, dispenser cleaning, delivery areas, business name and tagline, purification steps, bottle sizes, bottle purchase prices, pumps, domain). See `docs/status.md` section 27 and the maintenance log.
 - Orders are saved through `POST /api/v1/orders` and WhatsApp remains the final hand-off. Staff read and export them from `/admin.html`; set a strong `ADMIN_TOKEN` and serve the page only over HTTPS.
 - Keep `web/js/order.js` (`PRICE`), `web/js/planner.js` (`SIZES`) and `backend/internal/catalog/catalog.go` in sync until prices come from one API; the printable card in [web/price-card.html](web/price-card.html) repeats the confirmed refill and bottle prices.
 - Decide whether to add privacy-friendly analytics and a short privacy note (the API stores name, phone and address if it is used).

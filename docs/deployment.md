@@ -70,13 +70,16 @@ sudoedit /etc/aquamor/aquamor.env
 Set `ADMIN_TOKEN` to the value from `openssl rand -hex 32`. Keep the other paths
 as shown unless the server layout is different.
 
-### Online payments (optional)
+### Online payments (deferred to a later phase)
 
-Online payment uses Flutterwave hosted checkout. Leave the three payment values
-empty to keep WhatsApp-only ordering; the site then hides the Pay online button
-and `/api/v1/payments/config` reports `"enabled": false`.
+Online payments are not part of this launch. Leave the three payment values
+empty; WhatsApp ordering is the launch path. The site then hides the Pay online
+button and `/api/v1/payments/config` reports `"enabled": false`. No Flutterwave
+merchant account, API keys or webhook secret are needed now.
 
-To enable it:
+When online payments are enabled later:
+
+Online payment uses Flutterwave hosted checkout. To enable it:
 
 1. Create or open the Aquamor Flutterwave account and copy the secret key into
    `FLUTTERWAVE_SECRET_KEY`. Never put the key in the repository.
@@ -122,7 +125,7 @@ curl -fsS http://127.0.0.1:8080/api/v1/health
 
 1. Point the domain's `A` record (and `AAAA` if the server has IPv6) at the
    server's public IP address.
-2. Wait for DNS to resolve: `dig +short aquamor.co.ke`.
+2. Wait for DNS to resolve: `dig +short aquamorwater.co.ke`.
 3. Install Caddy using the instructions for your distribution, then install the
    example configuration:
 
@@ -158,7 +161,7 @@ Once the domain is confirmed, update the canonical URL, social preview URLs,
 
 ```sh
 cd /opt/aquamor
-./scripts/set-domain.sh aquamor.co.ke
+./scripts/set-domain.sh aquamorwater.co.ke
 git diff -- web/index.html web/robots.txt web/sitemap.xml deploy/Caddyfile
 ```
 
@@ -167,14 +170,14 @@ Reload Caddy if its configuration changed. Static files do not need a rebuild.
 ## 9. Verify the launch
 
 ```sh
-./deploy/smoke-test.sh https://aquamor.co.ke
+./deploy/smoke-test.sh https://aquamorwater.co.ke
 ```
 
 The smoke test checks the home page, the payment status page, health, products,
 the payments config, the protected orders endpoint and the security headers. Also
 check:
 
-- `https://aquamor.co.ke/` loads over HTTPS with no browser warnings.
+- `https://aquamorwater.co.ke/` loads over HTTPS with no browser warnings.
 - The canonical link and `og:image` use the new domain.
 - The WhatsApp link preview looks correct (for example with Facebook's Sharing
   Debugger). The first preview may need a refresh after the domain change.
@@ -254,7 +257,7 @@ sudo systemctl stop aquamor
 sudo cp aquamor-backend aquamor-backend.prev
 sudo install -m 755 "$HOME/aquamor-backend.new" aquamor-backend
 sudo systemctl start aquamor
-./deploy/smoke-test.sh https://aquamor.co.ke
+./deploy/smoke-test.sh https://aquamorwater.co.ke
 ```
 
 Web-only changes need no rebuild or restart because the files are served from

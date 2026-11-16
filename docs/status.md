@@ -1,6 +1,6 @@
 # Aquamor Purified Drinking Water: Website Project Status
 
-**Updated:** 14 November 2026
+**Updated:** 16 November 2026
 **Project start:** 10 November 2026
 **Target delivery:** about 10 December 2026 (one month)
 **Repository:** the site is in `web/`; the Go API is in `backend/` (see the root `README.md`)
@@ -20,20 +20,26 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 
 | Item | Detail |
 |---|---|
+| Official business name | AQUAMOR PURIFIED DRINKING WATER |
+| Tagline | "Hydrated? Worry no more! Aquamor has got you covered. Your satisfaction is our priority." |
 | Established | 2019 |
 | Address | Along Musindi Road, opposite Ngara Girls Secondary School, next to Ngara Heights building, Nairobi |
 | WhatsApp | 0712 140 006 |
 | Phone calls | 0113 952 100, 0736 054 182 |
-| Email | Aquamor2020@gmail.com |
+| Email | aquamor2020@gmail.com |
 | Opening hours | Mon to Sat 8:30am to 8:30pm; Sun 12:00pm to 7:00pm |
-| Refill prices | 5L Ksh 50, 10L Ksh 100, 20L Ksh 200 |
-| New 20L bottles | Hard bottle + water Ksh 1,400; regular bottle Ksh 450 |
-| Bottled water sizes | 300ml, 500ml, 1L, 1.5L |
-| Services | Refills, bottled water, custom-branded bottles (churches, weddings, graduations, corporate, events), dispenser cleaning and sanitizing |
-| Delivery | "Free delivery" (on the shop poster and two flyers; rules not yet known) |
-| Delivers to (flyer) | Homes, offices, schools, restaurants, clinics, hotels |
+| Refill prices | 5L Ksh 50, 10L Ksh 100, 20L Ksh 200 (includes water) |
+| New bottle purchase prices | 20L regular Ksh 450–550; 20L hard Ksh 1,000–1,700; 10L Ksh 200–250; 5L Ksh 100 |
+| Bottled water | 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L; prices vary by quantity, quoted on request |
+| Customised bottles | Churches, weddings, graduations, anniversaries, corporate events and other occasions; customisation Ksh 500–1,000; minimum 10 bales |
+| Dispenser cleaning | Ksh 500–1,000 depending on the dispenser and cleaning required |
+| Pumps and dispensers | Manual and electric pumps for 10L and 20L bottles; manual and electric dispensers |
+| Services | Refills, bottled water, customised bottles, dispenser cleaning and sanitizing, pumps and dispensers |
+| Delivery | Available in the listed areas; free delivery depends on distance and quantity |
+| Delivers to | Ngara, Parklands, Pangani, Gikomba, Westlands, Nairobi CBD and parts of Eastleigh |
+| Domain | aquamorwater.co.ke (preferred; registration under AQUAMOR PURIFIED DRINKING WATER) |
 | Payment | Equity Paybill 247247, account 395210 (account name: Aquamor Water) |
-| Facebook | https://www.facebook.com/profile.php?id=100066493751902 (confirmed by the user as the client's page) |
+| Facebook | AQUAMOR NGARA business page: https://www.facebook.com/profile.php?id=100066493751902 |
 | TikTok | https://www.tiktok.com/@aquamor2020 (provided by the client on 12 November 2026) |
 
 ---
@@ -50,17 +56,18 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] Skip-to-content link and visible focus styles
 
 ### Sections and features
-- [x] **Hero:** headline, buttons, key facts, live "Open now / Closed now" line (Nairobi time)
-- [x] **Build your order:** refill sizes, bottled water and new 20L bottles with steppers, delivery/pickup choice, running total, one-tap WhatsApp message with the order already written, and a one-tap reorder of the last order
+- [x] **Hero:** headline, official tagline, buttons, key facts, live "Open now / Closed now" line (Nairobi time)
+- [x] **Build your order:** refill sizes, bottled water in ten sizes (quoted by quantity) and new bottles in four sizes with steppers, delivery/pickup choice, running total, one-tap WhatsApp message with the order already written, and a one-tap reorder of the last order
 - [x] **Refill planner:** enter the number of people at home and choose 5L, 10L or 20L; the site estimates weekly litres, refills and cost, and links to WhatsApp with the plan already written
-- [x] **Label designer:** pick a Wedding, Church, Graduation or Corporate preset, type an event name and message, pick a color, a rectangular or round label and a size, see it on a bottle, send the request on WhatsApp
-- [x] **Printable price card:** a standalone A4 page for the shop counter with the confirmed refill and new-bottle prices, free-delivery line and WhatsApp number (linked from the docs; not part of the one-page site)
-- [x] **How it works and who we deliver to:** three steps (choose your water, order on WhatsApp, delivery or pickup) and a strip for homes, offices, schools, restaurants, clinics and hotels
-- [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, book on WhatsApp
+- [x] **Label designer:** pick a Wedding, Church, Graduation or Corporate preset, type an event name and message, pick a color, a rectangular or round label and one of ten bottle sizes, see it on a bottle, send the request on WhatsApp; customisation and minimum-order details are shown
+- [x] **Printable price card:** a standalone A4 page for the shop counter with the confirmed refill and new-bottle prices, bottled-water quotation, customisation and cleaning charges, delivery areas, tagline and WhatsApp number (linked from the docs; not part of the one-page site)
+- [x] **How it works and who/where we deliver to:** three steps (choose your water, order on WhatsApp, delivery or pickup), the business types served and the delivery areas; free delivery depends on distance and quantity
+- [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, the Ksh 500–1,000 price range, book on WhatsApp
 - [x] **Our work (gallery):** 26 real photos, three short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
-- [x] **About:** company story with a team photo
-- [x] **FAQ:** eight tap-to-open questions, answered only with confirmed facts
-- [x] **Contact:** address, hours, WhatsApp, calls (two numbers), email, Paybill with Copy buttons, Get directions (Google Maps), Facebook button
+- [x] **Water purification process:** the client's eight steps, without individual micron sizes
+- [x] **About:** company story, official tagline, pumps and dispensers, with a team photo
+- [x] **FAQ:** ten tap-to-open questions, answered only with confirmed facts
+- [x] **Contact:** address, hours, WhatsApp, calls (two numbers), email, Paybill with Copy buttons, Get directions (Google Maps), Facebook (AQUAMOR NGARA) and TikTok buttons
 - [x] **Testimonials:** built but hidden until real quotes are added
 
 ### Languages and search
@@ -80,7 +87,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 - Cropped the right side off two photos so the Paybill sign is not visible in them.
 - No names or job titles are given to anyone in the photos (nobody has been confirmed as the owner).
 - No health, certification or "100% pure" claims have been added. The flyers' claims about germs and bacteria were left out.
-- Hard bottle price set to Ksh 1,400 (clear flyer and the latest flyer agree; an earlier blurry rate card looked like 1,500).
+- Hard bottle price was first set to Ksh 1,400 (clear flyer and the latest flyer agree; an earlier blurry rate card looked like 1,500). On 16 November 2026 the client confirmed a range of Ksh 1,000–1,700; Ksh 1,400 remains within it and is the catalog value.
 - The client's official TikTok, [@aquamor2020](https://www.tiktok.com/@aquamor2020), is linked in the contact section and in the structured data. A personal-looking TikTok account (@benzi254) was **not** linked.
 - The client has no Instagram account, so no Instagram link was added (issue #5).
 - The logo is settled: the existing header mark (`icon.jpg` / `icon.webp`) and the icon files (`favicon-32.png`, `apple-touch-icon.png`, `icon-512.png`) are approved; no original logo file is being pursued (13 November 2026).
@@ -90,16 +97,17 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 ## 5. Open issues
 
 ### A. Blocking: needed from the client
-1. **Official business name and tagline** (four names and four taglines seen). The logo is settled: the existing header mark and icon files are the approved versions (13 November 2026).
-2. **Prices** for small bottled water (300ml, 500ml, 1L, 1.5L), branded bottles (and minimum order), and dispenser cleaning.
-3. **Free delivery rules:** areas and any minimum order (requested from the client on 13 November 2026).
-4. **Online payment and automated replies:** the client chose a hosted checkout. The site now integrates Flutterwave hosted checkout; the client still needs to supply an approved merchant account, API keys and a webhook secret. A real email or WhatsApp auto-reply still needs SMTP or WhatsApp Business API credentials; the site currently shows an on-page acknowledgment instead.
+1. **Domain registration and handover:** the client prefers `aquamorwater.co.ke` and wants registration under AQUAMOR PURIFIED DRINKING WATER, with Aquamor keeping ownership and control. Confirm who completes the registration and the DNS/hosting handover.
+
+All other client details requested on 13 November 2026 were confirmed on 16 November 2026; see section 28.
+
+**Deferred to a later phase (not required for launch):** online payments and automated replies. The hosted-checkout code stays in place but remains switched off until Flutterwave credentials are supplied later. The site currently shows an on-page acknowledgment instead of an automated reply.
 
 ### B. Permissions
 - [x] Showing the staff and customers in the photos, including the new event, shop and delivery photos (confirmed by the client on 12 November 2026)
-- Showing other customers' labels (Wave360 and the church labels)
-- Whether they sell the water pumps (the pump photo is in the gallery)
-- Showing the Paybill number online (it is on their own flyers)
+- [x] Showing other customers' labels (Wave360 and the church labels) — cleared for this build by the project owner on 16 November 2026
+- [x] Water pumps: the client confirmed on 16 November 2026 that they sell manual and electric pumps for 10L and 20L bottles, plus manual and electric dispensers
+- [x] Showing the Paybill number online — cleared for this build by the project owner on 16 November 2026; the number is already on the client's flyers
 
 ### C. Content still missing
 - Shop front on Musindi Road, taken from the street
@@ -110,20 +118,17 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 - A named person for the About page, only if the client wants one
 
 ### D. To verify
-- **KEBS:** the client replied on 13 November 2026 that their certification is currently with their supplier; they have started the process for their own permit and expect it in February next year. No permit number or certificate is available to publish, so the site makes no certification claim. The purification-steps question was sent on 13 November 2026; the reply is pending.
-- **Branded bottles:** the client quoted Ksh 500–800 "depending on the type of the bottle" on 13 November 2026. Confirm whether that is per bottle or per pack, and whether a minimum order applies, before publishing it.
-- **Small bottled water:** the same reply was ambiguous; confirm whether the Ksh 500–800 range covers small bottled water or custom-branded bottles.
-- **Facebook page:** confirm it is a business page and not a personal profile.
-- **Sizes:** the latest flyer shows 500ml, 5L, 10L, 20L only; the client's text also lists 300ml, 1L, 1.5L.
-- **Swahili text:** have a native speaker read it once.
-- **Regular 20L bottle (Ksh 450):** confirm whether water is included.
+- **KEBS:** the client's certification is currently with their supplier; their own permit is in process and expected in February next year. No permit number or certificate is available to publish, so the site makes no certification claim. The purification steps were supplied on 16 November 2026 and are published without the individual sediment-filter micron sizes.
+- **Swahili text:** internal review completed on 16 November 2026 (awkward phrases refined). A native-speaker read-through is still recommended before launch.
+- **Domain ownership:** confirm that `aquamorwater.co.ke` is registered under AQUAMOR PURIFIED DRINKING WATER and that the client retains the registrar login and renewal control. Aquamor will pay the annual renewal.
 
 ### E. Handover tasks (week 4)
 - Client review and the agreed revision rounds
-- Choose and register a domain (for example aquamor.co.ke) and set up hosting using [`deployment.md`](deployment.md)
+- Register the preferred domain `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER and set up hosting using [`deployment.md`](deployment.md)
 - Move the site to the domain (this is when the Google search data matters most)
 - Hand over, plus the client change-request sheet and the maintainer guide
 - Work through [`launch-checklist.md`](launch-checklist.md) before announcing the domain
+- Online payment activation is deferred to a later phase; no launch action is needed beyond keeping the payment values empty.
 
 ---
 
@@ -134,7 +139,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 4. ~~"Who we deliver to" strip and a three-step "How it works"~~ — built (see section 14)
 5. ~~Printable A4 price card for the shop counter~~ — built (see section 13)
 6. ~~"How to update your site" guide~~ — built (see section 17)
-7. Final speed, contrast and small-phone pass
+7. ~~Final speed, contrast and small-phone pass~~ — built (see section 18)
 
 ---
 
@@ -178,7 +183,7 @@ The standalone download has been imported into this git repository.
 - Docs: root `README.md` and `web/README.md` updated; this status file updated.
 
 ### Still to do before launch
-- Choose the domain and replace the `aquamor.co.ke` placeholders in `<head>`, `robots.txt` and `sitemap.xml`.
+- The preferred domain `aquamorwater.co.ke` is now used in `<head>`, `robots.txt`, `sitemap.xml` and the deployment examples; register it and point DNS at the server.
 - Put the Go server behind a TLS-terminating reverse proxy before any remote use and block direct access to port 8080; the admin bearer token and customer PII must not travel over plain HTTP.
 - Get the client answers listed in section 5.
 - Confirm the WhatsApp link preview after deployment.
@@ -210,9 +215,9 @@ The standalone download has been imported into this git repository.
 
 ## 13. Printable price card (13 November 2026)
 
-- Added [web/price-card.html](../web/price-card.html), a standalone A4 page for the shop counter. It uses the Aquamor logo and only confirmed prices: refills 5L Ksh 50, 10L Ksh 100, 20L Ksh 200; new 20L bottles Ksh 1,400 (hard bottle + water) and Ksh 450 (regular bottle).
-- Includes the free-delivery line with "tell us your area and we will confirm", the WhatsApp number, call numbers, opening hours, email, Paybill and the address.
-- Excludes unconfirmed prices: small bottled water, custom-branded bottles and dispenser cleaning are noted as quoted on request.
+- Added [web/price-card.html](../web/price-card.html), a standalone A4 page for the shop counter. Updated on 16 November 2026 with the client's confirmed details: refills 5L Ksh 50, 10L Ksh 100, 20L Ksh 200; new bottle purchase prices 20L regular Ksh 450–550, 20L hard Ksh 1,000–1,700, 10L Ksh 200–250, 5L Ksh 100; bottled water, customisation charges, dispenser cleaning and pumps/dispensers.
+- Includes the business name and tagline, the delivery areas with the "free delivery depends on distance and quantity" wording, the WhatsApp number, call numbers, opening hours, email, Paybill and the address.
+- Bottled water is quoted on request, as the client asked; customisation is Ksh 500–1,000 with a minimum order of 10 bales; dispenser cleaning is Ksh 500–1,000.
 - Print styles are built in: A4, one page, with a Print button on screen. The page is `noindex` and is not linked from the public site.
 
 ## 14. How it works and delivery strip (13 November 2026)
@@ -288,7 +293,8 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Prices:** the client replied about prices, but the reply does not clearly separate small bottled water from custom-branded bottles. The quoted range is Ksh 500–800 "depending on the type of the bottle"; the unit (per bottle or per pack) and any minimum order are not stated.
 - **Not published yet:** the Ksh 500–800 range, dispenser-cleaning price, delivery areas and minimum order. Publishing an unclear price would mislead customers, so the site keeps its current "confirmed on WhatsApp" wording.
 - **Still needed:** small bottled-water prices, branded-bottle unit and minimum order, dispenser-cleaning price, free-delivery areas and minimum order, the official business name and tagline, and the purification steps.
-- Follow-up questions covering those items and the Ksh 500–800 sizes were sent to the client on 13 November 2026; the reply is pending. The questions are recorded in the maintenance log.
+- Follow-up questions covering those items and the Ksh 500–800 sizes were sent to the client on 13 November 2026. The client replied with the confirmed details on 16 November 2026; see section 28. The earlier Ksh 500–800 range was superseded by Ksh 500–1,000 for customisation and a 10-bale minimum order.
+- **Update (16 November 2026):** all the items listed in this section were answered. The "not published yet" decisions above no longer apply; see section 28.
 
 ## 21. Launch readiness, tests and responsive images (13 November 2026)
 
@@ -304,10 +310,11 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Label designer:** the bottle preview now uses glass, water and cap gradients, edge shading, highlights and a soft shadow. It can be turned by dragging it or with a slider, and the label compresses and moves around the curve of the bottle. The rectangular/round styles, colours, presets, text fitting and WhatsApp hand-off are unchanged. No idle animation, so it respects reduced motion.
 - **Map:** added a lazy-loaded Google Maps embed in the contact section using the same location text as the existing "Get directions" link. The link itself is unchanged. The server CSP now allows Google Maps frames (`frame-src`).
 - **Reach-out acknowledgment:** tapping any WhatsApp or email link now shows an on-page message: thanks for reaching out, send the prepared message, and Aquamor will get back to you. It is translated into Swahili. This is a UI acknowledgment, not an automated email or WhatsApp reply.
-- **Still needed:** online payment and true automated replies require an external provider and credentials; see section 5A item 4.
+- **Still needed:** online payment and true automated replies require an external provider and credentials. Both are deferred to a later phase; see section 23 and section 5A.
 
 ## 23. Online payments with Flutterwave hosted checkout (13 November 2026)
 
+- **Status (16 November 2026):** deferred to a later phase at the project owner's request. The code remains in place but stays switched off; no Flutterwave account, API key or webhook secret is needed for launch. Customers order through WhatsApp.
 - **Decision:** the client chose a hosted checkout rather than building card or M-Pesa collection directly. Flutterwave is the first provider.
 - **Button:** a Pay online button appears in the order summary only when `/api/v1/payments/config` reports that payment is configured. If the provider is not configured, the existing WhatsApp order path is unchanged.
 - **Flow:** the dialog collects name, phone, receipt email and delivery area or pickup name; the site saves the order and redirects to Flutterwave's secure page. The no-JS WhatsApp path still works.
@@ -316,7 +323,7 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Data:** orders can store `customer_email`, `payment_provider`, `payment_reference`, `mpesa_receipt_number` and `paid_at`; older databases receive these columns automatically at startup.
 - **Tests:** Go tests cover checkout creation, provider errors, verification, amount/currency checks, the webhook signature, the paid-order update and the unconfigured state. The smoke test checks `/payment.html` and `/api/v1/payments/config`.
 - **Configuration:** set `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL`; see [`deployment.md`](deployment.md). Without all three, the button stays hidden.
-- **Still needed:** an approved Flutterwave merchant account and live credentials. Online payment is limited to refills and 20L bottles because the other bottled-water prices are not confirmed.
+- **Deferred to a later phase:** an approved Flutterwave merchant account and live credentials are not needed for this launch. When enabled later, online payment is limited to refills and the two 20L new-bottle catalog items because bottled water is quoted by quantity and other bottle ranges have no single payable price.
 
 ## 24. Authenticated admin orders view (13 November 2026)
 
@@ -350,4 +357,44 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - Re-ran every CI check locally: `gofmt`, `go build`, `go vet`, `go test -race`, `node --check` and `bash -n` all pass. GitHub CI is green for the same commits.
 - [`deploy/smoke-test.sh`](../deploy/smoke-test.sh) passes all checks against a local server; a test order posted to `/api/v1/orders` is listed by `/api/v1/orders/all` with the server-priced total.
 - Removed two orphaned, git-ignored SQLite files from the repository root and deleted the merged local and remote branches, leaving only `main`.
-- No client-facing change. Payments stay hidden until the three `FLUTTERWAVE_*`/`PUBLIC_BASE_URL` values are set.
+- No client-facing change. Payments stay hidden until the three `FLUTTERWAVE_*`/`PUBLIC_BASE_URL` values are set; online payments are deferred for this launch.
+
+## 28. Client confirmed details and content update (16 November 2026)
+
+The client sent the confirmed business details in writing. The site, price card and Swahili copy were updated.
+
+### Confirmed details now published
+- **Business name:** AQUAMOR PURIFIED DRINKING WATER.
+- **Tagline:** "Hydrated? Worry no more! Aquamor has got you covered. Your satisfaction is our priority." Added to the hero and About section, and as `slogan` in the structured data.
+- **Bottled water:** prices vary with quantity; the site asks visitors to contact Aquamor for a quotation. Sizes: 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L.
+- **Refills:** 5L Ksh 50, 10L Ksh 100, 20L Ksh 200; the price includes water.
+- **New bottles (bottle purchase; water refills separate):** 20L regular Ksh 450–550, 20L hard Ksh 1,000–1,700, 10L Ksh 200–250, 5L Ksh 100.
+- **Customised bottles:** churches, weddings, graduations, anniversaries, corporate events and other occasions; customisation Ksh 500–1,000; minimum order 10 bales; quotation on request.
+- **Dispenser cleaning:** Ksh 500–1,000 depending on the dispenser and cleaning required.
+- **Delivery:** Ngara, Parklands, Pangani, Gikomba, Westlands, Nairobi CBD and parts of Eastleigh. Free delivery depends on distance and quantity; customers are asked to confirm.
+- **Pumps and dispensers:** manual and electric pumps for 10L and 20L bottles; manual and electric dispensers.
+- **Purification process:** eight steps published in a new section, without individual sediment-filter micron sizes.
+- **Domain:** preferred `aquamorwater.co.ke`; to be registered under AQUAMOR PURIFIED DRINKING WATER, with Aquamor paying renewal and keeping ownership and control.
+- **Contact:** existing email `aquamor2020@gmail.com`; Gmail only, no domain email. Facebook page named AQUAMOR NGARA; the TikTok link is kept.
+
+### Changes made
+- `web/index.html`: meta and structured data updated; tagline added; bottle sizes, order notes, delivery areas, customisation charges, cleaning price, pumps, purification section, FAQ and Facebook label updated; canonical and Open Graph URLs moved to `aquamorwater.co.ke`.
+- `web/js/order.js`: the bottle tab lists all ten sizes with "Price on quotation"; the new-bottle tab lists the confirmed ranges; the refill note says the 20L price includes water.
+- `web/js/i18n.js`: Swahili copy added or updated for every changed string.
+- `web/price-card.html`: rebuilt with the confirmed prices, the bottle-purchase/refill distinction, delivery areas and new sections.
+- `backend/internal/catalog/catalog.go`: the 20L hard-bottle product now matches the bottle-purchase wording; its Ksh 1,400 price remains within the confirmed range.
+- `web/robots.txt`, `web/sitemap.xml`, `deploy/Caddyfile`, `deploy/aquamor.env.example`: domain set to `aquamorwater.co.ke` with `./scripts/set-domain.sh`.
+- Docs updated: this file, `maintenance-log.md`, `launch-checklist.md`, `how-to-update-your-site.md`, root `README.md` and `web/README.md`.
+
+### Deliberate choices
+- Bottled-water unit prices are not shown, because the client asked for quotations instead of fixed prices.
+- New-bottle prices are shown as ranges. The order builder's estimated total uses the lower bound and is labelled "from listed prices"; online payment remains limited to refills and the two 20L bottle catalog items.
+- No KEBS number, certification or health claim was added.
+- The purification steps are listed exactly as supplied; individual micron sizes are omitted.
+
+### Launch status (16 November 2026)
+- **Online payments:** deferred to a later phase. No Flutterwave merchant account, API keys or webhook secret are needed for launch; the code stays hidden until configured.
+- **Permissions:** the project owner cleared the existing gallery labels and the Paybill display for this build.
+- **Swahili:** internal review completed and awkward phrases refined; a native-speaker read-through is still recommended.
+- **Still external:** register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER, then complete DNS/TLS/hosting handover.
+- **Optional:** testimonials, original cleaning stills, shop-front/graduation/corporate photos, and a physical-device test.

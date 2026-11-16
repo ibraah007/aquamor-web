@@ -48,14 +48,14 @@ Prices are repeated in several files on purpose: the browser needs them, and the
 
 | Price | File | What to edit |
 |---|---|---|
-| Refills and bottles in the order builder | `web/js/order.js` | `PRICE` (refill and bottle prices) and the matching text in `items` (for example `Ksh 50 · bring your container`) |
+| Refills and new-bottle ranges in the order builder | `web/js/order.js` | `PRICE` (the lower bound for ranges) and the matching text in `items` (for example `Ksh 450–550 · bottle purchase`) |
 | Refills in the refill planner | `web/js/planner.js` | `SIZES` |
 | Notes, FAQ and the order summary text | `web/index.html` | the order note and the FAQ answers |
-| Printable shop card | `web/price-card.html` | the prices in the card |
+| Printable shop card | `web/price-card.html` | the prices and ranges in the card |
 | Swahili copies of the notes and FAQ | `web/js/i18n.js` | the `SW` entries that contain prices |
 | Server-side prices | `backend/internal/catalog/catalog.go` | the catalog used by `POST /api/v1/orders` |
 
-Only publish a price that the client has confirmed in writing. If a price is not confirmed, do not add it: the site currently leaves small bottled water, custom-branded bottles and dispenser cleaning as "quoted on request".
+Only publish a price that the client has confirmed in writing. If a price is not confirmed, do not add it. Bottled water is deliberately quoted by quantity, as the client asked; the order builder labels those items "Price on quotation" and leaves them out of the estimated total. Refills are fixed (5L Ksh 50, 10L Ksh 100, 20L Ksh 200); new bottles are ranges (20L regular Ksh 450–550, 20L hard Ksh 1,000–1,700, 10L Ksh 200–250, 5L Ksh 100), and the estimated total uses the lower bound.
 
 After a price change, check it on the page in English and Swahili, in the order builder, in the planner and on the price card.
 
@@ -146,7 +146,7 @@ Fill this in at handover and keep it with the client:
 
 | Item | Detail | Owner |
 |---|---|---|
-| Domain name | for example `aquamor.co.ke` | to agree in writing |
+| Domain name | `aquamorwater.co.ke` (preferred) | register under AQUAMOR PURIFIED DRINKING WATER |
 | Registrar account | | to agree in writing |
 | Hosting account | | to agree in writing |
 | Who pays the yearly domain and hosting renewals | | to agree in writing |

@@ -50,7 +50,7 @@ The site only shows prices and facts that Aquamor has confirmed. If you ask for 
 
 The prices themselves are kept on the website and on the printable price card for the shop counter, so there is only one list to keep up to date. If either looks out of date, tell us before you print a new card or quote a customer.
 
-The answers we still need before launch are listed in [client-information-needed.md](client-information-needed.md), with a form you can copy and fill in.
+The confirmed details and the remaining launch items are listed in [client-information-needed.md](client-information-needed.md), with a form you can copy and fill in.
 
 ---
 
@@ -78,8 +78,9 @@ The answers we still need before launch are listed in [client-information-needed
 
 ## Your accounts
 
-- The domain name and hosting account are owned by: `[to agree at handover]`.
-- The person who pays the yearly renewals is: `[to agree at handover]`.
+- The preferred domain name is `aquamorwater.co.ke`, to be registered under AQUAMOR PURIFIED DRINKING WATER. Aquamor must keep full ownership and control of the domain.
+- The hosting account owner: `[to agree at handover]`.
+- The person who pays the yearly domain renewal is: Aquamor.
 - Keep the login details somewhere safe. Never send passwords, hosting logins or the site's admin key in a WhatsApp group or a public message. If you need to share one, send it to the maintainer directly.
 - If you change hosting or the domain, tell the maintainer before the change, not after.
 

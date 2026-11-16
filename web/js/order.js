@@ -2,13 +2,24 @@
 (function(){
   var WA="254712140006";
   var items={
-    refill:[["5L refill","Ksh 50 · bring your container",34],["10L refill","Ksh 100 · bring your container",44],["20L refill","Ksh 200 · bring your container",56]],
-    bottle:[["300ml bottle","Bottled drinking water",30],["500ml bottle","Bottled drinking water",38],["1L bottle","Bottled drinking water",48],["1.5L bottle","Bottled drinking water",56]]
+    refill:[["5L refill","Ksh 50 · bring your container",34],["10L refill","Ksh 100 · bring your container",44],["20L refill","Ksh 200 · includes water",56]],
+    bottle:[
+      ["200ml bottle","Price on quotation",24],
+      ["300ml bottle","Price on quotation",30],
+      ["500ml bottle","Price on quotation",38],
+      ["1L bottle","Price on quotation",48],
+      ["1.5L bottle","Price on quotation",56],
+      ["2L bottle","Price on quotation",64],
+      ["3L bottle","Price on quotation",72],
+      ["5L bottle","Price on quotation",80],
+      ["10L bottle","Price on quotation",96],
+      ["20L bottle","Price on quotation",112]
+    ]
   };
-  items.container=[["20L hard bottle + water","Ksh 1,400 · bottle and water",56],["20L regular bottle","Ksh 450",56]];
-  var PRICE={"5L refill":50,"10L refill":100,"20L refill":200,"20L hard bottle + water":1400,"20L regular bottle":450}, qty={}, tab="refill", mode="Delivery";
+  items.container=[["20L regular bottle","Ksh 450–550 · bottle purchase",56],["20L hard bottle","Ksh 1,000–1,700 · bottle purchase",56],["10L bottle","Ksh 200–250 · bottle purchase",44],["5L bottle","Ksh 100 · bottle purchase",34]];
+  var PRICE={"5L refill":50,"10L refill":100,"20L refill":200,"20L regular bottle":450,"20L hard bottle":1400,"10L bottle":200,"5L bottle":100}, qty={}, tab="refill", mode="Delivery";
   /* Catalog IDs for online payment. Only items with confirmed prices are here. */
-  var PRODUCTS={"5L refill":{id:3,option:"swap"},"10L refill":{id:2,option:"swap"},"20L refill":{id:1,option:"swap"},"20L hard bottle + water":{id:4,option:"new_purchase"},"20L regular bottle":{id:5,option:"new_purchase"}};
+  var PRODUCTS={"5L refill":{id:3,option:"swap"},"10L refill":{id:2,option:"swap"},"20L refill":{id:1,option:"swap"},"20L hard bottle":{id:4,option:"new_purchase"},"20L regular bottle":{id:5,option:"new_purchase"}};
   var rows=document.getElementById("rows"), list=document.getElementById("sumList");
   var nameInput=document.getElementById("customerName"), phoneInput=document.getElementById("customerPhone"), orderError=document.getElementById("orderError");
   var LAST_KEY="aquamor-last-order", reorderBtn=document.getElementById("reorderBtn"), reorderNote=document.getElementById("reorderNote"), note="";
@@ -112,8 +123,8 @@
     });
     if(!ks.length){list.innerHTML='<li class="empty">Nothing added yet.</li>';return}
     var html=ks.map(function(k){return '<li><span>'+esc(k)+'</span><b>× '+qty[k]+'</b></li>'}).join("");
-    if(tot>0){html+='<li><span>Estimated total (listed items)</span><b>Ksh '+tot.toLocaleString("en-US")+'</b></li>'}
-    if(unpriced){html+='<li class="empty">Bottled water prices are confirmed on WhatsApp.</li>'}
+    if(tot>0){html+='<li><span>Estimated total (from listed prices)</span><b>Ksh '+tot.toLocaleString("en-US")+'</b></li>'}
+    if(unpriced){html+='<li class="empty">Some items are quoted on request. We will confirm the price on WhatsApp.</li>'}
     list.innerHTML=html;
   }
   rows.addEventListener("click",function(e){
@@ -175,8 +186,8 @@
     });
     var message=t("Hello Aquamor, I would like to order:\n","Habari Aquamor, ningependa kuagiza:\n");
     message+=ks.map(function(k){return "- "+tr(k)+" x "+qty[k]}).join("\n");
-    if(tot>0){message+=(sw()?"\nJumla ya makadirio (bidhaa zilizo na bei): Ksh ":"\nEstimated total (listed items): Ksh ")+tot.toLocaleString("en-US")}
-    if(unpriced){message+=(sw()?"\nBei za maji ya chupa zitathibitishwa kupitia WhatsApp.":"\nBottled water prices will be confirmed on WhatsApp.")}
+    if(tot>0){message+=(sw()?"\nJumla ya makadirio (kutoka bei zilizoorodheshwa): Ksh ":"\nEstimated total (from listed prices): Ksh ")+tot.toLocaleString("en-US")}
+    if(unpriced){message+=(sw()?"\nBaadhi ya bidhaa zinauzwa kwa bei ya kuuliza; tafadhali thibitisha bei.":"\nSome items are quoted on request; please confirm their prices.")}
     message+="\n"+t("Name","Jina")+": "+details.name;
     message+="\n"+t("Phone","Simu")+": "+details.phone;
     message+="\n"+tr(mode)+(details.area?": "+details.area:"");
@@ -218,7 +229,7 @@
       if(payBusy)return;
       var o=pricedOrder();
       if(!o.keys.length){list.innerHTML='<li class="empty">Add at least one item first.</li>';return}
-      if(o.unknown.length){setPayNote(t("Online payment is available for refills and 20L bottles. Please send bottled water orders on WhatsApp.","Malipo ya mtandaoni yanapatikana kwa kujaza maji na chupa za 20L. Tafadhali tuma oda za maji ya chupa kupitia WhatsApp."));return}
+      if(o.unknown.length){setPayNote(t("Online payment is available for refills and 20L bottles. Please send other items on WhatsApp.","Malipo ya mtandaoni yanapatikana kwa kujaza maji na chupa za 20L. Tafadhali tuma bidhaa nyingine kupitia WhatsApp."));return}
       setPayNote("");
       setOrderError("");
       var area=document.getElementById("area"),payArea=document.getElementById("payArea");
