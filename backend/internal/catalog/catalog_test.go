@@ -12,7 +12,7 @@ func TestConfirmedPrices(t *testing.T) {
 		{1, "20L Purified Water Refill", 200, 0},
 		{2, "10L Purified Water Refill", 100, 0},
 		{3, "5L Purified Water Refill", 50, 0},
-		{4, "20L Hard Bottle + Water", 0, 1400},
+		{4, "20L Hard Bottle", 0, 1400},
 		{5, "20L Regular Bottle", 0, 450},
 	}
 

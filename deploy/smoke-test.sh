@@ -2,7 +2,7 @@
 # Check a running Aquamor deployment.
 #
 #   ./deploy/smoke-test.sh http://127.0.0.1:8080
-#   ./deploy/smoke-test.sh https://aquamor.co.ke
+#   ./deploy/smoke-test.sh https://aquamorwater.co.ke
 #
 # If ADMIN_TOKEN is set in the environment, the protected orders endpoint is
 # also checked with that token. Otherwise it must answer 401 or 503.

@@ -9,7 +9,7 @@
   :root{--deep:#06476a;--deeper:#042f47;--sun:#f6b93b;--ink:#0a2533;--muted:#476272;--line:#c9e1e9}
   *{box-sizing:border-box}
   body{margin:0;background:#e9f3f7;color:var(--ink);font:400 14pt/1.38 "Segoe UI",system-ui,-apple-system,sans-serif;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .card{display:flex;flex-direction:column;justify-content:space-between;gap:5mm;width:210mm;min-height:297mm;margin:10mm auto;padding:16mm;background:#fff;box-shadow:0 10px 40px rgba(4,47,71,.18)}
+  .card{display:flex;flex-direction:column;justify-content:space-between;gap:4mm;width:210mm;min-height:297mm;margin:10mm auto;padding:16mm;background:#fff;box-shadow:0 10px 40px rgba(4,47,71,.18)}
   .head{display:flex;align-items:center;gap:5mm;padding-bottom:4mm;border-bottom:3px solid var(--deep)}
   .head img{width:24mm;height:24mm;border-radius:4mm;background:#fff}
   .brand{margin:0;font-size:26pt;font-weight:800;line-height:1.05;letter-spacing:-.02em;color:var(--deep)}
@@ -18,18 +18,22 @@
   h2{display:flex;justify-content:space-between;align-items:baseline;gap:4mm;margin:0 0 2mm;font-size:15pt;font-weight:800;color:var(--deep)}
   h2 span{font-size:10pt;font-weight:500;color:var(--muted);text-transform:none;letter-spacing:0}
   .prices{list-style:none;margin:0;padding:0}
-  .prices li{display:flex;align-items:flex-end;gap:2mm;padding:2mm 0;font-size:15pt;border-bottom:1px solid var(--line)}
+  .prices li{display:flex;align-items:flex-end;gap:2mm;padding:1.6mm 0;font-size:15pt;border-bottom:1px solid var(--line)}
   .prices li:last-child{border-bottom:0}
   .lbl{font-weight:600}
   .dots{flex:1;border-bottom:2px dotted #a9cbd8;margin-bottom:1.6mm}
   .prices b{font-size:17pt;font-weight:800;color:var(--deeper);white-space:nowrap}
   .refill{background:#f2f9fb;border:1.5px solid var(--line);border-radius:5mm;padding:4mm 5mm}
   .addr{margin:0;color:var(--muted);font-size:11pt}
-  .foot{display:flex;flex-direction:column;gap:1.5mm;padding:5mm;border-radius:5mm;background:var(--deep);color:#fff}
-  .free{margin:0;font-size:19pt;font-weight:800;color:var(--sun);letter-spacing:-.01em}
+  .foot{display:flex;flex-direction:column;gap:1mm;padding:4mm;border-radius:5mm;background:var(--deep);color:#fff}
+  .free{margin:0;font-size:17pt;font-weight:800;color:var(--sun);letter-spacing:-.01em}
   .wa{margin:0;font-size:14pt}
   .wa b{font-size:21pt;font-weight:800;letter-spacing:.01em}
   .small{margin:0;font-size:10pt;color:#d3ecf5}
+  .tagline{margin:0;font-size:11pt;font-weight:700;color:var(--deep)}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+  .cols h2{display:block;margin-bottom:1mm}
+  .cols h2 span{display:block;margin-top:.5mm}
   .note{margin:0;font-size:10pt;color:var(--muted)}
   .print{position:fixed;right:16px;bottom:16px;padding:12px 20px;border:0;border-radius:999px;background:var(--sun);color:#2a1d00;font:700 15px "Segoe UI",system-ui,sans-serif;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.25)}
   @media screen and (max-width:840px){
@@ -38,7 +42,7 @@
   @media print{
     @page{size:A4;margin:0}
     body{background:#fff}
-    .card{width:210mm;height:294mm;min-height:0;margin:0;padding:13mm;box-shadow:none}
+    .card{width:210mm;height:294mm;min-height:0;margin:0;padding:12mm;box-shadow:none}
     .print{display:none}
   }
 </style>
@@ -55,36 +59,63 @@
   </header>
 
   <p class="addr">Musindi Road, Ngara, Nairobi &middot; Established 2019</p>
+  <p class="tagline">Hydrated? Worry no more! Aquamor has got you covered. Your satisfaction is our priority.</p>
 
   <h1>Price list</h1>
 
-  <section class="refill">
-    <h2>Water refills <span>bring your container</span></h2>
-    <ul class="prices">
-      <li><span class="lbl">5 litres</span><span class="dots"></span><b>Ksh 50</b></li>
-      <li><span class="lbl">10 litres</span><span class="dots"></span><b>Ksh 100</b></li>
-      <li><span class="lbl">20 litres</span><span class="dots"></span><b>Ksh 200</b></li>
-    </ul>
-  </section>
+  <div class="cols">
+    <section class="refill">
+      <h2>Water refills <span>price includes water; bring your container</span></h2>
+      <ul class="prices">
+        <li><span class="lbl">5 litres</span><span class="dots"></span><b>Ksh 50</b></li>
+        <li><span class="lbl">10 litres</span><span class="dots"></span><b>Ksh 100</b></li>
+        <li><span class="lbl">20 litres</span><span class="dots"></span><b>Ksh 200</b></li>
+      </ul>
+    </section>
 
-  <section>
-    <h2>New 20L bottles</h2>
-    <ul class="prices">
-      <li><span class="lbl">Hard bottle + water</span><span class="dots"></span><b>Ksh 1,400</b></li>
-      <li><span class="lbl">Regular bottle</span><span class="dots"></span><b>Ksh 450</b></li>
-    </ul>
-  </section>
+    <section>
+      <h2>New bottles <span>bottle purchase; water sold separately</span></h2>
+      <ul class="prices">
+        <li><span class="lbl">20L regular</span><span class="dots"></span><b>Ksh 450–550</b></li>
+        <li><span class="lbl">20L hard</span><span class="dots"></span><b>Ksh 1,000–1,700</b></li>
+        <li><span class="lbl">10L bottle</span><span class="dots"></span><b>Ksh 200–250</b></li>
+        <li><span class="lbl">5L bottle</span><span class="dots"></span><b>Ksh 100</b></li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="cols">
+    <section>
+      <h2>Bottled water</h2>
+      <p class="note">200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L bottles. Prices vary depending on the quantity ordered. Contact us for a quotation.</p>
+    </section>
+    <section>
+      <h2>Customised bottles</h2>
+      <p class="note">For churches, weddings, graduations, anniversaries, corporate events and other occasions. Customisation Ksh 500–1,000. Minimum order: 10 bales. Contact us for a quotation.</p>
+    </section>
+  </div>
+
+  <div class="cols">
+    <section>
+      <h2>Dispenser cleaning</h2>
+      <p class="note">Ksh 500–1,000 depending on the type of dispenser and the cleaning required.</p>
+    </section>
+    <section>
+      <h2>Pumps and dispensers</h2>
+      <p class="note">Manual and electric water pumps for 10L and 20L bottles, and manual and electric water dispensers. Ask us for prices.</p>
+    </section>
+  </div>
 
   <footer class="foot">
-    <p class="free">Free delivery</p>
-    <p class="small">Tell us your area and we will confirm.</p>
+    <p class="free">Free delivery available</p>
+    <p class="small">Ngara, Parklands, Pangani, Gikomba, Westlands, Nairobi CBD and parts of Eastleigh. Free delivery depends on distance and quantity; contact us to confirm.</p>
     <p class="wa">WhatsApp <b>0712 140 006</b></p>
     <p class="small">Calls: 0113 952 100 &middot; 0736 054 182</p>
     <p class="small">Mon to Sat 8:30am to 8:30pm &middot; Sun 12:00pm to 7:00pm</p>
-    <p class="small">Aquamor2020@gmail.com &middot; Paybill 247247, account 395210</p>
+    <p class="small">aquamor2020@gmail.com &middot; Paybill 247247, account 395210</p>
   </footer>
 
-  <p class="note">Refill prices are for refills only; bring your own container. Small bottled water, custom-branded bottles and dispenser cleaning are quoted on request.</p>
+  <p class="note">Refill prices include the water; bring your own container. Bottled water, customised bottles and dispenser cleaning are quoted on request.</p>
 </main>
 
 <button class="print" type="button" onclick="window.print()">Print this card</button>

@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-# Replace the aquamor.co.ke placeholders with the confirmed domain.
+# Replace the current default domain (aquamorwater.co.ke) with the confirmed
+# domain.
 #
-#   ./scripts/set-domain.sh aquamor.co.ke
+#   ./scripts/set-domain.sh aquamorwater.co.ke
 #
 # This updates the canonical/Open Graph URLs, robots.txt, sitemap.xml, the
 # Caddy example and the PUBLIC_BASE_URL in the environment example. It does not
-# touch the client's DNS or hosting settings.
+# touch the client's DNS or hosting settings. If the files already use a
+# different domain, edit them directly.
 set -euo pipefail
 
 if [[ $# -ne 1 ]]; then
@@ -31,9 +33,9 @@ for file in "${files[@]}"; do
 		echo "skip $file (not found)"
 		continue
 	fi
-	before="$(grep -c 'aquamor\.co\.ke' "$file" || true)"
-	sed -i "s|aquamor\\.co\\.ke|${domain}|g" "$file"
-	after="$(grep -c 'aquamor\.co\.ke' "$file" || true)"
+	before="$(grep -c 'aquamorwater\.co\.ke' "$file" || true)"
+	sed -i "s|aquamorwater\\.co\\.ke|${domain}|g" "$file"
+	after="$(grep -c 'aquamorwater\.co\.ke' "$file" || true)"
 	if [[ "$before" != "$after" ]]; then
 		changed=$((changed + 1))
 	fi

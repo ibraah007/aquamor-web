@@ -22,6 +22,7 @@ p{margin:0 0 1em;max-width:60ch}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 section{padding:76px 0}
 .lead{color:var(--muted);font-size:1.1rem}
+.tagline{color:var(--sun);font-weight:600;max-width:46ch;margin:-6px 0 0}
 
 header.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
 .nav{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px;max-width:1080px;margin:0 auto}
@@ -169,6 +170,8 @@ label{display:block;font-weight:600;font-size:.95rem;margin-bottom:4px}
 .steps .n{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:var(--deep);color:#fff;font:800 1rem "Bricolage Grotesque","Figtree",sans-serif}
 .steps h3{margin:12px 0 6px}
 .steps p{margin:0;color:var(--muted)}
+.processsteps{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.processsteps h3{margin:12px 0 0;font-size:1.05rem}
 .who{margin-top:30px;padding-top:24px;border-top:1.5px solid var(--line)}
 .who h3{margin:0 0 12px}
 .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}

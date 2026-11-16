@@ -5,22 +5,22 @@ been checked on the real domain, not just locally.
 
 ## A. Client decisions (blocked)
 
-- [ ] Official business name and tagline confirmed in writing.
-- [ ] Small bottled-water prices confirmed (300ml, 500ml, 1L, 1.5L).
-- [ ] Branded-bottle pricing and minimum order confirmed.
-- [ ] Dispenser-cleaning price confirmed.
-- [ ] Free-delivery areas and any minimum order confirmed.
-- [ ] KEBS permit number and certificate photo supplied, if the client has them.
-- [ ] Purification steps supplied, if the client wants them published.
+- [x] Official business name and tagline confirmed in writing (16 November 2026).
+- [x] Bottled-water pricing confirmed: quoted by quantity, no fixed prices.
+- [x] Branded-bottle customisation and minimum order confirmed (Ksh 500–1,000; 10 bales).
+- [x] Dispenser-cleaning price confirmed (Ksh 500–1,000).
+- [x] Free-delivery areas and conditions confirmed (free depends on distance and quantity).
+- [x] KEBS position confirmed: certificate is with the supplier; no number or claim published.
+- [x] Purification steps supplied and published without micron sizes.
 - [ ] Permission to show other customers' labels (Wave360 and the church labels).
-- [ ] Confirm whether the water pumps are for sale.
+- [x] Water pumps and dispensers confirmed for sale.
 - [ ] Permission to display the Paybill number online.
 - [ ] Flutterwave merchant account approved and able to receive KES payments.
 - [ ] Payment API keys and webhook secret supplied by the client.
 - [ ] Settlement account, refund contact and chargeback process confirmed.
-- [ ] Confirm the Facebook page is a business page, not a personal profile.
-- [ ] Confirm the bottled-water sizes shown on the flyer and in the client's text.
-- [ ] Confirm whether the regular 20L bottle price includes water.
+- [x] Facebook page confirmed as the AQUAMOR NGARA business page.
+- [x] Bottled-water sizes confirmed: 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L.
+- [x] New-bottle prices distinguished from refills; water is separate.
 - [ ] Native-speaker Swahili review.
 - [ ] Real customer testimonials, if any.
 - [ ] Original cleaning before/after stills, if supplied.
@@ -59,9 +59,9 @@ been checked on the real domain, not just locally.
 
 ## C. Domain and hosting (blocked on the client)
 
-- [ ] Domain chosen, registered and paid for.
+- [ ] Preferred domain `aquamorwater.co.ke` registered under AQUAMOR PURIFIED DRINKING WATER and paid for.
 - [ ] DNS `A`/`AAAA` records point at the server.
-- [ ] `scripts/set-domain.sh` run with the final domain.
+- [x] `scripts/set-domain.sh` run with `aquamorwater.co.ke` (re-run if the final domain differs).
 - [ ] Caddy site address updated and certificate issued.
 - [ ] HTTP redirects to HTTPS; `www` redirects to the canonical host.
 - [ ] Firewall allows only 22, 80 and 443; port 8080 is not public.

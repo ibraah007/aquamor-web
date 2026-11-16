@@ -1,10 +1,10 @@
-# Replace aquamor.co.ke with the chosen domain, then reload Caddy.
+# Set this to the final registered domain, then reload Caddy.
 # Caddy obtains and renews the TLS certificate automatically.
 #
 # The Go server listens on loopback only (ADDR=127.0.0.1:8080), so it is not
 # reachable from the internet except through this proxy.
 
-aquamor.co.ke {
+aquamorwater.co.ke {
 	encode zstd gzip
 	reverse_proxy 127.0.0.1:8080
 
@@ -15,6 +15,6 @@ aquamor.co.ke {
 }
 
 # Keep one canonical hostname. If the client prefers www, swap these two blocks.
-www.aquamor.co.ke {
-	redir https://aquamor.co.ke{uri} permanent
+www.aquamorwater.co.ke {
+	redir https://aquamorwater.co.ke{uri} permanent
 }

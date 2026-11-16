@@ -55,9 +55,9 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 
 ## How the logic works
 
-**Order builder (`js/order.js`).** `items` holds the products shown in each tab. `PRICE` maps a product name to its price in Ksh. Each press of + or − updates the `qty` object, and the summary list and total are redrawn from it. On "Send order", the script builds a text message and opens `https://wa.me/254712140006?text=...` with the message URL-encoded. Delivery or pickup and the area are added. Product names and the delivery mode are translated when the site is in Swahili. Items without a listed price are shown separately and are not included in the estimated total.
+**Order builder (`js/order.js`).** `items` holds the products shown in each tab. `PRICE` maps a product name to its price in Ksh; for ranges it holds the lower bound, so the total is labelled "from listed prices". Each press of + or − updates the `qty` object, and the summary list and total are redrawn from it. On "Send order", the script builds a text message and opens `https://wa.me/254712140006?text=...` with the message URL-encoded. Delivery or pickup and the area are added. Product names and the delivery mode are translated when the site is in Swahili. Items without a listed price are shown separately and are not included in the estimated total. Refills are 5L Ksh 50, 10L Ksh 100 and 20L Ksh 200; bottled water is quoted on request; new bottles show the confirmed ranges.
 
-**Online payment (`js/order.js`, `js/payment.js`).** The Pay online button is hidden until `GET /api/v1/payments/config` reports that the server has Flutterwave keys. Only refills and 20L bottles have confirmed prices, so bottled-water orders stay on WhatsApp. The dialog collects the customer's details, posts the order to `/api/v1/payments/checkout`, and redirects to the provider's secure page. When the provider returns to `payment.html`, `payment.js` calls `/api/v1/payments/verify` and shows paid, failed, pending or an error. The server prices the order again and checks the amount and currency; the browser cannot set the price.
+**Online payment (`js/order.js`, `js/payment.js`).** The Pay online button is hidden until `GET /api/v1/payments/config` reports that the server has Flutterwave keys. Only refills and the two 20L new-bottle options have fixed catalog prices, so other item types stay on WhatsApp. The dialog collects the customer's details, posts the order to `/api/v1/payments/checkout`, and redirects to the provider's secure page. When the provider returns to `payment.html`, `payment.js` calls `/api/v1/payments/verify` and shows paid, failed, pending or an error. The server prices the order again and checks the amount and currency; the browser cannot set the price.
 
 **Admin orders (`js/admin.js`).** `admin.html` asks for `ADMIN_TOKEN` and keeps it in `sessionStorage` for that tab only; it is never put in the URL, the page or `localStorage`. The script sends it as a bearer token to `GET /api/v1/orders/all`, then renders the orders with their line items, customer contact details and payment state. It loads the public product list to show product names, supports search and status filters, and exports the filtered rows to CSV. The page is not linked from the public site, is `noindex`, and is served with `X-Robots-Tag: noindex` and `no-store`. Without `ADMIN_TOKEN` the API returns 503; with a wrong token it returns 401 and the page asks again.
 
@@ -92,7 +92,7 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 | Add a social link | Add a button next to the Facebook and TikTok ones in the contact section of `index.html`, and add the URL to `sameAs` in `<head>` |
 | Edit Swahili | `SW` in `js/i18n.js` (the English text must match `index.html` exactly) |
 | Colours | The `:root` variables at the top of `css/styles.css` |
-| Social preview / canonical | The `og:` tags, `twitter:` tags and `<link rel="canonical">` in `<head>`; update the `aquamor.co.ke` placeholder when the domain is confirmed |
+| Social preview / canonical | The `og:` tags, `twitter:` tags and `<link rel="canonical">` in `<head>`; they currently use `aquamorwater.co.ke` |
 | See or export orders | Open `/admin.html` on the deployed site and enter `ADMIN_TOKEN`; use Export CSV. The token comes from the server environment, not from a file in `web/` |
 
 ## Run it locally
@@ -108,14 +108,14 @@ Then visit <http://localhost:8000>. The Pay online button stays hidden because a
 
 Any static host works. For Netlify, Cloudflare Pages or Vercel, set the publish/output directory to `web/` and leave the build command empty. For GitHub Pages, use an Actions workflow that uploads `web/` (Pages cannot serve a subfolder directly without one).
 
-For a custom domain (for example `aquamor.co.ke`), add it in the host's dashboard and set the DNS records the provider asks for. Then run `./scripts/set-domain.sh aquamor.co.ke` to update the canonical and `og:` URLs, `robots.txt`, `sitemap.xml` and the Caddy example.
+For the client's preferred domain (`aquamorwater.co.ke`), add it in the host's dashboard and set the DNS records the provider asks for. The canonical and `og:` URLs, `robots.txt`, `sitemap.xml` and the Caddy example already use it; run `./scripts/set-domain.sh <domain>` first if a different final domain is chosen.
 
 For the full app (Go API, SQLite orders, TLS and backups), follow [`../docs/deployment.md`](../docs/deployment.md). The Go server binds to loopback by default and is meant to sit behind Caddy.
 
 ## Content rules used in this project
 
 - Only facts the client has stated, or that are visible in their own photos and flyers, appear on the site.
-- No certification, health or "100% pure" claims have been added. A KEBS permit number and purification details are still needed.
+- No certification, health or "100% pure" claims have been added. The client's confirmed purification steps are published without individual micron sizes; there is still no KEBS number or certification claim.
 - No names or job titles are given to people in photos.
 - The client confirmed permission to show the people in the photos (staff and customers, including the newer event, shop and delivery photos) on 12 November 2026.
 - Customer labels (Wave360 and church labels) should still be confirmed with the client before the site goes public.
