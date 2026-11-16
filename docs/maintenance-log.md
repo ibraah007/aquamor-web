@@ -28,6 +28,10 @@ Updated `web/index.html`, `web/js/order.js`, `web/js/i18n.js`, `web/price-card.h
 
 **Online payments are deferred to a later phase** at the project owner's request. The Flutterwave code stays in place but no merchant account, API keys or webhook secret are needed for launch; the Pay online button stays hidden. The two remaining permissions (other customers' labels and the Paybill display) were cleared for this build by the project owner. The Swahili copy was reviewed and awkward phrases refined.
 
+### Static preview published
+
+A static copy of `web/` is now published from the `gh-pages` branch at <https://ibraah007.github.io/aquamor-web/> using GitHub Pages. It is a preview of the public pages only: the Go API, admin orders page and online payment pages are not available there. The production site still needs the domain registration, DNS/TLS and a server for the Go API.
+
 ### Open items after this update
 
 Only the domain registration/handover and a native-speaker Swahili read-through remain. Online payments are deferred.

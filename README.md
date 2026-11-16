@@ -12,6 +12,10 @@ One-page website for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, N
 - [`docs/deployment.md`](docs/deployment.md) — server setup, TLS, backups, updates and launch runbook.
 - [`docs/launch-checklist.md`](docs/launch-checklist.md) — what to check before and after the public launch.
 
+## Live static preview
+
+A static copy of `web/` is published from the `gh-pages` branch at <https://ibraah007.github.io/aquamor-web/>. It is a preview only: the Go API, admin orders page and online payment pages are not available there. The production deployment remains the Go server behind Caddy, using the custom domain once it is registered.
+
 ## Run it
 
 ### Static site only

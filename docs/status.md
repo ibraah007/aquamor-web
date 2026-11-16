@@ -393,6 +393,7 @@ The client sent the confirmed business details in writing. The site, price card 
 - The purification steps are listed exactly as supplied; individual micron sizes are omitted.
 
 ### Launch status (16 November 2026)
+- **Static preview:** published from the `gh-pages` branch at <https://ibraah007.github.io/aquamor-web/>. It is the static site only; the Go API, admin orders and online payment pages are not available there.
 - **Online payments:** deferred to a later phase. No Flutterwave merchant account, API keys or webhook secret are needed for launch; the code stays hidden until configured.
 - **Permissions:** the project owner cleared the existing gallery labels and the Paybill display for this build.
 - **Swahili:** internal review completed and awkward phrases refined; a native-speaker read-through is still recommended.
