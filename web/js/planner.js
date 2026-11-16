@@ -26,7 +26,7 @@
     refills.textContent=c.refills+" × "+size;
     cost.textContent="Ksh "+num(c.cost);
     wa.href="https://wa.me/254712140006?text="+encodeURIComponent(
-      t("Hello Aquamor, I used the refill planner:\n","Habari Aquamor, nimetumia kipimo cha kujaza maji:\n")+
+      t("Hello Aquamor, I used the refill planner:\n","Habari Aquamor, nimetumia kikokotoo cha kujaza maji:\n")+
       t("People at home: ","Watu nyumbani: ")+c.people+"\n"+
       t("Container size: ","Ukubwa wa chombo: ")+size+"\n"+
       t("Suggested refills each week: ","Kujaza kunashauriwa kila wiki: ")+c.refills+" × "+size+"\n"+

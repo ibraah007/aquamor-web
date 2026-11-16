@@ -70,13 +70,16 @@ sudoedit /etc/aquamor/aquamor.env
 Set `ADMIN_TOKEN` to the value from `openssl rand -hex 32`. Keep the other paths
 as shown unless the server layout is different.
 
-### Online payments (optional)
+### Online payments (deferred to a later phase)
 
-Online payment uses Flutterwave hosted checkout. Leave the three payment values
-empty to keep WhatsApp-only ordering; the site then hides the Pay online button
-and `/api/v1/payments/config` reports `"enabled": false`.
+Online payments are not part of this launch. Leave the three payment values
+empty; WhatsApp ordering is the launch path. The site then hides the Pay online
+button and `/api/v1/payments/config` reports `"enabled": false`. No Flutterwave
+merchant account, API keys or webhook secret are needed now.
 
-To enable it:
+When online payments are enabled later:
+
+Online payment uses Flutterwave hosted checkout. To enable it:
 
 1. Create or open the Aquamor Flutterwave account and copy the secret key into
    `FLUTTERWAVE_SECRET_KEY`. Never put the key in the repository.

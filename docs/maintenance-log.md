@@ -24,11 +24,13 @@ The client sent the confirmed business details in writing. Changes made:
 - **Domain:** preferred `aquamorwater.co.ke`, to be registered under AQUAMOR PURIFIED DRINKING WATER with Aquamor keeping ownership and control and paying renewal. The site, `robots.txt`, sitemap, Caddyfile and environment example now use it.
 - **Contact:** existing Gmail `aquamor2020@gmail.com`; Facebook page is AQUAMOR NGARA; TikTok link kept.
 
-Updated `web/index.html`, `web/js/order.js`, `web/js/i18n.js`, `web/price-card.html`, the hard-bottle catalog name, and the project docs. Bottled-water prices stay as quotations, as requested. New-bottle ranges use the lower bound for the on-page estimate only; online payment remains limited to refills and the two 20L catalog items.
+Updated `web/index.html`, `web/js/order.js`, `web/js/i18n.js`, `web/price-card.html`, the hard-bottle catalog name, and the project docs. Bottled-water prices stay as quotations, as requested. New-bottle ranges use the lower bound for the on-page estimate only.
+
+**Online payments are deferred to a later phase** at the project owner's request. The Flutterwave code stays in place but no merchant account, API keys or webhook secret are needed for launch; the Pay online button stays hidden. The two remaining permissions (other customers' labels and the Paybill display) were cleared for this build by the project owner. The Swahili copy was reviewed and awkward phrases refined.
 
 ### Open items after this update
 
-Only the online-payment credentials and the domain registration/handover remain.
+Only the domain registration/handover and a native-speaker Swahili read-through remain. Online payments are deferred.
 
 ## 14 November 2026
 

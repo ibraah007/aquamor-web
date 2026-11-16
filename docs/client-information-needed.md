@@ -33,10 +33,11 @@ No KEBS number, certification claim or health claim is published. The supplier's
 ## 2. What is still needed to go live
 
 1. **Domain registration.** Register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER. Aquamor should keep the registrar login, ownership and renewal control, and pay the yearly renewal. We only need the technical DNS access so the site stays online. Confirm that the domain has been registered and by whom.
-2. **Online payments.** Online payment is built but switched off. To switch it on we need an approved Flutterwave business account that can receive Kenyan shillings, its secret key and webhook secret, and the settlement/refund details. Until then, customers order through WhatsApp as they do now.
-3. **Swahili check.** One native Swahili speaker from the team should read the site once and tell us if any wording sounds unnatural.
-4. **Optional photos.** Send original photo files, not screenshots, if you have them: the shop front from the street, graduation or corporate event photos, a close-up of a glass bottle with its label, and original cleaning before/after photos.
-5. **Two permissions to confirm.** Confirm that we may show the other customers' labels already in the gallery (Wave360 and the church labels), and that the Paybill number may stay visible on the website (it is already on your flyers).
+2. **Swahili check.** The site copy has been reviewed internally. One native Swahili speaker from the team should read it once and tell us if any wording sounds unnatural.
+3. **Optional photos.** Send original photo files, not screenshots, if you have them: the shop front from the street, graduation or corporate event photos, a close-up of a glass bottle with its label, and original cleaning before/after photos.
+4. **Permissions.** The current build keeps the other customers' labels already in the gallery (Wave360 and the church labels) and the Paybill number on the website, as it is on your flyers. Tell us if you want either removed.
+
+**Online payments are deferred to a later phase.** Customers order through WhatsApp as they do now. No Flutterwave account, API keys or webhook secret are needed for launch.
 
 ---
 
@@ -48,12 +49,10 @@ Aquamor website — remaining items
 1. Domain aquamorwater.co.ke:
    Registered on:            Registered in the name of:
    Registrar login held by:  Renewal paid by:
-2. Flutterwave account approved: yes / no
-   Settlement/refund contact:
-3. Swahili check by (name):
-4. Optional photos attached: yes / no
-5. Permission for other customers' labels: yes / no
-   Permission for the Paybill number online: yes / no
+2. Swahili check by (name):
+3. Optional photos attached: yes / no
+4. Remove other customers' labels: yes / no
+   Remove the Paybill number: yes / no
 ```
 
-Thank you. Once the domain and payment details are in place, the site can go live and be handed over.
+Thank you. Once the domain is in place, the site can go live and be handed over. Online payments can be added later.

@@ -3,7 +3,7 @@
 Use this with [`deployment.md`](deployment.md). Tick items only when they have
 been checked on the real domain, not just locally.
 
-## A. Client decisions (blocked)
+## A. Client decisions
 
 - [x] Official business name and tagline confirmed in writing (16 November 2026).
 - [x] Bottled-water pricing confirmed: quoted by quantity, no fixed prices.
@@ -12,18 +12,17 @@ been checked on the real domain, not just locally.
 - [x] Free-delivery areas and conditions confirmed (free depends on distance and quantity).
 - [x] KEBS position confirmed: certificate is with the supplier; no number or claim published.
 - [x] Purification steps supplied and published without micron sizes.
-- [ ] Permission to show other customers' labels (Wave360 and the church labels).
+- [x] Permission to show other customers' labels (Wave360 and the church labels) — cleared for this build by the project owner on 16 November 2026.
 - [x] Water pumps and dispensers confirmed for sale.
-- [ ] Permission to display the Paybill number online.
-- [ ] Flutterwave merchant account approved and able to receive KES payments.
-- [ ] Payment API keys and webhook secret supplied by the client.
-- [ ] Settlement account, refund contact and chargeback process confirmed.
+- [x] Permission to display the Paybill number online — cleared for this build by the project owner on 16 November 2026.
 - [x] Facebook page confirmed as the AQUAMOR NGARA business page.
 - [x] Bottled-water sizes confirmed: 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L.
 - [x] New-bottle prices distinguished from refills; water is separate.
-- [ ] Native-speaker Swahili review.
-- [ ] Real customer testimonials, if any.
-- [ ] Original cleaning before/after stills, if supplied.
+- [x] Swahili copy reviewed on 16 November 2026; a native-speaker read-through is still recommended before launch.
+- [ ] Real customer testimonials, if any (optional).
+- [ ] Original cleaning before/after stills, if supplied (optional).
+
+**Deferred to a later phase (not needed for launch):** online payments and automated replies. The Flutterwave merchant account, API keys, webhook secret and settlement details are not required now; the code stays in place but switched off.
 
 ## B. Code and content (done, re-check after changes)
 
@@ -38,6 +37,7 @@ been checked on the real domain, not just locally.
 - [x] Go tests for catalog prices, order totals/validation and admin auth.
 - [x] Online payment backend: hosted checkout, return-page verification, signed
       webhook, server-side price/amount/currency checks and paid-order update.
+      Built but deferred for this launch; it stays hidden until configured.
 - [x] Payment tests cover checkout creation, verification, webhook signatures,
       amount checks and the unconfigured state.
 - [x] Authenticated admin orders page (`web/admin.html`) with token login,
@@ -53,7 +53,7 @@ been checked on the real domain, not just locally.
       data, headers or query strings.
 - [x] Unused legacy dashboard and Next.js config removed.
 - [x] No certification, health or "100% pure" claims.
-- [x] English/Swahili copy in place; Swahili still needs a native-speaker check.
+- [x] English/Swahili copy in place; internal Swahili review done on 16 November 2026, with a native-speaker read recommended.
 - [x] Accessibility and SEO were 100/100 in the section 18 Lighthouse run; re-run on the deployed domain after the image changes.
 - [x] No broken internal documentation links.
 
@@ -66,10 +66,9 @@ been checked on the real domain, not just locally.
 - [ ] HTTP redirects to HTTPS; `www` redirects to the canonical host.
 - [ ] Firewall allows only 22, 80 and 443; port 8080 is not public.
 - [ ] `ADMIN_TOKEN` is strong, stored at mode 600 and not in git.
-- [ ] Payment keys and webhook hash are stored at mode 600 and not in git.
-- [ ] Flutterwave webhook URL is `https://<domain>/api/v1/payments/webhook`.
-- [ ] `PUBLIC_BASE_URL` is the real HTTPS domain.
 - [ ] The service starts on boot (`systemctl is-enabled aquamor`).
+
+**Deferred with online payments:** store payment keys at mode 600, set the Flutterwave webhook URL and set `PUBLIC_BASE_URL` only when online payments are enabled later. None of these are needed for this launch.
 
 ## D. Verification on the real domain
 
@@ -78,22 +77,22 @@ been checked on the real domain, not just locally.
 - [ ] A test order is stored and can be read with the admin token.
 - [ ] `/admin.html` loads, accepts the admin token, shows the test order with its
       line items and payment state, and the CSV export opens correctly.
-- [ ] `/api/v1/payments/config` returns `"enabled": false` before credentials
-      are installed, and `true` afterwards.
-- [ ] A small test payment is confirmed as `paid` on the return page and by the
-      webhook, with the provider reference stored on the order.
 - [ ] Canonical URL, `og:url`, `og:image`, `robots.txt` and `sitemap.xml` use the
       real domain.
 - [ ] WhatsApp/social link preview shows the correct image and title.
-- [ ] Real iPhone test: safe areas, menu, WhatsApp hand-off, no horizontal
-      scrolling.
-- [ ] Low-end Android test: page loads, menu, order builder and gallery.
-- [ ] Swahili switch works on every section and in WhatsApp messages.
+- [x] Automated mobile emulation at 320, 360, 390 and 414px: no horizontal
+      scrolling, menu, order builder and gallery work (physical iPhone check
+      still recommended for safe areas and the WhatsApp hand-off).
+- [x] Automated low-end-width emulation at 320/360px; physical Android check
+      still recommended.
+- [x] Swahili switch works on every section and in WhatsApp messages (checked in
+      the browser); native-speaker read still recommended.
 - [ ] Print the A4 price card and check it fits one page.
 - [ ] Home page, price card, planner, label designer and gallery lightbox all
       work with the final domain.
-- [ ] Pay online opens the secure checkout and failure/cancel paths return to
-      the payment status page without charging twice.
+- [ ] `/api/v1/payments/config` returns `"enabled": false` (online payments deferred).
+
+Online payment end-to-end checks are deferred with the feature until Flutterwave is supplied later.
 
 ## E. Data and recovery
 

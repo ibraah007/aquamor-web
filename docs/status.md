@@ -97,16 +97,17 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 ## 5. Open issues
 
 ### A. Blocking: needed from the client
-1. **Online payment and automated replies:** the client chose a hosted checkout. The site now integrates Flutterwave hosted checkout; the client still needs to supply an approved merchant account, API keys and a webhook secret. A real email or WhatsApp auto-reply still needs SMTP or WhatsApp Business API credentials; the site currently shows an on-page acknowledgment instead.
-2. **Domain registration and handover:** the client prefers `aquamorwater.co.ke` and wants registration under AQUAMOR PURIFIED DRINKING WATER, with Aquamor keeping ownership and control. Confirm who completes the registration and the DNS/hosting handover.
+1. **Domain registration and handover:** the client prefers `aquamorwater.co.ke` and wants registration under AQUAMOR PURIFIED DRINKING WATER, with Aquamor keeping ownership and control. Confirm who completes the registration and the DNS/hosting handover.
 
 All other client details requested on 13 November 2026 were confirmed on 16 November 2026; see section 28.
 
+**Deferred to a later phase (not required for launch):** online payments and automated replies. The hosted-checkout code stays in place but remains switched off until Flutterwave credentials are supplied later. The site currently shows an on-page acknowledgment instead of an automated reply.
+
 ### B. Permissions
 - [x] Showing the staff and customers in the photos, including the new event, shop and delivery photos (confirmed by the client on 12 November 2026)
-- Showing other customers' labels (Wave360 and the church labels)
+- [x] Showing other customers' labels (Wave360 and the church labels) — cleared for this build by the project owner on 16 November 2026
 - [x] Water pumps: the client confirmed on 16 November 2026 that they sell manual and electric pumps for 10L and 20L bottles, plus manual and electric dispensers
-- Showing the Paybill number online (it is on their own flyers)
+- [x] Showing the Paybill number online — cleared for this build by the project owner on 16 November 2026; the number is already on the client's flyers
 
 ### C. Content still missing
 - Shop front on Musindi Road, taken from the street
@@ -118,7 +119,7 @@ All other client details requested on 13 November 2026 were confirmed on 16 Nove
 
 ### D. To verify
 - **KEBS:** the client's certification is currently with their supplier; their own permit is in process and expected in February next year. No permit number or certificate is available to publish, so the site makes no certification claim. The purification steps were supplied on 16 November 2026 and are published without the individual sediment-filter micron sizes.
-- **Swahili text:** have a native speaker read it once.
+- **Swahili text:** internal review completed on 16 November 2026 (awkward phrases refined). A native-speaker read-through is still recommended before launch.
 - **Domain ownership:** confirm that `aquamorwater.co.ke` is registered under AQUAMOR PURIFIED DRINKING WATER and that the client retains the registrar login and renewal control. Aquamor will pay the annual renewal.
 
 ### E. Handover tasks (week 4)
@@ -127,6 +128,7 @@ All other client details requested on 13 November 2026 were confirmed on 16 Nove
 - Move the site to the domain (this is when the Google search data matters most)
 - Hand over, plus the client change-request sheet and the maintainer guide
 - Work through [`launch-checklist.md`](launch-checklist.md) before announcing the domain
+- Online payment activation is deferred to a later phase; no launch action is needed beyond keeping the payment values empty.
 
 ---
 
@@ -308,10 +310,11 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Label designer:** the bottle preview now uses glass, water and cap gradients, edge shading, highlights and a soft shadow. It can be turned by dragging it or with a slider, and the label compresses and moves around the curve of the bottle. The rectangular/round styles, colours, presets, text fitting and WhatsApp hand-off are unchanged. No idle animation, so it respects reduced motion.
 - **Map:** added a lazy-loaded Google Maps embed in the contact section using the same location text as the existing "Get directions" link. The link itself is unchanged. The server CSP now allows Google Maps frames (`frame-src`).
 - **Reach-out acknowledgment:** tapping any WhatsApp or email link now shows an on-page message: thanks for reaching out, send the prepared message, and Aquamor will get back to you. It is translated into Swahili. This is a UI acknowledgment, not an automated email or WhatsApp reply.
-- **Still needed:** online payment and true automated replies require an external provider and credentials; see section 5A item 4.
+- **Still needed:** online payment and true automated replies require an external provider and credentials. Both are deferred to a later phase; see section 23 and section 5A.
 
 ## 23. Online payments with Flutterwave hosted checkout (13 November 2026)
 
+- **Status (16 November 2026):** deferred to a later phase at the project owner's request. The code remains in place but stays switched off; no Flutterwave account, API key or webhook secret is needed for launch. Customers order through WhatsApp.
 - **Decision:** the client chose a hosted checkout rather than building card or M-Pesa collection directly. Flutterwave is the first provider.
 - **Button:** a Pay online button appears in the order summary only when `/api/v1/payments/config` reports that payment is configured. If the provider is not configured, the existing WhatsApp order path is unchanged.
 - **Flow:** the dialog collects name, phone, receipt email and delivery area or pickup name; the site saves the order and redirects to Flutterwave's secure page. The no-JS WhatsApp path still works.
@@ -320,7 +323,7 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - **Data:** orders can store `customer_email`, `payment_provider`, `payment_reference`, `mpesa_receipt_number` and `paid_at`; older databases receive these columns automatically at startup.
 - **Tests:** Go tests cover checkout creation, provider errors, verification, amount/currency checks, the webhook signature, the paid-order update and the unconfigured state. The smoke test checks `/payment.html` and `/api/v1/payments/config`.
 - **Configuration:** set `FLUTTERWAVE_SECRET_KEY`, `FLUTTERWAVE_WEBHOOK_SECRET` and `PUBLIC_BASE_URL`; see [`deployment.md`](deployment.md). Without all three, the button stays hidden.
-- **Still needed:** an approved Flutterwave merchant account and live credentials. Online payment is limited to refills and the two 20L new-bottle catalog items because bottled water is quoted by quantity and other bottle ranges have no single payable price.
+- **Deferred to a later phase:** an approved Flutterwave merchant account and live credentials are not needed for this launch. When enabled later, online payment is limited to refills and the two 20L new-bottle catalog items because bottled water is quoted by quantity and other bottle ranges have no single payable price.
 
 ## 24. Authenticated admin orders view (13 November 2026)
 
@@ -354,7 +357,7 @@ The simulated mobile run reports an inflated LCP (5.4s) while the observed LCP i
 - Re-ran every CI check locally: `gofmt`, `go build`, `go vet`, `go test -race`, `node --check` and `bash -n` all pass. GitHub CI is green for the same commits.
 - [`deploy/smoke-test.sh`](../deploy/smoke-test.sh) passes all checks against a local server; a test order posted to `/api/v1/orders` is listed by `/api/v1/orders/all` with the server-priced total.
 - Removed two orphaned, git-ignored SQLite files from the repository root and deleted the merged local and remote branches, leaving only `main`.
-- No client-facing change. Payments stay hidden until the three `FLUTTERWAVE_*`/`PUBLIC_BASE_URL` values are set.
+- No client-facing change. Payments stay hidden until the three `FLUTTERWAVE_*`/`PUBLIC_BASE_URL` values are set; online payments are deferred for this launch.
 
 ## 28. Client confirmed details and content update (16 November 2026)
 
@@ -388,3 +391,10 @@ The client sent the confirmed business details in writing. The site, price card 
 - New-bottle prices are shown as ranges. The order builder's estimated total uses the lower bound and is labelled "from listed prices"; online payment remains limited to refills and the two 20L bottle catalog items.
 - No KEBS number, certification or health claim was added.
 - The purification steps are listed exactly as supplied; individual micron sizes are omitted.
+
+### Launch status (16 November 2026)
+- **Online payments:** deferred to a later phase. No Flutterwave merchant account, API keys or webhook secret are needed for launch; the code stays hidden until configured.
+- **Permissions:** the project owner cleared the existing gallery labels and the Paybill display for this build.
+- **Swahili:** internal review completed and awkward phrases refined; a native-speaker read-through is still recommended.
+- **Still external:** register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER, then complete DNS/TLS/hosting handover.
+- **Optional:** testimonials, original cleaning stills, shop-front/graduation/corporate photos, and a physical-device test.
