@@ -246,17 +246,19 @@ The block below refuses to start if `aquamor.db.before-restore` or its `-wal`
 companion already exists, so a retry cannot overwrite an earlier copy. Inspect
 them and move both files aside before retrying.
 
-To restore, stop the service first:
+To restore, run this block as root (for example with `sudo -i`): the backup
+directory and database are not readable by the deploy user.
 
 ```sh
 set -euo pipefail
-sudo systemctl stop aquamor
 
 before=/var/lib/aquamor/aquamor.db.before-restore
 if sudo test -e "$before" || sudo test -e "$before-wal"; then
   echo "restore refused: $before or its -wal already exists; move both aside before retrying" >&2
   exit 1
 fi
+
+sudo systemctl stop aquamor
 sudo cp /var/lib/aquamor/aquamor.db "$before"
 if sudo test -f /var/lib/aquamor/aquamor.db-wal; then
   sudo cp /var/lib/aquamor/aquamor.db-wal "$before-wal"
