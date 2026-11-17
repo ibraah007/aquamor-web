@@ -2,7 +2,9 @@
 
 This is the technical runbook for putting the site on a server. The domain name,
 DNS access and final client sign-off are still needed from the client (issue
-#19); everything else can be prepared before then.
+#19); everything else can be prepared before then. For the ordered launch-day
+sequence, with an owner and a gate for each step, see
+[`go-live-runbook.md`](go-live-runbook.md).
 
 The examples use:
 

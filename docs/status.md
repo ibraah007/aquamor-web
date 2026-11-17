@@ -471,3 +471,24 @@ load when the slideshow reaches them, so nothing is missing from the page.
   low on the cache audit. The Caddy example sends long cache headers.
 - A native-speaker Swahili read-through and a physical iPhone/Android check are
   still recommended before launch.
+
+## 30. Launch runbook and client review message (17 November 2026)
+
+The build is complete; the remaining work is the domain, hosting and handover. Two
+documents make that work repeatable:
+
+- [`go-live-runbook.md`](go-live-runbook.md) is the ordered launch-day sequence:
+  what must be in place first, who owns each step (client or maintainer), the exact
+  DNS records, the deploy and TLS commands, the verification checks that must pass,
+  the handover items (including how the admin token is shared), first-week
+  monitoring, and a "if something goes wrong" table. It points to
+  [`deployment.md`](deployment.md) for the full explanation of each command.
+- [`client-review-message.md`](client-review-message.md) is a ready-to-send email
+  and WhatsApp message with the preview link
+  (<https://ibraah007.github.io/aquamor-web/>), what the client should check, the
+  preview's limits, and the remaining questions: domain and registrar ownership,
+  the business certificate/KRA PIN for `.co.ke`, holiday hours, optional customer
+  comments and photos, and the post-launch contact.
+
+No code changed. Online payments stay deferred, and no certification claim is
+published until the client's permit arrives.

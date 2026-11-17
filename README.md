@@ -10,6 +10,8 @@ One-page website for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, N
 - [`docs/how-to-update-your-site.md`](docs/how-to-update-your-site.md) — maintainer guide: editing text, prices and photos, previewing and publishing.
 - [`docs/maintenance-log.md`](docs/maintenance-log.md) — dated record of client decisions, requests and site changes.
 - [`docs/deployment.md`](docs/deployment.md) — server setup, TLS, backups, updates and launch runbook.
+- [`docs/go-live-runbook.md`](docs/go-live-runbook.md) — ordered launch-day sequence for the domain, DNS, TLS, verification and handover, with an owner for each step.
+- [`docs/client-review-message.md`](docs/client-review-message.md) — ready-to-send message with the preview link and the remaining client questions.
 - [`docs/launch-checklist.md`](docs/launch-checklist.md) — what to check before and after the public launch.
 
 ## Live static preview

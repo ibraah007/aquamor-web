@@ -26,6 +26,10 @@ server. No functional defects were found. Results are recorded in
   `data-src`/`data-srcset` and load when the slideshow is about to show them.
   First-load image bytes at 390px fell from 626 KB to 287 KB.
 - The `gh-pages` preview was refreshed so it matches `web/` again.
+- **Docs:** added [`go-live-runbook.md`](go-live-runbook.md) (the ordered
+  domain/DNS/TLS/verification/handover sequence with an owner for each step) and
+  [`client-review-message.md`](client-review-message.md) (a ready-to-send email and
+  WhatsApp message with the preview link and the remaining client questions).
 
 ## 16 November 2026
 
