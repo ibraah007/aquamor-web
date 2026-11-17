@@ -56,6 +56,9 @@ been checked on the real domain, not just locally.
 - [x] English/Swahili copy in place; internal Swahili review done on 16 November 2026, with a native-speaker read recommended.
 - [x] Accessibility and SEO were 100/100 in the section 18 Lighthouse run; re-run on the deployed domain after the image changes.
 - [x] No broken internal documentation links.
+- [x] Final QA sweep on 17 November 2026: widths 320–1600px, all interactive
+      flows in both languages, Lighthouse, the local smoke test and the A4 price
+      card; see `status.md` section 29.
 
 ## C. Domain and hosting (blocked on the client)
 
@@ -87,7 +90,8 @@ been checked on the real domain, not just locally.
       still recommended.
 - [x] Swahili switch works on every section and in WhatsApp messages (checked in
       the browser); native-speaker read still recommended.
-- [ ] Print the A4 price card and check it fits one page.
+- [x] Print the A4 price card and check it fits one page (printed to PDF
+      headlessly on 17 November 2026: one A4 page).
 - [ ] Home page, price card, planner, label designer and gallery lightbox all
       work with the final domain.
 - [ ] `/api/v1/payments/config` returns `"enabled": false` (online payments deferred).

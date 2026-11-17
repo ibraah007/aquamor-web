@@ -6,6 +6,27 @@ Keep it short. Link to the issue, PR or file when there is one.
 
 ---
 
+## 17 November 2026
+
+### Final QA on the published preview
+
+Ran a full pass on <https://ibraah007.github.io/aquamor-web/> and on the local Go
+server. No functional defects were found. Results are recorded in
+[`status.md`](status.md) section 29.
+
+- Lighthouse (mobile): accessibility 100, SEO 100, best practices 96, performance
+  84. The single best-practices deduction is the `/api/v1/payments/config` 404,
+  which only happens on the static preview because there is no Go API there.
+- Every width from 320px to 1600px scrolls only vertically; the mobile menu,
+  language switch, order builder, reorder, planner, designer, gallery filters,
+  lightbox, FAQ and Copy buttons all work, in both languages.
+- `deploy/smoke-test.sh` passes against the local server, the Go tests pass, and
+  the A4 price card prints on one page.
+- **Change:** banner slides after the first now keep their image sources in
+  `data-src`/`data-srcset` and load when the slideshow is about to show them.
+  First-load image bytes at 390px fell from 626 KB to 287 KB.
+- The `gh-pages` preview was refreshed so it matches `web/` again.
+
 ## 16 November 2026
 
 ### Client confirmed all outstanding details
