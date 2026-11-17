@@ -26,6 +26,19 @@ server. No functional defects were found. Results are recorded in
   `data-src`/`data-srcset` and load when the slideshow is about to show them.
   First-load image bytes at 390px fell from 626 KB to 287 KB.
 - The `gh-pages` preview was refreshed so it matches `web/` again.
+- **Docs:** added [`go-live-runbook.md`](go-live-runbook.md) (the ordered
+  domain/DNS/TLS/verification/handover sequence with an owner for each step) and
+  [`client-review-message.md`](client-review-message.md) (a ready-to-send email and
+  WhatsApp message with the preview link and the remaining client questions).
+- **Review corrections (PR #38):** the runbook now uses the client's chosen domain
+  throughout, reuses the prepared `/opt/aquamor` checkout, checks every JS and
+  shell file separately, names a supported item for the test order, and records
+  two limits: orders containing an unpriced item (such as 500ml) stay only in
+  WhatsApp, and a backup restore drops newer orders unless they are reconciled
+  first. The client message calls the preview public and explains that the order
+  draft is addressed to the Aquamor business number. The deployment steps also
+  update the installed Caddyfile and `PUBLIC_BASE_URL`, restart the service after
+  a new binary, and preserve the SQLite WAL before a restore.
 
 ## 16 November 2026
 

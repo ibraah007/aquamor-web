@@ -2,7 +2,9 @@
 
 This is the technical runbook for putting the site on a server. The domain name,
 DNS access and final client sign-off are still needed from the client (issue
-#19); everything else can be prepared before then.
+#19); everything else can be prepared before then. For the ordered launch-day
+sequence, with an owner and a gate for each step, see
+[`go-live-runbook.md`](go-live-runbook.md).
 
 The examples use:
 
@@ -154,18 +156,39 @@ sudo ufw enable
 sudo ss -ltnp | grep 8080
 ```
 
-## 8. Replace the domain placeholders
+## 8. Set the domain
 
-Once the domain is confirmed, update the canonical URL, social preview URLs,
-`robots.txt`, `sitemap.xml` and the Caddy example:
+The site already uses the preferred domain `aquamorwater.co.ke`. If the client
+confirms a different one, run the script in the checkout you deploy from and
+commit the result, then push it:
 
 ```sh
-cd /opt/aquamor
-./scripts/set-domain.sh aquamorwater.co.ke
-git diff -- web/index.html web/robots.txt web/sitemap.xml deploy/Caddyfile
+cd /path/to/aquamor-web
+./scripts/set-domain.sh <domain>
+git diff -- web/index.html web/robots.txt web/sitemap.xml deploy/Caddyfile deploy/aquamor.env.example
+git add web/index.html web/robots.txt web/sitemap.xml deploy/Caddyfile deploy/aquamor.env.example
+git commit -m "chore: set the live domain to <domain>"
+git push
 ```
 
-Reload Caddy if its configuration changed. Static files do not need a rebuild.
+On the server, `sudo git pull --ff-only` in `/opt/aquamor` updates the checkout
+only. Apply the new domain to the installed configuration:
+
+```sh
+sudo cp /opt/aquamor/deploy/Caddyfile /etc/caddy/Caddyfile
+sudo caddy validate --config /etc/caddy/Caddyfile
+sudo systemctl reload caddy
+
+sudoedit /etc/aquamor/aquamor.env    # set PUBLIC_BASE_URL=https://<domain>
+sudo systemctl restart aquamor
+```
+
+Caddy reads `/etc/caddy/Caddyfile`, not the checkout, and the service reads
+`/etc/aquamor/aquamor.env`, not the example. Neither is changed by the pull.
+Static files do not need a rebuild or restart.
+
+The verify, update and rollback commands below use `aquamorwater.co.ke`;
+substitute the final domain if it differs.
 
 ## 9. Verify the launch
 
@@ -213,12 +236,33 @@ off the server as well, for example with `rclone` or the hosting provider's
 snapshot feature. A backup that has never been restored is not a backup: restore
 one into a temporary copy and open it with `sqlite3` at least once.
 
-To restore, stop the service first:
+Restoring replaces the live database with the backup. Orders created after that
+backup are not in it, so note or export them first. The procedure keeps the
+pre-restore copy as `aquamor.db.before-restore`, but it is not merged back
+automatically: inspect the damage and reconcile any recoverable newer orders
+before resuming service.
+
+The block below refuses to start if `aquamor.db.before-restore` or its `-wal`
+companion already exists, so a retry cannot overwrite an earlier copy. Inspect
+them and move both files aside before retrying.
+
+To restore, run this block as root (for example with `sudo -i`): the backup
+directory and database are not readable by the deploy user.
 
 ```sh
 set -euo pipefail
+
+before=/var/lib/aquamor/aquamor.db.before-restore
+if sudo test -e "$before" || sudo test -e "$before-wal"; then
+  echo "restore refused: $before or its -wal already exists; move both aside before retrying" >&2
+  exit 1
+fi
+
 sudo systemctl stop aquamor
-sudo cp /var/lib/aquamor/aquamor.db /var/lib/aquamor/aquamor.db.before-restore
+sudo cp /var/lib/aquamor/aquamor.db "$before"
+if sudo test -f /var/lib/aquamor/aquamor.db-wal; then
+  sudo cp /var/lib/aquamor/aquamor.db-wal "$before-wal"
+fi
 
 restore_dir="$(mktemp -d)" || exit 1
 restore_db="$restore_dir/restore.db"
@@ -242,6 +286,20 @@ sqlite3 "$restore_db" "SELECT name FROM sqlite_master WHERE type='table' AND nam
 sudo install -o aquamor -g aquamor -m 600 "$restore_db" /var/lib/aquamor/aquamor.db
 rm -rf "$restore_dir"
 sudo rm -f /var/lib/aquamor/aquamor.db-wal /var/lib/aquamor/aquamor.db-shm
+```
+
+The service is still stopped. Before starting it, compare the preserved copy
+(with its WAL) against the restored backup and reconcile any newer orders that
+can be recovered:
+
+```sh
+sudo sqlite3 /var/lib/aquamor/aquamor.db.before-restore \
+  "SELECT id, created_at, customer_name, customer_phone, total_amount FROM orders ORDER BY id;"
+```
+
+Then start the service:
+
+```sh
 sudo systemctl start aquamor
 ```
 
