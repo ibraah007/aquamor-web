@@ -255,3 +255,17 @@ footer{padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px));font-size:.9r
 .paycard .btn-line{color:var(--ink)}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.payspin{animation:none}}
+
+/* Scroll reveal. site.js adds .reveal only to elements that start off-screen,
+   so the page stays readable without JavaScript and nothing flashes on load. */
+.reveal{opacity:0;transform:translate3d(0,26px,0);transition:opacity .7s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0s),transform .8s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0s)}
+.reveal.reveal-title{transform:translate3d(0,16px,0)}
+.reveal.reveal-zoom{transform:translate3d(0,18px,0) scale(.955)}
+.reveal.is-in{opacity:1;transform:none}
+section h2::after{content:"";display:block;width:64px;height:4px;margin-top:14px;border-radius:999px;background:linear-gradient(90deg,var(--aqua),var(--sun) 70%,transparent)}
+section h2.reveal-title::after{transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.22,1,.36,1) calc(var(--reveal-delay,0s) + .12s)}
+section h2.reveal-title.is-in::after{transform:scaleX(1)}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  section h2.reveal-title::after{transform:none;transition:none}
+}
