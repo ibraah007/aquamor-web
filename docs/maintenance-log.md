@@ -40,6 +40,16 @@ server. No functional defects were found. Results are recorded in
   update the installed Caddyfile and `PUBLIC_BASE_URL`, restart the service after
   a new binary, and preserve the SQLite WAL before a restore.
 
+### Scroll reveal animations
+
+Added a quiet scroll-reveal pass: section headings, cards, steps, gallery photos
+and contact/map blocks fade and rise in as they reach the viewport, with a short
+stagger and a small aqua-to-gold accent under each heading. The hidden state is
+only applied in JavaScript to elements that start below the fold, so the page
+stays readable without JavaScript and nothing flashes on load. Reduced-motion is
+respected and every element is unobserved after it appears. Recorded in
+`status.md` section 31 and the front-end README.
+
 ## 16 November 2026
 
 ### Client confirmed all outstanding details

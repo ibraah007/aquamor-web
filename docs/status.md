@@ -499,3 +499,22 @@ JavaScript and shell file separately, updates the installed Caddyfile and
 `PUBLIC_BASE_URL`, and records the 500ml/order-saving limit and the backup-restore
 reconciliation step. The client message describes the preview as public and
 corrects the WhatsApp draft instructions.
+
+## 31. Scroll reveal animations (17 November 2026)
+
+The page now reveals its content as it is scrolled, using a small
+IntersectionObserver in `web/js/site.js` and the styles at the end of
+`web/css/styles.css`:
+
+- Section headings, cards, steps, delivery areas, FAQ rows, contact rows, the map
+  and the 26 gallery photos fade and rise into place. Gallery photos and the
+  bottle stage also scale in slightly. Siblings are staggered by up to 360ms.
+- Each section heading gets a short aqua-to-gold accent line that draws in as the
+  heading appears.
+- The script adds the hidden state only to elements that start below the fold, so
+  the page is readable without JavaScript, there is no flash on load, and a hash
+  or restored scroll position reveals what is already on screen.
+- `prefers-reduced-motion: reduce` skips the animations entirely; changing the
+  preference after load shows everything immediately.
+- The observer unobserves each element after it appears and animates only
+  `opacity`/`transform`, so scrolling stays smooth on low-end phones.

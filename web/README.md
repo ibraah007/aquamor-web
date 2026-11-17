@@ -17,6 +17,7 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Label designer | Customer picks a Wedding, Church, Graduation or Corporate preset, types an event name and message, picks a colour, a rectangular or round label and a bottle size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
 | Gallery | 26 real photos and three short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
+| Scroll reveal | Section headings, cards and gallery photos rise and fade in as they enter the viewport, with a short stagger and an animated accent under each heading; respects reduced-motion |
 | Fading backgrounds | Photo slideshows behind the hero, order, branded-bottles and contact sections |
 | Mobile menu | A keyboard-accessible menu below 1000px |
 | English / Swahili | One-tap language switch, remembered between visits; WhatsApp messages are written in the chosen language |
