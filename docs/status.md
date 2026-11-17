@@ -1,10 +1,10 @@
 # Aquamor Purified Drinking Water: Website Project Status
 
-**Updated:** 16 November 2026
+**Updated:** 17 November 2026
 **Project start:** 10 November 2026
 **Target delivery:** about 10 December 2026 (one month)
 **Repository:** the site is in `web/`; the Go API is in `backend/` (see the root `README.md`)
-**Preview:** run locally with `cd web && python3 -m http.server 8000`, or run the Go server and open http://localhost:8080. No public URL yet.
+**Preview:** the static preview is published at <https://ibraah007.github.io/aquamor-web/>; run locally with `cd web && python3 -m http.server 8000`, or run the Go server and open http://localhost:8080.
 
 ---
 
@@ -95,6 +95,11 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 ---
 
 ## 5. Open issues
+
+> **Update 16 November 2026:** every business fact, price and permission in this
+> section was confirmed in writing and published; see section 28. Online payments
+> remain deferred to a later phase. The only external item left is the domain
+> registration and the hosting handover.
 
 ### A. Blocking: needed from the client
 1. **Domain registration and handover:** the client prefers `aquamorwater.co.ke` and wants registration under AQUAMOR PURIFIED DRINKING WATER, with Aquamor keeping ownership and control. Confirm who completes the registration and the DNS/hosting handover.
@@ -399,3 +404,70 @@ The client sent the confirmed business details in writing. The site, price card 
 - **Swahili:** internal review completed and awkward phrases refined; a native-speaker read-through is still recommended.
 - **Still external:** register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER, then complete DNS/TLS/hosting handover.
 - **Optional:** testimonials, original cleaning stills, shop-front/graduation/corporate photos, and a physical-device test.
+
+## 29. Final QA on the published preview (17 November 2026)
+
+Everything below was checked against the live static preview
+(<https://ibraah007.github.io/aquamor-web/>) and, where the Go API is needed,
+against a local server running the real binary. The preview is byte-for-byte the
+same as `web/` (`diff -rq` reports no differences).
+
+### Results
+
+| Check | Result |
+|---|---|
+| Lighthouse 12.8.2, mobile | Performance 84, Accessibility 100, Best practices 96, SEO 100 |
+| Lighthouse 12.8.2, desktop | Performance 74, Accessibility 100, Best practices 96, SEO 100 |
+| Widths (320, 360, 390, 414, 768, 900, 1000, 1024, 1280, 1600 px) | No horizontal scrolling at any width; menu button below 1024px, inline navigation from 1024px |
+| Assets and links | All 42 local asset references return 200; no duplicate `id`s, no missing `#` targets, no broken documentation links |
+| Go build, vet, tests, `node --check` | Pass |
+| `deploy/smoke-test.sh` against the local Go server | All checks pass (home, health, products, payments config, admin page `noindex`, protected orders, security headers) |
+| A4 price card | Prints to exactly one A4 page |
+
+### Behaviour checked with a headless browser
+
+- Mobile menu opens, closes, updates `aria-expanded`, and closes after a link is
+  tapped; the page scrolls to the section.
+- English/Swahili switch translates the page, the order builder, the planner and
+  the WhatsApp messages, and the choice survives a reload.
+- Order builder: steppers, running total, all three tabs (ten bottled-water sizes
+  "Price on quotation", four new-bottle ranges), Delivery/Pickup labels and
+  placeholders, and the validation error when the area is empty.
+- WhatsApp order message contains the items, the estimated total, name, phone and
+  Delivery/Pickup with the area. The last order is saved and "Reorder my last
+  order" restores the quantities, mode and area.
+- Refill planner arithmetic: 4 people → 56 L, 3 × 20L, Ksh 600; 5 people → 70 L,
+  4 × 20L, Ksh 800; switching to 5L → 14 × 5L, Ksh 700.
+- Label designer: presets fill the fields, round/rectangular styles switch, and
+  the WhatsApp message includes the event, message, colour, size and style.
+- Gallery: 26 tiles, filters show only their category, the lightbox opens with the
+  caption and closes.
+- FAQ opens, the two Paybill Copy buttons work, the map frame loads, and the
+  "Open now until 8:30pm" line is present.
+- With `prefers-reduced-motion: reduce`, each banner shows one photo and does not
+  rotate; smooth scrolling is off.
+- Dark-mode contrast measured between 4.57:1 and 18.5:1 on body, heading, note,
+  button and tab text (text over photos is excluded from the measurement).
+
+### Change made
+
+Banner slides after the first now keep their sources in `data-src` /
+`data-srcset` and are loaded by `web/js/gallery.js` just before the slideshow
+shows them; the current photo stays on screen until the next one has loaded.
+Previously every hidden slide was downloaded with the page because the stacked
+photos all sat inside the viewport, so `loading="lazy"` could not defer them.
+
+At 390px wide, first-load image bytes fell from **626 KB to 287 KB**
+(15 → 9 image requests; 809 KB → 471 KB in total). The remaining slides still
+load when the slideshow reaches them, so nothing is missing from the page.
+
+### Known limits (no action needed)
+
+- The static preview logs one console 404 for `/api/v1/payments/config` because
+  GitHub Pages has no Go API. In production the endpoint returns
+  `{"enabled": false}` and the Pay online button stays hidden; the code already
+  handles both.
+- GitHub Pages caps cache lifetimes at 10 minutes, which is why the preview scores
+  low on the cache audit. The Caddy example sends long cache headers.
+- A native-speaker Swahili read-through and a physical iPhone/Android check are
+  still recommended before launch.

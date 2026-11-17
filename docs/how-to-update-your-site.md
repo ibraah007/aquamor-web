@@ -99,6 +99,17 @@ You need two copies of the same photo: a JPG (fallback) and a WebP (smaller, use
 
 Permission to show people in a photo must be confirmed by the client before it goes on the site.
 
+### Banner (background) photos
+
+The fading banners in the hero, the order, designer and contact sections rotate
+through several photos. Only the first photo of each banner is downloaded with the
+page; the rest keep their sources in `data-src` and `data-srcset` and
+`web/js/gallery.js` loads each one just before it is shown. When you add a slide,
+follow the same pattern: the first `<picture>` keeps `src`/`srcset` (and gets
+`class="on"`), and every later `<picture>` uses `data-src` on the `<img>` and
+`data-srcset` on both the `<source>` and the `<img>`. If you leave a later slide
+with a plain `src`, it still works but downloads with the page again.
+
 ---
 
 ## 4. Preview the site locally
