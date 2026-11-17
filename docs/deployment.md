@@ -242,14 +242,24 @@ pre-restore copy as `aquamor.db.before-restore`, but it is not merged back
 automatically: inspect the damage and reconcile any recoverable newer orders
 before resuming service.
 
+The block below refuses to start if `aquamor.db.before-restore` already exists,
+so a retry cannot overwrite an earlier copy. Inspect it, then move it aside
+before retrying.
+
 To restore, stop the service first:
 
 ```sh
 set -euo pipefail
 sudo systemctl stop aquamor
-sudo cp /var/lib/aquamor/aquamor.db /var/lib/aquamor/aquamor.db.before-restore
-if [ -f /var/lib/aquamor/aquamor.db-wal ]; then
-  sudo cp /var/lib/aquamor/aquamor.db-wal /var/lib/aquamor/aquamor.db.before-restore-wal
+
+before=/var/lib/aquamor/aquamor.db.before-restore
+if sudo test -e "$before"; then
+  echo "restore refused: $before already exists; move it aside before retrying" >&2
+  exit 1
+fi
+sudo cp /var/lib/aquamor/aquamor.db "$before"
+if sudo test -f /var/lib/aquamor/aquamor.db-wal; then
+  sudo cp /var/lib/aquamor/aquamor.db-wal "$before-wal"
 fi
 
 restore_dir="$(mktemp -d)" || exit 1
