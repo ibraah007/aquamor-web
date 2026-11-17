@@ -492,3 +492,9 @@ documents make that work repeatable:
 
 No code changed. Online payments stay deferred, and no certification claim is
 published until the client's permit arrives.
+
+Review corrections to both documents followed the first PR review: the runbook
+now uses the final domain throughout, reuses the prepared checkout, checks each
+JavaScript and shell file separately, and records the 500ml/order-saving limit
+and the backup-restore reconciliation step. The client message describes the
+preview as public and corrects the WhatsApp draft instructions.

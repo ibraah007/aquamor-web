@@ -156,18 +156,26 @@ sudo ufw enable
 sudo ss -ltnp | grep 8080
 ```
 
-## 8. Replace the domain placeholders
+## 8. Set the domain
 
-Once the domain is confirmed, update the canonical URL, social preview URLs,
-`robots.txt`, `sitemap.xml` and the Caddy example:
+The site already uses the preferred domain `aquamorwater.co.ke`. If the client
+confirms a different one, run the script in the checkout you deploy from and
+commit the result, then push it:
 
 ```sh
-cd /opt/aquamor
-./scripts/set-domain.sh aquamorwater.co.ke
-git diff -- web/index.html web/robots.txt web/sitemap.xml deploy/Caddyfile
+cd /path/to/aquamor-web
+./scripts/set-domain.sh <domain>
+git diff -- web/index.html web/robots.txt web/sitemap.xml deploy/Caddyfile deploy/aquamor.env.example
+git add web/index.html web/robots.txt web/sitemap.xml deploy/Caddyfile deploy/aquamor.env.example
+git commit -m "chore: set the live domain to <domain>"
+git push
 ```
 
+On the server, `sudo git pull --ff-only` in `/opt/aquamor` picks up the change.
 Reload Caddy if its configuration changed. Static files do not need a rebuild.
+
+The verify, update and rollback commands below use `aquamorwater.co.ke`;
+substitute the final domain if it differs.
 
 ## 9. Verify the launch
 
@@ -214,6 +222,12 @@ The script keeps 14 days by default (`KEEP_DAYS` changes this). Copy the backups
 off the server as well, for example with `rclone` or the hosting provider's
 snapshot feature. A backup that has never been restored is not a backup: restore
 one into a temporary copy and open it with `sqlite3` at least once.
+
+Restoring replaces the live database with the backup. Orders created after that
+backup are not in it, so note or export them first. The procedure keeps the
+pre-restore copy as `aquamor.db.before-restore`, but it is not merged back
+automatically: inspect the damage and reconcile any recoverable newer orders
+before resuming service.
 
 To restore, stop the service first:
 

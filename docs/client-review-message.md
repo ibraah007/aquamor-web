@@ -18,7 +18,8 @@ pumps and the purification steps are all on the site.
 
 **Preview link:** https://ibraah007.github.io/aquamor-web/
 
-This is a private preview address, not the final one. The final site will be at
+This is a public preview address, not the final one: anyone with the link can
+open it, so please do not share it publicly. The final site will be at
 **https://aquamorwater.co.ke** once the domain is registered. Please look at the
 preview on both a phone and a computer.
 
@@ -36,9 +37,10 @@ preview on both a phone and a computer.
    section.
 7. **Contact details:** WhatsApp 0712 140 006, the two call numbers, the email,
    the Paybill, Facebook and TikTok.
-8. **The order buttons:** tap "Build your order", add a few items and send the
-   message to WhatsApp on your own number to see how it arrives. Please do not
-   send a real order.
+8. **The order buttons:** tap "Build your order", add a few items, then tap the
+   WhatsApp button and read the draft message. It is addressed to Aquamor's
+   business number (0712 140 006), not to your own number, so close the draft
+   without sending. Please do not send a real order.
 9. **The Swahili switch** at the top right (`SW`). A native speaker should read
    the Swahili once; it takes about 15 minutes. We can send the text if that is
    easier.
@@ -103,11 +105,12 @@ https://ibraah007.github.io/aquamor-web/
 
 Please open it on your phone and a computer. Check the name and tagline, the
 prices, the bottle sizes, the delivery areas, the photos and the contact
-details. Try "Build your order" and send the message to your own WhatsApp to see
-how it arrives (please do not send a real order). The `SW` button switches to
+details. Try "Build your order" and open the WhatsApp draft to see how the
+message arrives; it is addressed to Aquamor's business number, so close it
+without sending (please do not send a real order). The `SW` button switches to
 Swahili.
 
-This is a preview link; the final site will be at aquamorwater.co.ke.
+This is a public preview link; the final site will be at aquamorwater.co.ke.
 
 Before we register the domain, please confirm:
 
