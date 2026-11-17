@@ -51,11 +51,11 @@ You can also try the refill planner, the label designer and the gallery.
 online payment. Those are on the real site, which runs on our own server. Online
 payment is switched off for now; customers order on WhatsApp, as agreed.
 
-### Questions before we register the domain
+### Questions before the domain is registered
 
-1. **Domain:** we will register **aquamorwater.co.ke** in the name
-   **AQUAMOR PURIFIED DRINKING WATER**. Please confirm the name is correct, or
-   tell us the name you prefer.
+1. **Domain:** our recommendation is **aquamorwater.co.ke**, registered in the
+   name **AQUAMOR PURIFIED DRINKING WATER**. Please confirm the name is correct,
+   or tell us the name you prefer.
 2. **Registrar account:** we recommend that Aquamor opens the account so the
    domain stays yours, with [maintainer] added to manage the settings. To register
    a `.co.ke` in a business name the registrar will ask for a business
@@ -63,15 +63,23 @@ payment is switched off for now; customers order on WhatsApp, as agreed.
    ready, and which email should be used?
 3. **Renewal:** as agreed, Aquamor pays the yearly renewal. Are you happy for us
    to remind you a month before it is due?
-4. **Holiday hours:** the site shows your normal hours. Do you want different
+4. **Hosting:** the preview is a demo and cannot save orders, so the live site
+   needs a small hosting account that stays online all the time (roughly
+   Ksh 1,500–3,000 per month; the basic plan is enough, not an e-commerce
+   package). Pick one: **(a)** Aquamor buys it in the business name and sends us
+   the login — recommended, **(b)** we buy it and hand over the login at launch,
+   or **(c)** you already have hosting and we check it. Also tell us whether we
+   should look after it every month (updates, backups, monitoring) or hand
+   everything over after launch.
+5. **Holiday hours:** the site shows your normal hours. Do you want different
    hours for the December holidays?
-5. **Customer comments (optional):** two or three short comments from real
+6. **Customer comments (optional):** two or three short comments from real
    customers would make the site stronger. If you have them, send the exact words,
    the customer's first name and area, and confirm they are happy to be shown.
-6. **More photos (optional):** a photo of the shop front from the street,
+7. **More photos (optional):** a photo of the shop front from the street,
    graduation or corporate event photos, and clear before/after photos of a
    dispenser cleaning.
-7. **After launch:** who should we contact for changes, and on which number or
+8. **After launch:** who should we contact for changes, and on which number or
    email?
 
 There is no certification or "100% pure" claim on the site. When your own KEBS
@@ -81,10 +89,10 @@ permit arrives (expected in February), send us the number and we will add it.
 
 1. You review the preview and answer the questions above.
 2. We make any agreed changes.
-3. Once you approve in writing, we register the domain and put the site live,
-   usually within a few days.
-4. We hand over the change-request guide, the staff order page and a short
-   walkthrough.
+3. Once you approve in writing, Aquamor registers the domain (with our guidance)
+   and we set up the hosting you choose.
+4. We put the site live, usually within a few days, and hand over the
+   change-request guide, the staff order page and a short walkthrough.
 
 The target is to have the site live by **10 December 2026**.
 
@@ -112,20 +120,24 @@ Swahili.
 
 This is a public preview link; the final site will be at aquamorwater.co.ke.
 
-Before we register the domain, please confirm:
+Before the domain is registered, please confirm:
 
 1. The domain aquamorwater.co.ke, registered under AQUAMOR PURIFIED DRINKING WATER.
 2. Whether Aquamor will open the registrar account (we recommend yes), and which
    email to use. The registrar will ask for a business certificate or KRA PIN.
-3. Whether the normal opening hours are still correct for December.
-4. Whether you have two or three customer comments we can show.
-5. Who we should contact for changes after launch.
+3. How we should handle hosting: Aquamor buys a simple monthly account (about
+   Ksh 1,500–3,000; basic plan, not an e-commerce package) and sends us the login
+   (recommended), we buy it and hand over the login at launch, or you already have
+   hosting. Also say whether we should manage it every month.
+4. Whether the normal opening hours are still correct for December.
+5. Whether you have two or three customer comments we can show.
+6. Who we should contact for changes after launch.
 
 There is no certification claim on the site; we will add your KEBS number when
 your permit arrives.
 
-If it looks good, reply "approved" and we will register the domain and put the
-site live.
+If it looks good, reply "approved" and we will guide the domain registration and
+put the site live once hosting is ready.
 
 ---
 
@@ -140,13 +152,15 @@ ukubwa wa chupa, maeneo ya kuletewa, picha na namba za mawasiliano. Kitufe cha
 `SW` kinabadilisha lugha. Hii ni tovuti ya majaribio; tovuti kamili itakuwa
 aquamorwater.co.ke.
 
-Tafadhali tujulishe kama kuna chochote cha kubadilisha. Ukikubali, tutasajili
-jina la tovuti na kuiweka hewani.
+Tafadhali tujulishe kama kuna chochote cha kubadilisha. Ukikubali, tutakuongoza
+kusajili jina la tovuti na kuiweka hewani pindi hosting iko tayari.
 
 ---
 
 ## Notes for the sender
 
+- If the client phones instead of replying, use [`client-call-script.md`](client-call-script.md):
+  the same four asks in plain language, with the questions he is likely to raise.
 - The preview link is public. Share it with the client only, not in public groups.
 - If the client asks for changes, log them in
   [`maintenance-log.md`](maintenance-log.md) and record the agreed revision round.

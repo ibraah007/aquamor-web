@@ -21,6 +21,10 @@ been checked on the real domain, not just locally.
 - [x] Swahili copy reviewed on 16 November 2026; a native-speaker read-through is still recommended before launch.
 - [ ] Real customer testimonials, if any (optional).
 - [ ] Original cleaning before/after stills, if supplied (optional).
+- [ ] Written approval of the preview received before the domain is registered.
+- [ ] Hosting option agreed: client buys (recommended), maintainer buys with the
+      login handed over, or an existing server checked as suitable. Monthly
+      manager and payment method confirmed.
 
 **Deferred to a later phase (not needed for launch):** online payments and automated replies. The Flutterwave merchant account, API keys, webhook secret and settlement details are not required now; the code stays in place but switched off.
 

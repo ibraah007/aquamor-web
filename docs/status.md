@@ -518,3 +518,29 @@ IntersectionObserver in `web/js/site.js` and the styles at the end of
   preference after load shows everything immediately.
 - The observer unobserves each element after it appears and animates only
   `opacity`/`transform`, so scrolling stays smooth on low-end phones.
+
+## 32. Client call script and plain-language launch ask (17 November 2026)
+
+The client is likely to phone rather than reply in writing, so the launch ask now
+has a spoken version in [`client-call-script.md`](client-call-script.md). It takes
+the four blockers — approval, domain, business details, hosting — and explains
+each one in the client’s terms, with the questions he is likely to ask and a short
+answer, plus a written summary to send after the call.
+
+Following from that review, the client-facing documents were made consistent:
+
+- [`client-information-needed.md`](client-information-needed.md) now lists hosting
+  as a launch item (with the three ownership options, the monthly cost guide and
+  the "do not buy e-commerce hosting" warning) and the reply form asks for the
+  hosting choice and who manages it. The closing line now says domain **and**
+  hosting. The PDF is regenerated from the updated sheet.
+- [`client-review-message.md`](client-review-message.md) no longer says we will
+  register the domain for the client. It now describes Aquamor registering it with
+  our guidance, adds the hosting question to both the email and WhatsApp versions,
+  and updates the Swahili courtesy message to match.
+- [`go-live-runbook.md`](go-live-runbook.md) records the server owner as "client
+  or maintainer (agree)" and points to the call script.
+
+No code changed. The technical facts are unchanged: `.co.ke` needs a business
+certificate or KRA PIN at the registrar, the domain stays in Aquamor's name, the
+server is a small Ubuntu VPS behind Caddy, and online payments remain deferred.

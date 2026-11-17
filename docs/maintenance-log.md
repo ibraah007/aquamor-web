@@ -50,6 +50,28 @@ stays readable without JavaScript and nothing flashes on load. Reduced-motion is
 respected and every element is unobserved after it appears. Recorded in
 `status.md` section 31 and the front-end README.
 
+### Plain-language launch ask and client call script
+
+The client is expected to phone rather than reply in writing. Added
+[`client-call-script.md`](client-call-script.md): each of the four launch items
+(approval, domain, business details, hosting) explained in the client's terms,
+with the questions he is likely to ask, short answers, a "what happens after each
+item" table, a six-fact cheat sheet for the call, and a written summary to send
+afterwards.
+
+The client-facing documents were aligned with it:
+
+- [`client-information-needed.md`](client-information-needed.md) now includes
+  hosting as a launch item (three ownership options, cost guide, warning against
+  e-commerce packages) and the reply form asks for the hosting choice and monthly
+  manager. The PDF was regenerated.
+- [`client-review-message.md`](client-review-message.md): the email now says
+  Aquamor registers the domain with our guidance instead of "we will register it",
+  both email and WhatsApp versions ask about hosting, and the Swahili message was
+  updated to match.
+- [`go-live-runbook.md`](go-live-runbook.md) points to the call script and records
+  the server owner as agreed between client and maintainer.
+
 ## 16 November 2026
 
 ### Client confirmed all outstanding details

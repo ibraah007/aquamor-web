@@ -12,6 +12,7 @@ One-page website for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, N
 - [`docs/deployment.md`](docs/deployment.md) — server setup, TLS, backups, updates and launch runbook.
 - [`docs/go-live-runbook.md`](docs/go-live-runbook.md) — ordered launch-day sequence for the domain, DNS, TLS, verification and handover, with an owner for each step.
 - [`docs/client-review-message.md`](docs/client-review-message.md) — ready-to-send message with the preview link and the remaining client questions.
+- [`docs/client-call-script.md`](docs/client-call-script.md) — plain-language phone script: what to ask for at each step, the likely client questions and short answers.
 - [`docs/launch-checklist.md`](docs/launch-checklist.md) — what to check before and after the public launch.
 
 ## Live static preview
@@ -95,6 +96,9 @@ aquamor-web/
 │   ├── how-to-request-a-change.md   # client-facing change-request sheet
 │   ├── client-information-needed.md # confirmed details and remaining launch items
 │   ├── client-information-needed.pdf # the same sheet as a PDF for emailing
+│   ├── client-review-message.md     # ready-to-send review message with the preview link
+│   ├── client-call-script.md        # plain-language phone script for the launch items
+│   ├── go-live-runbook.md           # ordered launch-day sequence for domain, DNS and TLS
 │   └── maintenance-log.md           # dated client decisions, requests and changes
 └── aquamor.db              # local development database (not for production)
 ```

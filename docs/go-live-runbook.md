@@ -23,10 +23,14 @@ carry a different domain through the deployment.
 | Final domain (`aquamorwater.co.ke` by default) registered under AQUAMOR PURIFIED DRINKING WATER | Client registers, maintainer guides | The account must be in the business name, not the maintainer's personal name. Aquamor pays the yearly renewal and keeps control. |
 | Registrar login or delegated access | Client → maintainer | Use the registrar's "delegate user" feature if it has one, or a shared password in a password manager. Never a WhatsApp group. |
 | Business registration certificate / KRA PIN | Client | Most `.co.ke` registrars ask for one of these to register a `.co.ke` in a business name. Confirm the exact list with the registrar. |
-| A server (VPS or dedicated) | To agree | Ubuntu LTS, 1 vCPU / 1 GB RAM is enough, Go 1.22+, `gcc`, `sqlite3`, `curl`, `git`, Caddy. |
+| A server (VPS or dedicated) | Client or maintainer (agree) | Ubuntu LTS, 1 vCPU / 1 GB RAM is enough, Go 1.22+, `gcc`, `sqlite3`, `curl`, `git`, Caddy. |
 | Server IP address and SSH access | Maintainer | Keep port 8080 closed to the internet. |
 | `ADMIN_TOKEN` | Maintainer | `openssl rand -hex 32`, stored in `/etc/aquamor/aquamor.env` at mode 600. |
 | Swahili read-through | Client's reviewer | Recommended, not blocking. The English and Swahili pages are otherwise ready. |
+
+For the client-facing version of this list — what to ask for on a phone call, in
+plain language, with the questions he is likely to ask — use
+[`client-call-script.md`](client-call-script.md).
 
 **Decide the final domain before touching DNS.** If it stays
 `aquamorwater.co.ke`, no change is needed. If the client chooses something else,
