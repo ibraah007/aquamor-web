@@ -34,7 +34,11 @@ run `./scripts/set-domain.sh <domain>` in the checkout that will be deployed,
 then commit and push the change. The script updates the canonical/Open Graph
 URLs, `robots.txt`, `sitemap.xml`, the Caddy example and the environment example.
 Deploy that commit: a separate clone, or uncommitted local edits, will not
-contain the new domain.
+contain the new domain. On the server, the installed
+`/etc/aquamor/aquamor.env` is also separate from the checkout: once the service
+is set up, set `PUBLIC_BASE_URL=https://<domain>` there and restart the service.
+`git pull` updates only the example file. This value matters when online payments
+are enabled later.
 
 ---
 
@@ -121,12 +125,14 @@ Both must return the server IP. With a 300-second TTL this is usually minutes.
 # deployment.md section 2. Do not clone again into the non-empty directory.
 cd /opt/aquamor
 sudo git pull --ff-only        # picks up the set-domain.sh commit, if there is one
+sudoedit /etc/aquamor/aquamor.env     # PUBLIC_BASE_URL=https://<domain>; git pull does not update this copy
 CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o "$HOME/aquamor-backend" ./backend/cmd/server
 sudo install -m 755 "$HOME/aquamor-backend" /opt/aquamor/aquamor-backend
 
 sudo cp deploy/aquamor.service /etc/systemd/system/aquamor.service
 sudo systemctl daemon-reload
 sudo systemctl enable --now aquamor
+sudo systemctl restart aquamor        # apply the new binary and environment to a running service
 sudo systemctl status aquamor --no-pager
 ```
 
@@ -278,7 +284,7 @@ and know how to request a change.
 | Wrong content is live | Web files are served from `/opt/aquamor/web`; fix the file and pull. No rebuild needed. |
 | Orders stop saving | `systemctl status aquamor`, then `journalctl -u aquamor -n 100`. A missing `ADMIN_TOKEN` or a read-only database produces a clear error. |
 | A bad release | Roll back the binary as in [`deployment.md`](deployment.md) section 11. Database migrations are additive, so an older binary still runs. |
-| Customer data looks wrong | Stop the service and inspect the damage before restoring: a restore replaces the live database and drops every order created after the backup. Note or export those newer orders and reconcile any that can be recovered from the pre-restore copy (`aquamor.db.before-restore`); that copy is kept but is not merged automatically. Use the tested restore procedure and never overwrite the backup. |
+| Customer data looks wrong | Stop the service and inspect the damage before restoring: a restore replaces the live database and drops every order created after the backup. Note or export those newer orders and reconcile any that can be recovered from the pre-restore copy (`aquamor.db.before-restore`, plus its `-wal` if present); that copy is kept but is not merged automatically. Use the tested restore procedure and never overwrite the backup. |
 
 ---
 

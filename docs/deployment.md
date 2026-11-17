@@ -171,8 +171,21 @@ git commit -m "chore: set the live domain to <domain>"
 git push
 ```
 
-On the server, `sudo git pull --ff-only` in `/opt/aquamor` picks up the change.
-Reload Caddy if its configuration changed. Static files do not need a rebuild.
+On the server, `sudo git pull --ff-only` in `/opt/aquamor` updates the checkout
+only. Apply the new domain to the installed configuration:
+
+```sh
+sudo cp /opt/aquamor/deploy/Caddyfile /etc/caddy/Caddyfile
+sudo caddy validate --config /etc/caddy/Caddyfile
+sudo systemctl reload caddy
+
+sudoedit /etc/aquamor/aquamor.env    # set PUBLIC_BASE_URL=https://<domain>
+sudo systemctl restart aquamor
+```
+
+Caddy reads `/etc/caddy/Caddyfile`, not the checkout, and the service reads
+`/etc/aquamor/aquamor.env`, not the example. Neither is changed by the pull.
+Static files do not need a rebuild or restart.
 
 The verify, update and rollback commands below use `aquamorwater.co.ke`;
 substitute the final domain if it differs.
@@ -235,6 +248,9 @@ To restore, stop the service first:
 set -euo pipefail
 sudo systemctl stop aquamor
 sudo cp /var/lib/aquamor/aquamor.db /var/lib/aquamor/aquamor.db.before-restore
+if [ -f /var/lib/aquamor/aquamor.db-wal ]; then
+  sudo cp /var/lib/aquamor/aquamor.db-wal /var/lib/aquamor/aquamor.db.before-restore-wal
+fi
 
 restore_dir="$(mktemp -d)" || exit 1
 restore_db="$restore_dir/restore.db"
@@ -258,6 +274,20 @@ sqlite3 "$restore_db" "SELECT name FROM sqlite_master WHERE type='table' AND nam
 sudo install -o aquamor -g aquamor -m 600 "$restore_db" /var/lib/aquamor/aquamor.db
 rm -rf "$restore_dir"
 sudo rm -f /var/lib/aquamor/aquamor.db-wal /var/lib/aquamor/aquamor.db-shm
+```
+
+The service is still stopped. Before starting it, compare the preserved copy
+(with its WAL) against the restored backup and reconcile any newer orders that
+can be recovered:
+
+```sh
+sudo sqlite3 /var/lib/aquamor/aquamor.db.before-restore \
+  "SELECT id, created_at, customer_name, customer_phone, total_amount FROM orders ORDER BY id;"
+```
+
+Then start the service:
+
+```sh
 sudo systemctl start aquamor
 ```
 

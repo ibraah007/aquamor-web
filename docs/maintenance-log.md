@@ -36,7 +36,9 @@ server. No functional defects were found. Results are recorded in
   two limits: orders containing an unpriced item (such as 500ml) stay only in
   WhatsApp, and a backup restore drops newer orders unless they are reconciled
   first. The client message calls the preview public and explains that the order
-  draft is addressed to the Aquamor business number.
+  draft is addressed to the Aquamor business number. The deployment steps also
+  update the installed Caddyfile and `PUBLIC_BASE_URL`, restart the service after
+  a new binary, and preserve the SQLite WAL before a restore.
 
 ## 16 November 2026
 
