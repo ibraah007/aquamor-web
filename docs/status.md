@@ -27,9 +27,9 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 | WhatsApp | 0712 140 006 |
 | Phone calls | 0113 952 100, 0736 054 182 |
 | Email | aquamor2020@gmail.com |
-| Opening hours | Mon to Sat 8:30am to 8:30pm; Sun 12:00pm to 7:00pm |
+| Opening hours | Every day 8:30am to 9:00pm |
 | Refill prices | 5L Ksh 50, 10L Ksh 100, 20L Ksh 200 (includes water) |
-| New bottle purchase prices | 20L regular Ksh 450–550; 20L hard Ksh 1,000–1,700; 10L Ksh 200–250; 5L Ksh 100 |
+| New bottle prices | 20L regular Ksh 450–550; 20L hard Ksh 1,000–1,700; 10L Ksh 200–250; 5L Ksh 100 (includes the bottle and the water) |
 | Bottled water | 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L; prices vary by quantity, quoted on request |
 | Customised bottles | Churches, weddings, graduations, anniversaries, corporate events and other occasions; customisation Ksh 500–1,000; minimum 10 bales |
 | Dispenser cleaning | Ksh 500–1,000 depending on the dispenser and cleaning required |
@@ -59,11 +59,11 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] **Hero:** headline, official tagline, buttons, key facts, live "Open now / Closed now" line (Nairobi time)
 - [x] **Build your order:** refill sizes, bottled water in ten sizes (quoted by quantity) and new bottles in four sizes with steppers, delivery/pickup choice, running total, one-tap WhatsApp message with the order already written, and a one-tap reorder of the last order
 - [x] **Refill planner:** enter the number of people at home and choose 5L, 10L or 20L; the site estimates weekly litres, refills and cost, and links to WhatsApp with the plan already written
-- [x] **Label designer:** pick a Wedding, Church, Graduation or Corporate preset, type an event name and message, pick a color, a rectangular or round label and one of ten bottle sizes, see it on a bottle, send the request on WhatsApp; customisation and minimum-order details are shown
+- [x] **Label designer:** pick a Wedding, Church, Graduation or Corporate preset, type an event name and message, pick a named color, a rectangular, round or oval label and one of ten bottle sizes, see it on a bottle, send the request on WhatsApp; customisation and minimum-order details are shown
 - [x] **Printable price card:** a standalone A4 page for the shop counter with the confirmed refill and new-bottle prices, bottled-water quotation, customisation and cleaning charges, delivery areas, tagline and WhatsApp number (linked from the docs; not part of the one-page site)
 - [x] **How it works and who/where we deliver to:** three steps (choose your water, order on WhatsApp, delivery or pickup), the business types served and the delivery areas; free delivery depends on distance and quantity
 - [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, the Ksh 500–1,000 price range, book on WhatsApp
-- [x] **Our work (gallery):** 26 real photos, three short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
+- [x] **Our work (gallery):** 39 real photos, four short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
 - [x] **Water purification process:** the client's eight steps, without individual micron sizes
 - [x] **About:** company story, official tagline, pumps and dispensers, with a team photo
 - [x] **FAQ:** ten tap-to-open questions, answered only with confirmed facts
@@ -544,3 +544,69 @@ Following from that review, the client-facing documents were made consistent:
 No code changed. The technical facts are unchanged: `.co.ke` needs a business
 certificate or KRA PIN at the registrar, the domain stays in Aquamor's name, the
 server is a small Ubuntu VPS behind Caddy, and online payments remain deferred.
+
+## 33. Content corrections: hours, prices wording and label designer (18 November 2026)
+
+A round of corrections to the published content, plus more ways to brand a
+bottle.
+
+- **Opening hours:** now every day, 8:30am to 9:00pm. Updated in the contact
+  section, the FAQ, the structured data in `<head>`, the price card, the `H`
+  table that powers the live "Open now" line, and the Swahili dictionary.
+  `H` therefore uses `510`–`1260` for every day.
+- **New bottles:** the listed prices include the bottle and the water, not just
+  the bottle. The wording changed in the order builder, the order note, the
+  price card, the Swahili dictionary and the client documents. Prices themselves
+  are unchanged, and the estimated total still uses the lower bound of each range.
+- **Location:** the contact section and FAQ now lead with "Ngara, Nairobi" before
+  the Musindi Road directions.
+- **Gallery captions:** corrected to match the photos: one shows a team member
+  wiping a 20L bottle after refilling it, and the other shows a 20L bottle being
+  refilled with a pump.
+- **Label designer:** the colour palette is now black, yellow, light green, dark
+  green, red, ocean blue, white and blue. Added an oval label style alongside the
+  rectangular and round styles. Light labels (yellow, light green, white) switch
+  to dark text, and white gets a thin outline; the swatches also have a subtle
+  outline so the white option is visible. The WhatsApp request now includes the
+  label style, in English or Swahili.
+- `web/price-card.html`, the live facts in `docs/status.md` and
+  `docs/client-information-needed.md`, the maintenance log, the client review
+  message and the site README were updated to match.
+
+Verified with the JavaScript syntax check and a browser pass: the live line reads
+"Open now until 9:00pm", the three label styles switch, the swatch and style
+labels translate, and the WhatsApp draft includes the colour and style.
+
+## 34. New client photos, colour-blind support and full wordmark (18 November 2026)
+
+The client sent a new media pack: 13 photos and a 24-second delivery clip. The
+same review asked for the full brand name, a more attractive rotating
+background, and help for colour-blind customers choosing a label colour. Work is
+tracked in #39–#43.
+
+- **Media:** added the graduation bottle, 20L bottle with a manual pump,
+  dispenser tap, clean tank interior, staff portrait, 5L bottle, TotalEnergies
+  thank-you card, two glass-bottle rows, tank-care and tank-check posters, and
+  the staff cleaning a tank. Each has an optimised JPG and WebP original plus
+  480px and 800px variants, and a `.p-*` lightbox class.
+- **Gallery:** now 39 tiles. New captions are in English and Swahili.
+- **Delivery clip:** `assets/video/delivery.mp4` with a poster frame from the
+  clip; it sits with the other short clips and uses `preload="none"`.
+- **Rotating backgrounds:** the hero now cycles through nine photos. The order,
+  design and contact bands have seven, seven and six. Extra slides stay in
+  `data-src`/`data-srcset` and are fetched just before they are shown, so a phone
+  still downloads only the first photo up front.
+- **Colour-blind support (#42):** every swatch now carries its name in text
+  (translated), the current choice is written out in a live region, and a
+  collapsible help panel shows the client's photo of the shop's cap colours with
+  a WhatsApp fallback. The white swatch keeps its outline.
+- **Wordmark (#43):** the header now shows "Aquamor" with "Purified Drinking
+  Water" underneath. It was checked at 320px, 360px and 1300px; the small CTA is
+  already hidden below 420px, so nothing overlaps.
+- **Captions (#39):** corrected to the client's wording: one photo is staff
+  cleaning a 20L bottle, the other is staff wiping a bottle after refilling.
+
+Verified with `node --check` on every script and a headless browser pass at
+320px, 360px and 1300px: no console errors, all 13 new captions, the help panel,
+the delivery clip caption and the live colour line translate to Swahili, and the
+WhatsApp design message still includes the colour and style.

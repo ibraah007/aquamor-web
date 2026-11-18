@@ -14,9 +14,9 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Price card | A standalone A4 page ([price-card.html](price-card.html)) for the shop counter, with the confirmed refill and bottle prices, free-delivery line and WhatsApp number; use the Print button or the browser's print dialog |
 | Admin orders | A private page ([admin.html](admin.html)) that asks for `ADMIN_TOKEN`, then lists saved orders with customer details, line items, payment state and a CSV export; never linked from the public site and marked `noindex` |
 | How it works | Three steps (choose your water, order on WhatsApp, delivery or pickup) and a "Who we deliver to" strip for homes, offices, schools, restaurants, clinics and hotels |
-| Label designer | Customer picks a Wedding, Church, Graduation or Corporate preset, types an event name and message, picks a colour, a rectangular or round label and a bottle size, sees it on a bottle, and sends the request to WhatsApp |
+| Label designer | Customer picks a Wedding, Church, Graduation or Corporate preset, types an event name and message, picks a named colour, a rectangular, round or oval label and a bottle size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
-| Gallery | 26 real photos and three short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
+| Gallery | 39 real photos and four short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
 | Scroll reveal | Section headings, cards and gallery photos rise and fade in as they enter the viewport, with a short stagger and an animated accent under each heading; respects reduced-motion |
 | Fading backgrounds | Photo slideshows behind the hero, order, branded-bottles and contact sections |
 | Mobile menu | A keyboard-accessible menu below 1000px |
@@ -48,7 +48,7 @@ web/
 │   ├── admin.js        # Admin orders page: token login, list, filters, CSV
 │   └── i18n.js         # Swahili switch, open/closed status, copy buttons, testimonials
 ├── assets/img/         # Photos (JPG + WebP, plus 480w/800w variants), og.jpg, favicons
-├── assets/video/       # Short muted MP4 clips (event setup, event bottles, dispenser cleaning)
+├── assets/video/       # Short muted MP4 clips (event setup, event bottles, dispenser cleaning, delivery)
 └── README.md
 ```
 
@@ -66,15 +66,15 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 
 **Refill planner (`js/planner.js`).** `SIZES` holds the three refill sizes and their confirmed prices, and `PER_PERSON_DAY` is the planning assumption (2 litres). Weekly litres are the number of people times the assumption times seven; the refills are rounded up to full containers, and the cost is refills times the size price. The results and the WhatsApp message are redrawn on each change and when the language changes.
 
-**Label designer (`js/order.js`).** The bottle is an SVG. The event text, message and label colour are SVG elements that the inputs update live. Presets fill the event name, message and colour with sample values in the current language; they do not add products or prices. The label style switches between a rectangle (`#lbl`) and a circle (`#lblRound`). `fit()` measures the rendered text and reduces the font size until it fits inside the label, using smaller limits for the round style; it runs again when the web font finishes loading, when the style changes and when the language changes. "Request this design" builds a WhatsApp message from the same values.
+**Label designer (`js/order.js`).** The bottle is an SVG. The event text, message and label colour are SVG elements that the inputs update live. Presets fill the event name, message and colour with sample values in the current language; they do not add products or prices. The label style switches between a rectangle (`#lbl`), a circle (`#lblRound`) and an oval (`#lblOval`). `fit()` measures the rendered text and reduces the font size until it fits inside the label, using smaller limits for the round and oval styles; it runs again when the web font finishes loading, when the style changes and when the language changes. Light label colours (yellow, light green, white) get dark text and a thin outline, so the design stays readable. Every swatch also shows its colour name in text; the current choice is written into `#swPick`, and the "Not sure which color?" panel shows the shop's cap-colour photo for colour-blind customers. "Request this design" builds a WhatsApp message from the same values.
 
-**Fading backgrounds (`js/gallery.js`).** Any element with class `bg` holds `<picture>` children with a `<source>` for WebP and a JPEG fallback. The script shows one at a time and fades to the next every 6 seconds. The first hero photo is eager and high priority; the other slides and below-the-fold banners are lazy-loaded. With "reduced motion" turned on in the visitor's phone, it shows only the first photo.
+**Fading backgrounds (`js/gallery.js`).** Any element with class `bg` holds `<picture>` children with a `<source>` for WebP and a JPEG fallback. The script shows one at a time and fades to the next every 6 seconds. The hero has nine photos; the order, design and contact bands have seven, seven and six. The first hero photo is eager and high priority; the other slides and below-the-fold banners are lazy-loaded. With "reduced motion" turned on in the visitor's phone, it shows only the first photo.
 
-**Gallery filters and lightbox (`js/gallery.js`).** Each tile has `data-c` with its categories (for example `"events bottles"`). A filter button hides tiles that do not include its category. Tapping a tile opens a `<dialog>` with the photo enlarged, using the tile's caption. Gallery photos are `<picture>` elements with a WebP source and a JPEG fallback, responsive `srcset` variants (480w, 800w and the original), and `loading="lazy"`. The lightbox uses the full-size photo from `css/photos.css`, so enlarging does not show a small variant. The three short video clips sit below the grid and use `preload="none"` with a poster image, so they download only when played.
+**Gallery filters and lightbox (`js/gallery.js`).** Each tile has `data-c` with its categories (for example `"events bottles"`). A filter button hides tiles that do not include its category. Tapping a tile opens a `<dialog>` with the photo enlarged, using the tile's caption. Gallery photos are `<picture>` elements with a WebP source and a JPEG fallback, responsive `srcset` variants (480w, 800w and the original), and `loading="lazy"`. The lightbox uses the full-size photo from `css/photos.css`, so enlarging does not show a small variant. The four short video clips sit below the grid and use `preload="none"` with a poster image, so they download only when played.
 
 **Mobile menu (`js/site.js`).** The toggle updates `aria-expanded`, opens the menu, closes on Escape, on an outside click, or when a link is chosen.
 
-**Open now (`js/i18n.js`).** The script reads the current day and time in the `Africa/Nairobi` time zone and compares them with the `H` table (minutes since midnight for each weekday). It writes "Open now until 8:30pm" or "Closed now, opens ..." into every element with class `js-open`, and refreshes it every minute.
+**Open now (`js/i18n.js`).** The script reads the current day and time in the `Africa/Nairobi` time zone and compares them with the `H` table (minutes since midnight for each weekday). It writes "Open now until 9:00pm" or "Closed now, opens ..." into every element with class `js-open`, and refreshes it every minute.
 
 **English / Swahili (`js/i18n.js`).** The `SW` dictionary maps each English sentence to its Swahili version. When Swahili is switched on, the script walks every text node on the page, looks up its exact English text, and swaps it. The original is stored so it can be switched back. It also translates `aria-label`s and placeholders. A `MutationObserver` translates text added later, such as the order rows. The chosen language is saved in `localStorage`.
 

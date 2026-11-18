@@ -32,7 +32,7 @@ preview on both a phone and a computer.
 3. **Bottle sizes:** 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L.
 4. **Delivery areas:** Ngara, Parklands, Pangani, Gikomba, Westlands, Nairobi CBD
    and parts of Eastleigh.
-5. **Opening hours:** Monday–Saturday 8:30am–8:30pm, Sunday 12:00pm–7:00pm.
+5. **Opening hours:** every day 8:30am–9:00pm.
 6. **Photos and captions** in "Our work", the cleaning section and the About
    section.
 7. **Contact details:** WhatsApp 0712 140 006, the two call numbers, the email,

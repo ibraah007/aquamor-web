@@ -6,6 +6,41 @@ Keep it short. Link to the issue, PR or file when there is one.
 
 ---
 
+## 18 November 2026
+
+### Content corrections: hours, prices wording, photos and label designer
+
+- **Opening hours** are now every day, 8:30am to 9:00pm. The contact section,
+  FAQ, structured data, price card and the live "Open now" table were updated.
+- **New-bottle prices include the bottle and the water.** The 16 November entry
+  below said water was sold separately; the site now describes the listed price
+  as including both. The prices themselves did not change.
+- **Location** now leads with "Ngara, Nairobi" before the Musindi Road directions.
+- **Gallery captions** were corrected to match the photos.
+- **Label designer:** eight colours (black, yellow, light green, dark green, red,
+  ocean blue, white, blue), a new oval style, dark text on light labels, and an
+  outline on the white swatch. The WhatsApp request includes the label style.
+
+See [`status.md`](status.md) section 33 for details.
+
+### New photos, colour-blind help and the full wordmark
+
+- Added 13 of the client's new photos and a 24-second delivery clip to the
+  gallery and the rotating backgrounds. Images have JPG + WebP copies and
+  480/800px variants (#40, #41).
+- The hero now rotates through nine photos; the order, design and contact bands
+  have seven, seven and six.
+- Every label-colour swatch now shows its name, the selected colour is written
+  out, and a help panel shows the client's photo of the shop's bottle caps
+  (#42).
+- The header wordmark now reads Aquamor Purified Drinking Water (#43).
+- Corrected the two photo captions to the client's wording: staff cleaning a
+  bottle, and staff wiping a bottle after refilling (#39).
+
+See [`status.md`](status.md) section 34 for details.
+
+---
+
 ## 17 November 2026
 
 ### Final QA on the published preview
