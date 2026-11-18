@@ -39,6 +39,8 @@
     "section .band > .wrap > h2",
     "section .band > .wrap > .lead",
     "#order .build",
+    ".perks .perk",
+    ".ctaband .ctabandin > *",
     "#planner .plan",
     "#how .steps > li",
     "#how .who",
