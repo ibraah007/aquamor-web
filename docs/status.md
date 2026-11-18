@@ -64,6 +64,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] **How it works and who/where we deliver to:** three steps (choose your water, order on WhatsApp, delivery or pickup), the business types served and the delivery areas; free delivery depends on distance and quantity
 - [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, the Ksh 500–1,000 price range, book on WhatsApp
 - [x] **Our work (gallery):** 39 real photos, four short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
+- [x] **Colour and motion:** 5-second fading photos behind seven sections, tinted planner/gallery/about/FAQ, colourful step and card accents, hover feedback and a scroll-progress line
 - [x] **Water purification process:** the client's eight steps, without individual micron sizes
 - [x] **About:** company story, official tagline, pumps and dispensers, with a team photo
 - [x] **FAQ:** ten tap-to-open questions, answered only with confirmed facts
@@ -610,3 +611,32 @@ Verified with `node --check` on every script and a headless browser pass at
 320px, 360px and 1300px: no console errors, all 13 new captions, the help panel,
 the delivery clip caption and the live colour line translate to Swahili, and the
 WhatsApp design message still includes the colour and style.
+
+## 35. More colour, photos across the page and a faster slideshow (18 November 2026)
+
+The client asked for a more marketable, attractive site: sections that "pop"
+with colour, fading photos all over the page, and a new background photo about
+every 5 seconds. Tracked in #44.
+
+- **Slideshow:** every `.bg` now advances every 5 seconds (was 6) and the
+  crossfade is 1.2 seconds (was 1.6). The initial stagger dropped from 1.5s to
+  0.4s per section, so the lower sections start rotating soon after load.
+- **More photo sections:** How it works, dispenser cleaning and purification now
+  sit on full-section fading photos, like the hero, order, design, contact
+  sections. They add six, six and five lazy slides respectively with a matching
+  photo in each gallery category.
+- **Colour rhythm:** the planner, gallery, about and FAQ use tinted backgrounds
+  with soft aqua, sun and leaf glows. Photo sections have a different glow per
+  section (leaf, sun, aqua). This alternation means the page no longer reads as
+  one long dark block.
+- **Details:** new uppercase "eyebrow" labels above the headings (Planner,
+  ordering, cleaning, process, about, FAQ), step numbers in aqua/sun/leaf,
+  coloured card edges, gradient filter tabs and primary buttons, hover lift on
+  cards and photos, and an open-state highlight on FAQ rows. All new text has
+  Swahili translations.
+- **Scroll progress:** a 3px aqua–sun–coral line above the sticky header fills as
+  the page is read (`site.js`, `.scrollbar` in `styles.css`).
+- **Access and performance:** reduced-motion turns off the slideshow, hovers and
+  progress transition. Every new slide except the first in each section stays in
+  `data-src`/`data-srcset`. Checked at 320px, 360px and 1300px; no sideways
+  scroll and no console errors.

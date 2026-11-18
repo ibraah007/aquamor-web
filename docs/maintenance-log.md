@@ -39,6 +39,17 @@ See [`status.md`](status.md) section 33 for details.
 
 See [`status.md`](status.md) section 34 for details.
 
+### More colour and photos across the page
+
+- The client wanted the site to feel more marketable, with colour in more
+  sections and fading photos all over. The slideshow now changes every
+  5 seconds, and the How it works, cleaning and purification sections have
+  their own photo backgrounds.
+- The planner, gallery, about and FAQ now use tinted backgrounds with aqua,
+  sun and leaf glows; step numbers, card edges, tabs and buttons carry the same
+  accents. Added a slim scroll-progress line and hover feedback on cards/photos.
+- Tracked in #44 and described in [`status.md`](status.md) section 35.
+
 ---
 
 ## 17 November 2026

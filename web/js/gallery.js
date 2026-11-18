@@ -28,7 +28,7 @@
         var j=(i+1)%s.length,pic=s[j];
         load(pic).then(function(){s[i].classList.remove("on");i=j;pic.classList.add("on");busy=false});
       }
-      setTimeout(function(){setInterval(function(){if(!busy){busy=true;advance()}},6000)},n*1500);
+      setTimeout(function(){setInterval(function(){if(!busy){busy=true;advance()}},5000)},n*400);
     });
     var tabs=document.querySelectorAll(".gallery .tab"),tiles=document.querySelectorAll(".g");
     tabs.forEach(function(t){t.addEventListener("click",function(){

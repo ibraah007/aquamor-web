@@ -32,8 +32,10 @@
   var motion=window.matchMedia?window.matchMedia("(prefers-reduced-motion: reduce)"):null;
   if(!("IntersectionObserver" in window)||(motion&&motion.matches))return;
   var selectors=[
+    "section > .wrap > .eyebrow",
     "section > .wrap > h2",
     "section > .wrap > .lead",
+    "section .band > .wrap > .eyebrow",
     "section .band > .wrap > h2",
     "section .band > .wrap > .lead",
     "#order .build",
@@ -105,4 +107,26 @@
   window.addEventListener("load",revealInView);
   window.addEventListener("hashchange",revealInView);
   window.addEventListener("pageshow",revealInView);
+})();
+
+/* Scroll progress bar. */
+(function(){
+  var fill=document.getElementById("scrollFill");
+  if(!fill)return;
+  var ticking=false;
+  function update(){
+    var d=document.documentElement;
+    var max=d.scrollHeight-d.clientHeight;
+    fill.style.width=(max>0?(d.scrollTop/max)*100:0)+"%";
+    ticking=false;
+  }
+  function queue(){
+    if(ticking)return;
+    ticking=true;
+    requestAnimationFrame(update);
+  }
+  window.addEventListener("scroll",queue,{passive:true});
+  window.addEventListener("resize",queue);
+  window.addEventListener("load",update);
+  update();
 })();
