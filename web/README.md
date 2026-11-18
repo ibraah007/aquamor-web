@@ -19,6 +19,8 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Gallery | 39 real photos and four short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
 | Scroll reveal | Section headings, cards and gallery photos rise and fade in as they enter the viewport, with a short stagger and an animated accent under each heading; respects reduced-motion |
 | Scroll progress | A slim aqua-to-coral line above the header fills as the page is read |
+| Benefit strip | Four colour-coded cards under the hero: purified water, refills from Ksh 50, custom labels and delivery |
+| Closing call to action | Bright gradient band before the contact section with "Build your order" and WhatsApp buttons |
 | Fading backgrounds | Photo slideshows behind the hero, order, branded-bottles, how-it-works, dispenser-cleaning, purification and contact sections |
 | Mobile menu | A keyboard-accessible menu below 1000px |
 | English / Swahili | One-tap language switch, remembered between visits; WhatsApp messages are written in the chosen language |
@@ -111,6 +113,8 @@ Then visit <http://localhost:8000>. The Pay online button stays hidden because a
 ## Deploy
 
 Any static host works. For Netlify, Cloudflare Pages or Vercel, set the publish/output directory to `web/` and leave the build command empty. For GitHub Pages, use an Actions workflow that uploads `web/` (Pages cannot serve a subfolder directly without one).
+
+CSS and JS links carry a `?v=` value. Bump it in `index.html`, `payment.html`, `admin.html` and `price-card.html` whenever those files change, so browsers do not keep an old cached copy; GitHub Pages caches assets for 10 minutes and cannot send custom headers.
 
 For the client's preferred domain (`aquamorwater.co.ke`), add it in the host's dashboard and set the DNS records the provider asks for. The canonical and `og:` URLs, `robots.txt`, `sitemap.xml` and the Caddy example already use it; run `./scripts/set-domain.sh <domain>` first if a different final domain is chosen.
 

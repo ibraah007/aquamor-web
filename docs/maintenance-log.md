@@ -49,6 +49,10 @@ See [`status.md`](status.md) section 34 for details.
   sun and leaf glows; step numbers, card edges, tabs and buttons carry the same
   accents. Added a slim scroll-progress line and hover feedback on cards/photos.
 - Tracked in #44 and described in [`status.md`](status.md) section 35.
+- Follow-up the same day: added the four benefit cards under the hero, a bright
+  closing call-to-action band, a lighter hero overlay and `?v=` version queries
+  on every CSS/JS link so cached files cannot hold the old design. Tracked in
+  #45 and described in section 36.
 
 ---
 

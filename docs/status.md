@@ -640,3 +640,27 @@ every 5 seconds. Tracked in #44.
   progress transition. Every new slide except the first in each section stays in
   `data-src`/`data-srcset`. Checked at 320px, 360px and 1300px; no sideways
   scroll and no console errors.
+
+## 36. Benefit strip, closing call to action and versioned assets (18 November 2026)
+
+The first colour-and-photo pass was live, but the client reported that the site
+still looked the same. GitHub Pages caches HTML and CSS for 10 minutes and the
+asset links had no version, so an open tab could keep the old design. This pass
+adds changes that are impossible to miss and prevents the same cache problem.
+
+- **Benefit strip:** four colour-coded cards directly under the hero — purified
+  water, refills from Ksh 50, custom labels for events and delivery across
+  Nairobi. Each has its own icon, gradient and tint (aqua, sun, coral, leaf).
+- **Closing call to action:** a bright aqua/sun gradient band before the contact
+  section, with a short marketing line and "Build your order" and WhatsApp
+  buttons.
+- **Hero:** the overlay is lighter and ends in a warm gold wash, so more of the
+  photo and its colour show through.
+- **Cache busting:** every CSS and JS link now carries `?v=20261118e` on all four
+  pages. Future asset edits must bump the value.
+- New text is translated to Swahili; the benefit cards and CTA block join the
+  scroll-reveal set. Checked at 320, 360 and 1300px in light and dark mode,
+  including the two CTA buttons wrapping on small phones.
+
+Tracked in #45. The live preview was confirmed to contain the new sections and
+the 5-second slideshow after the deploy.
