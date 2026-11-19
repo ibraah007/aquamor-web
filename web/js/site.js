@@ -50,6 +50,7 @@
     "#gallery .clips > .clip",
     "#process .steps > li",
     "#about .aboutgrid > *",
+    "#reviews .rev",
     "#faq details",
     "#contact .box > div",
     "#contact .map"
