@@ -315,12 +315,7 @@
   "Read all reviews on Google": "Soma maoni yote kwenye Google",
   "Google review · September 2026": "Maoni ya Google · Septemba 2026",
   "Google review · July 2026": "Maoni ya Google · Julai 2026",
-  "Follow us": "Tufuate",
-  "Find Aquamor online": "Pata Aquamor mtandaoni",
-  "Photos from the shop, event bottles and updates. Facebook is our main page.": "Picha za dukani, chupa za hafla na taarifa. Facebook ndiyo ukurasa wetu mkuu.",
-  "Background photos": "Picha za mandhari",
-  "Previous background photo": "Picha iliyopita ya mandhari",
-  "Next background photo": "Picha inayofuata ya mandhari"
+  "Follow us": "Tufuate"
 };
   var PH = {
   "e.g. Ngara, Pangani, Eastleigh": "mf. Ngara, Pangani, Eastleigh",

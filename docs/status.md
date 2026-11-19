@@ -665,27 +665,21 @@ adds changes that are impossible to miss and prevents the same cache problem.
 Tracked in #45. The live preview was confirmed to contain the new sections and
 the 5-second slideshow after the deploy.
 
-## 37. Manual section slides, lit hovers and Google reviews (19 November 2026)
+## 37. Section hovers, gallery light and Google reviews (19 November 2026)
 
-The client asked for sections that brighten and slide by hand, photo changes that
-fade and brighten, a livelier gallery, and the social page with the strongest
-following plus a few real customer comments.
+The client asked for sections that brighten, photo changes that fade and
+brighten, a livelier gallery, and the social page with the strongest following
+plus a few real customer comments.
 
 ### Slideshows and hovers
-- **Manual controls:** every section with more than one background photo now has
-  a small previous / counter / next pill. The arrows work by mouse, touch and
-  keyboard (Left and Right when the controls have focus); a sideways touch swipe
-  on the section also changes the photo. The controls sit outside the
-  `aria-hidden` `.bg` box, so they are reachable by screen readers.
-- **Fade and brighten:** an incoming photo fades in from a slightly larger,
-  brighter frame and settles; the outgoing photo still crossfades. Reduced-motion
-  keeps the crossfade instant and turns the flash off.
-- **Interaction:** hovering, focusing or touching a photo section briefly flashes
-  the photo and overlay brighter, then holds a gentler brightness while the
-  pointer or focus stays inside. The automatic 5-second timer pauses during that
-  interaction and resumes when it ends. Off-screen sections stop cycling and
-  only load a photo just before it is shown, so the change does not add
-  first-load bytes.
+- **Automatic fading:** each photo section crossfades to its next photo every
+  5 seconds. The incoming photo fades in from a slightly larger, brighter frame
+  and settles while the outgoing photo fades away. The background photos have no
+  manual arrows or counters.
+- **Interaction:** hovering a photo section brightens its overlay and photo; the
+  slideshow keeps running on its own. Off-screen sections stop cycling and only
+  load a photo just before it is shown, so the change does not add first-load
+  bytes.
 - **Gallery:** tiles lift and brighten and a soft band of light sweeps across the
   photo on hover or keyboard focus, with the same treatment disabled under
   reduced-motion.
@@ -697,18 +691,37 @@ following plus a few real customer comments.
   shown; the credit is "Google review · month year". Dates and wording come from
   the public listing; the text was lightly edited for spelling, punctuation and
   spacing, with the meaning unchanged.
-- **Social links:** the two plain buttons are now a "Follow us" card with brand
-  icons. Facebook — the established AQUAMOR NGARA page — leads as the main page,
-  with TikTok beside it. Follower counts are deliberately not displayed because
-  neither platform exposes them to a logged-out reader; the question of which
-  page is busiest was settled from the public posting activity, not a count.
+- **Social links:** the two plain buttons are now a "Follow us" card with the
+  Facebook (AQUAMOR NGARA) and TikTok links and their brand icons. No follower
+  counts and no claim about which page is busier are shown; the links are left
+  to speak for themselves.
 - All new labels have Swahili translations, and the review cards join the
   scroll-reveal set.
 
 ### Checks and cache
 - `node --check` passes on every script. A headless Chromium pass confirmed seven
-  control pills, manual advance from 4/9 to 5/9 with the photo changing, the
-  Swahili labels after the language switch, three review cards and both social
-  icons. The new review and social layouts were checked at 390px and 1300px.
-- CSS and JS links are now `?v=20261119a` on `index.html`, `admin.html` and
-  `payment.html`. The A4 price card has no external assets.
+  automatic slideshows with no controls, the Swahili labels after the language
+  switch, three review cards and both social icons. The review and social
+  layouts were checked at 390px and 1300px.
+- CSS and JS links were moved to `?v=20261119a` on `index.html`, `admin.html` and
+  `payment.html` for this pass. The A4 price card has no external assets.
+
+## 38. Background photos are automatic again (19 November 2026)
+
+The client did not want the manual sliding options on the fading background
+photos; the photos should come and go by themselves.
+
+- Removed the previous / counter / next controls, the sideways swipe, the
+  keyboard arrow handling and the pause-on-hover behaviour from every section
+  background.
+- The photos now crossfade automatically every 5 seconds, with the same
+  brighten-in fade as before. Hovering still brightens the section, but it no
+  longer stops or changes the slideshow. Reduced-motion still shows only the
+  first photo.
+- The unused control translations and styles were removed. The gallery hover
+  light and reviews are unchanged. The social card now shows only the Facebook
+  and TikTok links, with no "main page" wording.
+- Cache versions are now `?v=20261119c` on `index.html`, `admin.html` and
+  `payment.html`. `node --check` passes and a headless Chromium pass confirms
+  that no control pills are created and the background photos advance
+  automatically.
