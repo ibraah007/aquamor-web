@@ -309,7 +309,18 @@
   "Inside the shop, with packs of bottles ready for orders": "Ndani ya duka, pakiti za chupa ziko tayari kwa oda",
   "A team member showing a portable automatic water pump for 20 litre containers": "Mfanyakazi akionyesha pampu ndogo ya maji ya kiotomatiki kwa chombo cha lita 20",
   "Close": "Funga",
-  "An Aquamor team member smiling and holding a pack of custom-labelled bottles in front of the refill price poster": "Mfanyakazi wa Aquamor akitabasamu akiwa ameshika pakiti ya chupa zenye lebo maalum mbele ya bango la bei za kujaza maji"
+  "An Aquamor team member smiling and holding a pack of custom-labelled bottles in front of the refill price poster": "Mfanyakazi wa Aquamor akitabasamu akiwa ameshika pakiti ya chupa zenye lebo maalum mbele ya bango la bei za kujaza maji",
+  "Reviews": "Maoni",
+  "4.9 out of 5 from 24 Google reviews (November 2026).": "4.9 kati ya 5 kutoka kwa maoni 24 ya Google (Novemba 2026).",
+  "Read all reviews on Google": "Soma maoni yote kwenye Google",
+  "Google review · September 2026": "Maoni ya Google · Septemba 2026",
+  "Google review · July 2026": "Maoni ya Google · Julai 2026",
+  "Follow us": "Tufuate",
+  "Find Aquamor online": "Pata Aquamor mtandaoni",
+  "Photos from the shop, event bottles and updates. Facebook is our main page.": "Picha za dukani, chupa za hafla na taarifa. Facebook ndiyo ukurasa wetu mkuu.",
+  "Background photos": "Picha za mandhari",
+  "Previous background photo": "Picha iliyopita ya mandhari",
+  "Next background photo": "Picha inayofuata ya mandhari"
 };
   var PH = {
   "e.g. Ngara, Pangani, Eastleigh": "mf. Ngara, Pangani, Eastleigh",
@@ -321,7 +332,7 @@
   "e.g. Your name": "mf. Jina lako"
 };
   window.__sw=SW; window.LANG="en";
-  var TESTIMONIALS=[]; // add real quotes: {quote:"...", name:"...", place:"..."}
+  var TESTIMONIALS=[]; // optional extra quotes: {quote:"...", name:"...", place:"..."}; the published Google reviews are in index.html
   var orig=new WeakMap();
   function textNodes(root){var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n,a=[];while(n=w.nextNode()){var t=n.parentNode&&n.parentNode.nodeName;if(t!=="SCRIPT"&&t!=="STYLE")a.push(n)}return a}
   function apply(root){textNodes(root).forEach(function(n){
