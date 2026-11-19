@@ -76,39 +76,15 @@ main:focus{outline:none}
   from{opacity:0;transform:scale(1.035);filter:brightness(1.4) saturate(1.12)}
   to{opacity:1;transform:none;filter:none}
 }
-/* Interacting with a photo section lights it up for a moment, then leaves the
-   photo brighter while the pointer or keyboard focus stays inside. */
+/* Hovering a photo section brightens its overlay and photo a little. The
+   slideshow keeps running on its own. */
 .hero::before,.band::before,.contact::before,.withbg::before,.tinted::before{transition:filter .5s ease}
-.is-lit::before{filter:brightness(1.2) saturate(1.06)}
+.hero:hover::before,.band:hover::before,.contact:hover::before,.withbg:hover::before{filter:brightness(1.2) saturate(1.06)}
 .tinted:hover::before{filter:brightness(1.12)}
-.is-lit .bg picture.on{filter:brightness(1.18) saturate(1.08);animation:bgFlash 1.1s ease}
-@keyframes bgFlash{
-  0%,100%{filter:brightness(1.18) saturate(1.08)}
-  45%{filter:brightness(1.46) saturate(1.18)}
-}
-/* Manual photo controls on each section that has a slideshow. */
-.has-bgslides{position:relative}
-.bgctl{position:absolute;right:clamp(10px,2.4vw,24px);bottom:clamp(10px,2.4vw,22px);z-index:4;
-  display:flex;align-items:center;gap:6px;padding:5px;border-radius:999px;
-  background:rgba(4,25,38,.5);border:1px solid rgba(255,255,255,.3);
-  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
-  box-shadow:0 8px 24px rgba(3,20,30,.28);opacity:.55;
-  transition:opacity .3s ease,transform .3s ease}
-.has-bgslides:hover .bgctl,.has-bgslides:focus-within .bgctl,.has-bgslides.is-lit .bgctl{opacity:1;transform:translateY(-2px)}
-.bgbtn{width:34px;height:34px;padding:0;border:0;border-radius:50%;cursor:pointer;
-  display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.14);
-  transition:background .2s ease,transform .2s ease}
-.bgbtn:hover,.bgbtn:focus-visible{background:linear-gradient(135deg,var(--aqua),#0d7fa0);transform:scale(1.06)}
-.bgbtn:active{transform:scale(.94)}
-.bgbtn svg{width:18px;height:18px}
-.bgcount{min-width:42px;text-align:center;color:#fff;font:700 .72rem/1 "Figtree",sans-serif;letter-spacing:.04em}
-@media(hover:none){.bgctl{opacity:.9}.bgbtn{width:38px;height:38px}}
-.hero .bgctl{bottom:clamp(84px,10vw,104px)}
-.contact .bgctl{top:clamp(10px,2.4vw,22px);bottom:auto}
+.hero:hover .bg picture.on,.band:hover .bg picture.on,.contact:hover .bg picture.on,.withbg:hover .bg picture.on{filter:brightness(1.18) saturate(1.08)}
 @media(prefers-reduced-motion:reduce){
   .bg picture.on{animation:none}
-  .is-lit .bg picture.on{animation:none}
-  .bgctl,.bgbtn,.is-lit::before,.tinted::before{transition:none}
+  .hero::before,.band::before,.contact::before,.withbg::before,.tinted::before{transition:none}
 }
 /* Colour rhythm: tinted sections between the photo bands so the page does not
    stay one flat colour. The glows are decorative only. */
@@ -243,9 +219,7 @@ details p{padding:0 18px 16px;margin:0;color:var(--muted)}
 @media(prefers-reduced-motion:reduce){.rev{transition:none}}
 /* Social links: Facebook is the busiest page, so it leads. */
 .socials{margin:28px 0 8px;padding:20px;border:1.5px solid rgba(255,255,255,.3);border-radius:18px;background:rgba(4,25,38,.3)}
-.socials .eyebrow{margin-bottom:10px}
-.socials h3{margin:0 0 6px;color:#fff}
-.socials p{margin:0 0 14px;color:#d3ecf5;max-width:52ch}
+.socials .eyebrow{margin-bottom:10px;color:#eaf9ff;border-color:rgba(255,255,255,.35)}
 .socialrow{display:flex;gap:10px;flex-wrap:wrap}
 .social{display:inline-flex;align-items:center;gap:9px;border-color:transparent;transition:transform .2s ease,filter .2s ease}
 .social svg{width:19px;height:19px;flex:0 0 auto;fill:currentColor}
