@@ -140,10 +140,30 @@ curl -fsS http://127.0.0.1:8080/api/v1/health
 
 ## 6. DNS and Caddy
 
-1. Point the domain's `A` record (and `AAAA` if the server has IPv6) at the
-   server's public IP address.
-2. Wait for DNS to resolve: `dig +short aquamorwater.co.ke`.
-3. Install Caddy using the instructions for your distribution, then install the
+DNS is not set up yet. This step needs the client's TrueHost DNS access; the
+server's public IP comes from provisioning.
+
+1. Get the server's public IP from the `./deploy/aws-provision.sh` output (or the
+   AWS console). Its output ends with the records to add:
+
+   ```
+   A  @    <PUBLIC_IP>
+   A  www  <PUBLIC_IP>
+   ```
+
+2. At TrueHost (client area → Domains → `aquamorwater.co.ke` → DNS Zone
+   Editor / Manage DNS):
+   - Confirm the domain uses TrueHost's nameservers. If it points elsewhere,
+     either switch the nameservers to TrueHost's or create the records at the
+     current DNS host.
+   - Add or replace an `A` record for `@` with the server's public IP.
+   - Add or replace an `A` record for `www` with the same IP.
+   - Delete any conflicting `A`/`AAAA` or parking/forwarding records on `@` and
+     `www`. Only add `AAAA` if the server actually has IPv6.
+   - Leave the existing `MX`/`TXT` (email forwarding) records untouched.
+3. Wait for DNS to resolve: `dig +short aquamorwater.co.ke` and
+   `dig +short www.aquamorwater.co.ke` should both return the server IP.
+4. Install Caddy using the instructions for your distribution, then install the
    example configuration:
 
 ```sh
