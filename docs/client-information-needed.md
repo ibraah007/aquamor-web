@@ -32,7 +32,7 @@ No KEBS number, certification claim or health claim is published. The supplier's
 
 ## 2. What is still needed to go live
 
-1. **Domain registration.** Register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER. Aquamor should keep the registrar login, ownership and renewal control, and pay the yearly renewal. We only need the technical DNS access so the site stays online. Confirm that the domain has been registered and by whom.
+1. **Domain and DNS access.** `aquamorwater.co.ke` is now registered and paid for (Truehost, renews 17 November 2027) — thank you. We only need the technical DNS access (or the registrar login) so we can point the domain at the server and switch the site on. If possible, ask the registrar to show the registrant name as AQUAMOR PURIFIED DRINKING WATER; the current invoice reads "Aquamor Drinking Water, Benard Opudo".
 2. **Swahili check.** The site copy has been reviewed internally. One native Swahili speaker from the team should read it once and tell us if any wording sounds unnatural.
 3. **Optional photos.** Send original photo files, not screenshots, if you have them: the shop front from the street, graduation or corporate event photos, a close-up of a glass bottle with its label, and original cleaning before/after photos.
 4. **Permissions.** The current build keeps the other customers' labels already in the gallery (Wave360 and the church labels) and the Paybill number on the website, as it is on your flyers. Tell us if you want either removed.
@@ -47,8 +47,10 @@ No KEBS number, certification claim or health claim is published. The supplier's
 Aquamor website — remaining items
 
 1. Domain aquamorwater.co.ke:
-   Registered on:            Registered in the name of:
+   Registered:               yes (Truehost, renews 17 Nov 2027)
+   Registered in the name of:
    Registrar login held by:  Renewal paid by:
+   DNS access provided:      yes / no
 2. Swahili check by (name):
 3. Optional photos attached: yes / no
 4. Remove other customers' labels: yes / no

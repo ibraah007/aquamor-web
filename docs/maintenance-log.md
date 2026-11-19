@@ -6,6 +6,20 @@ Keep it short. Link to the issue, PR or file when there is one.
 
 ---
 
+## 19 November 2026
+
+### Domain purchased and paid
+
+The client sent four Truehost screenshots: the domain search, the invoice email, the invoice document and the invoice notice.
+
+- `aquamorwater.co.ke` registered through **Truehost AI LTD** for 18 Nov 2026 – 17 Nov 2027, with email forwarding.
+- Invoice #674341 (document KRACU0400002830/32033; payment 597680) paid by M-Pesa on 19 Nov 2026 at 13:01: Ksh 999 less a Ksh 700 promotional code (TLDBEEKE) = Ksh 299, plus 16% VAT = **Ksh 346.84** (SCU ID KRACU0400002830, receipt 31949).
+- Registrant on the invoice is "Aquamor Drinking Water, Benard Opudo, 2502, Musindi road, Nairobi 00200". The intended name is AQUAMOR PURIFIED DRINKING WATER, so ask the registrar to correct it if needed.
+- The site, `robots.txt`, sitemap, Caddyfile and environment example already use `aquamorwater.co.ke`, so no site text changes are needed.
+- **Next:** obtain DNS access (registrar login or nameserver control), point `A`/`AAAA` at the server, then work through `launch-checklist.md` section C.
+
+Do not add the invoice screenshots to the repository: they include the client's personal details and a Truehost auto-login link containing a `zmkey` token.
+
 ## 16 November 2026
 
 ### Client confirmed all outstanding details
@@ -34,7 +48,7 @@ A static copy of `web/` is now published from the `gh-pages` branch at <https://
 
 ### Open items after this update
 
-Only the domain registration/handover and a native-speaker Swahili read-through remain. Online payments are deferred.
+Only the DNS access, native-speaker Swahili read-through and optional content remain. Online payments are deferred. The domain is registered (19 November 2026).
 
 ## 14 November 2026
 
@@ -224,6 +238,6 @@ Decision: the client chose a hosted checkout. The site now uses Flutterwave host
 | Confirm bottled-water sizes (flyer vs client text) | #10 | Resolved 16 Nov: ten sizes from 200ml to 20L |
 | Native-speaker Swahili review | #10 | Waiting |
 | Regular 20L bottle: is water included? | #10 | Resolved 16 Nov: bottle purchase; water refill separate |
-| Domain registration and handover (`aquamorwater.co.ke`) | #4 | Preferred domain set in the site; registration/handover still to complete |
+| Domain registration and handover (`aquamorwater.co.ke`) | #4 | Registered 18 Nov 2026 via Truehost; DNS access and server pointing still to do |
 | Original cleaning before/after stills | #9 | Waiting |
 | More gallery content (shop front, graduation/corporate) | #7 | Waiting |

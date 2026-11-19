@@ -59,8 +59,8 @@ been checked on the real domain, not just locally.
 
 ## C. Domain and hosting (blocked on the client)
 
-- [ ] Preferred domain `aquamorwater.co.ke` registered under AQUAMOR PURIFIED DRINKING WATER and paid for.
-- [ ] DNS `A`/`AAAA` records point at the server.
+- [x] Preferred domain `aquamorwater.co.ke` registered under the client's name and paid for (Truehost, 18 Nov 2026; renews 17 Nov 2027). Confirm the registrant name reads AQUAMOR PURIFIED DRINKING WATER.
+- [ ] DNS `A`/`AAAA` records point at the server (need DNS access from the client).
 - [x] `scripts/set-domain.sh` run with `aquamorwater.co.ke` (re-run if the final domain differs).
 - [ ] Caddy site address updated and certificate issued.
 - [ ] HTTP redirects to HTTPS; `www` redirects to the canonical host.

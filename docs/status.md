@@ -1,6 +1,6 @@
 # Aquamor Purified Drinking Water: Website Project Status
 
-**Updated:** 16 November 2026
+**Updated:** 19 November 2026
 **Project start:** 10 November 2026
 **Target delivery:** about 10 December 2026 (one month)
 **Repository:** the site is in `web/`; the Go API is in `backend/` (see the root `README.md`)
@@ -97,7 +97,7 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 ## 5. Open issues
 
 ### A. Blocking: needed from the client
-1. **Domain registration and handover:** the client prefers `aquamorwater.co.ke` and wants registration under AQUAMOR PURIFIED DRINKING WATER, with Aquamor keeping ownership and control. Confirm who completes the registration and the DNS/hosting handover.
+1. ~~**Domain registration and handover:** the client prefers `aquamorwater.co.ke` and wants registration under AQUAMOR PURIFIED DRINKING WATER, with Aquamor keeping ownership and control. Confirm who completes the registration and the DNS/hosting handover.~~ **Registered 18 November 2026** via Truehost; see section 29. Remaining: DNS access and pointing the domain at the server. Confirm the registrant name should read AQUAMOR PURIFIED DRINKING WATER (the invoice shows "Aquamor Drinking Water, Benard Opudo").
 
 All other client details requested on 13 November 2026 were confirmed on 16 November 2026; see section 28.
 
@@ -120,12 +120,12 @@ All other client details requested on 13 November 2026 were confirmed on 16 Nove
 ### D. To verify
 - **KEBS:** the client's certification is currently with their supplier; their own permit is in process and expected in February next year. No permit number or certificate is available to publish, so the site makes no certification claim. The purification steps were supplied on 16 November 2026 and are published without the individual sediment-filter micron sizes.
 - **Swahili text:** internal review completed on 16 November 2026 (awkward phrases refined). A native-speaker read-through is still recommended before launch.
-- **Domain ownership:** confirm that `aquamorwater.co.ke` is registered under AQUAMOR PURIFIED DRINKING WATER and that the client retains the registrar login and renewal control. Aquamor will pay the annual renewal.
+- **Domain ownership:** `aquamorwater.co.ke` is registered and paid through 17 November 2027 (section 29). Confirm the registrant name reads AQUAMOR PURIFIED DRINKING WATER (invoice shows "Aquamor Drinking Water, Benard Opudo") and that the client retains the registrar login and renewal control. Aquamor will pay the annual renewal.
 
 ### E. Handover tasks (week 4)
 - Client review and the agreed revision rounds
-- Register the preferred domain `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER and set up hosting using [`deployment.md`](deployment.md)
-- Move the site to the domain (this is when the Google search data matters most)
+- ~~Register the preferred domain `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER and set up hosting using [`deployment.md`](deployment.md)~~ — domain registered 18 November 2026 (section 29); hosting/DNS still to do
+- Point DNS at the server and move the site to the domain (this is when the Google search data matters most)
 - Hand over, plus the client change-request sheet and the maintainer guide
 - Work through [`launch-checklist.md`](launch-checklist.md) before announcing the domain
 - Online payment activation is deferred to a later phase; no launch action is needed beyond keeping the payment values empty.
@@ -397,5 +397,24 @@ The client sent the confirmed business details in writing. The site, price card 
 - **Online payments:** deferred to a later phase. No Flutterwave merchant account, API keys or webhook secret are needed for launch; the code stays hidden until configured.
 - **Permissions:** the project owner cleared the existing gallery labels and the Paybill display for this build.
 - **Swahili:** internal review completed and awkward phrases refined; a native-speaker read-through is still recommended.
-- **Still external:** register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER, then complete DNS/TLS/hosting handover.
+- **Still external:** ~~register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER~~ (registered 18 November 2026; see section 29), then complete DNS/TLS/hosting handover.
 - **Optional:** testimonials, original cleaning stills, shop-front/graduation/corporate photos, and a physical-device test.
+
+## 29. Domain registered (19 November 2026)
+
+The client purchased and paid for the preferred domain. Evidence supplied as four screenshots: the Truehost domain search, the invoice email, the invoice document and the earlier invoice notice.
+
+- **Domain:** `aquamorwater.co.ke`
+- **Registrar:** Truehost AI LTD (Truehost Cloud), Juja–Thika Superhighway, Nairobi; Tax ID P052258145G.
+- **Registrant on invoice:** "Aquamor Drinking Water, Benard Opudo, 2502, Musindi road, Nairobi 00200". The intended registrant is AQUAMOR PURIFIED DRINKING WATER; flagged for a name check with the registrar.
+- **Registration period:** 18 November 2026 to 17 November 2027 (one year), with email forwarding.
+- **Invoice:** #674341 (document KRACU0400002830/32033; payment/order 597680); Ksh 999.00 less a Ksh 700.00 promotional code (TLDBEEKE) = Ksh 299.00, plus 16% VAT Ksh 47.84 = **Ksh 346.84**, paid by M-Pesa on 19 November 2026 at 13:01 (SCU ID KRACU0400002830, receipt 31949).
+- **Client email on the account:** `aquamor2020@gmail.com`.
+- A later search on the Truehost site (19 November 2026) reports `aquamorwater.co.ke is already taken`, consistent with the domain now being held in the client's account.
+
+### What this unblocks
+- The domain is already written into `web/index.html` (`canonical`, Open Graph), `robots.txt`, `sitemap.xml`, `deploy/Caddyfile` and the environment example, so no site text changes are needed.
+- **Next:** get DNS access from the client (registrar login or nameserver control), point `A`/`AAAA` at the server, then work through `launch-checklist.md` section C (Caddy address, certificate, HTTPS and `www` redirect, firewall, `ADMIN_TOKEN`, service on boot).
+
+### Security note
+The email screenshots contain the client's personal details and a Truehost auto-login link with a `zmkey` token. Do not publish or commit them; keep the invoice PDF privately on file.
