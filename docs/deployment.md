@@ -1,8 +1,9 @@
 # Deployment and launch runbook
 
-This is the technical runbook for putting the site on a server. The domain name,
-DNS access and final client sign-off are still needed from the client (issue
-#19); everything else can be prepared before then.
+This is the technical runbook for putting the site on a server. The domain
+`aquamorwater.co.ke` is registered and paid (Truehost, 18 November 2026; see
+`docs/status.md` section 29). DNS access and final client sign-off are still
+needed from the client (issue #19); everything else can be prepared before then.
 
 The examples use:
 
@@ -297,8 +298,10 @@ data was damaged.
 
 ## Still blocked on the client
 
-- The domain name and DNS access.
-- The official business name and tagline (used in the page title and structured
-  data).
-- Prices, delivery rules and KEBS details (see `docs/status.md` section 5A).
-- Final content and photo permissions before the site is public.
+- DNS access (registrar login or nameserver control) so `A`/`AAAA` can point at
+  the server.
+- Confirmation that the registrant name reads AQUAMOR PURIFIED DRINKING WATER.
+- A native-speaker Swahili read-through and final client sign-off.
+
+The domain, business name and tagline, prices, delivery rules and photo
+permissions are now confirmed (see `docs/status.md` section 5).
