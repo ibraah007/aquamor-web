@@ -329,10 +329,18 @@ Decision: the client chose a hosted checkout. The site now uses Flutterwave host
 - Slide changes fade in from a brighter, slightly larger frame and settle. Hovering or focusing a photo section flashes it brighter, then holds a gentler lift while the interaction lasts. Off-screen sections stop cycling and only load the next photo when it is needed.
 - Gallery tiles brighten, lift and pass a band of light across the photo on hover or keyboard focus. Reduced-motion keeps the manual controls but disables the automatic slideshow, flash and transitions.
 - Replaced the hidden review placeholder with three real reviews from the business's public Google listing, the 4.9/5 rating from 24 reviews (November 2026) and a link to the full listing. Reviewer names are not shown; each card is credited "Google review · month year". Wording and dates come from Google; the text was lightly edited for spelling, punctuation and spacing, with the meaning unchanged.
-- The contact section now has a "Follow us" card with brand icons. Facebook leads as the main page because it is the established AQUAMOR NGARA page and the busier of the two in public activity; TikTok is beside it. Follower counts are not shown because neither platform makes them readable while logged out.
+- The contact section now has a "Follow us" card with the Facebook (AQUAMOR NGARA) and TikTok links and their brand icons. No "main page" claim or follower counts are shown; the links are left to speak for themselves.
 - All new labels have Swahili translations. `node --check` and a headless Chromium pass confirmed the controls, the manual photo change, the Swahili labels, the three review cards and both social icons at 390px and 1300px.
 - Cache versions are now `?v=20261119a` in `index.html`, `admin.html` and `payment.html`.
 - Docs updated: `status.md` section 37, this log and `web/README.md`.
+
+### Background photos automatic again (19 November 2026)
+
+- The client did not want manual sliding options on the fading background images. Removed the previous / counter / next controls, the sideways swipe, the keyboard arrow handling and the pause-on-hover behaviour.
+- The photos now fade through automatically every 5 seconds, with the same brighten-in effect. Hovering a section still brightens it but does not stop or change the slideshow. Reduced-motion shows only the first photo.
+- Removed the unused control styles and Swahili labels. Gallery hover and reviews are unchanged. The social card now shows only the Facebook and TikTok links, without the "main page" wording.
+- Cache versions are now `?v=20261119c`. `node --check` passes and a headless Chromium pass confirms the controls are gone and the slides advance automatically.
+- Docs updated: `status.md` section 38, this log, the root README and `web/README.md`.
 
 ---
 
