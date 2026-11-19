@@ -323,6 +323,17 @@ Decision: the client chose a hosted checkout. The site now uses Flutterwave host
 - Wired around the security and cache middleware, so rate-limited `429` responses are recorded too. Tests cover status/size, the `200` default, query-string exclusion and the forwarded client address.
 - Updated the deployment security notes and the launch checklist; the local smoke test and a privacy check of the log output pass.
 
+### Manual slides, lit hovers and Google reviews (19 November 2026)
+
+- Each photo section now has a manual control pill (previous, counter, next). The arrows work by mouse, touch and keyboard, and a sideways touch swipe also changes the photo. The automatic 5-second timer pauses while the section is hovered, focused or touched, and resumes afterwards.
+- Slide changes fade in from a brighter, slightly larger frame and settle. Hovering or focusing a photo section flashes it brighter, then holds a gentler lift while the interaction lasts. Off-screen sections stop cycling and only load the next photo when it is needed.
+- Gallery tiles brighten, lift and pass a band of light across the photo on hover or keyboard focus. Reduced-motion keeps the manual controls but disables the automatic slideshow, flash and transitions.
+- Replaced the hidden review placeholder with three real reviews from the business's public Google listing, the 4.9/5 rating from 24 reviews (November 2026) and a link to the full listing. Reviewer names are not shown; each card is credited "Google review · month year". Wording and dates come from Google; the text was lightly edited for spelling, punctuation and spacing, with the meaning unchanged.
+- The contact section now has a "Follow us" card with brand icons. Facebook leads as the main page because it is the established AQUAMOR NGARA page and the busier of the two in public activity; TikTok is beside it. Follower counts are not shown because neither platform makes them readable while logged out.
+- All new labels have Swahili translations. `node --check` and a headless Chromium pass confirmed the controls, the manual photo change, the Swahili labels, the three review cards and both social icons at 390px and 1300px.
+- Cache versions are now `?v=20261119a` in `index.html`, `admin.html` and `payment.html`.
+- Docs updated: `status.md` section 37, this log and `web/README.md`.
+
 ---
 
 ## Open items waiting on the client

@@ -1,6 +1,6 @@
 # Aquamor Purified Drinking Water: Website Project Status
 
-**Updated:** 17 November 2026
+**Updated:** 19 November 2026
 **Project start:** 10 November 2026
 **Target delivery:** about 10 December 2026 (one month)
 **Repository:** the site is in `web/`; the Go API is in `backend/` (see the root `README.md`)
@@ -69,7 +69,7 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] **About:** company story, official tagline, pumps and dispensers, with a team photo
 - [x] **FAQ:** ten tap-to-open questions, answered only with confirmed facts
 - [x] **Contact:** address, hours, WhatsApp, calls (two numbers), email, Paybill with Copy buttons, Get directions (Google Maps), Facebook (AQUAMOR NGARA) and TikTok buttons
-- [x] **Testimonials:** built but hidden until real quotes are added
+- [x] **Reviews:** three verified Google reviews with the 4.9/5 rating from 24 reviews and a link to the full listing (see section 37)
 
 ### Languages and search
 - [x] **English / Swahili switch** (SW / EN button), remembered between visits; WhatsApp messages are written in the chosen language, including product names and Delivery/Pickup
@@ -119,7 +119,7 @@ All other client details requested on 13 November 2026 were confirmed on 16 Nove
 - Shop front on Musindi Road, taken from the street
 - Graduation and corporate event photos (church-event and wedding-reception photos are now added)
 - A close-up of a glass bottle with its label
-- Two or three real customer comments
+- [x] Two or three real customer comments — three Google reviews added (see section 37)
 - Original before/after stills for the cleaning service (the current ones are small crops from a flyer; a short cleaning video clip is now on the site)
 - A named person for the About page, only if the client wants one
 
@@ -664,3 +664,51 @@ adds changes that are impossible to miss and prevents the same cache problem.
 
 Tracked in #45. The live preview was confirmed to contain the new sections and
 the 5-second slideshow after the deploy.
+
+## 37. Manual section slides, lit hovers and Google reviews (19 November 2026)
+
+The client asked for sections that brighten and slide by hand, photo changes that
+fade and brighten, a livelier gallery, and the social page with the strongest
+following plus a few real customer comments.
+
+### Slideshows and hovers
+- **Manual controls:** every section with more than one background photo now has
+  a small previous / counter / next pill. The arrows work by mouse, touch and
+  keyboard (Left and Right when the controls have focus); a sideways touch swipe
+  on the section also changes the photo. The controls sit outside the
+  `aria-hidden` `.bg` box, so they are reachable by screen readers.
+- **Fade and brighten:** an incoming photo fades in from a slightly larger,
+  brighter frame and settles; the outgoing photo still crossfades. Reduced-motion
+  keeps the crossfade instant and turns the flash off.
+- **Interaction:** hovering, focusing or touching a photo section briefly flashes
+  the photo and overlay brighter, then holds a gentler brightness while the
+  pointer or focus stays inside. The automatic 5-second timer pauses during that
+  interaction and resumes when it ends. Off-screen sections stop cycling and
+  only load a photo just before it is shown, so the change does not add
+  first-load bytes.
+- **Gallery:** tiles lift and brighten and a soft band of light sweeps across the
+  photo on hover or keyboard focus, with the same treatment disabled under
+  reduced-motion.
+
+### Reviews and social links
+- **Reviews:** the hidden placeholder is replaced by three real reviews from the
+  business's public Google listing, with the 4.9/5 rating from 24 reviews
+  (November 2026) and a "Read all reviews on Google" link. Reviewer names are not
+  shown; the credit is "Google review · month year". Dates and wording come from
+  the public listing; the text was lightly edited for spelling, punctuation and
+  spacing, with the meaning unchanged.
+- **Social links:** the two plain buttons are now a "Follow us" card with brand
+  icons. Facebook — the established AQUAMOR NGARA page — leads as the main page,
+  with TikTok beside it. Follower counts are deliberately not displayed because
+  neither platform exposes them to a logged-out reader; the question of which
+  page is busiest was settled from the public posting activity, not a count.
+- All new labels have Swahili translations, and the review cards join the
+  scroll-reveal set.
+
+### Checks and cache
+- `node --check` passes on every script. A headless Chromium pass confirmed seven
+  control pills, manual advance from 4/9 to 5/9 with the photo changing, the
+  Swahili labels after the language switch, three review cards and both social
+  icons. The new review and social layouts were checked at 390px and 1300px.
+- CSS and JS links are now `?v=20261119a` on `index.html`, `admin.html` and
+  `payment.html`. The A4 price card has no external assets.

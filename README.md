@@ -70,7 +70,7 @@ aquamor-web/
 │   │   ├── site.js         # mobile navigation
 │   │   ├── payment.js      # confirms the checkout result on payment.html
 │   │   ├── admin.js        # admin orders page: token login, list, filters, CSV
-│   │   └── i18n.js         # English/Swahili, open/closed status, copy, testimonials
+│   │   └── i18n.js         # English/Swahili, open/closed status, copy, optional quotes
 │   ├── assets/img/         # JPG + WebP photos, social preview, icons
 │   └── README.md           # front-end details and edit points
 ├── backend/
@@ -160,6 +160,7 @@ The original snapshot was a standalone marketing page. It is now the `web/` fron
 - **Status:** the open/closed line refreshes every minute, not only on page load.
 - **Go server:** now serves `web/`; the API uses server-side prices, a transaction, size/quantity validation, and a protected orders list. SQLite uses WAL and a busy timeout.
 - **Order capture and admin view:** the order builder now saves each order to `POST /api/v1/orders` before handing off to WhatsApp (and only remembers a save after a successful response). The private `/admin.html` page lists saved orders with line items and payment state, supports search and filters, and exports CSV.
+- **Interaction and reviews:** each photo section has manual previous/next controls, a counter and sideways swipe; hovering or focusing brightens the section, slide changes brighten as they fade in, and gallery tiles get a light sweep on hover. The hidden testimonial placeholder is now a three-card Google review section with the public rating, and the contact section has a Facebook/TikTok follow card.
 
 ## Before going live
 
