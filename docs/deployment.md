@@ -19,6 +19,22 @@ The examples use:
 The Go server binds to `127.0.0.1:8080` by default, so only the local reverse
 proxy can reach it. Do not expose port 8080 in the firewall.
 
+## 0. Quick start on a fresh server
+
+On a new Ubuntu LTS server, the steps below are automated by
+[`deploy/bootstrap-server.sh`](../deploy/bootstrap-server.sh):
+
+```sh
+sudo ./deploy/bootstrap-server.sh aquamorwater.co.ke
+```
+
+It installs the packages and Caddy, creates the service account and database
+directory, builds and installs the backend, writes `/etc/aquamor/aquamor.env`
+with a generated `ADMIN_TOKEN`, enables the service, configures Caddy and the
+firewall, and installs the daily backup cron job. It keeps an existing env file
+and is safe to re-run. The manual steps remain below for review and for
+non-Ubuntu hosts.
+
 ## 1. Before you start
 
 - A DNS provider account for the client's domain.
