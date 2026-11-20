@@ -20,14 +20,21 @@ if [ -n "$(git status --porcelain)" ]; then
 fi
 
 orig_branch="$(git rev-parse --abbrev-ref HEAD)"
-cleanup() { git checkout "$orig_branch" >/dev/null 2>&1 || true; }
+tmp="$(mktemp -d)"
+cleanup() {
+  rm -rf "$tmp"
+  git checkout "$orig_branch" >/dev/null 2>&1 || true
+}
 trap cleanup EXIT
+
+# Snapshot web/ before switching branches, because gh-pages does not have it.
+cp -a "$source_dir"/. "$tmp"/
 
 git fetch origin --quiet
 git checkout gh-pages
 git pull --ff-only --quiet origin gh-pages
 
-rsync -a --delete --exclude='.git' --exclude='CNAME' "$source_dir"/ ./
+rsync -a --delete --exclude='.git' --exclude='CNAME' "$tmp"/ ./
 printf '%s\n' "$domain" > CNAME
 
 git add -A
