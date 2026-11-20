@@ -38,7 +38,7 @@ Everything is kept in the git repository. Make the change on a branch, open a pu
 
 **Tip:** contact details and opening hours appear in more than one place. If the phone, WhatsApp, email, hours or Paybill changes, search the whole `web/` folder for the old value and update every copy, including the structured data in the `<head>` of `index.html`.
 
-Opening hours are also stored as minutes since midnight in the `H` table in `web/js/i18n.js`, which drives the live "Open now / Closed now" line. Update it too (8:30am is `510`, 8:30pm is `1230`, noon is `720` and 7pm is `1140`), then check the line on the page.
+Opening hours are also stored as minutes since midnight in the `H` table in `web/js/i18n.js`, which drives the live "Open now / Closed now" line. Update it too (the shop currently opens at 8:30am, which is `510`, and closes at 9:00pm, which is `1260`), then check the line on the page.
 
 ---
 
@@ -48,14 +48,14 @@ Prices are repeated in several files on purpose: the browser needs them, and the
 
 | Price | File | What to edit |
 |---|---|---|
-| Refills and new-bottle ranges in the order builder | `web/js/order.js` | `PRICE` (the lower bound for ranges) and the matching text in `items` (for example `Ksh 450–550 · bottle purchase`) |
+| Refills and new-bottle ranges in the order builder | `web/js/order.js` | `PRICE` (the lower bound for ranges) and the matching text in `items` (for example `Ksh 450–550 · bottle + water`) |
 | Refills in the refill planner | `web/js/planner.js` | `SIZES` |
 | Notes, FAQ and the order summary text | `web/index.html` | the order note and the FAQ answers |
 | Printable shop card | `web/price-card.html` | the prices and ranges in the card |
 | Swahili copies of the notes and FAQ | `web/js/i18n.js` | the `SW` entries that contain prices |
 | Server-side prices | `backend/internal/catalog/catalog.go` | the catalog used by `POST /api/v1/orders` |
 
-Only publish a price that the client has confirmed in writing. If a price is not confirmed, do not add it. Bottled water is deliberately quoted by quantity, as the client asked; the order builder labels those items "Price on quotation" and leaves them out of the estimated total. Refills are fixed (5L Ksh 50, 10L Ksh 100, 20L Ksh 200); new bottles are ranges (20L regular Ksh 450–550, 20L hard Ksh 1,000–1,700, 10L Ksh 200–250, 5L Ksh 100), and the estimated total uses the lower bound.
+Only publish a price that the client has confirmed in writing. If a price is not confirmed, do not add it. Bottled water is deliberately quoted by quantity, as the client asked; the order builder labels those items "Price on quotation" and leaves them out of the estimated total. Refills are fixed (5L Ksh 50, 10L Ksh 100, 20L Ksh 200); new bottles are ranges (20L regular Ksh 450–550, 20L hard Ksh 1,000–1,700, 10L Ksh 200–250, 5L Ksh 100) and include the bottle and the water; the estimated total uses the lower bound.
 
 After a price change, check it on the page in English and Swahili, in the order builder, in the planner and on the price card.
 
@@ -98,6 +98,17 @@ You need two copies of the same photo: a JPG (fallback) and a WebP (smaller, use
 7. Preview the gallery, test the filter buttons and tap the photo to check the enlarged view.
 
 Permission to show people in a photo must be confirmed by the client before it goes on the site.
+
+### Banner (background) photos
+
+The fading banners in the hero, the order, designer and contact sections rotate
+through several photos. Only the first photo of each banner is downloaded with the
+page; the rest keep their sources in `data-src` and `data-srcset` and
+`web/js/gallery.js` loads each one just before it is shown. When you add a slide,
+follow the same pattern: the first `<picture>` keeps `src`/`srcset` (and gets
+`class="on"`), and every later `<picture>` uses `data-src` on the `<img>` and
+`data-srcset` on both the `<source>` and the `<img>`. If you leave a later slide
+with a plain `src`, it still works but downloads with the page again.
 
 ---
 

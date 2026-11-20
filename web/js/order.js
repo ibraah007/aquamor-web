@@ -16,7 +16,7 @@
       ["20L bottle","Price on quotation",112]
     ]
   };
-  items.container=[["20L regular bottle","Ksh 450–550 · bottle purchase",56],["20L hard bottle","Ksh 1,000–1,700 · bottle purchase",56],["10L bottle","Ksh 200–250 · bottle purchase",44],["5L bottle","Ksh 100 · bottle purchase",34]];
+  items.container=[["20L regular bottle","Ksh 450–550 · bottle + water",56],["20L hard bottle","Ksh 1,000–1,700 · bottle + water",56],["10L bottle","Ksh 200–250 · bottle + water",44],["5L bottle","Ksh 100 · bottle + water",34]];
   var PRICE={"5L refill":50,"10L refill":100,"20L refill":200,"20L regular bottle":450,"20L hard bottle":1400,"10L bottle":200,"5L bottle":100}, qty={}, tab="refill", mode="Delivery";
   /* Catalog IDs for online payment. Only items with confirmed prices are here. */
   var PRODUCTS={"5L refill":{id:3,option:"swap"},"10L refill":{id:2,option:"swap"},"20L refill":{id:1,option:"swap"},"20L hard bottle":{id:4,option:"new_purchase"},"20L regular bottle":{id:5,option:"new_purchase"}};
@@ -280,12 +280,21 @@
   });
   document.addEventListener("aquamor:lang",function(){if(paySubmit)paySubmit.textContent=paySubmit.disabled?t("Starting payment…","Tunanza malipo…"):t("Continue to payment","Endelea kulipa");setOrderError("");renderPayTotal()});
 
-  var ev=document.getElementById("ev"),msg=document.getElementById("msg"),t1=document.getElementById("t1"),t2=document.getElementById("t2"),t3=document.getElementById("t3"),lbl=document.getElementById("lbl"),lblRound=document.getElementById("lblRound"),col="#06476a",style="rect";
+  var ev=document.getElementById("ev"),msg=document.getElementById("msg"),t1=document.getElementById("t1"),t2=document.getElementById("t2"),t3=document.getElementById("t3"),lbl=document.getElementById("lbl"),lblRound=document.getElementById("lblRound"),lblOval=document.getElementById("lblOval"),swPick=document.getElementById("swPick"),col="#06476a",style="rect";
+  var COLOR_NAMES={"#1a1a1a":"black","#f4c430":"yellow","#8bc34a":"light green","#1d6b43":"dark green","#c62828":"red","#0077be":"ocean blue","#ffffff":"white","#06476a":"blue"};
+  var COLOR_NAMES_SW={"#1a1a1a":"nyeusi","#f4c430":"njano","#8bc34a":"kijani kibichi","#1d6b43":"kijani kikolevu","#c62828":"nyekundu","#0077be":"bluu ya bahari","#ffffff":"nyeupe","#06476a":"bluu"};
+  function colorName(){
+    var n=(sw()?COLOR_NAMES_SW:COLOR_NAMES)[col]||col;
+    return n.charAt(0).toUpperCase()+n.slice(1);
+  }
+  function updateColorPick(){
+    if(swPick)swPick.textContent=t("Selected color","Rangi iliyochaguliwa")+": "+colorName();
+  }
   var PRESETS={
-    wedding:{color:"#7a1f3d",en:["John & Mary","12 December 2026"],sw:["John na Mary","12 Desemba 2026"]},
+    wedding:{color:"#c62828",en:["John & Mary","12 December 2026"],sw:["John na Mary","12 Desemba 2026"]},
     church:{color:"#06476a",en:["Grace Church","Sunday service"],sw:["Kanisa la Neema","Ibada ya Jumapili"]},
     graduation:{color:"#1d6b43",en:["Class of 2026","Graduation day"],sw:["Darasa la 2026","Siku ya mahafali"]},
-    corporate:{color:"#4b2c82",en:["Your company","Team event"],sw:["Kampuni yako","Hafla ya timu"]}
+    corporate:{color:"#0077be",en:["Your company","Team event"],sw:["Kampuni yako","Hafla ya timu"]}
   };
   function fit(el,max,base,min){
     el.removeAttribute("textLength");
@@ -296,24 +305,39 @@
     // Extreme input still gets one final squeeze rather than being clipped.
     if(el.getComputedTextLength()>max){el.setAttribute("textLength",max);el.setAttribute("lengthAdjust","spacingAndGlyphs")}
   }
+  function lightColor(c){
+    var m=c.replace("#","");if(m.length===3)m=m.replace(/./g,"$&$&");
+    return (0.299*parseInt(m.substr(0,2),16)+0.587*parseInt(m.substr(2,2),16)+0.114*parseInt(m.substr(4,2),16))>150;
+  }
+  function paintLabel(c){
+    [lbl,lblRound,lblOval].forEach(function(s){if(!s)return;
+      s.setAttribute("fill",c);
+      var white=c.toLowerCase()==="#ffffff";
+      s.setAttribute("stroke",white?"rgba(6,71,106,.35)":"none");
+      s.setAttribute("stroke-width",white?"1":"0");
+    });
+    var ink=lightColor(c)?"#14212b":"#ffffff";
+    [t1,t2,t3].forEach(function(x){if(x)x.setAttribute("fill",ink)});
+  }
   function updateLabel(){
-    var round=style==="round";
+    var compact=style!=="rect";
     t1.textContent=ev.value||t("Your event","Hafla yako");
     t2.textContent=msg.value||t("date or message","tarehe au ujumbe");
-    fit(t1,round?46:54,12,4.5);
-    fit(t2,round?42:54,8,4.5);
+    fit(t1,compact?48:54,12,4.5);
+    fit(t2,compact?44:54,8,4.5);
   }
   function setColor(c){
-    col=c; lbl.setAttribute("fill",c); lblRound.setAttribute("fill",c);
+    col=c; paintLabel(c); updateColorPick();
     document.querySelectorAll("#sw button").forEach(function(x){x.setAttribute("aria-pressed",x.dataset.c===c)});
   }
   function applyStyle(){
-    var round=style==="round";
-    lbl.style.display=round?"none":"";
+    var round=style==="round",oval=style==="oval",compact=round||oval;
+    lbl.style.display=compact?"none":"";
     lblRound.style.display=round?"":"none";
-    t1.setAttribute("y",round?"176":"170");
-    t2.setAttribute("y",round?"192":"190");
-    t3.style.display=round?"none":"";
+    lblOval.style.display=oval?"":"none";
+    t1.setAttribute("y",compact?"176":"170");
+    t2.setAttribute("y",compact?"192":"190");
+    t3.style.display=compact?"none":"";
     updateLabel();
   }
   /* Turn the label around the bottle to give the preview a 3D feel. */
@@ -346,7 +370,7 @@
   }
   ev.addEventListener("input",updateLabel);
   msg.addEventListener("input",updateLabel);
-  document.addEventListener("aquamor:lang",function(){drawRows();updateLabel();if(note)showNote(note)});
+  document.addEventListener("aquamor:lang",function(){drawRows();updateLabel();updateColorPick();if(note)showNote(note)});
   document.querySelectorAll("#sw button").forEach(function(b){b.addEventListener("click",function(){setColor(b.dataset.c)})});
   document.querySelectorAll("#presets button").forEach(function(b){b.addEventListener("click",function(){
     var p=PRESETS[b.dataset.p]; if(!p)return;
@@ -360,16 +384,18 @@
   })});
   document.getElementById("sendDesign").addEventListener("click",function(e){
     e.preventDefault();
-    var names={"#06476a":"deep blue","#7a1f3d":"burgundy","#1d6b43":"green","#4b2c82":"purple","#1a1a1a":"black"};
-    var namesSw={"#06476a":"bluu iliyokolea","#7a1f3d":"rangi ya divai","#1d6b43":"kijani","#4b2c82":"zambarau","#1a1a1a":"nyeusi"};
-    var color=sw()?namesSw[col]:names[col];
+    var color=(sw()?COLOR_NAMES_SW:COLOR_NAMES)[col];
+    var stylesEn={rect:"rectangular",round:"round",oval:"oval"},stylesSw={rect:"mstatili",round:"duara",oval:"mviringo"};
+    var styleName=sw()?stylesSw[style]:stylesEn[style];
     var notSet=t("(not set)","(hujaweka)");
     go(t("Hello Aquamor, I would like a branded bottle:\nEvent or name: ","Habari Aquamor, ningependa chupa yenye chapa yangu:\nHafla au jina: ")+(ev.value||notSet)+
       t("\nMessage: ","\nUjumbe: ")+(msg.value||notSet)+
       t("\nLabel color: ","\nRangi ya lebo: ")+color+
+      t("\nLabel style: ","\nMtindo wa lebo: ")+styleName+
       t("\nBottle size: ","\nUkubwa wa chupa: ")+document.getElementById("sz").value+
       t("\nPlease tell me the quantity options and price.","\nTafadhali niambie idadi zinazopatikana na bei."));
   });
+  setColor(col);
   drawRows();
   applyStyle();
   applyRotation();

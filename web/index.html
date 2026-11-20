@@ -60,16 +60,11 @@
           "Wednesday",
           "Thursday",
           "Friday",
-          "Saturday"
+          "Saturday",
+          "Sunday"
         ],
         "opens": "08:30",
-        "closes": "20:30"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Sunday",
-        "opens": "12:00",
-        "closes": "19:00"
+        "closes": "21:00"
       }
     ],
     "url": "https://aquamorwater.co.ke/",
@@ -134,7 +129,7 @@
         "name": "When are you open?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Monday to Saturday from 8:30am to 8:30pm, and Sunday from 12:00pm to 7:00pm."
+          "text": "Every day from 8:30am to 9:00pm."
         }
       },
       {
@@ -173,17 +168,18 @@
   }
 ]
 </script>
-<link rel="stylesheet" href="css/styles.css">
-<link rel="stylesheet" href="css/photos.css">
+<link rel="stylesheet" href="css/styles.css?v=20261119c">
+<link rel="stylesheet" href="css/photos.css?v=20261119c">
 </head>
 <body>
 
+<div class="scrollbar" aria-hidden="true"><span id="scrollFill"></span></div>
 <a class="skip" href="#top">Skip to content</a>
 <header class="top">
   <div class="nav">
     <div class="navleft">
       <button class="navToggle" id="navToggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="navMenu"><span></span><span></span><span></span></button>
-      <a class="brand" href="#top"><span class="mark p-icon" aria-hidden="true"></span>Aquamor</a>
+      <a class="brand" href="#top"><span class="mark p-icon" aria-hidden="true"></span><span class="brandtext"><span class="brandname">Aquamor</span><small>Purified Drinking Water</small></span></a>
     </div>
     <ul id="navMenu">
       <li><a href="#order">Order</a></li>
@@ -200,7 +196,7 @@
 
 <main id="top" tabindex="-1">
 <div class="hero">
-  <div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/rowClose-480.webp 480w, assets/img/rowClose-800.webp 800w, assets/img/rowClose.webp 1200w" sizes="100vw"><img src="assets/img/rowClose.jpg" srcset="assets/img/rowClose-480.jpg 480w, assets/img/rowClose-800.jpg 800w, assets/img/rowClose.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="eager" fetchpriority="high" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/refill-480.webp 480w, assets/img/refill-800.webp 800w, assets/img/refill.webp 1200w" sizes="100vw"><img src="assets/img/refill.jpg" srcset="assets/img/refill-480.jpg 480w, assets/img/refill-800.jpg 800w, assets/img/refill.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/fruit-480.webp 480w, assets/img/fruit-800.webp 800w, assets/img/fruit.webp 1200w" sizes="100vw"><img src="assets/img/fruit.jpg" srcset="assets/img/fruit-480.jpg 480w, assets/img/fruit-800.jpg 800w, assets/img/fruit.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/shelf-480.webp 480w, assets/img/shelf-800.webp 800w, assets/img/shelf.webp 950w" sizes="100vw"><img src="assets/img/shelf.jpg" srcset="assets/img/shelf-480.jpg 480w, assets/img/shelf-800.jpg 800w, assets/img/shelf.jpg 950w" sizes="100vw" alt="" width="950" height="929" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/rowWide-480.webp 480w, assets/img/rowWide-800.webp 800w, assets/img/rowWide.webp 1200w" sizes="100vw"><img src="assets/img/rowWide.jpg" srcset="assets/img/rowWide-480.jpg 480w, assets/img/rowWide-800.jpg 800w, assets/img/rowWide.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
+  <div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/rowClose-480.webp 480w, assets/img/rowClose-800.webp 800w, assets/img/rowClose.webp 1200w" sizes="100vw"><img src="assets/img/rowClose.jpg" srcset="assets/img/rowClose-480.jpg 480w, assets/img/rowClose-800.jpg 800w, assets/img/rowClose.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="eager" fetchpriority="high" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/refill-480.webp 480w, assets/img/refill-800.webp 800w, assets/img/refill.webp 1200w" sizes="100vw"><img data-src="assets/img/refill.jpg" data-srcset="assets/img/refill-480.jpg 480w, assets/img/refill-800.jpg 800w, assets/img/refill.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/fruit-480.webp 480w, assets/img/fruit-800.webp 800w, assets/img/fruit.webp 1200w" sizes="100vw"><img data-src="assets/img/fruit.jpg" data-srcset="assets/img/fruit-480.jpg 480w, assets/img/fruit-800.jpg 800w, assets/img/fruit.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/shelf-480.webp 480w, assets/img/shelf-800.webp 800w, assets/img/shelf.webp 950w" sizes="100vw"><img data-src="assets/img/shelf.jpg" data-srcset="assets/img/shelf-480.jpg 480w, assets/img/shelf-800.jpg 800w, assets/img/shelf.jpg 950w" sizes="100vw" alt="" width="950" height="929" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/rowWide-480.webp 480w, assets/img/rowWide-800.webp 800w, assets/img/rowWide.webp 1200w" sizes="100vw"><img data-src="assets/img/rowWide.jpg" data-srcset="assets/img/rowWide-480.jpg 480w, assets/img/rowWide-800.jpg 800w, assets/img/rowWide.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/bottleRowTable-480.webp 480w, assets/img/bottleRowTable-800.webp 800w, assets/img/bottleRowTable.webp 1200w" sizes="100vw"><img data-src="assets/img/bottleRowTable.jpg" data-srcset="assets/img/bottleRowTable-480.jpg 480w, assets/img/bottleRowTable-800.jpg 800w, assets/img/bottleRowTable.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/glassRow-480.webp 480w, assets/img/glassRow-800.webp 800w, assets/img/glassRow.webp 1200w" sizes="100vw"><img data-src="assets/img/glassRow.jpg" data-srcset="assets/img/glassRow-480.jpg 480w, assets/img/glassRow-800.jpg 800w, assets/img/glassRow.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/graduationBottle-480.webp 480w, assets/img/graduationBottle-800.webp 800w, assets/img/graduationBottle.webp 1200w" sizes="100vw"><img data-src="assets/img/graduationBottle.jpg" data-srcset="assets/img/graduationBottle-480.jpg 480w, assets/img/graduationBottle-800.jpg 800w, assets/img/graduationBottle.jpg 1200w" sizes="100vw" alt="" width="1200" height="1600" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/tankCleaning-480.webp 480w, assets/img/tankCleaning-800.webp 800w, assets/img/tankCleaning.webp 1200w" sizes="100vw"><img data-src="assets/img/tankCleaning.jpg" data-srcset="assets/img/tankCleaning-480.jpg 480w, assets/img/tankCleaning-800.jpg 800w, assets/img/tankCleaning.jpg 1200w" sizes="100vw" alt="" width="1200" height="1600" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
   <div class="wrap">
     <div>
       <h1>Pure water, delivered the way you need it.</h1>
@@ -219,8 +215,33 @@
   </svg>
 </div>
 
+<section class="perks" aria-label="Why Aquamor">
+  <div class="wrap perkgrid">
+    <article class="perk perk--aqua">
+      <span class="perkicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5c3.6 4.3 6.5 7.2 6.5 11a6.5 6.5 0 1 1-13 0c0-3.8 2.9-6.7 6.5-11Z"/></svg></span>
+      <b>Purified, great-tasting water</b>
+      <span>Multi-stage treatment and UV sterilisation.</span>
+    </article>
+    <article class="perk perk--sun">
+      <span class="perkicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M10 2h4v3l1.6 2.6A4 4 0 0 1 16 9v12a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V9a4 4 0 0 1 .4-1.4L10 5V2Z"/><path d="M8 12h8"/></svg></span>
+      <b>Refills from Ksh 50</b>
+      <span>5L, 10L and 20L. Bring your container.</span>
+    </article>
+    <article class="perk perk--coral">
+      <span class="perkicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><circle cx="8" cy="8" r="1.4"/></svg></span>
+      <b>Custom labels for events</b>
+      <span>Weddings, churches, graduations and companies.</span>
+    </article>
+    <article class="perk perk--leaf">
+      <span class="perkicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg></span>
+      <b>Delivery across Nairobi</b>
+      <span>Free delivery depends on distance and quantity.</span>
+    </article>
+  </div>
+</section>
+
 <section id="order" class="withband">
-  <div class="band"><div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/refill-480.webp 480w, assets/img/refill-800.webp 800w, assets/img/refill.webp 1200w" sizes="100vw"><img src="assets/img/refill.jpg" srcset="assets/img/refill-480.jpg 480w, assets/img/refill-800.jpg 800w, assets/img/refill.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/clean-480.webp 480w, assets/img/clean-800.webp 800w, assets/img/clean.webp 1200w" sizes="100vw"><img src="assets/img/clean.jpg" srcset="assets/img/clean-480.jpg 480w, assets/img/clean-800.jpg 800w, assets/img/clean.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/work-480.webp 480w, assets/img/work.webp 560w" sizes="100vw"><img src="assets/img/work.jpg" srcset="assets/img/work-480.jpg 480w, assets/img/work.jpg 560w" sizes="100vw" alt="" width="560" height="747" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/pumps-480.webp 480w, assets/img/pumps.webp 800w" sizes="100vw"><img src="assets/img/pumps.jpg" srcset="assets/img/pumps-480.jpg 480w, assets/img/pumps.jpg 800w" sizes="100vw" alt="" width="800" height="600" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
+  <div class="band"><div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/refill-480.webp 480w, assets/img/refill-800.webp 800w, assets/img/refill.webp 1200w" sizes="100vw"><img src="assets/img/refill.jpg" srcset="assets/img/refill-480.jpg 480w, assets/img/refill-800.jpg 800w, assets/img/refill.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/clean-480.webp 480w, assets/img/clean-800.webp 800w, assets/img/clean.webp 1200w" sizes="100vw"><img data-src="assets/img/clean.jpg" data-srcset="assets/img/clean-480.jpg 480w, assets/img/clean-800.jpg 800w, assets/img/clean.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/work-480.webp 480w, assets/img/work.webp 560w" sizes="100vw"><img data-src="assets/img/work.jpg" data-srcset="assets/img/work-480.jpg 480w, assets/img/work.jpg 560w" sizes="100vw" alt="" width="560" height="747" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/pumps-480.webp 480w, assets/img/pumps.webp 800w" sizes="100vw"><img data-src="assets/img/pumps.jpg" data-srcset="assets/img/pumps-480.jpg 480w, assets/img/pumps.jpg 800w" sizes="100vw" alt="" width="800" height="600" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/bottleHandPump-480.webp 480w, assets/img/bottleHandPump-800.webp 800w, assets/img/bottleHandPump.webp 849w" sizes="100vw"><img data-src="assets/img/bottleHandPump.jpg" data-srcset="assets/img/bottleHandPump-480.jpg 480w, assets/img/bottleHandPump-800.jpg 800w, assets/img/bottleHandPump.jpg 849w" sizes="100vw" alt="" width="849" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/fiveLitreBottle-480.webp 480w, assets/img/fiveLitreBottle-800.webp 800w, assets/img/fiveLitreBottle.webp 918w" sizes="100vw"><img data-src="assets/img/fiveLitreBottle.jpg" data-srcset="assets/img/fiveLitreBottle-480.jpg 480w, assets/img/fiveLitreBottle-800.jpg 800w, assets/img/fiveLitreBottle.jpg 918w" sizes="100vw" alt="" width="918" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/shopTeam-480.webp 480w, assets/img/shopTeam-800.webp 800w, assets/img/shopTeam.webp 960w" sizes="100vw"><img data-src="assets/img/shopTeam.jpg" data-srcset="assets/img/shopTeam-480.jpg 480w, assets/img/shopTeam-800.jpg 800w, assets/img/shopTeam.jpg 960w" sizes="100vw" alt="" width="960" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
     <div class="wrap"><h2>Build your order</h2><p class="lead">Choose your sizes and how many. We will confirm the price and delivery on WhatsApp.</p></div></div>
   <div class="wrap bandbody">
     <div class="build">
@@ -252,15 +273,16 @@
         <p class="note payNote" id="payNote" role="status" hidden></p>
         <a class="btn btn-sun wa" id="sendOrder" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20order%20water." style="display:flex;justify-content:center;align-items:center;gap:9px"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>Send order on WhatsApp</a>
         <noscript><p class="note">The order builder needs JavaScript. You can still <a href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20order%20water.">order on WhatsApp</a> or call <a href="tel:+254113952100">0113 952 100</a>.</p></noscript>
-        <p class="note">Refills: 5L Ksh 50, 10L Ksh 100, 20L Ksh 200 (includes water; bring your container). New bottles: 20L regular Ksh 450–550, 20L hard Ksh 1,000–1,700, 10L Ksh 200–250, 5L Ksh 100; these are bottle-purchase prices, and water refills are separate. Bottled water prices vary depending on the quantity ordered, so we will confirm your quotation on WhatsApp. Free delivery is available depending on the distance and quantity ordered. The estimated total only includes items with a listed price.</p>
+        <p class="note">Refills: 5L Ksh 50, 10L Ksh 100, 20L Ksh 200 (includes water; bring your container). New bottles: 20L regular Ksh 450–550, 20L hard Ksh 1,000–1,700, 10L Ksh 200–250, 5L Ksh 100; these prices include the bottle and the water. Bottled water prices vary depending on the quantity ordered, so we will confirm your quotation on WhatsApp. Free delivery is available depending on the distance and quantity ordered. The estimated total only includes items with a listed price.</p>
         <p class="note">Also available: manual and electric water pumps for 10L and 20L bottles, and manual and electric water dispensers. Ask us for prices on WhatsApp.</p>
       </div>
     </div>
   </div>
 </section>
 
-<section id="planner">
+<section id="planner" class="tinted tint-aqua">
   <div class="wrap">
+    <p class="eyebrow">Plan your week</p>
     <h2>Refill planner</h2>
     <p class="lead">How many refills does your home need? Tell us how many people are at home and choose a container size; we will estimate the refills and the cost each week.</p>
     <div class="plan">
@@ -293,8 +315,10 @@
   </div>
 </section>
 
-<section id="how" class="how">
+<section id="how" class="how withbg withbg--leaf">
+  <div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/shopTeam-480.webp 480w, assets/img/shopTeam-800.webp 800w, assets/img/shopTeam.webp 960w" sizes="100vw"><img src="assets/img/shopTeam.jpg" srcset="assets/img/shopTeam-480.jpg 480w, assets/img/shopTeam-800.jpg 800w, assets/img/shopTeam.jpg 960w" sizes="100vw" alt="" width="960" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/bottleRowTable-480.webp 480w, assets/img/bottleRowTable-800.webp 800w, assets/img/bottleRowTable.webp 1200w" sizes="100vw"><img data-src="assets/img/bottleRowTable.jpg" data-srcset="assets/img/bottleRowTable-480.jpg 480w, assets/img/bottleRowTable-800.jpg 800w, assets/img/bottleRowTable.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/refill-480.webp 480w, assets/img/refill-800.webp 800w, assets/img/refill.webp 1200w" sizes="100vw"><img data-src="assets/img/refill.jpg" data-srcset="assets/img/refill-480.jpg 480w, assets/img/refill-800.jpg 800w, assets/img/refill.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/glassRow-480.webp 480w, assets/img/glassRow-800.webp 800w, assets/img/glassRow.webp 1200w" sizes="100vw"><img data-src="assets/img/glassRow.jpg" data-srcset="assets/img/glassRow-480.jpg 480w, assets/img/glassRow-800.jpg 800w, assets/img/glassRow.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/glassShelf-480.webp 480w, assets/img/glassShelf-800.webp 800w, assets/img/glassShelf.webp 1200w" sizes="100vw"><img data-src="assets/img/glassShelf.jpg" data-srcset="assets/img/glassShelf-480.jpg 480w, assets/img/glassShelf-800.jpg 800w, assets/img/glassShelf.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/tankCleaning-480.webp 480w, assets/img/tankCleaning-800.webp 800w, assets/img/tankCleaning.webp 1200w" sizes="100vw"><img data-src="assets/img/tankCleaning.jpg" data-srcset="assets/img/tankCleaning-480.jpg 480w, assets/img/tankCleaning-800.jpg 800w, assets/img/tankCleaning.jpg 1200w" sizes="100vw" alt="" width="1200" height="1600" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
   <div class="wrap">
+    <p class="eyebrow">Simple ordering</p>
     <h2>How it works</h2>
     <p class="lead">Three simple steps from your first message to water at your door.</p>
     <ol class="steps">
@@ -342,7 +366,7 @@
 </section>
 
 <section id="design" class="designer withband">
-  <div class="band"><div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/fruit-480.webp 480w, assets/img/fruit-800.webp 800w, assets/img/fruit.webp 1200w" sizes="100vw"><img src="assets/img/fruit.jpg" srcset="assets/img/fruit-480.jpg 480w, assets/img/fruit-800.jpg 800w, assets/img/fruit.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/shelf-480.webp 480w, assets/img/shelf-800.webp 800w, assets/img/shelf.webp 950w" sizes="100vw"><img src="assets/img/shelf.jpg" srcset="assets/img/shelf-480.jpg 480w, assets/img/shelf-800.jpg 800w, assets/img/shelf.jpg 950w" sizes="100vw" alt="" width="950" height="929" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/wedding-480.webp 480w, assets/img/wedding.webp 716w" sizes="100vw"><img src="assets/img/wedding.jpg" srcset="assets/img/wedding-480.jpg 480w, assets/img/wedding.jpg 716w" sizes="100vw" alt="" width="716" height="480" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/rowClose-480.webp 480w, assets/img/rowClose-800.webp 800w, assets/img/rowClose.webp 1200w" sizes="100vw"><img src="assets/img/rowClose.jpg" srcset="assets/img/rowClose-480.jpg 480w, assets/img/rowClose-800.jpg 800w, assets/img/rowClose.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
+  <div class="band"><div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/fruit-480.webp 480w, assets/img/fruit-800.webp 800w, assets/img/fruit.webp 1200w" sizes="100vw"><img src="assets/img/fruit.jpg" srcset="assets/img/fruit-480.jpg 480w, assets/img/fruit-800.jpg 800w, assets/img/fruit.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/shelf-480.webp 480w, assets/img/shelf-800.webp 800w, assets/img/shelf.webp 950w" sizes="100vw"><img data-src="assets/img/shelf.jpg" data-srcset="assets/img/shelf-480.jpg 480w, assets/img/shelf-800.jpg 800w, assets/img/shelf.jpg 950w" sizes="100vw" alt="" width="950" height="929" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/wedding-480.webp 480w, assets/img/wedding.webp 716w" sizes="100vw"><img data-src="assets/img/wedding.jpg" data-srcset="assets/img/wedding-480.jpg 480w, assets/img/wedding.jpg 716w" sizes="100vw" alt="" width="716" height="480" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/rowClose-480.webp 480w, assets/img/rowClose-800.webp 800w, assets/img/rowClose.webp 1200w" sizes="100vw"><img data-src="assets/img/rowClose.jpg" data-srcset="assets/img/rowClose-480.jpg 480w, assets/img/rowClose-800.jpg 800w, assets/img/rowClose.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/graduationBottle-480.webp 480w, assets/img/graduationBottle-800.webp 800w, assets/img/graduationBottle.webp 1200w" sizes="100vw"><img data-src="assets/img/graduationBottle.jpg" data-srcset="assets/img/graduationBottle-480.jpg 480w, assets/img/graduationBottle-800.jpg 800w, assets/img/graduationBottle.jpg 1200w" sizes="100vw" alt="" width="1200" height="1600" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/glassShelf-480.webp 480w, assets/img/glassShelf-800.webp 800w, assets/img/glassShelf.webp 1200w" sizes="100vw"><img data-src="assets/img/glassShelf.jpg" data-srcset="assets/img/glassShelf-480.jpg 480w, assets/img/glassShelf-800.jpg 800w, assets/img/glassShelf.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/dispenserTap-480.webp 480w, assets/img/dispenserTap-800.webp 800w, assets/img/dispenserTap.webp 1060w" sizes="100vw"><img data-src="assets/img/dispenserTap.jpg" data-srcset="assets/img/dispenserTap-480.jpg 480w, assets/img/dispenserTap-800.jpg 800w, assets/img/dispenserTap.jpg 1060w" sizes="100vw" alt="" width="1060" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
     <div class="wrap"><h2>Your name on every bottle</h2><p class="lead">Design a label for your wedding, church service, graduation, anniversary or company event and see it on the bottle straight away.</p></div></div>
   <div class="wrap dgrid">
     <div class="stage">
@@ -384,6 +408,7 @@
           <g id="labelGroup">
             <rect id="lbl" x="30" y="120" width="60" height="120" fill="#06476a"/>
             <circle id="lblRound" cx="60" cy="180" r="29" fill="#06476a" style="display:none"/>
+            <ellipse id="lblOval" cx="60" cy="180" rx="30" ry="27" fill="#06476a" style="display:none"/>
             <text id="t1" x="60" y="170" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="12" fill="#fff">Your event</text>
             <text id="t2" x="60" y="190" text-anchor="middle" font-family="Figtree,sans-serif" font-size="8" fill="#fff">date or message</text>
             <text id="t3" x="60" y="226" text-anchor="middle" font-family="Figtree,sans-serif" font-size="5" fill="#fff" opacity=".8">Aquamor purified water</text>
@@ -415,16 +440,27 @@
       <input type="text" id="msg" maxlength="26" placeholder="e.g. 12 December 2026">
       <label>Label color</label>
       <div class="sw" id="sw" role="group" aria-label="Label color">
-        <button style="--c:#06476a" data-c="#06476a" aria-pressed="true" aria-label="Deep blue"></button>
-        <button style="--c:#7a1f3d" data-c="#7a1f3d" aria-pressed="false" aria-label="Burgundy"></button>
-        <button style="--c:#1d6b43" data-c="#1d6b43" aria-pressed="false" aria-label="Green"></button>
-        <button style="--c:#4b2c82" data-c="#4b2c82" aria-pressed="false" aria-label="Purple"></button>
-        <button style="--c:#1a1a1a" data-c="#1a1a1a" aria-pressed="false" aria-label="Black"></button>
+        <button type="button" style="--c:#1a1a1a" data-c="#1a1a1a" aria-pressed="false" aria-label="Black"><span class="dot" aria-hidden="true"></span><span class="nm">Black</span></button>
+        <button type="button" style="--c:#f4c430" data-c="#f4c430" aria-pressed="false" aria-label="Yellow"><span class="dot" aria-hidden="true"></span><span class="nm">Yellow</span></button>
+        <button type="button" style="--c:#8bc34a" data-c="#8bc34a" aria-pressed="false" aria-label="Light green"><span class="dot" aria-hidden="true"></span><span class="nm">Light green</span></button>
+        <button type="button" style="--c:#1d6b43" data-c="#1d6b43" aria-pressed="false" aria-label="Dark green"><span class="dot" aria-hidden="true"></span><span class="nm">Dark green</span></button>
+        <button type="button" style="--c:#c62828" data-c="#c62828" aria-pressed="false" aria-label="Red"><span class="dot" aria-hidden="true"></span><span class="nm">Red</span></button>
+        <button type="button" style="--c:#0077be" data-c="#0077be" aria-pressed="false" aria-label="Ocean blue"><span class="dot" aria-hidden="true"></span><span class="nm">Ocean blue</span></button>
+        <button type="button" style="--c:#ffffff" data-c="#ffffff" aria-pressed="false" aria-label="White"><span class="dot" aria-hidden="true"></span><span class="nm">White</span></button>
+        <button type="button" style="--c:#06476a" data-c="#06476a" aria-pressed="true" aria-label="Blue"><span class="dot" aria-hidden="true"></span><span class="nm">Blue</span></button>
       </div>
+      <p class="swpick" id="swPick" aria-live="polite"></p>
+      <details class="cbhelp">
+        <summary>Not sure which color? We can help.</summary>
+        <p class="note">Every label color has a name. If colors are hard to tell apart, choose by name, or message us and we will confirm the color with you.</p>
+        <img src="assets/img/colourCapsWide.jpg" width="1180" height="300" alt="Bottle caps in every label color, mounted on a board in our shop" loading="lazy" decoding="async">
+        <p class="note">Bottle caps in our shop, in the colors we offer.</p>
+      </details>
       <label id="styleLbl">Label style</label>
       <div class="seg" id="styleSeg" role="group" aria-labelledby="styleLbl">
         <button type="button" data-st="rect" aria-pressed="true">Rectangular</button>
         <button type="button" data-st="round" aria-pressed="false">Round</button>
+        <button type="button" data-st="oval" aria-pressed="false">Oval</button>
       </div>
       <label for="sz">Bottle size</label>
       <select id="sz"><option>200ml</option><option>300ml</option><option selected>500ml</option><option>1L</option><option>1.5L</option><option>2L</option><option>3L</option><option>5L</option><option>10L</option><option>20L</option></select>
@@ -434,8 +470,10 @@
   </div>
 </section>
 
-<section id="cleaning" class="foamsec">
+<section id="cleaning" class="withbg withbg--sun">
+  <div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/tankInterior-480.webp 480w, assets/img/tankInterior-800.webp 800w, assets/img/tankInterior.webp 960w" sizes="100vw"><img src="assets/img/tankInterior.jpg" srcset="assets/img/tankInterior-480.jpg 480w, assets/img/tankInterior-800.jpg 800w, assets/img/tankInterior.jpg 960w" sizes="100vw" alt="" width="960" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/tankCleaning-480.webp 480w, assets/img/tankCleaning-800.webp 800w, assets/img/tankCleaning.webp 1200w" sizes="100vw"><img data-src="assets/img/tankCleaning.jpg" data-srcset="assets/img/tankCleaning-480.jpg 480w, assets/img/tankCleaning-800.jpg 800w, assets/img/tankCleaning.jpg 1200w" sizes="100vw" alt="" width="1200" height="1600" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/dispenserTap-480.webp 480w, assets/img/dispenserTap-800.webp 800w, assets/img/dispenserTap.webp 1060w" sizes="100vw"><img data-src="assets/img/dispenserTap.jpg" data-srcset="assets/img/dispenserTap-480.jpg 480w, assets/img/dispenserTap-800.jpg 800w, assets/img/dispenserTap.jpg 1060w" sizes="100vw" alt="" width="1060" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/clean-480.webp 480w, assets/img/clean-800.webp 800w, assets/img/clean.webp 1200w" sizes="100vw"><img data-src="assets/img/clean.jpg" data-srcset="assets/img/clean-480.jpg 480w, assets/img/clean-800.jpg 800w, assets/img/clean.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/tankCheck-480.webp 480w, assets/img/tankCheck-800.webp 800w, assets/img/tankCheck.webp 853w" sizes="100vw"><img data-src="assets/img/tankCheck.jpg" data-srcset="assets/img/tankCheck-480.jpg 480w, assets/img/tankCheck-800.jpg 800w, assets/img/tankCheck.jpg 853w" sizes="100vw" alt="" width="853" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/wash-480.webp 480w, assets/img/wash-800.webp 800w, assets/img/wash.webp 1200w" sizes="100vw"><img data-src="assets/img/wash.jpg" data-srcset="assets/img/wash-480.jpg 480w, assets/img/wash-800.jpg 800w, assets/img/wash.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
   <div class="wrap">
+    <p class="eyebrow">Fresh, safe dispensers</p>
     <h2>Dispenser cleaning and sanitizing</h2>
     <p class="lead">A clean dispenser keeps your drinking water fresh. Our trained team cleans and sanitizes water dispensers for homes and workplaces.</p>
     <div class="cgrid">
@@ -461,7 +499,7 @@
   </div>
 </section>
 
-<section id="gallery" class="gallery">
+<section id="gallery" class="gallery tinted tint-night">
   <div class="wrap">
     <h2>Our work</h2>
     <p class="lead">Real photos from our shop, our events and our custom labels. Tap a photo to enlarge it.</p>
@@ -541,11 +579,11 @@
         </button>
         <button class="g" data-c="refills team" data-k="delivery">
           <picture><source type="image/webp" srcset="assets/img/delivery-480.webp 480w, assets/img/delivery.webp 720w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/delivery.jpg" srcset="assets/img/delivery-480.jpg 480w, assets/img/delivery.jpg 720w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="720" height="960" alt="" loading="lazy" decoding="async"></picture>
-          <span>A customer carrying a 20 litre refill</span>
+          <span>A team member cleaning a 20L bottle</span>
         </button>
         <button class="g" data-c="refills team" data-k="refillAction">
           <picture><source type="image/webp" srcset="assets/img/refillAction-480.webp 480w, assets/img/refillAction-800.webp 800w, assets/img/refillAction.webp 1000w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/refillAction.jpg" srcset="assets/img/refillAction-480.jpg 480w, assets/img/refillAction-800.jpg 800w, assets/img/refillAction.jpg 1000w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="1000" height="750" alt="" loading="lazy" decoding="async"></picture>
-          <span>A team member refilling a 20 litre container</span>
+          <span>A team member wiping a 20L bottle after refilling it</span>
         </button>
         <button class="g" data-c="bottles events" data-k="bottleLabel">
           <picture><source type="image/webp" srcset="assets/img/bottleLabel-480.webp 480w, assets/img/bottleLabel-800.webp 800w, assets/img/bottleLabel.webp 900w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/bottleLabel.jpg" srcset="assets/img/bottleLabel-480.jpg 480w, assets/img/bottleLabel-800.jpg 800w, assets/img/bottleLabel.jpg 900w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="900" height="1200" alt="" loading="lazy" decoding="async"></picture>
@@ -571,6 +609,58 @@
           <picture><source type="image/webp" srcset="assets/img/blueBottles-480.webp 480w, assets/img/blueBottles.webp 731w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/blueBottles.jpg" srcset="assets/img/blueBottles-480.jpg 480w, assets/img/blueBottles.jpg 731w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="731" height="1200" alt="" loading="lazy" decoding="async"></picture>
           <span>20L containers stacked at the shop</span>
         </button>
+        <button class="g" data-c="events bottles" data-k="graduationBottle">
+          <picture><source type="image/webp" srcset="assets/img/graduationBottle-480.webp 480w, assets/img/graduationBottle-800.webp 800w, assets/img/graduationBottle.webp 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/graduationBottle.jpg" srcset="assets/img/graduationBottle-480.jpg 480w, assets/img/graduationBottle-800.jpg 800w, assets/img/graduationBottle.jpg 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="1200" height="1600" alt="" loading="lazy" decoding="async"></picture>
+          <span>A 500ml bottle for The Ransomed Schools graduation</span>
+        </button>
+        <button class="g" data-c="refills" data-k="bottleHandPump">
+          <picture><source type="image/webp" srcset="assets/img/bottleHandPump-480.webp 480w, assets/img/bottleHandPump-800.webp 800w, assets/img/bottleHandPump.webp 849w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/bottleHandPump.jpg" srcset="assets/img/bottleHandPump-480.jpg 480w, assets/img/bottleHandPump-800.jpg 800w, assets/img/bottleHandPump.jpg 849w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="849" height="1280" alt="" loading="lazy" decoding="async"></picture>
+          <span>A 20L bottle fitted with a manual pump</span>
+        </button>
+        <button class="g" data-c="refills bottles" data-k="dispenserTap">
+          <picture><source type="image/webp" srcset="assets/img/dispenserTap-480.webp 480w, assets/img/dispenserTap-800.webp 800w, assets/img/dispenserTap.webp 1060w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/dispenserTap.jpg" srcset="assets/img/dispenserTap-480.jpg 480w, assets/img/dispenserTap-800.jpg 800w, assets/img/dispenserTap.jpg 1060w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="1060" height="1280" alt="" loading="lazy" decoding="async"></picture>
+          <span>A close-up of a water dispenser tap</span>
+        </button>
+        <button class="g" data-c="team" data-k="tankInterior">
+          <picture><source type="image/webp" srcset="assets/img/tankInterior-480.webp 480w, assets/img/tankInterior-800.webp 800w, assets/img/tankInterior.webp 960w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/tankInterior.jpg" srcset="assets/img/tankInterior-480.jpg 480w, assets/img/tankInterior-800.jpg 800w, assets/img/tankInterior.jpg 960w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="960" height="1280" alt="" loading="lazy" decoding="async"></picture>
+          <span>The inside of a freshly cleaned water tank</span>
+        </button>
+        <button class="g" data-c="team" data-k="shopTeam">
+          <picture><source type="image/webp" srcset="assets/img/shopTeam-480.webp 480w, assets/img/shopTeam-800.webp 800w, assets/img/shopTeam.webp 960w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/shopTeam.jpg" srcset="assets/img/shopTeam-480.jpg 480w, assets/img/shopTeam-800.jpg 800w, assets/img/shopTeam.jpg 960w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="960" height="1280" alt="" loading="lazy" decoding="async"></picture>
+          <span>A team member holding a bottle in the shop</span>
+        </button>
+        <button class="g" data-c="bottles" data-k="fiveLitreBottle">
+          <picture><source type="image/webp" srcset="assets/img/fiveLitreBottle-480.webp 480w, assets/img/fiveLitreBottle-800.webp 800w, assets/img/fiveLitreBottle.webp 918w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/fiveLitreBottle.jpg" srcset="assets/img/fiveLitreBottle-480.jpg 480w, assets/img/fiveLitreBottle-800.jpg 800w, assets/img/fiveLitreBottle.jpg 918w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="918" height="1280" alt="" loading="lazy" decoding="async"></picture>
+          <span>A 5L bottle ready for delivery</span>
+        </button>
+        <button class="g" data-c="events team" data-k="thankYouTotal">
+          <picture><source type="image/webp" srcset="assets/img/thankYouTotal-480.webp 480w, assets/img/thankYouTotal-800.webp 800w, assets/img/thankYouTotal.webp 853w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/thankYouTotal.jpg" srcset="assets/img/thankYouTotal-480.jpg 480w, assets/img/thankYouTotal-800.jpg 800w, assets/img/thankYouTotal.jpg 853w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="853" height="1280" alt="" loading="lazy" decoding="async"></picture>
+          <span>A thank-you card for TotalEnergies Nanyuki</span>
+        </button>
+        <button class="g" data-c="bottles" data-k="glassShelf">
+          <picture><source type="image/webp" srcset="assets/img/glassShelf-480.webp 480w, assets/img/glassShelf-800.webp 800w, assets/img/glassShelf.webp 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/glassShelf.jpg" srcset="assets/img/glassShelf-480.jpg 480w, assets/img/glassShelf-800.jpg 800w, assets/img/glassShelf.jpg 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="1200" height="900" alt="" loading="lazy" decoding="async"></picture>
+          <span>Glass bottles lined up on the shelf</span>
+        </button>
+        <button class="g" data-c="team" data-k="tankCare">
+          <picture><source type="image/webp" srcset="assets/img/tankCare-480.webp 480w, assets/img/tankCare-800.webp 800w, assets/img/tankCare.webp 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/tankCare.jpg" srcset="assets/img/tankCare-480.jpg 480w, assets/img/tankCare-800.jpg 800w, assets/img/tankCare.jpg 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="1200" height="1200" alt="" loading="lazy" decoding="async"></picture>
+          <span>Our tank cleaning and maintenance poster</span>
+        </button>
+        <button class="g" data-c="events bottles" data-k="bottleRowTable">
+          <picture><source type="image/webp" srcset="assets/img/bottleRowTable-480.webp 480w, assets/img/bottleRowTable-800.webp 800w, assets/img/bottleRowTable.webp 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/bottleRowTable.jpg" srcset="assets/img/bottleRowTable-480.jpg 480w, assets/img/bottleRowTable-800.jpg 800w, assets/img/bottleRowTable.jpg 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="1200" height="900" alt="" loading="lazy" decoding="async"></picture>
+          <span>Bottles prepared for an event</span>
+        </button>
+        <button class="g" data-c="team" data-k="tankCleaning">
+          <picture><source type="image/webp" srcset="assets/img/tankCleaning-480.webp 480w, assets/img/tankCleaning-800.webp 800w, assets/img/tankCleaning.webp 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/tankCleaning.jpg" srcset="assets/img/tankCleaning-480.jpg 480w, assets/img/tankCleaning-800.jpg 800w, assets/img/tankCleaning.jpg 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="1200" height="1600" alt="" loading="lazy" decoding="async"></picture>
+          <span>A team member cleaning inside a water tank</span>
+        </button>
+        <button class="g" data-c="team" data-k="tankCheck">
+          <picture><source type="image/webp" srcset="assets/img/tankCheck-480.webp 480w, assets/img/tankCheck-800.webp 800w, assets/img/tankCheck.webp 853w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/tankCheck.jpg" srcset="assets/img/tankCheck-480.jpg 480w, assets/img/tankCheck-800.jpg 800w, assets/img/tankCheck.jpg 853w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="853" height="1280" alt="" loading="lazy" decoding="async"></picture>
+          <span>What is inside your water tank: before and after cleaning</span>
+        </button>
+        <button class="g" data-c="bottles" data-k="glassRow">
+          <picture><source type="image/webp" srcset="assets/img/glassRow-480.webp 480w, assets/img/glassRow-800.webp 800w, assets/img/glassRow.webp 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px"><img src="assets/img/glassRow.jpg" srcset="assets/img/glassRow-480.jpg 480w, assets/img/glassRow-800.jpg 800w, assets/img/glassRow.jpg 1200w" sizes="(max-width: 471px) calc(100vw - 40px), (max-width: 693px) calc(50vw - 26px), (max-width: 915px) calc(33.33vw - 21.33px), (max-width: 1079px) calc(25vw - 19px), 251px" width="1200" height="900" alt="" loading="lazy" decoding="async"></picture>
+          <span>Glass bottles with black labels on the shelf</span>
+        </button>
       </div>
       <div class="clips">
         <figure class="clip">
@@ -594,11 +684,20 @@
           </video>
           <figcaption>Custom-labelled bottles at an event</figcaption>
         </figure>
+        <figure class="clip clip--portrait">
+          <video controls muted playsinline preload="none" poster="assets/img/deliveryPoster.webp" aria-label="A delivery rider leaving the shop with an order">
+            <source src="assets/video/delivery.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>A delivery leaving the shop</figcaption>
+        </figure>
       </div>
   </div>
 </section>
-<section id="process" class="process">
+<section id="process" class="process withbg withbg--aqua">
+  <div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/tankInterior-480.webp 480w, assets/img/tankInterior-800.webp 800w, assets/img/tankInterior.webp 960w" sizes="100vw"><img src="assets/img/tankInterior.jpg" srcset="assets/img/tankInterior-480.jpg 480w, assets/img/tankInterior-800.jpg 800w, assets/img/tankInterior.jpg 960w" sizes="100vw" alt="" width="960" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/tankCleaning-480.webp 480w, assets/img/tankCleaning-800.webp 800w, assets/img/tankCleaning.webp 1200w" sizes="100vw"><img data-src="assets/img/tankCleaning.jpg" data-srcset="assets/img/tankCleaning-480.jpg 480w, assets/img/tankCleaning-800.jpg 800w, assets/img/tankCleaning.jpg 1200w" sizes="100vw" alt="" width="1200" height="1600" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/tankCare-480.webp 480w, assets/img/tankCare-800.webp 800w, assets/img/tankCare.webp 1200w" sizes="100vw"><img data-src="assets/img/tankCare.jpg" data-srcset="assets/img/tankCare-480.jpg 480w, assets/img/tankCare-800.jpg 800w, assets/img/tankCare.jpg 1200w" sizes="100vw" alt="" width="1200" height="1200" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/clean-480.webp 480w, assets/img/clean-800.webp 800w, assets/img/clean.webp 1200w" sizes="100vw"><img data-src="assets/img/clean.jpg" data-srcset="assets/img/clean-480.jpg 480w, assets/img/clean-800.jpg 800w, assets/img/clean.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/refill-480.webp 480w, assets/img/refill-800.webp 800w, assets/img/refill.webp 1200w" sizes="100vw"><img data-src="assets/img/refill.jpg" data-srcset="assets/img/refill-480.jpg 480w, assets/img/refill-800.jpg 800w, assets/img/refill.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
   <div class="wrap">
+    <p class="eyebrow">Quality at every step</p>
     <h2>Our water purification process</h2>
     <p class="lead">Every drop passes through a controlled, multi-stage treatment process before it reaches our treated-water outlets.</p>
     <ol class="steps processsteps">
@@ -635,9 +734,10 @@
   </form>
 </dialog>
 
-<section id="about" class="about">
+<section id="about" class="about tinted tint-aqua">
   <div class="wrap aboutgrid">
     <div>
+    <p class="eyebrow">Who we are</p>
     <p class="stat">2019</p>
     <h2>A trusted drinking water partner in Ngara</h2>
     <p>Aquamor Purified Drinking Water was established in 2019 and is located along Musindi Road, Ngara, Nairobi. We are committed to quality purified drinking water and reliable customer service.</p>
@@ -649,32 +749,68 @@
   </div>
 </section>
 
-<section id="reviews" hidden>
-  <div class="wrap"><h2>What customers say</h2><div class="revs" id="revList"></div></div>
-</section>
-<section id="faq">
+<section id="reviews" class="tinted tint-aqua">
   <div class="wrap">
+    <p class="eyebrow">Reviews</p>
+    <h2>What customers say</h2>
+    <p class="lead">4.9 out of 5 from 24 Google reviews (November 2026). <a href="https://www.google.com/maps/place/?q=place_id:ChIJo11WKEIXLxgRky9JCq5a4U0" target="_blank" rel="noopener">Read all reviews on Google</a>.</p>
+    <div class="revs" id="revList">
+      <figure class="rev">
+        <span class="revstars" aria-hidden="true">★★★★★</span>
+        <p>“Top notch service, quality water and you deliver as promised. The delivery guy needs a raise 😁👌”</p>
+        <footer>Google review · September 2026</footer>
+      </figure>
+      <figure class="rev">
+        <span class="revstars" aria-hidden="true">★★★★★</span>
+        <p>“Very clean, affordable prices, timely deliveries, not forgetting their best customer service 💯. The best water in town 👍”</p>
+        <footer>Google review · July 2026</footer>
+      </figure>
+      <figure class="rev">
+        <span class="revstars" aria-hidden="true">★★★★★</span>
+        <p>“Good customer service, clean, and timely deliveries. They are the best.”</p>
+        <footer>Google review · September 2026</footer>
+      </figure>
+    </div>
+  </div>
+</section>
+<section id="faq" class="tinted tint-sun">
+  <div class="wrap">
+    <p class="eyebrow">Good to know</p>
     <h2>Questions people ask</h2>
     <details><summary>What sizes do you sell?</summary><p>We refill 5L, 10L and 20L containers. We also sell bottled drinking water in 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L bottles.</p></details>
     <details><summary>How much does a refill cost?</summary><p>A 5L refill is Ksh 50, a 10L refill is Ksh 100 and a 20L refill is Ksh 200. A refill includes the water; bring your container.</p></details>
     <details><summary>How much does bottled water cost?</summary><p>Bottled water prices vary depending on the quantity ordered. Contact us on WhatsApp for a quotation.</p></details>
     <details><summary>Do you deliver?</summary><p>Yes. We deliver to Ngara, Parklands, Pangani, Gikomba, Westlands, Nairobi CBD and parts of Eastleigh. Free delivery is available depending on the distance and quantity ordered; contact us to confirm.</p></details>
     <details><summary>Can I order bottles with my own label?</summary><p>Yes. We make customised bottled water for churches, weddings, graduations, anniversaries, corporate events and other special occasions. Customisation charges range from Ksh 500 to Ksh 1,000 depending on the order and design, and the minimum order is 10 bales. Contact us for a quotation.</p></details>
-    <details><summary>When are you open?</summary><p>Monday to Saturday from 8:30am to 8:30pm, and Sunday from 12:00pm to 7:00pm.</p></details>
+    <details><summary>When are you open?</summary><p>Every day from 8:30am to 9:00pm.</p></details>
     <details><summary>How do I pay?</summary><p>You can pay with Equity Paybill 247247, account number 395210. Confirm your total with us on WhatsApp first.</p></details>
     <details><summary>Do you clean water dispensers?</summary><p>Yes. Dispenser cleaning charges range from Ksh 500 to Ksh 1,000 depending on the type of dispenser and the cleaning required. Contact us for a quotation.</p></details>
     <details><summary>Do you sell water pumps and dispensers?</summary><p>Yes. We sell manual and electric water pumps for 10L and 20L bottles, and manual and electric water dispensers.</p></details>
-    <details><summary>Where are you located?</summary><p>Along Musindi Road, opposite Ngara Girls Secondary School, next to Ngara Heights building, Nairobi.</p></details>
+    <details><summary>Where are you located?</summary><p>We are in Ngara, Nairobi — along Musindi Road, opposite Ngara Girls Secondary School, next to Ngara Heights building.</p></details>
+  </div>
+</section>
+
+<section class="ctaband">
+  <div class="wrap ctabandin">
+    <div>
+      <p class="eyebrow">Fresh water, ready when you are</p>
+      <h2>Order your water in under a minute</h2>
+      <p>Send your order on WhatsApp or call us. We will confirm the price and delivery.</p>
+    </div>
+    <div class="ctabandbtns">
+      <a class="btn btn-sun" href="#order">Build your order</a>
+      <a class="btn btn-line" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20order%20water." target="_blank" rel="noopener">Chat on WhatsApp</a>
+    </div>
   </div>
 </section>
 
 <section id="contact" class="contact">
-  <div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/refill-480.webp 480w, assets/img/refill-800.webp 800w, assets/img/refill.webp 1200w" sizes="100vw"><img src="assets/img/refill.jpg" srcset="assets/img/refill-480.jpg 480w, assets/img/refill-800.jpg 800w, assets/img/refill.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/pumps-480.webp 480w, assets/img/pumps.webp 800w" sizes="100vw"><img src="assets/img/pumps.jpg" srcset="assets/img/pumps-480.jpg 480w, assets/img/pumps.jpg 800w" sizes="100vw" alt="" width="800" height="600" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" srcset="assets/img/rowWide-480.webp 480w, assets/img/rowWide-800.webp 800w, assets/img/rowWide.webp 1200w" sizes="100vw"><img src="assets/img/rowWide.jpg" srcset="assets/img/rowWide-480.jpg 480w, assets/img/rowWide-800.jpg 800w, assets/img/rowWide.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
+  <div class="bg" aria-hidden="true"><picture class="on"><source type="image/webp" srcset="assets/img/refill-480.webp 480w, assets/img/refill-800.webp 800w, assets/img/refill.webp 1200w" sizes="100vw"><img src="assets/img/refill.jpg" srcset="assets/img/refill-480.jpg 480w, assets/img/refill-800.jpg 800w, assets/img/refill.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/pumps-480.webp 480w, assets/img/pumps.webp 800w" sizes="100vw"><img data-src="assets/img/pumps.jpg" data-srcset="assets/img/pumps-480.jpg 480w, assets/img/pumps.jpg 800w" sizes="100vw" alt="" width="800" height="600" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/rowWide-480.webp 480w, assets/img/rowWide-800.webp 800w, assets/img/rowWide.webp 1200w" sizes="100vw"><img data-src="assets/img/rowWide.jpg" data-srcset="assets/img/rowWide-480.jpg 480w, assets/img/rowWide-800.jpg 800w, assets/img/rowWide.jpg 1200w" sizes="100vw" alt="" width="1200" height="675" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/shopTeam-480.webp 480w, assets/img/shopTeam-800.webp 800w, assets/img/shopTeam.webp 960w" sizes="100vw"><img data-src="assets/img/shopTeam.jpg" data-srcset="assets/img/shopTeam-480.jpg 480w, assets/img/shopTeam-800.jpg 800w, assets/img/shopTeam.jpg 960w" sizes="100vw" alt="" width="960" height="1280" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/glassRow-480.webp 480w, assets/img/glassRow-800.webp 800w, assets/img/glassRow.webp 1200w" sizes="100vw"><img data-src="assets/img/glassRow.jpg" data-srcset="assets/img/glassRow-480.jpg 480w, assets/img/glassRow-800.jpg 800w, assets/img/glassRow.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture><picture><source type="image/webp" data-srcset="assets/img/bottleRowTable-480.webp 480w, assets/img/bottleRowTable-800.webp 800w, assets/img/bottleRowTable.webp 1200w" sizes="100vw"><img data-src="assets/img/bottleRowTable.jpg" data-srcset="assets/img/bottleRowTable-480.jpg 480w, assets/img/bottleRowTable-800.jpg 800w, assets/img/bottleRowTable.jpg 1200w" sizes="100vw" alt="" width="1200" height="900" loading="lazy" fetchpriority="low" decoding="async"></picture></div>
   <div class="wrap">
     <h2>Talk to us</h2>
     <div class="box">
-      <div><b>Visit us</b>Along Musindi Road, opposite Ngara Girls Secondary School, next to Ngara Heights building, Nairobi</div>
-      <div><b>Opening hours</b>Monday to Saturday: 8:30am to 8:30pm<br>Sunday: 12:00pm to 7:00pm<br><span class="js-open"></span></div>
+      <div><b>Visit us</b>Ngara, Nairobi — along Musindi Road, opposite Ngara Girls Secondary School, next to Ngara Heights building</div>
+      <div><b>Opening hours</b>Every day: 8:30am to 9:00pm<br><span class="js-open"></span></div>
       <div><b>WhatsApp</b><a href="https://wa.me/254712140006">0712 140 006</a></div>
       <div><b>Phone calls</b><a href="tel:+254113952100">0113 952 100</a> · <a href="tel:+254736054182">0736 054 182</a></div>
       <div><b>Email</b><a href="mailto:aquamor2020@gmail.com">aquamor2020@gmail.com</a></div>
@@ -683,8 +819,13 @@
     <a class="btn btn-sun wa" id="chatWa" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20ask%20about%20your%20water." target="_blank" rel="noopener"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>Chat on WhatsApp</a>
     <a class="btn btn-line" href="tel:+254113952100">Call us</a>
     <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Aquamor+Drinking+Water+Musindi+Road+Ngara+Nairobi" target="_blank" rel="noopener">Get directions</a>
-    <a class="btn btn-line" href="https://www.facebook.com/profile.php?id=100066493751902" target="_blank" rel="noopener">Facebook: AQUAMOR NGARA</a>
-    <a class="btn btn-line" href="https://www.tiktok.com/@aquamor2020" target="_blank" rel="noopener">TikTok</a>
+    <div class="socials">
+      <p class="eyebrow">Follow us</p>
+      <div class="socialrow">
+        <a class="btn social social--fb" href="https://www.facebook.com/profile.php?id=100066493751902" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.96.93-1.96 1.89v2.25h3.33l-.53 3.49h-2.8V24C19.61 23.1 24 18.1 24 12.07Z"/></svg>Facebook · AQUAMOR NGARA</a>
+        <a class="btn social social--tt" href="https://www.tiktok.com/@aquamor2020" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07Z"/></svg>TikTok</a>
+      </div>
+    </div>
     <div class="map">
       <h3>Find us on the map</h3>
       <iframe
@@ -701,10 +842,10 @@
 <a class="btn btn-sun fab wa" href="https://wa.me/254712140006?text=Hello%20Aquamor%2C%20I%20would%20like%20to%20ask%20about%20your%20water." target="_blank" rel="noopener"><svg viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7 .9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>WhatsApp us</a>
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="js/order.js" defer></script>
-<script src="js/planner.js" defer></script>
-<script src="js/gallery.js" defer></script>
-<script src="js/site.js" defer></script>
-<script src="js/i18n.js" defer></script>
+<script src="js/order.js?v=20261119c" defer></script>
+<script src="js/planner.js?v=20261119c" defer></script>
+<script src="js/gallery.js?v=20261119c" defer></script>
+<script src="js/site.js?v=20261119c" defer></script>
+<script src="js/i18n.js?v=20261119c" defer></script>
 </body>
 </html>

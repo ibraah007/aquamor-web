@@ -20,6 +20,122 @@ The client sent four Truehost screenshots: the domain search, the invoice email,
 
 Do not add the invoice screenshots to the repository: they include the client's personal details and a Truehost auto-login link containing a `zmkey` token.
 
+## 18 November 2026
+
+### Content corrections: hours, prices wording, photos and label designer
+
+- **Opening hours** are now every day, 8:30am to 9:00pm. The contact section,
+  FAQ, structured data, price card and the live "Open now" table were updated.
+- **New-bottle prices include the bottle and the water.** The 16 November entry
+  below said water was sold separately; the site now describes the listed price
+  as including both. The prices themselves did not change.
+- **Location** now leads with "Ngara, Nairobi" before the Musindi Road directions.
+- **Gallery captions** were corrected to match the photos.
+- **Label designer:** eight colours (black, yellow, light green, dark green, red,
+  ocean blue, white, blue), a new oval style, dark text on light labels, and an
+  outline on the white swatch. The WhatsApp request includes the label style.
+
+See [`status.md`](status.md) section 33 for details.
+
+### New photos, colour-blind help and the full wordmark
+
+- Added 13 of the client's new photos and a 24-second delivery clip to the
+  gallery and the rotating backgrounds. Images have JPG + WebP copies and
+  480/800px variants (#40, #41).
+- The hero now rotates through nine photos; the order, design and contact bands
+  have seven, seven and six.
+- Every label-colour swatch now shows its name, the selected colour is written
+  out, and a help panel shows the client's photo of the shop's bottle caps
+  (#42).
+- The header wordmark now reads Aquamor Purified Drinking Water (#43).
+- Corrected the two photo captions to the client's wording: staff cleaning a
+  bottle, and staff wiping a bottle after refilling (#39).
+
+See [`status.md`](status.md) section 34 for details.
+
+### More colour and photos across the page
+
+- The client wanted the site to feel more marketable, with colour in more
+  sections and fading photos all over. The slideshow now changes every
+  5 seconds, and the How it works, cleaning and purification sections have
+  their own photo backgrounds.
+- The planner, gallery, about and FAQ now use tinted backgrounds with aqua,
+  sun and leaf glows; step numbers, card edges, tabs and buttons carry the same
+  accents. Added a slim scroll-progress line and hover feedback on cards/photos.
+- Tracked in #44 and described in [`status.md`](status.md) section 35.
+- Follow-up the same day: added the four benefit cards under the hero, a bright
+  closing call-to-action band, a lighter hero overlay and `?v=` version queries
+  on every CSS/JS link so cached files cannot hold the old design. Tracked in
+  #45 and described in section 36.
+
+---
+
+## 17 November 2026
+
+### Final QA on the published preview
+
+Ran a full pass on <https://ibraah007.github.io/aquamor-web/> and on the local Go
+server. No functional defects were found. Results are recorded in
+[`status.md`](status.md) section 29.
+
+- Lighthouse (mobile): accessibility 100, SEO 100, best practices 96, performance
+  84. The single best-practices deduction is the `/api/v1/payments/config` 404,
+  which only happens on the static preview because there is no Go API there.
+- Every width from 320px to 1600px scrolls only vertically; the mobile menu,
+  language switch, order builder, reorder, planner, designer, gallery filters,
+  lightbox, FAQ and Copy buttons all work, in both languages.
+- `deploy/smoke-test.sh` passes against the local server, the Go tests pass, and
+  the A4 price card prints on one page.
+- **Change:** banner slides after the first now keep their image sources in
+  `data-src`/`data-srcset` and load when the slideshow is about to show them.
+  First-load image bytes at 390px fell from 626 KB to 287 KB.
+- The `gh-pages` preview was refreshed so it matches `web/` again.
+- **Docs:** added [`go-live-runbook.md`](go-live-runbook.md) (the ordered
+  domain/DNS/TLS/verification/handover sequence with an owner for each step) and
+  [`client-review-message.md`](client-review-message.md) (a ready-to-send email and
+  WhatsApp message with the preview link and the remaining client questions).
+- **Review corrections (PR #38):** the runbook now uses the client's chosen domain
+  throughout, reuses the prepared `/opt/aquamor` checkout, checks every JS and
+  shell file separately, names a supported item for the test order, and records
+  two limits: orders containing an unpriced item (such as 500ml) stay only in
+  WhatsApp, and a backup restore drops newer orders unless they are reconciled
+  first. The client message calls the preview public and explains that the order
+  draft is addressed to the Aquamor business number. The deployment steps also
+  update the installed Caddyfile and `PUBLIC_BASE_URL`, restart the service after
+  a new binary, and preserve the SQLite WAL before a restore.
+
+### Scroll reveal animations
+
+Added a quiet scroll-reveal pass: section headings, cards, steps, gallery photos
+and contact/map blocks fade and rise in as they reach the viewport, with a short
+stagger and a small aqua-to-gold accent under each heading. The hidden state is
+only applied in JavaScript to elements that start below the fold, so the page
+stays readable without JavaScript and nothing flashes on load. Reduced-motion is
+respected and every element is unobserved after it appears. Recorded in
+`status.md` section 31 and the front-end README.
+
+### Plain-language launch ask and client call script
+
+The client is expected to phone rather than reply in writing. Added
+[`client-call-script.md`](client-call-script.md): each of the four launch items
+(approval, domain, business details, hosting) explained in the client's terms,
+with the questions he is likely to ask, short answers, a "what happens after each
+item" table, a six-fact cheat sheet for the call, and a written summary to send
+afterwards.
+
+The client-facing documents were aligned with it:
+
+- [`client-information-needed.md`](client-information-needed.md) now includes
+  hosting as a launch item (three ownership options, cost guide, warning against
+  e-commerce packages) and the reply form asks for the hosting choice and monthly
+  manager. The PDF was regenerated.
+- [`client-review-message.md`](client-review-message.md): the email now says
+  Aquamor registers the domain with our guidance instead of "we will register it",
+  both email and WhatsApp versions ask about hosting, and the Swahili message was
+  updated to match.
+- [`go-live-runbook.md`](go-live-runbook.md) points to the call script and records
+  the server owner as agreed between client and maintainer.
+
 ## 16 November 2026
 
 ### Client confirmed all outstanding details
@@ -220,6 +336,25 @@ Decision: the client chose a hosted checkout. The site now uses Flutterwave host
 - Query strings and headers are not logged, and customer fields never appear. The admin token, admin search terms and payment parameters therefore stay out of the log.
 - Wired around the security and cache middleware, so rate-limited `429` responses are recorded too. Tests cover status/size, the `200` default, query-string exclusion and the forwarded client address.
 - Updated the deployment security notes and the launch checklist; the local smoke test and a privacy check of the log output pass.
+
+### Manual slides, lit hovers and Google reviews (19 November 2026)
+
+- Each photo section now has a manual control pill (previous, counter, next). The arrows work by mouse, touch and keyboard, and a sideways touch swipe also changes the photo. The automatic 5-second timer pauses while the section is hovered, focused or touched, and resumes afterwards.
+- Slide changes fade in from a brighter, slightly larger frame and settle. Hovering or focusing a photo section flashes it brighter, then holds a gentler lift while the interaction lasts. Off-screen sections stop cycling and only load the next photo when it is needed.
+- Gallery tiles brighten, lift and pass a band of light across the photo on hover or keyboard focus. Reduced-motion keeps the manual controls but disables the automatic slideshow, flash and transitions.
+- Replaced the hidden review placeholder with three real reviews from the business's public Google listing, the 4.9/5 rating from 24 reviews (November 2026) and a link to the full listing. Reviewer names are not shown; each card is credited "Google review · month year". Wording and dates come from Google; the text was lightly edited for spelling, punctuation and spacing, with the meaning unchanged.
+- The contact section now has a "Follow us" card with the Facebook (AQUAMOR NGARA) and TikTok links and their brand icons. No "main page" claim or follower counts are shown; the links are left to speak for themselves.
+- All new labels have Swahili translations. `node --check` and a headless Chromium pass confirmed the controls, the manual photo change, the Swahili labels, the three review cards and both social icons at 390px and 1300px.
+- Cache versions are now `?v=20261119a` in `index.html`, `admin.html` and `payment.html`.
+- Docs updated: `status.md` section 37, this log and `web/README.md`.
+
+### Background photos automatic again (19 November 2026)
+
+- The client did not want manual sliding options on the fading background images. Removed the previous / counter / next controls, the sideways swipe, the keyboard arrow handling and the pause-on-hover behaviour.
+- The photos now fade through automatically every 5 seconds, with the same brighten-in effect. Hovering a section still brightens it but does not stop or change the slideshow. Reduced-motion shows only the first photo.
+- Removed the unused control styles and Swahili labels. Gallery hover and reviews are unchanged. The social card now shows only the Facebook and TikTok links, without the "main page" wording.
+- Cache versions are now `?v=20261119c`. `node --check` passes and a headless Chromium pass confirms the controls are gone and the slides advance automatically.
+- Docs updated: `status.md` section 38, this log, the root README and `web/README.md`.
 
 ---
 

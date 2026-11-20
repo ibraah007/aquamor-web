@@ -14,16 +14,21 @@ The repository-level README explains the Go API and how the pieces fit together.
 | Price card | A standalone A4 page ([price-card.html](price-card.html)) for the shop counter, with the confirmed refill and bottle prices, free-delivery line and WhatsApp number; use the Print button or the browser's print dialog |
 | Admin orders | A private page ([admin.html](admin.html)) that asks for `ADMIN_TOKEN`, then lists saved orders with customer details, line items, payment state and a CSV export; never linked from the public site and marked `noindex` |
 | How it works | Three steps (choose your water, order on WhatsApp, delivery or pickup) and a "Who we deliver to" strip for homes, offices, schools, restaurants, clinics and hotels |
-| Label designer | Customer picks a Wedding, Church, Graduation or Corporate preset, types an event name and message, picks a colour, a rectangular or round label and a bottle size, sees it on a bottle, and sends the request to WhatsApp |
+| Label designer | Customer picks a Wedding, Church, Graduation or Corporate preset, types an event name and message, picks a named colour, a rectangular, round or oval label and a bottle size, sees it on a bottle, and sends the request to WhatsApp |
 | Dispenser cleaning | Service section with before / cleaning / after photos and a WhatsApp booking button |
-| Gallery | 26 real photos and three short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view |
-| Fading backgrounds | Photo slideshows behind the hero, order, branded-bottles and contact sections |
+| Gallery | 39 real photos and four short video clips, with filters (Bottles, Events, Refills, Team) and a tap-to-enlarge view; tiles brighten with a soft light sweep on hover or keyboard focus |
+| Scroll reveal | Section headings, cards and gallery photos rise and fade in as they enter the viewport, with a short stagger and an animated accent under each heading; respects reduced-motion |
+| Scroll progress | A slim aqua-to-coral line above the header fills as the page is read |
+| Benefit strip | Four colour-coded cards under the hero: purified water, refills from Ksh 50, custom labels and delivery |
+| Closing call to action | Bright gradient band before the contact section with "Build your order" and WhatsApp buttons |
+| Fading backgrounds | Automatic photo slideshows behind the hero, order, branded-bottles, how-it-works, dispenser-cleaning, purification and contact sections; photos fade through every 5 seconds and hovering a section brightens it |
 | Mobile menu | A keyboard-accessible menu below 1000px |
 | English / Swahili | One-tap language switch, remembered between visits; WhatsApp messages are written in the chosen language |
 | Open now | Live "Open now" / "Closed now" line using Nairobi time, refreshed every minute |
 | Paybill | Copy buttons for the Paybill and account numbers |
 | FAQ | Tap-to-open questions |
-| Testimonials | Built, hidden until real quotes are added |
+| Reviews | Three verified Google reviews (lightly copy-edited) with the 4.9/5 rating from 24 reviews and a link to the full Google listing |
+| Social links | Facebook (AQUAMOR NGARA) and TikTok buttons with their icons and a short follow label |
 | Search data | Title, description, social preview image and structured business data |
 
 ## Project structure
@@ -47,7 +52,7 @@ web/
 │   ├── admin.js        # Admin orders page: token login, list, filters, CSV
 │   └── i18n.js         # Swahili switch, open/closed status, copy buttons, testimonials
 ├── assets/img/         # Photos (JPG + WebP, plus 480w/800w variants), og.jpg, favicons
-├── assets/video/       # Short muted MP4 clips (event setup, event bottles, dispenser cleaning)
+├── assets/video/       # Short muted MP4 clips (event setup, event bottles, dispenser cleaning, delivery)
 └── README.md
 ```
 
@@ -65,15 +70,17 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 
 **Refill planner (`js/planner.js`).** `SIZES` holds the three refill sizes and their confirmed prices, and `PER_PERSON_DAY` is the planning assumption (2 litres). Weekly litres are the number of people times the assumption times seven; the refills are rounded up to full containers, and the cost is refills times the size price. The results and the WhatsApp message are redrawn on each change and when the language changes.
 
-**Label designer (`js/order.js`).** The bottle is an SVG. The event text, message and label colour are SVG elements that the inputs update live. Presets fill the event name, message and colour with sample values in the current language; they do not add products or prices. The label style switches between a rectangle (`#lbl`) and a circle (`#lblRound`). `fit()` measures the rendered text and reduces the font size until it fits inside the label, using smaller limits for the round style; it runs again when the web font finishes loading, when the style changes and when the language changes. "Request this design" builds a WhatsApp message from the same values.
+**Label designer (`js/order.js`).** The bottle is an SVG. The event text, message and label colour are SVG elements that the inputs update live. Presets fill the event name, message and colour with sample values in the current language; they do not add products or prices. The label style switches between a rectangle (`#lbl`), a circle (`#lblRound`) and an oval (`#lblOval`). `fit()` measures the rendered text and reduces the font size until it fits inside the label, using smaller limits for the round and oval styles; it runs again when the web font finishes loading, when the style changes and when the language changes. Light label colours (yellow, light green, white) get dark text and a thin outline, so the design stays readable. Every swatch also shows its colour name in text; the current choice is written into `#swPick`, and the "Not sure which color?" panel shows the shop's cap-colour photo for colour-blind customers. "Request this design" builds a WhatsApp message from the same values.
 
-**Fading backgrounds (`js/gallery.js`).** Any element with class `bg` holds `<picture>` children with a `<source>` for WebP and a JPEG fallback. The script shows one at a time and fades to the next every 6 seconds. The first hero photo is eager and high priority; the other slides and below-the-fold banners are lazy-loaded. With "reduced motion" turned on in the visitor's phone, it shows only the first photo.
+**Fading backgrounds (`js/gallery.js`).** Any element with class `bg` holds `<picture>` children with a `<source>` for WebP and a JPEG fallback. The script shows one at a time and fades to the next every 5 seconds, with a brief brightness lift as the incoming photo appears. There are no manual controls: the photos come and go on their own. Hovering a section brightens its overlay and photo but does not stop the slideshow, and only visible sections cycle, so off-screen photos are not downloaded early. The hero has nine photos; the order, design, how-it-works, cleaning, purification and contact sections have seven, seven, six, six, five and six. The first hero photo is eager and high priority; the other slides and below-the-fold sections are lazy-loaded. Tinted sections (planner, gallery, about, FAQ) alternate with the photo sections so the page does not sit on one flat colour. With "reduced motion" turned on in the visitor's phone, it shows only the first photo.
 
-**Gallery filters and lightbox (`js/gallery.js`).** Each tile has `data-c` with its categories (for example `"events bottles"`). A filter button hides tiles that do not include its category. Tapping a tile opens a `<dialog>` with the photo enlarged, using the tile's caption. Gallery photos are `<picture>` elements with a WebP source and a JPEG fallback, responsive `srcset` variants (480w, 800w and the original), and `loading="lazy"`. The lightbox uses the full-size photo from `css/photos.css`, so enlarging does not show a small variant. The three short video clips sit below the grid and use `preload="none"` with a poster image, so they download only when played.
+**Colour rhythm and motion (`css/styles.css`, `js/site.js`).** Tinted sections use soft aqua, sun and leaf glows behind the content; photo sections (`withbg`) add a different colour glow over the image so each one feels distinct. Step numbers and card edges cycle through aqua, sun/coral and leaf, filter tabs and primary buttons use gradients, and cards lift slightly on hover. A slim gradient scroll-progress line sits above the header. Every transition is disabled when reduced motion is requested, and the decorative glows are CSS-only, so no extra images are downloaded.
+
+**Gallery filters and lightbox (`js/gallery.js`).** Each tile has `data-c` with its categories (for example `"events bottles"`). A filter button hides tiles that do not include its category. Tapping a tile opens a `<dialog>` with the photo enlarged, using the tile's caption. Gallery photos are `<picture>` elements with a WebP source and a JPEG fallback, responsive `srcset` variants (480w, 800w and the original), and `loading="lazy"`. The lightbox uses the full-size photo from `css/photos.css`, so enlarging does not show a small variant. Tiles lift, brighten and pass a soft band of light across the photo on hover or keyboard focus; reduced-motion turns those transitions off. The four short video clips sit below the grid and use `preload="none"` with a poster image, so they download only when played.
 
 **Mobile menu (`js/site.js`).** The toggle updates `aria-expanded`, opens the menu, closes on Escape, on an outside click, or when a link is chosen.
 
-**Open now (`js/i18n.js`).** The script reads the current day and time in the `Africa/Nairobi` time zone and compares them with the `H` table (minutes since midnight for each weekday). It writes "Open now until 8:30pm" or "Closed now, opens ..." into every element with class `js-open`, and refreshes it every minute.
+**Open now (`js/i18n.js`).** The script reads the current day and time in the `Africa/Nairobi` time zone and compares them with the `H` table (minutes since midnight for each weekday). It writes "Open now until 9:00pm" or "Closed now, opens ..." into every element with class `js-open`, and refreshes it every minute.
 
 **English / Swahili (`js/i18n.js`).** The `SW` dictionary maps each English sentence to its Swahili version. When Swahili is switched on, the script walks every text node on the page, looks up its exact English text, and swaps it. The original is stored so it can be switched back. It also translates `aria-label`s and placeholders. A `MutationObserver` translates text added later, such as the order rows. The chosen language is saved in `localStorage`.
 
@@ -87,7 +94,7 @@ Scripts load with `defer`, in this order: `order.js`, `planner.js`, `gallery.js`
 | Phone, WhatsApp, email | `index.html` (contact section and the `wa.me` links), `js/order.js` and `js/i18n.js` (`254712140006`), and the structured data in `<head>` |
 | Opening hours | `H` table in `js/i18n.js`, the contact section and FAQ in `index.html`, and the structured data in `<head>` |
 | Paybill and account | Contact section and FAQ in `index.html` |
-| Add a testimonial | `TESTIMONIALS` at the top of `js/i18n.js`: `{quote:"...", name:"...", place:"..."}`. The section appears when the list is not empty. |
+| Add or change a review | Edit the `<figure class="rev">` blocks in the `#reviews` section of `index.html`. Keep the quote and its “Google review · month year” credit together. `TESTIMONIALS` in `js/i18n.js` is still available for optional extra quotes added by script. |
 | Add a photo | Put the JPG and a WebP copy in `assets/img/`, add `.p-name{...}` to `css/photos.css` (for the lightbox and service photos), then add a gallery tile in `index.html` with `data-c`, `data-k="name"` and a `<picture>` that includes the 480w/800w `srcset` entries. Create the variants with `convert name.jpg -resize '480x>' -strip -quality 82 name-480.jpg` and `-quality 80 name-480.webp`, then repeat for 800. |
 | Add a social link | Add a button next to the Facebook and TikTok ones in the contact section of `index.html`, and add the URL to `sameAs` in `<head>` |
 | Edit Swahili | `SW` in `js/i18n.js` (the English text must match `index.html` exactly) |
@@ -107,6 +114,8 @@ Then visit <http://localhost:8000>. The Pay online button stays hidden because a
 ## Deploy
 
 Any static host works. For Netlify, Cloudflare Pages or Vercel, set the publish/output directory to `web/` and leave the build command empty. For GitHub Pages, use an Actions workflow that uploads `web/` (Pages cannot serve a subfolder directly without one).
+
+CSS and JS links carry a `?v=` value. Bump it in `index.html`, `payment.html`, `admin.html` and `price-card.html` whenever those files change, so browsers do not keep an old cached copy; GitHub Pages caches assets for 10 minutes and cannot send custom headers.
 
 For the client's preferred domain (`aquamorwater.co.ke`), add it in the host's dashboard and set the DNS records the provider asks for. The canonical and `og:` URLs, `robots.txt`, `sitemap.xml` and the Caddy example already use it; run `./scripts/set-domain.sh <domain>` first if a different final domain is chosen.
 

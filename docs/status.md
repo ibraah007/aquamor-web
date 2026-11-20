@@ -4,7 +4,7 @@
 **Project start:** 10 November 2026
 **Target delivery:** about 10 December 2026 (one month)
 **Repository:** the site is in `web/`; the Go API is in `backend/` (see the root `README.md`)
-**Preview:** run locally with `cd web && python3 -m http.server 8000`, or run the Go server and open http://localhost:8080. No public URL yet.
+**Preview:** the static preview is published at <https://ibraah007.github.io/aquamor-web/>; run locally with `cd web && python3 -m http.server 8000`, or run the Go server and open http://localhost:8080.
 
 ---
 
@@ -27,9 +27,9 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 | WhatsApp | 0712 140 006 |
 | Phone calls | 0113 952 100, 0736 054 182 |
 | Email | aquamor2020@gmail.com |
-| Opening hours | Mon to Sat 8:30am to 8:30pm; Sun 12:00pm to 7:00pm |
+| Opening hours | Every day 8:30am to 9:00pm |
 | Refill prices | 5L Ksh 50, 10L Ksh 100, 20L Ksh 200 (includes water) |
-| New bottle purchase prices | 20L regular Ksh 450–550; 20L hard Ksh 1,000–1,700; 10L Ksh 200–250; 5L Ksh 100 |
+| New bottle prices | 20L regular Ksh 450–550; 20L hard Ksh 1,000–1,700; 10L Ksh 200–250; 5L Ksh 100 (includes the bottle and the water) |
 | Bottled water | 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L; prices vary by quantity, quoted on request |
 | Customised bottles | Churches, weddings, graduations, anniversaries, corporate events and other occasions; customisation Ksh 500–1,000; minimum 10 bales |
 | Dispenser cleaning | Ksh 500–1,000 depending on the dispenser and cleaning required |
@@ -59,16 +59,17 @@ A mobile-first, one-page website for Aquamor, a purified drinking water business
 - [x] **Hero:** headline, official tagline, buttons, key facts, live "Open now / Closed now" line (Nairobi time)
 - [x] **Build your order:** refill sizes, bottled water in ten sizes (quoted by quantity) and new bottles in four sizes with steppers, delivery/pickup choice, running total, one-tap WhatsApp message with the order already written, and a one-tap reorder of the last order
 - [x] **Refill planner:** enter the number of people at home and choose 5L, 10L or 20L; the site estimates weekly litres, refills and cost, and links to WhatsApp with the plan already written
-- [x] **Label designer:** pick a Wedding, Church, Graduation or Corporate preset, type an event name and message, pick a color, a rectangular or round label and one of ten bottle sizes, see it on a bottle, send the request on WhatsApp; customisation and minimum-order details are shown
+- [x] **Label designer:** pick a Wedding, Church, Graduation or Corporate preset, type an event name and message, pick a named color, a rectangular, round or oval label and one of ten bottle sizes, see it on a bottle, send the request on WhatsApp; customisation and minimum-order details are shown
 - [x] **Printable price card:** a standalone A4 page for the shop counter with the confirmed refill and new-bottle prices, bottled-water quotation, customisation and cleaning charges, delivery areas, tagline and WhatsApp number (linked from the docs; not part of the one-page site)
 - [x] **How it works and who/where we deliver to:** three steps (choose your water, order on WhatsApp, delivery or pickup), the business types served and the delivery areas; free delivery depends on distance and quantity
 - [x] **Dispenser cleaning and sanitizing:** four service points, before / cleaning / after photos, the Ksh 500–1,000 price range, book on WhatsApp
-- [x] **Our work (gallery):** 26 real photos, three short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
+- [x] **Our work (gallery):** 39 real photos, four short video clips, filter buttons (Bottles, Events, Refills, Team), tap to enlarge
+- [x] **Colour and motion:** 5-second fading photos behind seven sections, tinted planner/gallery/about/FAQ, colourful step and card accents, hover feedback and a scroll-progress line
 - [x] **Water purification process:** the client's eight steps, without individual micron sizes
 - [x] **About:** company story, official tagline, pumps and dispensers, with a team photo
 - [x] **FAQ:** ten tap-to-open questions, answered only with confirmed facts
 - [x] **Contact:** address, hours, WhatsApp, calls (two numbers), email, Paybill with Copy buttons, Get directions (Google Maps), Facebook (AQUAMOR NGARA) and TikTok buttons
-- [x] **Testimonials:** built but hidden until real quotes are added
+- [x] **Reviews:** three verified Google reviews with the 4.9/5 rating from 24 reviews and a link to the full listing (see section 37)
 
 ### Languages and search
 - [x] **English / Swahili switch** (SW / EN button), remembered between visits; WhatsApp messages are written in the chosen language, including product names and Delivery/Pickup
@@ -96,8 +97,13 @@ Refill station, glass bottle rows, custom church labels, Wave360 label bottle, s
 
 ## 5. Open issues
 
+> **Update 16 November 2026:** every business fact, price and permission in this
+> section was confirmed in writing and published; see section 28. Online payments
+> remain deferred to a later phase. The only external item left is the domain
+> registration and the hosting handover.
+
 ### A. Blocking: needed from the client
-1. ~~**Domain registration and handover:** the client prefers `aquamorwater.co.ke` and wants registration under AQUAMOR PURIFIED DRINKING WATER, with Aquamor keeping ownership and control. Confirm who completes the registration and the DNS/hosting handover.~~ **Registered 18 November 2026** via Truehost; see section 29. Remaining: DNS access and pointing the domain at the server. Confirm the registrant name should read AQUAMOR PURIFIED DRINKING WATER (the invoice shows "Aquamor Drinking Water, Benard Opudo").
+1. ~~**Domain registration and handover:** the client prefers `aquamorwater.co.ke` and wants registration under AQUAMOR PURIFIED DRINKING WATER, with Aquamor keeping ownership and control. Confirm who completes the registration and the DNS/hosting handover.~~ **Registered 18 November 2026** via Truehost; see section 39. Remaining: DNS access and pointing the domain at the server. Confirm the registrant name should read AQUAMOR PURIFIED DRINKING WATER (the invoice shows "Aquamor Drinking Water, Benard Opudo").
 
 All other client details requested on 13 November 2026 were confirmed on 16 November 2026; see section 28.
 
@@ -113,18 +119,18 @@ All other client details requested on 13 November 2026 were confirmed on 16 Nove
 - Shop front on Musindi Road, taken from the street
 - Graduation and corporate event photos (church-event and wedding-reception photos are now added)
 - A close-up of a glass bottle with its label
-- Two or three real customer comments
+- [x] Two or three real customer comments — three Google reviews added (see section 37)
 - Original before/after stills for the cleaning service (the current ones are small crops from a flyer; a short cleaning video clip is now on the site)
 - A named person for the About page, only if the client wants one
 
 ### D. To verify
 - **KEBS:** the client's certification is currently with their supplier; their own permit is in process and expected in February next year. No permit number or certificate is available to publish, so the site makes no certification claim. The purification steps were supplied on 16 November 2026 and are published without the individual sediment-filter micron sizes.
 - **Swahili text:** internal review completed on 16 November 2026 (awkward phrases refined). A native-speaker read-through is still recommended before launch.
-- **Domain ownership:** `aquamorwater.co.ke` is registered and paid through 17 November 2027 (section 29). Confirm the registrant name reads AQUAMOR PURIFIED DRINKING WATER (invoice shows "Aquamor Drinking Water, Benard Opudo") and that the client retains the registrar login and renewal control. Aquamor will pay the annual renewal.
+- **Domain ownership:** `aquamorwater.co.ke` is registered and paid through 17 November 2027 (section 39). Confirm the registrant name reads AQUAMOR PURIFIED DRINKING WATER (invoice shows "Aquamor Drinking Water, Benard Opudo") and that the client retains the registrar login and renewal control. Aquamor will pay the annual renewal.
 
 ### E. Handover tasks (week 4)
 - Client review and the agreed revision rounds
-- ~~Register the preferred domain `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER and set up hosting using [`deployment.md`](deployment.md)~~ — domain registered 18 November 2026 (section 29); hosting/DNS still to do
+- ~~Register the preferred domain `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER and set up hosting using [`deployment.md`](deployment.md)~~ — domain registered 18 November 2026 (section 39); hosting/DNS still to do
 - Point DNS at the server and move the site to the domain (this is when the Google search data matters most)
 - Hand over, plus the client change-request sheet and the maintainer guide
 - Work through [`launch-checklist.md`](launch-checklist.md) before announcing the domain
@@ -397,10 +403,330 @@ The client sent the confirmed business details in writing. The site, price card 
 - **Online payments:** deferred to a later phase. No Flutterwave merchant account, API keys or webhook secret are needed for launch; the code stays hidden until configured.
 - **Permissions:** the project owner cleared the existing gallery labels and the Paybill display for this build.
 - **Swahili:** internal review completed and awkward phrases refined; a native-speaker read-through is still recommended.
-- **Still external:** ~~register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER~~ (registered 18 November 2026; see section 29), then complete DNS/TLS/hosting handover.
+- **Still external:** ~~register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER~~ (registered 18 November 2026; see section 39), then complete DNS/TLS/hosting handover.
 - **Optional:** testimonials, original cleaning stills, shop-front/graduation/corporate photos, and a physical-device test.
 
-## 29. Domain registered (19 November 2026)
+## 29. Final QA on the published preview (17 November 2026)
+
+Everything below was checked against the live static preview
+(<https://ibraah007.github.io/aquamor-web/>) and, where the Go API is needed,
+against a local server running the real binary. The preview is byte-for-byte the
+same as `web/` (`diff -rq` reports no differences).
+
+### Results
+
+| Check | Result |
+|---|---|
+| Lighthouse 12.8.2, mobile | Performance 84, Accessibility 100, Best practices 96, SEO 100 |
+| Lighthouse 12.8.2, desktop | Performance 74, Accessibility 100, Best practices 96, SEO 100 |
+| Widths (320, 360, 390, 414, 768, 900, 1000, 1024, 1280, 1600 px) | No horizontal scrolling at any width; menu button below 1024px, inline navigation from 1024px |
+| Assets and links | All 42 local asset references return 200; no duplicate `id`s, no missing `#` targets, no broken documentation links |
+| Go build, vet, tests, `node --check` | Pass |
+| `deploy/smoke-test.sh` against the local Go server | All checks pass (home, health, products, payments config, admin page `noindex`, protected orders, security headers) |
+| A4 price card | Prints to exactly one A4 page |
+
+### Behaviour checked with a headless browser
+
+- Mobile menu opens, closes, updates `aria-expanded`, and closes after a link is
+  tapped; the page scrolls to the section.
+- English/Swahili switch translates the page, the order builder, the planner and
+  the WhatsApp messages, and the choice survives a reload.
+- Order builder: steppers, running total, all three tabs (ten bottled-water sizes
+  "Price on quotation", four new-bottle ranges), Delivery/Pickup labels and
+  placeholders, and the validation error when the area is empty.
+- WhatsApp order message contains the items, the estimated total, name, phone and
+  Delivery/Pickup with the area. The last order is saved and "Reorder my last
+  order" restores the quantities, mode and area.
+- Refill planner arithmetic: 4 people → 56 L, 3 × 20L, Ksh 600; 5 people → 70 L,
+  4 × 20L, Ksh 800; switching to 5L → 14 × 5L, Ksh 700.
+- Label designer: presets fill the fields, round/rectangular styles switch, and
+  the WhatsApp message includes the event, message, colour, size and style.
+- Gallery: 26 tiles, filters show only their category, the lightbox opens with the
+  caption and closes.
+- FAQ opens, the two Paybill Copy buttons work, the map frame loads, and the
+  "Open now until 8:30pm" line is present.
+- With `prefers-reduced-motion: reduce`, each banner shows one photo and does not
+  rotate; smooth scrolling is off.
+- Dark-mode contrast measured between 4.57:1 and 18.5:1 on body, heading, note,
+  button and tab text (text over photos is excluded from the measurement).
+
+### Change made
+
+Banner slides after the first now keep their sources in `data-src` /
+`data-srcset` and are loaded by `web/js/gallery.js` just before the slideshow
+shows them; the current photo stays on screen until the next one has loaded.
+Previously every hidden slide was downloaded with the page because the stacked
+photos all sat inside the viewport, so `loading="lazy"` could not defer them.
+
+At 390px wide, first-load image bytes fell from **626 KB to 287 KB**
+(15 → 9 image requests; 809 KB → 471 KB in total). The remaining slides still
+load when the slideshow reaches them, so nothing is missing from the page.
+
+### Known limits (no action needed)
+
+- The static preview logs one console 404 for `/api/v1/payments/config` because
+  GitHub Pages has no Go API. In production the endpoint returns
+  `{"enabled": false}` and the Pay online button stays hidden; the code already
+  handles both.
+- GitHub Pages caps cache lifetimes at 10 minutes, which is why the preview scores
+  low on the cache audit. The Caddy example sends long cache headers.
+- A native-speaker Swahili read-through and a physical iPhone/Android check are
+  still recommended before launch.
+
+## 30. Launch runbook and client review message (17 November 2026)
+
+The build is complete; the remaining work is the domain, hosting and handover. Two
+documents make that work repeatable:
+
+- [`go-live-runbook.md`](go-live-runbook.md) is the ordered launch-day sequence:
+  what must be in place first, who owns each step (client or maintainer), the exact
+  DNS records, the deploy and TLS commands, the verification checks that must pass,
+  the handover items (including how the admin token is shared), first-week
+  monitoring, and a "if something goes wrong" table. It points to
+  [`deployment.md`](deployment.md) for the full explanation of each command.
+- [`client-review-message.md`](client-review-message.md) is a ready-to-send email
+  and WhatsApp message with the preview link
+  (<https://ibraah007.github.io/aquamor-web/>), what the client should check, the
+  preview's limits, and the remaining questions: domain and registrar ownership,
+  the business certificate/KRA PIN for `.co.ke`, holiday hours, optional customer
+  comments and photos, and the post-launch contact.
+
+No code changed. Online payments stay deferred, and no certification claim is
+published until the client's permit arrives.
+
+Review corrections to both documents followed the first PR review: the runbook
+now uses the final domain throughout, reuses the prepared checkout, checks each
+JavaScript and shell file separately, updates the installed Caddyfile and
+`PUBLIC_BASE_URL`, and records the 500ml/order-saving limit and the backup-restore
+reconciliation step. The client message describes the preview as public and
+corrects the WhatsApp draft instructions.
+
+## 31. Scroll reveal animations (17 November 2026)
+
+The page now reveals its content as it is scrolled, using a small
+IntersectionObserver in `web/js/site.js` and the styles at the end of
+`web/css/styles.css`:
+
+- Section headings, cards, steps, delivery areas, FAQ rows, contact rows, the map
+  and the 26 gallery photos fade and rise into place. Gallery photos and the
+  bottle stage also scale in slightly. Siblings are staggered by up to 360ms.
+- Each section heading gets a short aqua-to-gold accent line that draws in as the
+  heading appears.
+- The script adds the hidden state only to elements that start below the fold, so
+  the page is readable without JavaScript, there is no flash on load, and a hash
+  or restored scroll position reveals what is already on screen.
+- `prefers-reduced-motion: reduce` skips the animations entirely; changing the
+  preference after load shows everything immediately.
+- The observer unobserves each element after it appears and animates only
+  `opacity`/`transform`, so scrolling stays smooth on low-end phones.
+
+## 32. Client call script and plain-language launch ask (17 November 2026)
+
+The client is likely to phone rather than reply in writing, so the launch ask now
+has a spoken version in [`client-call-script.md`](client-call-script.md). It takes
+the four blockers — approval, domain, business details, hosting — and explains
+each one in the client’s terms, with the questions he is likely to ask and a short
+answer, plus a written summary to send after the call.
+
+Following from that review, the client-facing documents were made consistent:
+
+- [`client-information-needed.md`](client-information-needed.md) now lists hosting
+  as a launch item (with the three ownership options, the monthly cost guide and
+  the "do not buy e-commerce hosting" warning) and the reply form asks for the
+  hosting choice and who manages it. The closing line now says domain **and**
+  hosting. The PDF is regenerated from the updated sheet.
+- [`client-review-message.md`](client-review-message.md) no longer says we will
+  register the domain for the client. It now describes Aquamor registering it with
+  our guidance, adds the hosting question to both the email and WhatsApp versions,
+  and updates the Swahili courtesy message to match.
+- [`go-live-runbook.md`](go-live-runbook.md) records the server owner as "client
+  or maintainer (agree)" and points to the call script.
+
+No code changed. The technical facts are unchanged: `.co.ke` needs a business
+certificate or KRA PIN at the registrar, the domain stays in Aquamor's name, the
+server is a small Ubuntu VPS behind Caddy, and online payments remain deferred.
+
+## 33. Content corrections: hours, prices wording and label designer (18 November 2026)
+
+A round of corrections to the published content, plus more ways to brand a
+bottle.
+
+- **Opening hours:** now every day, 8:30am to 9:00pm. Updated in the contact
+  section, the FAQ, the structured data in `<head>`, the price card, the `H`
+  table that powers the live "Open now" line, and the Swahili dictionary.
+  `H` therefore uses `510`–`1260` for every day.
+- **New bottles:** the listed prices include the bottle and the water, not just
+  the bottle. The wording changed in the order builder, the order note, the
+  price card, the Swahili dictionary and the client documents. Prices themselves
+  are unchanged, and the estimated total still uses the lower bound of each range.
+- **Location:** the contact section and FAQ now lead with "Ngara, Nairobi" before
+  the Musindi Road directions.
+- **Gallery captions:** corrected to match the photos: one shows a team member
+  wiping a 20L bottle after refilling it, and the other shows a 20L bottle being
+  refilled with a pump.
+- **Label designer:** the colour palette is now black, yellow, light green, dark
+  green, red, ocean blue, white and blue. Added an oval label style alongside the
+  rectangular and round styles. Light labels (yellow, light green, white) switch
+  to dark text, and white gets a thin outline; the swatches also have a subtle
+  outline so the white option is visible. The WhatsApp request now includes the
+  label style, in English or Swahili.
+- `web/price-card.html`, the live facts in `docs/status.md` and
+  `docs/client-information-needed.md`, the maintenance log, the client review
+  message and the site README were updated to match.
+
+Verified with the JavaScript syntax check and a browser pass: the live line reads
+"Open now until 9:00pm", the three label styles switch, the swatch and style
+labels translate, and the WhatsApp draft includes the colour and style.
+
+## 34. New client photos, colour-blind support and full wordmark (18 November 2026)
+
+The client sent a new media pack: 13 photos and a 24-second delivery clip. The
+same review asked for the full brand name, a more attractive rotating
+background, and help for colour-blind customers choosing a label colour. Work is
+tracked in #39–#43.
+
+- **Media:** added the graduation bottle, 20L bottle with a manual pump,
+  dispenser tap, clean tank interior, staff portrait, 5L bottle, TotalEnergies
+  thank-you card, two glass-bottle rows, tank-care and tank-check posters, and
+  the staff cleaning a tank. Each has an optimised JPG and WebP original plus
+  480px and 800px variants, and a `.p-*` lightbox class.
+- **Gallery:** now 39 tiles. New captions are in English and Swahili.
+- **Delivery clip:** `assets/video/delivery.mp4` with a poster frame from the
+  clip; it sits with the other short clips and uses `preload="none"`.
+- **Rotating backgrounds:** the hero now cycles through nine photos. The order,
+  design and contact bands have seven, seven and six. Extra slides stay in
+  `data-src`/`data-srcset` and are fetched just before they are shown, so a phone
+  still downloads only the first photo up front.
+- **Colour-blind support (#42):** every swatch now carries its name in text
+  (translated), the current choice is written out in a live region, and a
+  collapsible help panel shows the client's photo of the shop's cap colours with
+  a WhatsApp fallback. The white swatch keeps its outline.
+- **Wordmark (#43):** the header now shows "Aquamor" with "Purified Drinking
+  Water" underneath. It was checked at 320px, 360px and 1300px; the small CTA is
+  already hidden below 420px, so nothing overlaps.
+- **Captions (#39):** corrected to the client's wording: one photo is staff
+  cleaning a 20L bottle, the other is staff wiping a bottle after refilling.
+
+Verified with `node --check` on every script and a headless browser pass at
+320px, 360px and 1300px: no console errors, all 13 new captions, the help panel,
+the delivery clip caption and the live colour line translate to Swahili, and the
+WhatsApp design message still includes the colour and style.
+
+## 35. More colour, photos across the page and a faster slideshow (18 November 2026)
+
+The client asked for a more marketable, attractive site: sections that "pop"
+with colour, fading photos all over the page, and a new background photo about
+every 5 seconds. Tracked in #44.
+
+- **Slideshow:** every `.bg` now advances every 5 seconds (was 6) and the
+  crossfade is 1.2 seconds (was 1.6). The initial stagger dropped from 1.5s to
+  0.4s per section, so the lower sections start rotating soon after load.
+- **More photo sections:** How it works, dispenser cleaning and purification now
+  sit on full-section fading photos, like the hero, order, design, contact
+  sections. They add six, six and five lazy slides respectively with a matching
+  photo in each gallery category.
+- **Colour rhythm:** the planner, gallery, about and FAQ use tinted backgrounds
+  with soft aqua, sun and leaf glows. Photo sections have a different glow per
+  section (leaf, sun, aqua). This alternation means the page no longer reads as
+  one long dark block.
+- **Details:** new uppercase "eyebrow" labels above the headings (Planner,
+  ordering, cleaning, process, about, FAQ), step numbers in aqua/sun/leaf,
+  coloured card edges, gradient filter tabs and primary buttons, hover lift on
+  cards and photos, and an open-state highlight on FAQ rows. All new text has
+  Swahili translations.
+- **Scroll progress:** a 3px aqua–sun–coral line above the sticky header fills as
+  the page is read (`site.js`, `.scrollbar` in `styles.css`).
+- **Access and performance:** reduced-motion turns off the slideshow, hovers and
+  progress transition. Every new slide except the first in each section stays in
+  `data-src`/`data-srcset`. Checked at 320px, 360px and 1300px; no sideways
+  scroll and no console errors.
+
+## 36. Benefit strip, closing call to action and versioned assets (18 November 2026)
+
+The first colour-and-photo pass was live, but the client reported that the site
+still looked the same. GitHub Pages caches HTML and CSS for 10 minutes and the
+asset links had no version, so an open tab could keep the old design. This pass
+adds changes that are impossible to miss and prevents the same cache problem.
+
+- **Benefit strip:** four colour-coded cards directly under the hero — purified
+  water, refills from Ksh 50, custom labels for events and delivery across
+  Nairobi. Each has its own icon, gradient and tint (aqua, sun, coral, leaf).
+- **Closing call to action:** a bright aqua/sun gradient band before the contact
+  section, with a short marketing line and "Build your order" and WhatsApp
+  buttons.
+- **Hero:** the overlay is lighter and ends in a warm gold wash, so more of the
+  photo and its colour show through.
+- **Cache busting:** every CSS and JS link now carries `?v=20261118e` on all four
+  pages. Future asset edits must bump the value.
+- New text is translated to Swahili; the benefit cards and CTA block join the
+  scroll-reveal set. Checked at 320, 360 and 1300px in light and dark mode,
+  including the two CTA buttons wrapping on small phones.
+
+Tracked in #45. The live preview was confirmed to contain the new sections and
+the 5-second slideshow after the deploy.
+
+## 37. Section hovers, gallery light and Google reviews (19 November 2026)
+
+The client asked for sections that brighten, photo changes that fade and
+brighten, a livelier gallery, and the social page with the strongest following
+plus a few real customer comments.
+
+### Slideshows and hovers
+- **Automatic fading:** each photo section crossfades to its next photo every
+  5 seconds. The incoming photo fades in from a slightly larger, brighter frame
+  and settles while the outgoing photo fades away. The background photos have no
+  manual arrows or counters.
+- **Interaction:** hovering a photo section brightens its overlay and photo; the
+  slideshow keeps running on its own. Off-screen sections stop cycling and only
+  load a photo just before it is shown, so the change does not add first-load
+  bytes.
+- **Gallery:** tiles lift and brighten and a soft band of light sweeps across the
+  photo on hover or keyboard focus, with the same treatment disabled under
+  reduced-motion.
+
+### Reviews and social links
+- **Reviews:** the hidden placeholder is replaced by three real reviews from the
+  business's public Google listing, with the 4.9/5 rating from 24 reviews
+  (November 2026) and a "Read all reviews on Google" link. Reviewer names are not
+  shown; the credit is "Google review · month year". Dates and wording come from
+  the public listing; the text was lightly edited for spelling, punctuation and
+  spacing, with the meaning unchanged.
+- **Social links:** the two plain buttons are now a "Follow us" card with the
+  Facebook (AQUAMOR NGARA) and TikTok links and their brand icons. No follower
+  counts and no claim about which page is busier are shown; the links are left
+  to speak for themselves.
+- All new labels have Swahili translations, and the review cards join the
+  scroll-reveal set.
+
+### Checks and cache
+- `node --check` passes on every script. A headless Chromium pass confirmed seven
+  automatic slideshows with no controls, the Swahili labels after the language
+  switch, three review cards and both social icons. The review and social
+  layouts were checked at 390px and 1300px.
+- CSS and JS links were moved to `?v=20261119a` on `index.html`, `admin.html` and
+  `payment.html` for this pass. The A4 price card has no external assets.
+
+## 38. Background photos are automatic again (19 November 2026)
+
+The client did not want the manual sliding options on the fading background
+photos; the photos should come and go by themselves.
+
+- Removed the previous / counter / next controls, the sideways swipe, the
+  keyboard arrow handling and the pause-on-hover behaviour from every section
+  background.
+- The photos now crossfade automatically every 5 seconds, with the same
+  brighten-in fade as before. Hovering still brightens the section, but it no
+  longer stops or changes the slideshow. Reduced-motion still shows only the
+  first photo.
+- The unused control translations and styles were removed. The gallery hover
+  light and reviews are unchanged. The social card now shows only the Facebook
+  and TikTok links, with no "main page" wording.
+- Cache versions are now `?v=20261119c` on `index.html`, `admin.html` and
+  `payment.html`. `node --check` passes and a headless Chromium pass confirms
+  that no control pills are created and the background photos advance
+  automatically.
+
+## 39. Domain registered (19 November 2026)
 
 The client purchased and paid for the preferred domain. Evidence supplied as four screenshots: the Truehost domain search, the invoice email, the invoice document and the earlier invoice notice.
 

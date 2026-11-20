@@ -10,6 +10,9 @@ One-page website for **Aquamor Purified Drinking Water**, Musindi Road, Ngara, N
 - [`docs/how-to-update-your-site.md`](docs/how-to-update-your-site.md) — maintainer guide: editing text, prices and photos, previewing and publishing.
 - [`docs/maintenance-log.md`](docs/maintenance-log.md) — dated record of client decisions, requests and site changes.
 - [`docs/deployment.md`](docs/deployment.md) — server setup, TLS, backups, updates and launch runbook.
+- [`docs/go-live-runbook.md`](docs/go-live-runbook.md) — ordered launch-day sequence for the domain, DNS, TLS, verification and handover, with an owner for each step.
+- [`docs/client-review-message.md`](docs/client-review-message.md) — ready-to-send message with the preview link and the remaining client questions.
+- [`docs/client-call-script.md`](docs/client-call-script.md) — plain-language phone script: what to ask for at each step, the likely client questions and short answers.
 - [`docs/launch-checklist.md`](docs/launch-checklist.md) — what to check before and after the public launch.
 
 ## Live static preview
@@ -67,7 +70,7 @@ aquamor-web/
 │   │   ├── site.js         # mobile navigation
 │   │   ├── payment.js      # confirms the checkout result on payment.html
 │   │   ├── admin.js        # admin orders page: token login, list, filters, CSV
-│   │   └── i18n.js         # English/Swahili, open/closed status, copy, testimonials
+│   │   └── i18n.js         # English/Swahili, open/closed status, copy, optional quotes
 │   ├── assets/img/         # JPG + WebP photos, social preview, icons
 │   └── README.md           # front-end details and edit points
 ├── backend/
@@ -93,6 +96,9 @@ aquamor-web/
 │   ├── how-to-request-a-change.md   # client-facing change-request sheet
 │   ├── client-information-needed.md # confirmed details and remaining launch items
 │   ├── client-information-needed.pdf # the same sheet as a PDF for emailing
+│   ├── client-review-message.md     # ready-to-send review message with the preview link
+│   ├── client-call-script.md        # plain-language phone script for the launch items
+│   ├── go-live-runbook.md           # ordered launch-day sequence for domain, DNS and TLS
 │   └── maintenance-log.md           # dated client decisions, requests and changes
 └── aquamor.db              # local development database (not for production)
 ```
@@ -154,6 +160,7 @@ The original snapshot was a standalone marketing page. It is now the `web/` fron
 - **Status:** the open/closed line refreshes every minute, not only on page load.
 - **Go server:** now serves `web/`; the API uses server-side prices, a transaction, size/quantity validation, and a protected orders list. SQLite uses WAL and a busy timeout.
 - **Order capture and admin view:** the order builder now saves each order to `POST /api/v1/orders` before handing off to WhatsApp (and only remembers a save after a successful response). The private `/admin.html` page lists saved orders with line items and payment state, supports search and filters, and exports CSV.
+- **Interaction and reviews:** each photo section changes its background automatically every 5 seconds, with a brighten-in fade and a hover brightness lift; gallery tiles get a light sweep on hover. The hidden testimonial placeholder is now a three-card Google review section with the public rating, and the contact section has a Facebook/TikTok follow card.
 
 ## Before going live
 

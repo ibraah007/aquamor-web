@@ -1,10 +1,10 @@
 # Aquamor website: confirmed details and final items
 
-**First prepared 14 November 2026 · Updated 16 November 2026**
+**First prepared 14 November 2026 · Updated 17 November 2026**
 
 You sent the confirmed business details on 16 November 2026. The website, printable price card and ordering information have been updated with them. Thank you.
 
-This sheet lists what is now published, what is still needed before launch, and a short reply form for the remaining items.
+This sheet lists what is now published, what is still needed before launch, and a short reply form for the remaining items. If it is easier to talk it through, the maintainer can walk through every item with you on a call.
 
 ---
 
@@ -16,7 +16,8 @@ This sheet lists what is now published, what is still needed before launch, and 
 | Tagline | "Hydrated? Worry no more! Aquamor has got you covered. Your satisfaction is our priority." |
 | Operating since | 2019 |
 | Water refills | 5L Ksh 50, 10L Ksh 100, 20L Ksh 200 (the price includes water; customers bring their container) |
-| New bottles (bottle purchase; water refills are separate) | 20L regular Ksh 450–550; 20L hard Ksh 1,000–1,700; 10L Ksh 200–250; 5L Ksh 100 |
+| New bottles (price includes the bottle and the water) | 20L regular Ksh 450–550; 20L hard Ksh 1,000–1,700; 10L Ksh 200–250; 5L Ksh 100 |
+| Opening hours | Every day 8:30am–9:00pm |
 | Bottled water | 200ml, 300ml, 500ml, 1L, 1.5L, 2L, 3L, 5L, 10L and 20L. Prices vary with quantity, so customers are asked to contact Aquamor for a quotation. |
 | Customised bottles | Churches, weddings, graduations, anniversaries, corporate events and other occasions. Customisation Ksh 500–1,000; minimum order 10 bales. |
 | Dispenser cleaning | Ksh 500–1,000 depending on the type of dispenser and the cleaning required. |
@@ -57,4 +58,4 @@ Aquamor website — remaining items
    Remove the Paybill number: yes / no
 ```
 
-Thank you. Once the domain is in place, the site can go live and be handed over. Online payments can be added later.
+Thank you. Once the domain and hosting are in place, the site can go live and be handed over. Online payments can be added later.
