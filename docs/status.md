@@ -398,12 +398,13 @@ The client sent the confirmed business details in writing. The site, price card 
 - No KEBS number, certification or health claim was added.
 - The purification steps are listed exactly as supplied; individual micron sizes are omitted.
 
-### Launch status (16 November 2026)
-- **Static preview:** published from the `gh-pages` branch at <https://ibraah007.github.io/aquamor-web/>. It is the static site only; the Go API, admin orders and online payment pages are not available there.
+### Launch status (16 November 2026, updated 20 November 2026)
+- **Live site:** <https://aquamorwater.co.ke> is live over HTTPS, with HTTP and `www` redirecting to the apex domain. It is served by GitHub Pages from `gh-pages`; see section 40.
+- **Static preview:** also still available at <https://ibraah007.github.io/aquamor-web/>. It is the static site only; the Go API, admin orders and online payment pages are not available there.
 - **Online payments:** deferred to a later phase. No Flutterwave merchant account, API keys or webhook secret are needed for launch; the code stays hidden until configured.
 - **Permissions:** the project owner cleared the existing gallery labels and the Paybill display for this build.
 - **Swahili:** internal review completed and awkward phrases refined; a native-speaker read-through is still recommended.
-- **Still external:** ~~register `aquamorwater.co.ke` under AQUAMOR PURIFIED DRINKING WATER~~ (registered 18 November 2026; see section 39), then complete DNS/TLS/hosting handover.
+- **Domain, DNS and TLS:** done. The domain is registered (section 39) and the static site is live on it via GitHub Pages (section 40). A server/backend is only needed if the client wants saved orders or the admin page.
 - **Optional:** testimonials, original cleaning stills, shop-front/graduation/corporate photos, and a physical-device test.
 
 ## 29. Final QA on the published preview (17 November 2026)
@@ -744,3 +745,15 @@ The client purchased and paid for the preferred domain. Evidence supplied as fou
 
 ### Security note
 The email screenshots contain the client's personal details and a Truehost auto-login link with a `zmkey` token. Do not publish or commit them; keep the invoice PDF privately on file.
+
+## 40. Site live on the custom domain (20 November 2026)
+
+The static site is now live on the client's paid domain, served by GitHub Pages.
+
+- **DNS (Truehost):** Truehost added four `A` records on `@` (185.199.108.153, 185.199.109.153, 185.199.110.153, 185.199.111.153) and a `CNAME` on `www` → `ibraah007.github.io`. The existing `MX`/`TXT` email records were left untouched.
+- **GitHub Pages:** the `gh-pages` branch has a `CNAME` file set to `aquamorwater.co.ke`, so Pages serves the custom domain. Source: `gh-pages` root, build type legacy.
+- **HTTPS:** the Let's Encrypt certificate was approved by GitHub for both `aquamorwater.co.ke` and `www.aquamorwater.co.ke`, expiring 18 February 2027 and renewed automatically. "Enforce HTTPS" is on.
+- **Redirects:** `http://` → `https://` and `www.` → apex both work; the page title and content were verified over HTTPS.
+- **Email:** the Truehost email forwarding records were not changed.
+- **Scope:** this is the static site only. Orders still go through WhatsApp; there is no server, database, admin orders page or online payment on this deployment. Adopting the Go backend later would need the server steps in [`deployment.md`](deployment.md).
+- **Still outstanding:** correct the registrant name to AQUAMOR PURIFIED DRINKING WATER with Truehost, a native-speaker Swahili read-through, and final client sign-off.

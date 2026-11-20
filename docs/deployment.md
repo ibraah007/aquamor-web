@@ -7,6 +7,14 @@ needed from the client (issue #19); everything else can be prepared before then.
 For the ordered launch-day sequence, with an owner and a gate for each step, see
 [`go-live-runbook.md`](go-live-runbook.md).
 
+> **Current status (20 November 2026):** the static site is already live on
+> <https://aquamorwater.co.ke> via GitHub Pages and Truehost DNS, with HTTPS
+> enforced (see `docs/status.md` section 40). This runbook only applies if the
+> client adopts the Go backend — that is, if saved orders, the admin orders page
+> or online payments are needed. The DNS and TLS steps here are specific to
+> running it on your own server and are not required for the current Pages
+> deployment.
+
 The examples use:
 
 | Item | Value |

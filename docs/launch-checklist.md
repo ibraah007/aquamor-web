@@ -64,16 +64,16 @@ been checked on the real domain, not just locally.
       flows in both languages, Lighthouse, the local smoke test and the A4 price
       card; see `status.md` section 29.
 
-## C. Domain and hosting (blocked on the client)
+## C. Domain and hosting
 
 - [x] Preferred domain `aquamorwater.co.ke` registered under the client's name and paid for (Truehost, 18 Nov 2026; renews 17 Nov 2027). Confirm the registrant name reads AQUAMOR PURIFIED DRINKING WATER.
-- [ ] DNS `A`/`AAAA` records point at the server (need DNS access from the client).
+- [x] DNS records point at GitHub Pages (Truehost: four `A` records on `@`, `CNAME` on `www` → `ibraah007.github.io`), email `MX`/`TXT` untouched. See `status.md` section 40.
 - [x] `scripts/set-domain.sh` run with `aquamorwater.co.ke` (re-run if the final domain differs).
-- [ ] Caddy site address updated and certificate issued.
-- [ ] HTTP redirects to HTTPS; `www` redirects to the canonical host.
-- [ ] Firewall allows only 22, 80 and 443; port 8080 is not public.
-- [ ] `ADMIN_TOKEN` is strong, stored at mode 600 and not in git.
-- [ ] The service starts on boot (`systemctl is-enabled aquamor`).
+- [x] HTTPS certificate issued by GitHub Pages for the apex and `www`; "Enforce HTTPS" is on. The Caddy/server items below apply only if the Go backend is adopted later.
+- [x] HTTP redirects to HTTPS; `www` redirects to the canonical host.
+- [ ] Firewall allows only 22, 80 and 443; port 8080 is not public. *(server only)*
+- [ ] `ADMIN_TOKEN` is strong, stored at mode 600 and not in git. *(server only)*
+- [ ] The service starts on boot (`systemctl is-enabled aquamor`). *(server only)*
 
 **Deferred with online payments:** store payment keys at mode 600, set the Flutterwave webhook URL and set `PUBLIC_BASE_URL` only when online payments are enabled later. None of these are needed for this launch.
 
